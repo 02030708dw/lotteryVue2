@@ -1,0 +1,45 @@
+{
+"frames": {
+	"checkIcon": {
+		"frame": {"x":81, "y":604, "w":36, "h":34},
+		"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+		"sourceSize": {"w":36,"h":34}
+	},
+	"radioFalse": {
+		"frame": {"x":81, "y":639, "w":21, "h":21},
+		"spriteSourceSize": {"x":0,"y":0,"w":21,"h":21},
+		"sourceSize": {"w":21,"h":21}
+	},
+	"radioTrue": {
+		"frame": {"x":103, "y":639, "w":21, "h":21},
+		"spriteSourceSize": {"x":0,"y":0,"w":21,"h":21},
+		"sourceSize": {"w":21,"h":21}
+	},
+	"close": {
+		"frame": {"x":0, "y":604, "w":79, "h":77},
+		"spriteSourceSize": {"x":0,"y":0,"w":79,"h":77},
+		"sourceSize": {"w":79,"h":77}
+	},
+	"offBtn": {
+		"frame": {"x":64, "y":682, "w":63, "h":63},
+		"spriteSourceSize": {"x":0,"y":0,"w":63,"h":63},
+		"sourceSize": {"w":63,"h":63}
+	},
+	"onBtn": {
+		"frame": {"x":0, "y":682, "w":63, "h":63},
+		"spriteSourceSize": {"x":0,"y":0,"w":63,"h":63},
+		"sourceSize": {"w":63,"h":63}
+	},
+	"settingBg": {
+		"frame": {"x":0, "y":0, "w":753, "h":603},
+		"spriteSourceSize": {"x":0,"y":0,"w":753,"h":603},
+		"sourceSize": {"w":753,"h":603}
+	}
+
+},
+"meta": {
+	"image": "sp_v2.png",
+	"size": {"w": 754, "h": 746},
+	"scale": "1"
+}
+}

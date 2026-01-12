@@ -1,0 +1,17 @@
+// ************************************************************
+// view home
+// ************************************************************
+
+@import '~@CSS/main';
+
+@import '~@CSS/Layout/gr_home';
+
+.lang_jp {
+    @import '~@CSS/Lang/JP/l_home';
+}
+.lang_th {
+    @import '~@CSS/Lang/TH/l_home';
+}
+.lang_vn {
+    @import '~@CSS/Lang/VN/l_home';
+}

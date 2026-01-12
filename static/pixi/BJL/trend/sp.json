@@ -1,0 +1,35 @@
+{
+"frames": {
+	"tPlace": {
+		"frame": {"x":0, "y":0, "w":1067, "h":420},
+		"spriteSourceSize": {"x":0,"y":0,"w":1067,"h":420},
+		"sourceSize": {"w":1067,"h":420}
+	},
+	"tlPlace": {
+		"frame": {"x":0, "y":421, "w":74, "h":389},
+		"spriteSourceSize": {"x":0,"y":0,"w":74,"h":389},
+		"sourceSize": {"w":74,"h":389}
+	},
+	"tp1": {
+		"frame": {"x":0, "y":861, "w":48, "h":49},
+		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":49},
+		"sourceSize": {"w":48,"h":49}
+	},
+	"tp2": {
+		"frame": {"x":0, "y":811, "w":49, "h":49},
+		"spriteSourceSize": {"x":0,"y":0,"w":49,"h":49},
+		"sourceSize": {"w":49,"h":49}
+	},
+	"tp3": {
+		"frame": {"x":0, "y":911, "w":48, "h":49},
+		"spriteSourceSize": {"x":0,"y":0,"w":48,"h":49},
+		"sourceSize": {"w":48,"h":49}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 1068, "h": 961},
+	"scale": "1"
+}
+}

@@ -1,0 +1,206 @@
+// ************************************************************
+// c_grid-tab
+// ************************************************************
+
+.c_h-game-grid-maintab {
+    overflow: hidden;
+    position: relative;
+    top: 1px;
+    z-index: 2;
+    & .c_maintab__tab {
+        background: backgrounds(accent);
+        box-shadow: 0 -1px 0 #808080 inset;
+        cursor: pointer;
+        border-right: 1px solid #808080;
+        border-top: 1px solid #808080;
+        display: inline-block;
+        line-height: 36px;
+        text-align: center;
+        &:first-of-type {
+            border-left: 1px solid #808080;
+        }
+    }
+    & .is_active {
+        background: backgrounds(primary);
+        box-shadow: -1px 0 0 #808080;
+        cursor: default;
+        padding-top: 2px;
+        position: relative;
+        &::before,
+        &::after {
+            @include pseudo;
+            @include size(5px, calc(100% - 2px));
+            position: absolute;
+            top: 2px;
+        }
+        &::before {
+            @include background_gradient(false, to left, #999999, transparent);
+            right: 100%;
+        }
+        &::after {
+            @include background_gradient(false, to right, #999999, transparent);
+            left: 100%;
+        }
+    }
+}
+
+
+
+
+@media screen and (min-width: 979px) {
+    .c_h-game-grid-maintab + .c_h-game-grid-subtab {
+        border-right: 1px solid #808080;
+        border-left: 1px solid #808080;
+        border-bottom: none;
+        padding: 11px 15px 0;
+    }
+    
+    .c_h-game-grid-subtab {
+        font-size: 0;
+        padding-top: 10px;
+        & .c_subtab__tab {
+            display: inline-block;
+            font-size: $font_size_small;
+            margin: 0 10px 10px 0;
+            text-align: center;
+            &:last-of-type {
+                margin-right: 0;
+            }
+        }
+        & .c_tab__button {
+            @include border(border_color(default));
+            border-radius: border_radius(default);
+            cursor: pointer;
+            line-height: 20px;
+            margin: 0 0 2px;
+            min-width: 65px;
+            padding: 0 5px;
+            position: relative;
+            text-align: center;
+            transition: all 0.3s ease;
+            & .c_button__text {
+                position: relative;
+                z-index: 2;
+            }
+            &::before,
+            &::after {
+                @include pseudo;
+                @include size(100%);
+                border-radius: 2px;
+                top: 0;
+                left: 0;
+                transition: all 0.3s ease;
+            }
+            &::before {
+                @include background_gradient(ture, to bottom, lighten(backgrounds(default), 10%), backgrounds(default));
+                opacity: 1;
+            }
+            &::after {
+                @include background_gradient(ture, to bottom, backgrounds(default), lighten(backgrounds(default), 10%));
+                opacity: 0;
+            }
+            &.is_active,
+            &.is_active:hover {
+                @include border(border_color(dark));
+                color: text_color(default_invert);
+                &::before {
+                    @include background_gradient(ture, to bottom, darken(mix($color_secondary_heavy, $color_strong, 85%), 8%), lighten(mix($color_secondary_heavy, $color_strong, 85%), 15%));
+                    box-shadow: 0 0 3px 0 shadow_color(light) inset;
+                    opacity: 1;
+                }
+                &::after {
+                    opacity: 0;
+                }
+            }
+            &:hover {
+                &::before {
+                    opacity: 0;
+                }
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+        & .is_strong {
+            color: #d10000;
+            &.c_tab__button {
+                border-color: currentColor;
+            }
+            &.is_active,
+            &.is_active:hover {
+                border-color: #d10000;
+                &::before {
+                    background: #d10000;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 979px) {
+    .c_h-game-grid-subtab {
+        font-size: 0;
+        padding: 0 10px 10px;
+    }
+    .c_subtab__title {
+        font-size: $font_size;
+        font-weight: bold;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+    }
+    .c_subtab__tab {
+        display: inline-block;
+        font-size: $font_size_small;
+        line-height: 32px;
+        margin: 10px 10px 10px 0;
+        min-width: 60px;
+        vertical-align: top;
+        text-align: center;
+        & .c_tab__button {
+            background: border_color(primary_dark);
+            border-radius: border_radius(default);
+            cursor: default;
+            font-size: $font_size_large;
+            height: 32px;
+            padding: 1px;
+            position: relative;
+            text-align: center;
+            vertical-align: middle;
+            &.is_active {
+                @include animate(bounceIn, 0.75s);
+                background: border_color(dark);
+                & .c_button__text {
+                    @include background_gradient(ture, to bottom, darken(mix($color_secondary_heavy, $color_strong, 85%), 8%), lighten(mix($color_secondary_heavy, $color_strong, 85%), 15%));
+                    box-shadow: 0 0 3px 0 shadow_color(light) inset;
+                    color: text_color(default_invert);
+                }
+            }
+            @include multi-lang {
+                font-size: $font_size;
+            }
+        }
+        & .c_button__text {
+            @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+            @include size(100%, 30px);
+            border-radius: inherit;
+            color: lighten(text_color(secondary), 10%);
+            display: block;
+            line-height: 30px;
+        }
+        & .is_strong {
+            &.c_tab__button {
+                background: #d10000;
+            }
+            & .c_button__text {
+                color: #d10000;
+            }
+        &.is_active {
+                background: #d10000;
+                & .c_button__text {
+                    background: #d10000;
+                    color: text_color(default_invert);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,140 @@
+// ************************************************************
+// c_slider
+// ************************************************************
+
+.c_slider {
+    display: inline-block;
+    font-size: 0;
+    vertical-align: middle;
+    & span {
+        display: inline-block;
+        font-size: $font_size;
+        vertical-align: middle;
+    }
+    & .c_slider-point {
+        margin-right: 10px;
+        min-width: 65px;
+        text-align: right;
+    }
+    & .c_slider-prize {
+        margin-left: 10px;
+    }
+    & .c_slider-bar {
+        position: relative;
+        z-index: 2;
+    }
+    & .c_slider-bar__minus,
+    & .c_slider-bar__plus {
+        @include background_gradient(ture, to bottom, #ffffff, #cccccc);
+        @include size(17px);
+        border: 1px solid #666666;
+        border-radius: border_radius(rounded);
+        cursor: pointer;
+        line-height: 15px;
+        text-align: center;
+        user-select: none;
+        position: relative;
+        &::after {
+            @include pseudo;
+            @include size(150%, 250%);
+            margin-top: -125%;
+            margin-left: -25%;
+            top: 0;
+            left: 0;
+        }
+    }
+    & .c_slider-bar__track {
+        @include background_gradient(false, to bottom, #1a1a1a 0%, #4d4d4d 100%, #232323 10%);
+        @include size(100px, 4px);
+        background-color: mix(#1a1a1a, #4d4d4d, 50%);
+        border-radius: border_radius(default);
+        margin: 0 13px;
+        position: relative;
+        &::after {
+            @include pseudo;
+            @include size(100%, 500%);
+            top: -8px;
+            left: 0;
+        }
+    }
+    & .c_track__line {
+        @include background_gradient(ture, to bottom, #ffffff, #cccccc);
+        border-radius: border_radius(default);
+        height: 2px;
+        width: 100%;
+        max-width: calc(100% - 2px);
+        position: absolute;
+        top: 50%;
+        left: 1px;
+        transform: translateY(-50%);
+    }
+    & .c_track__thumb {
+        @include background_gradient(ture, to bottom, #ffffff, #cccccc);
+        @include size(17px);
+        border: 1px solid #666666;
+        border-radius: border_radius(rounded);
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(50%, -50%);
+        transform-origin: right center;
+        &::before {
+            @include pseudo;
+            @include background_gradient(ture, to bottom, #f77f1e, #f15a24);
+            @include size(7px);
+            border-radius: inherit;
+            cursor: inherit;
+            top: 4px;
+            left: 4px;
+        }
+    }
+    & .c_slider-bar__tooltip {
+        background: $color_accent_heavy;
+        color: text_color(default_invert);
+        display: none;
+        font-size: $font_size;
+        height: 28px;
+        line-height: 28px;
+        min-width: 55px;
+        padding: 0 10px;
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        text-align: center;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        &::before {
+            @include triangle($color_accent_heavy, down, 8px);
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 979px) {
+    .c_slider {
+        float: right;
+        line-height: 40px;
+        margin: 4px 5px 4px 0;
+        position: relative;
+        & span {
+            font-size: $font_size_small;
+        }
+        & .c_slider-point {
+            margin-right: 5px;
+            min-width: 0;
+        }
+        & .c_slider-prize {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        & .is_active {
+            display: block;
+        }
+    }
+}

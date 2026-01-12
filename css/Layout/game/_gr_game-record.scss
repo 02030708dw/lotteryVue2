@@ -1,0 +1,16 @@
+// ************************************************************
+// gr_game-record
+// ************************************************************
+
+.gr_game-record {
+    background: #d7d7d7;
+    padding: 0px 20px 40px;
+    .i_detailedNumber {
+        display: none;
+    }
+    @include multi-lang {
+        .i_detailedNumber {
+            display: inline-block;
+        }
+    }
+}

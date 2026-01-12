@@ -1,0 +1,84 @@
+// ************************************************************
+// gr_area-table
+// ************************************************************
+.gr_area-table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 20px;
+    border:1px solid #808080;
+    &__wrap {
+        min-width: 980px;
+        display: block;
+        float: left;
+        height: auto;
+    }
+    &__list {
+        font-size: $font_size_small;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 12px;
+        width: calc(100%/7);
+        border-right:1px solid #808080;
+        & .gr_area-list__item{
+            // @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+            display: block;
+            min-height: 31px;
+            line-height: 30px;
+            text-align: center;
+            position: relative;
+            border-bottom:1px solid #808080;
+            width: 100%;
+            top: 0;
+            left: 0;
+            &.is_active {
+                // @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                // color: text_color(default_invert);
+                background-color: #FFE594;
+            }   
+            & span {
+                position: relative;
+                z-index: 1;
+            }
+            &:first-child {
+                color: #ffffff;
+                background: #666666;   
+                &.is_active {
+                    @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                    color: text_color(default_invert);
+                }      
+            }
+            &:last-child {
+                border-bottom: 0px solid transparent;    
+            }
+            & label {
+                @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            & input {
+                &[type="checkbox"]:checked ~ label{
+                    @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                    color: text_color(default_invert);
+                }
+            }
+        }
+        &:last-child {
+            border-right:0px solid transparent;
+        }
+    }
+    & [type="checkbox"] {
+        @include size(0);
+        margin: 0;
+        opacity: 0;
+        outline: 0;
+        position: absolute;
+        left: -9999px;
+    }
+}
+
+

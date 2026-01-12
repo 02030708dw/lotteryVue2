@@ -1,0 +1,41 @@
+// ************************************************************
+// view game
+// ************************************************************
+
+@import '~@CSS/main';
+
+// 共用組件
+@import '~@CSS/Module/game/c_grid';
+@import '~@CSS/Module/game/c_grid--zodiac';
+@import '~@CSS/Module/game/c_grid-tab';
+@import '~@CSS/Module/game/c_grid-toggle';
+@import '~@CSS/Module/game/c_slider';
+@import '~@CSS/Module/game/c_sup-ball';
+@import '~@CSS/Module/game/c_tooltip';
+
+@import '~@CSS/Module/game/i_farm';
+
+// Layout
+@import '~@CSS/Layout/game/gr_current-game';
+@import '~@CSS/Layout/game/gr_fast-game-order';
+@import '~@CSS/Layout/game/gr_game-controller';
+@import '~@CSS/Layout/game/gr_game-controller--sin';
+@import '~@CSS/Layout/game/gr_game-danshi';
+@import '~@CSS/Layout/game/gr_game-history';
+@import '~@CSS/Layout/game/gr_game-menu';
+@import '~@CSS/Layout/game/gr_game-prompt';
+@import '~@CSS/Layout/game/gr_game-record';
+@import '~@CSS/Layout/game/gr_game-select';
+@import '~@CSS/Layout/game/gr_game-submenu';
+@import '~@CSS/Layout/game/gr_games-header';
+@import '~@CSS/Layout/game/gr_official';                  // 官方玩法
+
+.lang_jp {
+    @import '~@CSS/Lang/JP/l_game';
+}
+.lang_th {
+    @import '~@CSS/Lang/TH/l_game';
+}
+.lang_vn {
+    @import '~@CSS/Lang/VN/l_game';
+}

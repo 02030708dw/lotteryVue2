@@ -1,0 +1,56 @@
+// ************************************************************
+// c_flat-button
+// ************************************************************
+
+$flat-button-color: (
+    'primary': #c69c6d,
+    'secondary': #4d4d4d
+);
+
+@each $state, $color in $flat-button-color {
+    .c_flat-button--#{$state} {
+        background-color: $color;
+        &:hover {
+            background-color: darken($color, 5%);
+        }
+    }
+}
+
+[class*="c_flat-button--"] {
+    border: none;
+    border-radius: border_radius(default);
+    color: text_color(default_invert);
+    cursor: pointer;
+    display: inline-block;
+    font: $font_size $font_family;
+    height: 30px;
+    line-height: 30px;
+    min-width: 75px;
+    outline: none;
+    padding: 0 5px;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    & .c_flat-button__icon {
+        vertical-align: middle;
+    }
+    & i {
+        font-size: $font_size_small;
+    }
+    & + & {
+        margin-left: 8px;
+    }
+    &:active {
+    }
+    &[class*="--large"] {
+        height: 33px;
+        line-height: 33px;
+    }
+    &[class*="--full"] {
+        display: block;
+        margin-left: 0;
+        & + &[class*="--full"] {
+            margin: 8px 0 0;
+        }
+    }
+}

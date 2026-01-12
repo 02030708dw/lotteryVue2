@@ -1,0 +1,41 @@
+{"frames": {
+
+"BJL_money":
+{
+	"frame": {"x":0,"y":0,"w":26,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":26,"h":32},
+	"sourceSize": {"w":26,"h":32}
+},
+"BJL_money_place":
+{
+	"frame": {"x":0,"y":100,"w":332,"h":85},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":85},
+	"sourceSize": {"w":332,"h":85}
+},
+"BJL_money_reload":
+{
+	"frame": {"x":26,"y":0,"w":26,"h":26},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":26,"h":26},
+	"sourceSize": {"w":26,"h":26}
+},
+"BJL_timer_place":
+{
+	"frame": {"x":52,"y":0,"w":288,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":288,"h":100},
+	"sourceSize": {"w":288,"h":100}
+}},
+"meta": {
+	"image": "sp.png",
+	"format": "RGBA8888",
+	"size": {"w":340,"h":185},
+	"scale": "1"
+}
+}

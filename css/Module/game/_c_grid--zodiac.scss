@@ -1,0 +1,66 @@
+// ************************************************************
+// c_h-game-grid--zodiac
+// ************************************************************
+
+// 信用玩法 grid--肖
+@media screen and (min-width: 980px) {
+    .c_h-game-grid--zodiac {
+        @include multi-lang("all") {
+            & .c_component:first-of-type:nth-last-of-type(4),
+            & .c_component:first-of-type:nth-last-of-type(3) {
+                font-size: $font_size_small;
+                width: 24.5%;
+                & ~ .c_component {
+                    width: 20%;
+                    &:last-of-type {
+                        padding-left: 25px;
+                    }
+                    & .c_ball--xsmall {
+                        margin: 0 2px 0 1px;
+                    }
+                }
+            }
+            & .c_component:first-of-type:nth-last-of-type(4) {
+                & ~ .c_component {
+                    &:nth-last-of-type(2) {
+                        width: 18%;
+                    }
+                    &:last-of-type {
+                        width: 37.5%;
+                    }
+                }
+            }
+            & .c_component:first-of-type:nth-last-of-type(3) {
+                & ~ .c_component {
+                    &:nth-last-of-type(2) {
+                        width: 25%;
+                    }
+                    &:last-of-type {
+                        text-align: left;
+                        padding-left: 25px;
+                        width: 50.5%;
+                    }
+                }
+            }
+        }
+        [class*="i_zodiac"] {
+            margin-right: 10px;
+        }
+    }
+
+
+
+
+
+    .c_h-game-grid--odds {
+        & .c_component:first-of-type:nth-last-of-type(3) {
+            width: 21%;
+            & ~ .c_component {
+                width: 58%;
+                &:last-of-type {
+                    width: 21%;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,755 @@
+// ************************************************************
+// elementui
+// ************************************************************
+
+// Form
+*[class*="el"] {
+    &.small {
+        & .el-input__inner {
+            height: 28px;
+            line-height: 20px;
+        }
+    }
+    // length setting
+    &.auto {
+        cursor: pointer;
+        width: auto;
+        & .el-input__inner {
+            width: auto;
+        }
+        &:hover .el-input__inner {
+            border-color: $color_primary;
+        }
+    }
+    &.shortest {
+        width: 50px;
+    }
+    &.short {
+        width: 65px;
+    }
+    &.medium {
+        width: 90px;
+    }
+    &.long {
+        width: 125px;
+    }
+}
+
+
+
+
+
+// Radio 单选框 => 按钮样式
+.el-radio-group {
+    font-size: 0;
+}
+.el-radio-button__inner {
+    @include background_gradient(ture, to bottom, lighten(backgrounds(primary), 5%), backgrounds(default));
+    @include border(lighten($color_secondary_heavy, 7%));
+    border-left: 0;
+    color: text_color(default);
+    font-size: $font_size;
+    line-height: 28px;
+    padding: 0 7px;
+    &:hover {
+        @include background_gradient(ture, to bottom, backgrounds(default), lighten(backgrounds(primary), 5%));
+        color: text_color(default);
+    }
+}
+.el-radio-button:first-child .el-radio-button__inner {
+    border-left: 1px solid lighten($color_secondary_heavy, 7%);
+    box-shadow: 0 0 3px shadow_color(light) inset !important;
+}
+.el-radio-button__orig-radio:checked + .el-radio-button__inner {
+    background-color: backgrounds(secondary);
+    background-image: none;
+    border-color: lighten($color_secondary_heavy, 7%);
+    box-shadow: 0 0 3px shadow_color(light) inset;
+    color: text_color(default);
+    padding: 0 12px;
+}
+
+
+
+
+
+//Checkbox 多选框
+.el-checkbox__inner {
+    @include size(16px);
+    background: none;
+    border-color: text_color(secondary);
+    color: text_color(secondary);
+    &:hover {
+        border-color: text_color(default);
+    }
+}
+.el-checkbox__input {
+    &.is-checked .el-checkbox__inner {
+        background: text_color(secondary);
+        border: text_color(secondary);
+    }
+    &.is-focus .el-checkbox__inner {
+        border-color: text_color(primary);
+    }
+}
+.el-checkbox__label {
+    font-size: $font_size_small;
+    padding-left: 0;
+}
+
+
+
+
+
+// Input 输入框
+.el-input__inner {
+    border-color: text_color(weak);
+    color: text_color(default);
+    font-size: $font_size_small;
+    padding: 3px 8px;
+    &::placeholder {
+        color: text_color(weak);
+    }
+    &:hover,
+    &:focus {
+        border-color: text_color(secondary);
+    }
+}
+.el-input.el-input--small .el-input__inner {
+    text-align: center;
+}
+
+
+
+
+
+// InputNumber 计数器
+.el-input-number {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    & .el-input-number__decrease,
+    & .el-input-number__increase {
+        @include background_gradient(ture, to bottom, lighten(backgrounds(primary), 5%), backgrounds(default));
+        @include border(lighten($color_secondary_heavy, 7%));
+        @include size(23px, 100%);
+        color: darken($color_secondary_heavy, 18%);
+        cursor: pointer;
+        line-height: 20px;
+        position: absolute;
+        top: 0;
+        text-align: center;
+        z-index: 1;
+        &:hover {
+            @include background_gradient(ture, to bottom, backgrounds(default), lighten(backgrounds(primary), 5%));
+            &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+                border-color: lighten($color_secondary_heavy, 7%);
+            }
+        }
+    }
+    & .el-input-number__decrease {
+        border-right: 1px solid lighten($color_secondary_heavy, 7%);
+        border-radius: 4px 0 0 4px;
+        left: 0;
+    }
+    & .el-input-number__increase {
+        border-left: 1px solid lighten($color_secondary_heavy, 7%);
+        border-radius: 0 4px 4px 0;
+        right: 0;
+    }
+    & .el-input__inner {
+        background: backgrounds(secondary);
+        border-color: lighten($color_secondary_heavy, 7%);
+        border-radius: 0;
+        box-shadow: 0 0 3px shadow_color(light) inset;
+        color: text_color(primary);
+        margin: 0 24px;
+        padding: 0;
+        text-align: center;
+        width: 52px;
+        &:hover,
+        &:focus {
+            border-color: lighten($color_secondary_heavy, 7%);
+        }
+    }
+    // small
+    &.el-input-number--small {
+        line-height: 30px;
+        height: 30px;
+        & .el-input-number__decrease,
+        & .el-input-number__increase {
+            font-size: $font_size_small;
+            line-height: 28px;
+            width: 25px;
+            & i {
+                transform: scale(0.85);
+            }
+        }
+        & .el-input--small {
+            font-size: $font_size_small;
+            height: inherit;
+            & .el-input__inner {
+                height: inherit;
+            }
+        }
+    }
+}
+@media screen and (max-width: 979px) {
+    .el-input--small .el-input__inner {
+        font-size: $font_size_small;
+        height: 20px;
+    }
+}
+// 计数器 + 选择器
+.counter {
+    @include size(100px, 30px);
+    position: relative;
+    & .el-input-number {
+        margin: 0 !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    & .el-select {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        & .el-input {
+            & .el-input__inner {
+                @include size(50px, 28px);
+                background: backgrounds(secondary);
+                border: none;
+                border-radius: 0;
+                box-shadow: 0 0 3px shadow_color(light) inset;
+                font-size: $font_size_small;
+                margin: 1px 25px;
+                padding: 0;
+                text-align: center;
+                &:hover,
+                &:focus {
+                    border-color: lighten($color_secondary_heavy, 7%);
+                }
+            }
+        }
+    }
+}
+
+
+
+// Select 选择器
+.el-select {
+    vertical-align: middle;
+    .el-input__inner {
+        font-size: $font_size_small;
+        padding: 3px 25px 3px 8px;
+        &:hover,
+        &:focus {
+            border-color: text_color(secondary);
+        }
+        &::placeholder {
+            color: text_color(default);
+        }
+    }
+    .el-input .el-input__icon {
+        color: $color_secondary_heavy;
+        width: 25px;
+        &.is-show-close {
+            color: $color_accent;
+            right: 0;
+            width: 25px;
+            &:hover {
+                color: $color_accent;
+            }
+        }
+    }
+}
+
+.el-select-dropdown {
+    border-color: border_color(dark);
+    border-radius: border_radius(default);
+    box-shadow: 2px 2px 7px shadow_color(default);
+}
+.el-select-group__title {
+    color: text_color(weak);
+}
+.el-select-dropdown__item {
+    color: text_color(primary);
+    font-size: $font_size_small;
+    height: 20px;
+    padding: 1px 10px;
+    &.selected,
+    &.selected.hover {
+        background: none;
+        color: text_color(accent);
+    }
+    &.hover,
+    &:hover {
+        background-color: darken(backgrounds(primary), 25%);
+        color: text_color(default_invert);
+    }
+}
+
+.el-select-dropdown.is-multiple .el-select-dropdown__item {
+    color: text_color(primary);
+    font-size: $font_size_small;
+    height: 20px;
+    padding: 1px 12px 1px 26px;
+    &::before {
+        @include pseudo;
+        @include size(16px);
+        border-radius: 4px;
+        border: 1px solid #666666;
+        box-sizing: border-box;
+        top: 50%;
+        left: 12px;
+        transform: translate(-50%, -50%);
+        transition: border-color .25s cubic-bezier(.71,-.46,.29,1.46),background-color .25s cubic-bezier(.71,-.46,.29,1.46);
+    }
+    &::after {
+        @include pseudo;
+        @include size(4px, 8px);
+        border: 2px solid #fff;
+        border-top: none;
+        border-left: none;
+        box-sizing: content-box;
+        top: 20%;
+        left: 9px;
+        transform-origin: center;
+        transform: rotate(45deg) scaleY(0);
+        transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+}
+    &.selected {
+        background: none;
+        color: text_color(primary);
+        &::before {
+            background: #666666;
+        }
+        &::after {
+            content: '';
+            right: auto;
+            transform: rotate(45deg) scaleY(1);
+        }
+    }
+    &.is_cancel {
+        &::after {
+            @include animate(scaleCancel, 0.15s);
+            border-bottom: 0;
+        }
+    }
+    &.selected.hover,
+    &.selected:hover,
+    &.hover,
+    &:hover {
+        background-color: backgrounds(primary);
+    }
+}
+
+.el-select__tags {
+    font-size: $font_size_small;
+    line-height: 20px;
+    left: 8px;
+}
+
+.el-select-dropdown__empty {
+    font-size: $font_size_small;
+}
+
+.el-input.is-disabled {
+    opacity: 0.65;
+    & .el-input__inner {
+        background: backgrounds(primary);
+        border-color: lighten(border_color(light), 4%);
+        color: text_color(secondary);
+        &::placeholder {
+            color: text_color(secondary);
+        }
+    }
+}
+.el-select .el-input.is-disabled {
+    & .el-input__icon {
+        color: darken(backgrounds(primary), 13%);
+        cursor: not-allowed;
+    }
+    & .el-input__inner:hover {
+        border-color: lighten(border_color(light), 6%);
+    }
+}
+
+.el-select .mobile {
+    @include size(100%);
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+@media screen and (max-width: 979px) {
+    .el-select-dropdown.is-multiple .isMobileMulti .el-select-dropdown__item {
+        font-size: $font_size;
+        height: 30px;
+        line-height: 28px;
+        padding: 1px 12px 1px 30px;
+        &::before {
+            left: 16px;
+        }
+        &::after {
+            top: 37%;
+            left: 13px;
+        }
+        &.selected.hover,
+        &.selected:hover,
+        &.hover,
+        &:hover {
+            background-color: transparent;
+        }
+    }
+}
+
+
+
+
+
+@keyframes scaleCancel {
+    from {
+        transform: rotate(45deg) scaleY(1);
+    }
+    50% {
+        transform: rotate(45deg) scaleY(0);
+    }
+    to {
+        transform: rotate(90deg) scaleY(1);
+    }
+}
+
+
+
+
+
+// Loading 加载
+.el-loading-spinner {
+    margin-top: 0;
+    transform: translateY(-50%);
+    & .el-loading-text {
+        color: $color_primary;
+        font-size: $font_size_small;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    & .circular {
+        @include size(106px);
+    }
+    & .border {
+        stroke-width: 6;
+        stroke: backgrounds(default);
+    }
+    & .path_base {
+        stroke-width: 5;
+        stroke: backgrounds(primary);
+    }
+    & .path {
+        stroke-width: 5;
+        stroke: $color_primary;
+        stroke-linecap: round;
+    }
+}
+
+
+
+
+
+// DateTimePicker 日期时间选择器
+.el-time-panel {
+    *,
+    *::before,
+    *::after {
+        box-sizing: content-box;
+    }
+}
+
+
+
+.el-date-table td,
+.el-date-editor .el-picker-panel,
+.el-picker-panel [slot=sidebar],.el-picker-panel__sidebar,
+.el-date-picker__time-header,
+.el-date-range-picker__content,
+.el-date-range-picker__editors-wrap,
+.el-date-range-picker__time-header,
+.el-input__inner,.el-textarea__inner ,
+.el-time-range-picker__cell,
+.el-time-panel__content::after,.el-time-panel__content::before,
+.el-time-panel__footer {
+	box-sizing: border-box;
+}
+
+
+
+.el-time-panel__content::after,
+.el-time-panel__content::before {
+    margin-top: -14px;
+}
+
+
+
+.el-date-table td {
+    vertical-align: middle;
+}
+
+
+
+.el-date-table td.today {
+	color: $color_primary;
+}
+
+.el-date-table td.today:before {
+	border-top: .5em solid $color_primary;
+}
+
+.el-date-table td.available:hover {
+	background-color: backgrounds(primary);
+}
+
+.el-date-table td.in-range {
+	background-color: #d2ecff;
+}
+
+.el-date-table td.in-range:hover {
+	background-color: #afddff;
+}
+
+.el-date-table td.current:not(.disabled),.el-date-table td.end-date,.el-date-table td.start-date {
+    color: #ffffff;
+	background-color: $color_primary !important;
+}
+
+.el-date-table td.week {
+	color: #8391a5;
+}
+
+.el-date-table th {
+	color: #8391a5;
+}
+
+.el-date-table.is-week-mode .el-date-table__row:hover {
+	background-color: backgrounds(primary);
+}
+
+.el-date-table.is-week-mode .el-date-table__row.current {
+	background-color: #d2ecff;
+}
+
+.el-month-table td .cell {
+	color: #48576a;
+}
+
+.el-month-table td .cell:hover {
+	background-color: backgrounds(primary);
+}
+
+.el-month-table td.current:not(.disabled) .cell {
+	background-color:  $color_primary !important;
+}
+
+.el-year-table .el-icon {
+	color: #97a8be;
+}
+
+.el-year-table td .cell {
+	color: #48576a;
+}
+
+.el-year-table td .cell:hover {
+	background-color: backgrounds(primary);
+}
+
+.el-year-table td.current:not(.disabled) .cell {
+	background-color: $color_primary !important;
+}
+
+.el-time-spinner__item:hover:not(.disabled):not(.active) {
+	background: backgrounds(primary);
+}
+
+.el-time-spinner__item.disabled {
+	color: #d1dbe5;
+}
+
+.el-picker-panel {
+	border: 1px solid #d1dbe5;
+	color: #48576a;
+}
+
+.el-picker-panel__shortcut {
+	color: #48576a;
+}
+
+.el-picker-panel__shortcut:hover {
+	background-color: backgrounds(primary);
+}
+
+.el-picker-panel__shortcut.active {
+	background-color: #e6f1fe;
+	color: $color_primary;
+}
+
+.el-picker-panel__btn {
+	border: 1px solid #dcdcdc;
+	color: #333;
+}
+
+.el-picker-panel__icon-btn {
+	color: #97a8be;
+}
+
+.el-date-picker__header-label.active,
+.el-date-picker__header-label:hover,
+.el-picker-panel__icon-btn:hover {
+	color: $color_primary;
+}
+
+.el-picker-panel__link-btn {
+	color: $color_primary;
+}
+
+.el-picker-panel [slot=sidebar],.el-picker-panel__sidebar {
+	border-right: 1px solid #e4e4e4;
+	background-color: #fbfdff;
+}
+
+.el-date-range-picker__time-header>.el-icon-arrow-right {
+	color: #97a8be;
+}
+
+.el-time-range-picker__body {
+	border: 1px solid #d1dbe5;
+}
+
+.el-time-panel {
+	border: 1px solid #d1dbe5;
+}
+
+.el-time-panel__content::after,.el-time-panel__content::before {
+	background-color: $color_primary;
+}
+
+.el-time-panel__btn {
+	color: #8391a5;
+}
+
+.el-time-panel__btn.confirm {
+	color: $color_primary;
+}
+
+.el-input.is-active .el-input__inner {
+	border-color: $color_primary;
+}
+
+.el-input__icon {
+    color: text_color(weak);
+    width: 25px;
+    & + .el-input__inner {
+        padding-right: 25px;
+    }
+}
+
+.el-input__icon.is-clickable:hover {
+	color: text_color(secondary);
+}
+
+.el-input__icon.is-clickable:hover+.el-input__inner {
+	border-color: text_color(secondary);
+}
+
+.el-input-group__append,.el-input-group__prepend {
+	border: 1px solid #bfcbd9;
+	background-color: #fbfdff;
+	color: #97a8be;
+}
+
+.el-scrollbar__thumb {
+	background-color: rgba(151,168,190,.3);
+}
+
+.el-scrollbar__thumb:hover {
+	background-color: rgba(151,168,190,.5);
+}
+// 日曆
+.el-date-editor--calendar {
+    .el-date-range-picker__content {
+        .el-date-table {
+            td.available:hover {
+                background-color: lighten(#fb8032, 30%);
+            }
+        }
+    }
+}
+@media screen and (max-width: 979px) {
+    // input
+    .el-date-editor--daterange {
+        .el-input__icon {
+            width: 100%;
+            text-align: right;
+            padding-right: 7px;
+            cursor: pointer;
+            &:hover, &:active {
+                ~ .el-input__inner {
+                    border-color: #666666;
+                }
+            }
+        }
+    }
+    // 日曆 320 只要顯示一個, 隱藏右邊
+    .el-date-editor--calendar {
+        &.el-date-range-picker {
+            min-width: 100%;
+            .el-picker-panel__body {
+                min-width: 250px;
+                .el-date-range-picker__content {
+                    width: 100%;
+                    [class*="el-icon-d-arrow-"] {
+                        // 隱藏年 botton << >>
+                        display: none;
+                    }
+                    [class*="el-icon-arrow-"] {
+                        // 月 botton < >
+                        padding: 17px;
+                        position: absolute;
+                        top: -15px;
+                        margin: 0;
+                    }
+                    .el-icon-arrow-left {
+                        left: -15px;
+                    }
+                    .el-icon-arrow-right {
+                        right: -15px;
+                    }
+                    &.is-right {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 100px;
+                        height: 50px;
+                        .el-date-range-picker__header {
+                            > div {
+                                display: none;
+                            }
+                        }
+                        .el-date-table {
+                            display: none;
+                        }
+                    }
+                    &.is-left {
+                        .el-date-range-picker__header {
+                            > div {
+                                margin-right: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

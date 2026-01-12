@@ -1,0 +1,70 @@
+// ************************************************************
+// gr_container
+// ************************************************************
+
+.gr_container {
+    max-width: 980px;
+    min-width: 320px;
+    &.normal {
+        padding-left: 60px;
+    }
+}
+.gr_gamenav {
+    position: fixed;
+    width: 65px;
+    left: 0;
+    top: 174px;
+    border: 1px solid #808080;
+    height: calc(100vh - 270px);
+    background: #dfe2ea;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 66;
+    & ul {
+        padding: 0 5px;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        transition: all ease .5s;
+        top: 0;
+        & > div {
+            position: absolute;
+            width: 100%;
+            padding: 7px 5px;
+            left: 0;
+            z-index: -1;
+            transition: all ease .5s;
+            & div {
+                border-radius: 5px;
+                background: #4d4d4d;
+                height: 100%;
+            }
+        }
+        & li {
+            display: table;
+            width: 100%;
+            border-bottom: 1px solid #808080;
+            border-top: 1px solid #fff;
+        }
+        & li.is_active {
+            & p {
+                color: #fff;
+            }
+        }
+        & li:first-child {
+            border-top: none;
+        }
+        & p {
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            transition: all ease .5s;
+            color: #4d4d4d;
+        }
+    }
+}
+@media screen and (min-width: 980px) {
+    .gr_container {
+        margin: 0 auto;
+    }
+}

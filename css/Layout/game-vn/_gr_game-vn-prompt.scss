@@ -1,0 +1,87 @@
+// ************************************************************
+// gr_game-vn-prompt
+// ************************************************************
+
+.gr_game-vn-prompt {
+    cursor: default;
+    display: inline-block;
+    line-height: 24px;
+    margin: 8px 0 0 5px;
+    white-space: nowrap;
+}
+
+.gr_game-vn-prompt__tooltip {
+    display: inline-block;
+    position: relative;
+    .gr_tooltip__item {
+        color: #8e7c66;
+        & .gr_item__text {
+            display: none;
+        }
+        @media screen and (min-width: 980px) {
+            & .gr_item__icon {
+                @include size(24px);
+            }
+            & .gr_item__text {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+    .gr_tooltip__popper {
+        border: 1px solid #333333;
+        border-radius: border_radius(large);
+        box-shadow: 3px 3px 3px shadow_color(light);
+        font-size: 0;
+        line-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 30px;
+        left: 0px;
+        text-align: center;
+        transition: all 0.3s ease;
+        visibility: hidden;
+        z-index: 6;
+        @media screen and (max-width: 979px) {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        & .gr_popper__list {
+            display: inline-block;
+            font-size: $font_size_small;
+            min-width: 58px;
+            & + .gr_popper__list {
+                border-left: 1px solid border_color(dark);
+            }
+        }
+        & .gr_popper__all .gr_popper__list {
+            vertical-align: top;
+        }
+        & .gr_list__area {
+            background: rgba(#4d4d4d, 0.95);
+            color: text_color(default_invert);
+            border-top: 1px solid border_color(dark);
+            line-height: 26px;
+        }
+
+        & .gr_list__item {
+            background: rgba(#4d4d4d, 0.95);
+            color: text_color(default_invert);
+            line-height: 21px;
+            padding: 0 8px;
+            & + .gr_list__item {
+                background: rgba(#ffffff, 0.95);
+                border-top: 1px solid border_color(dark);
+                color: text_color(primary);
+                line-height: 25px;
+            }
+        }
+    }
+    &.is_active {
+        & .gr_tooltip__popper {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+"frames": {
+	"bg": {
+		"frame": {"x":0, "y":650, "w":5, "h":5},
+		"spriteSourceSize": {"x":0,"y":0,"w":5,"h":5},
+		"sourceSize": {"w":5,"h":5}
+	},
+	"curtainLeft": {
+		"frame": {"x":770, "y":0, "w":182, "h":640},
+		"spriteSourceSize": {"x":0,"y":0,"w":182,"h":640},
+		"sourceSize": {"w":182,"h":640}
+	},
+	"curtainTop": {
+		"frame": {"x":0, "y":453, "w":644, "h":120},
+		"spriteSourceSize": {"x":0,"y":0,"w":644,"h":120},
+		"sourceSize": {"w":644,"h":120}
+	},
+	"loadingBar": {
+		"frame": {"x":0, "y":626, "w":506, "h":23},
+		"spriteSourceSize": {"x":0,"y":0,"w":506,"h":23},
+		"sourceSize": {"w":506,"h":23}
+	},
+	"loadingBarBg": {
+		"frame": {"x":0, "y":574, "w":527, "h":51},
+		"spriteSourceSize": {"x":0,"y":0,"w":527,"h":51},
+		"sourceSize": {"w":527,"h":51}
+	},
+	"mainImg": {
+		"frame": {"x":0, "y":0, "w":769, "h":452},
+		"spriteSourceSize": {"x":0,"y":0,"w":769,"h":452},
+		"sourceSize": {"w":769,"h":452}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 953, "h": 656},
+	"scale": "1"
+}
+}

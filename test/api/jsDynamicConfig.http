@@ -1,0 +1,8 @@
+POST {{host}}/api/v1/game/jsDynamicConfig/1.1.1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "lotteryId": "56",
+    "roomMasterId": "{{rmid}}",
+    "userId": "{{userId}}"
+}

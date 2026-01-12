@@ -1,0 +1,42 @@
+// ************************************************************
+// c_sup-ball
+// ************************************************************
+
+// 尺寸設定
+
+.c_sup-ball {
+    @include size(24px);
+    background: #666666;
+    border: 1px solid border_color(default_invert);
+    border-radius: border_radius(rounded);
+    box-shadow: 1px 1px 5px shadow_color(default);
+    color: text_color(default_invert);
+    cursor: default;
+    font-size: $font_size_small;
+    line-height: 22px;
+    position: absolute;
+    bottom: 76%;
+    left: 71%;
+    text-align: center;
+    z-index: 2;
+    &::before,
+    &::after {
+        @include pseudo;
+        @include size(0);
+        border-style: solid;
+    }
+    &::before {
+        border-color: border_color(default_invert) transparent transparent transparent;
+        border-width: 5px 3px 0 3px;
+        bottom: -1.5px;
+        left: -1.5px;
+        transform: rotate(43deg);
+    }
+    &::after {
+        border-color: #666666 transparent transparent transparent;
+        border-width: 4px 2.5px 0 2.5px;
+        bottom: 0;
+        left: 0;
+        transform: rotate(40deg);
+    }
+}

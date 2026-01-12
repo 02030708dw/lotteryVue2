@@ -1,0 +1,426 @@
+// ************************************************************
+// gr_app
+// ************************************************************
+
+.gr_app__container {
+    background-image: url(~@IMG/lang_cn/gr_app/gr_app--bg.jpg);
+    background-size: cover;
+    min-height: calc(100vh - 44px);
+    padding-bottom: 10px;
+}
+.gr_google-play {
+    @include size(120px, 36px);
+    background: url(~@IMG/lang_cn/gr_app/gr_google-play.png);
+    background-size: 100%;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+
+
+.gr_app__slogan {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 20px 0 30px;
+    text-align: center;
+    @include multi-lang {
+        font-size: 22px;
+    }
+}
+
+
+
+.gr_app__qrcode {
+    color: text_color(secondary);
+    font-size: $font_size_small;
+    margin: 0 auto;
+    min-height: 246px;
+    padding: 0 14px 19px;
+    position: relative;
+    text-align: center;
+    width: 168px;
+    z-index: 2;
+    & .gr_qrcode__image {
+        padding: 0 5px 5px;
+    }
+    & .gr_google-play {
+        margin-top: 13px;
+    }
+    & img {
+        @include size(120px);
+    }
+}
+
+
+
+
+
+.gr_step__button {
+    background-color: #333333;
+    border-radius: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: $font_size;
+    line-height: 28px;
+    width: 150px;
+    & + & {
+        margin-top: 10px;
+    }
+    &:hover {
+        @include animate(bounceIn, 0.75s);
+    }
+    @include multi-lang {
+        width: 170px;
+    }
+}
+
+
+
+
+
+.gr_app__step {
+    border-left: 1px solid border_color(dark);
+    margin: 0 auto;
+    padding: 20px 15px 0 15px;
+    position: relative;
+    width: 240px;
+    & .gr_step__hr {
+        @include size(57px, 1px);
+        background: border_color(dark);
+        position: relative;
+        &::before {
+            @include pseudo;
+            @include size(6px);
+            background: inherit;
+            border-radius: border_radius(rounded);
+            top: -2.5px;
+            right: 0;
+        }
+    }
+    & .gr_hr__dot {
+        @include size(3px);
+        background: inherit;
+        border-radius: border_radius(rounded);
+        position: absolute;
+        top: -1px;
+        left: 0;
+        &::before,
+        &::after {
+            @include pseudo;
+            @include size(inherit);
+            background: inherit;
+            border-radius: border_radius(rounded);
+            left: 0;
+        }
+        &::before {
+            top: -5px;
+        }
+        &::after {
+            bottom: -5px;
+        }
+    }
+    &::before {
+        @include pseudo;
+        @include size(7px);
+        background: border_color(dark);
+        border-radius: border_radius(rounded);
+        top: 0;
+        left: -4px;
+    }
+}
+
+
+
+.gr_step__header {
+    font-size: 0;
+    padding-bottom: 12px;
+    & .gr_header__num {
+        float: left;
+        font-size: 32px;
+        font-weight: bold;
+        margin-right: 5px;
+        vertical-align: middle;
+        width: 36px;
+    }
+    & .gr_header__title {
+        color: #aa895c;
+        float: left;
+        font-size: $font_size;
+        vertical-align: middle;
+    }
+    & .gr_header__desc {
+        float: right;
+        font-size: $font_size;
+        vertical-align: middle;
+        width: calc(100% - 42px);
+    }
+    @include multi-lang {
+        .gr_header__num {
+            font-size: 24px;
+            line-height: 37px;
+            width: 27px;
+        }
+        .gr_header__title {
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 37px;
+        }
+        .gr_header__desc {
+            width: calc(100% - 32px);
+        }
+    }
+}
+
+
+
+.gr_step__1 {
+    padding-bottom: 48px;
+    & .gr_step__content {
+        text-align: center;
+    }
+}
+
+
+
+.gr_step__2 {
+    & .gr_step__content {
+        @include size(202px, 106px);
+        background-image: url(~@IMG/lang_cn/gr_app/gr_step__2.png);
+        background-position: center 40%;
+        background-repeat: no-repeat;
+        background-size: 75%;
+        position: relative;
+        &::before {
+            @include pseudo;
+            @include size(100%, 23px);
+            background: radial-gradient(ellipse at center, rgba(219, 219, 219, 0.8) 0%,rgba(200, 200, 200, 0) 70%), radial-gradient(ellipse at center, rgba(159, 159, 159, 1) 0%,rgba(180, 180, 180, 0) 25%);
+            background-position: center center, 25px center;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 88%;
+            left: 0;
+        }
+    }
+}
+@keyframes floating {
+    0% {
+        background-position: center 40%;
+    }
+    40% {
+        background-position: center 65%;
+    }
+    60% {
+        background-position: center 45%;
+    }
+    80% {
+        background-position: center 55%;
+    }
+    100% {
+        background-position: center 40%;
+    }
+}
+
+
+
+.gr_step__3 {
+    padding-top: 20px;
+    & .gr_header__title {
+        line-height: 37px;
+    }
+    & .gr_step__content {
+        @include size(153px, 144px);
+        background-image: url(~@IMG/lang_cn/gr_app/gr_step__3.png);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        position: relative;
+        &::before {
+            @include animate(translating, 1.8s, infinite);
+            @include pseudo;
+            @include size(80px, 39px);
+            animation-timing-function: ease;
+            background-image: url(~@IMG/lang_cn/gr_app/gr_step__3--decoration.png);
+            background-size: 100%;
+            bottom: -4%;
+            left: 20%;
+        }
+    }
+}
+@keyframes translating {
+    0% {
+        transform: translate(0%, 0%);
+    }
+    50% {
+        transform: translate(-8%, 8%);
+    }
+    100% {
+        transform: translate(0%, 0%);
+    }
+  }
+
+
+
+
+
+@media screen and (min-width: 980px) {
+    .gr_app__slogan {
+        font-size: 42px;
+        padding: 40px 0 50px;
+        max-width: 700px;
+        @include multi-lang {
+            font-size: 42px;
+        }
+    }
+
+
+
+    .gr_app__qrcode {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 12px shadow_color(light);
+        padding: 19px;
+        position: absolute;
+        left: calc(50% + 118px);
+        top: 170px;
+        z-index: 2;
+    }
+
+
+
+
+
+    .gr_app__step {
+        padding: 20px 0 0 30px;
+        width: 700px;
+        & .gr_step__hr {
+            position: relative;
+            width: 103px;
+            &::before {
+                @include size(11px);
+                top: -4.5px;
+            }
+        }
+        & .gr_hr__dot {
+            @include size(5px);
+            top: -2px;
+            &::before {
+                top: -9px;
+            }
+            &::after {
+                bottom: -9px;
+            }
+        }
+        &::before {
+            @include size(13px);
+            left: -7px;
+        }
+    }
+
+
+
+    .gr_step__header {
+        margin-left: 30px;
+        padding-bottom: 20px;
+        & .gr_header__num {
+            font-size: 64px;
+            margin-right: 20px;
+            width: 72px;
+        }
+        & .gr_header__title,
+        & .gr_header__desc {
+            font-size: 24px;
+            line-height: 26px;
+            width: calc(100% - 92px);
+        }
+        & .gr_header__title {
+            margin-top: 11px;
+        }
+        & .gr_header__desc {
+            margin-bottom: 11px;
+        }
+    }
+
+
+
+    .gr_step__1 {
+        padding-bottom: 20px;
+        width: 394px;
+        & .gr_step__content {
+            text-align: center;
+            margin-left: 0 0 0 30px;
+        }
+    }
+    .gr_step__button {
+        & + & {
+            margin-left: 5px;
+        }
+    }
+
+
+    .gr_step__2 {
+        & .gr_step__header {
+            float: right;
+            margin: 140px 0 0;
+            width: 335px;
+        }
+        & .gr_step__content {
+            @include animate(floating, 6s, infinite);
+            @include size(317px, 312px);
+            animation-timing-function: ease-in-out;
+            background-size: 100%;
+            margin-bottom: 20px;
+            &::before {
+                @include size(100%, 40px);
+                background-position: center center, 55px center;
+                top: 83%;
+            }
+        }
+    }
+
+
+
+    .gr_step__3 {
+        padding: 35px 0 85px;
+        position: relative;
+        & .gr_header__title,
+        & .gr_header__desc {
+            line-height: 52px;
+            margin: 11px 0;
+        }
+        & .gr_step__content {
+            @include size(251px, 235px);
+            position: absolute;
+            top: -40px;
+            right: 0;
+            &::before {
+                @include size(132px, 64px);
+            }
+        }
+    }
+
+
+    .gr_step__header {
+        @include multi-lang {
+            .gr_header__num {
+                font-size: 48px;
+                line-height: 55px;
+                margin-right: 15px;
+                width: 55px;
+            }
+            .gr_header__title {
+                font-size: 32px;
+                font-weight: bold;
+                line-height: 55px;
+                margin-top: 0;
+                width: calc(100% - 70px);
+            }
+            .gr_header__desc {
+                font-size: $font_size_large;
+                margin-bottom: 0;
+                width: calc(100% - 70px);
+            }
+        }
+    }
+}

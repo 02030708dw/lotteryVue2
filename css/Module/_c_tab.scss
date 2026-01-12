@@ -1,0 +1,39 @@
+// ************************************************************
+// c_tab
+// ************************************************************
+
+.c_tab {
+    background: backgrounds(primary);
+    font-size: 0;
+    text-align: center;
+}
+
+.c_tab__nav--average {
+    box-shadow: 0 -1px 0 #b3b3b3 inset;
+    & .c_tab__item {
+        width: 50%;
+    }
+    & .c_tab__item.is_active {
+        color: text_color(accent);
+        position: relative;
+        &::after {
+            @include pseudo;
+            border: 2px solid currentColor;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+    }
+}
+.c_tab__item {
+    display: inline-block;
+    font-size: $font_size;
+    line-height: 26px;
+    padding: 12px 5px;
+}
+
+.c_tab__content {
+    & .c_tab__item {
+        padding-left: 35px;
+    }
+}

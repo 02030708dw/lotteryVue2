@@ -1,0 +1,774 @@
+// ************************************************************
+// page
+// ************************************************************
+// gr_game-info   投注记录
+// gr_report-list 盈亏查询
+// gr_wallet-list 钱包记录
+// gr_sales-time  贩售时间
+
+
+.gr_page__nav {
+    @extend %shadow_linear_gradient_default_inset;
+    line-height: 20px;
+    padding: 10px 15px;
+    left: 0;
+    transition: left 0.3s ease;
+}
+
+
+.gr_page__controls {
+    @extend %shadow_linear_gradient_default;
+    padding: 15px 15px 10px;
+    left: 0;
+    transition: left 0.3s ease;
+    & .el-button.gr-gameInfo--button {
+        margin: 0;
+        margin-right: 8px;
+        margin-bottom: 10px;
+    }
+    & > .el-select,
+    & > .el-select + span,
+    & > .el-input {
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+    & .el-input{
+        vertical-align: middle;
+    }
+    &::before {
+        display: none;
+    }
+    & select {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    & svg {
+        @include size(14px);
+        display: inline-block;
+        vertical-align: middle;
+        & .st0 {
+            fill: none;
+            stroke: $color_default_invert;
+            stroke-miterlimit: 10;
+            stroke-width: 1.5;
+        }
+        & .st1{
+            fill: $color_default_invert;
+        }
+    }
+    .el-accountsBalance {
+        display: inline-block;
+        margin-right: 5px;
+    }
+}
+
+
+
+.gr_page__content {
+    min-height: calc(100vh - 44px);
+    padding: 0 10px 30px;
+}
+.gr_game-info{
+    .gr_page__controls{
+        .el-date-editor--daterange.el-input{
+            width: 175px;
+        }
+    }
+}
+
+
+@media screen and (min-width: 980px) {
+    .gr_page__content {
+        min-height: calc(100vh - 140px);
+    }
+    .gr_game-info .gr_page__content {
+        min-height: calc(100vh - 205px);
+    }
+    // 頁面沒有 gr_page__controls 時的高度
+    .gr_page__nav + .gr_page__content {
+        min-height: calc(100vh - 84px);
+    }
+    .gr_game-info{
+        .gr_page__controls__search--submit{
+            display: inline;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    $gr_page__nav--height: 36px;
+    $gr_page__controls--height: 36px;
+    $select_medium_size: $gr_page__controls--height;
+    $select_long_width: calc((100vw - #{$select_medium_size}) / 3);
+    $select_long_width_2: calc((100vw - #{$select_medium_size}) / 2);
+    $select_long_width_3: calc((100vw - #{$select_medium_size}) / 3 * 2);
+    $select_long_width_4: calc(100vw - #{$select_medium_size});
+
+    .gr_page__nav {
+        @include size(100vw, $gr_page__nav--height);
+        line-height: 22px;
+        padding: 7px 10px;
+        position: fixed;
+        z-index: 50;
+        & button,
+        & hr {
+            display: none;
+        }
+        display: none;
+    }
+
+    .gr_page__controls {
+        border-bottom: 1px solid rgba(#999999,0.25);
+        @include size(100vw, $gr_page__controls--height);
+        height: auto;
+        //margin-top: $gr_page__nav--height;
+        padding: 0;
+        z-index: 50;
+        &::before {
+            display: block;
+        }
+        & .el-input__inner {
+            background: backgrounds(primary);
+            border-radius: 0;
+            border-width: 0;
+            padding-left: 10px;
+            &,
+            &:hover,
+            &:focus {
+                border-color: border_color(light);
+            }
+        }
+        & .el-select {
+            float: left;
+            margin: 0;
+            width: $select_long_width;
+            &:nth-of-type(4) ~ button {
+                display: none;
+            }
+            &.medium {
+                width: $select_medium_size;
+                & i {
+                    display: none;
+                }
+                & input {
+                    @include background_image("~@IMG/icon/i_filter.svg");
+                    font-size: 0;
+                }
+            }
+            & .el-input__inner {
+                height: $gr_page__controls--height;
+            }
+        }
+        & > .el-select .el-input__inner {border-right-width: 1px;}
+        & > .el-input:not(.el-date-editor) {
+            display: none;
+        }
+        & select[class*="el-"] {
+            cursor: pointer;
+            &.small {
+                height: $gr_page__nav--height;
+            }
+            &.mobile {
+                opacity: 0;
+            }
+        }
+        & svg {
+            @include size(24px);
+            & .st0 {
+                stroke: border_color(primary_dark);
+            }
+            & .st1{
+                fill: border_color(primary_dark);
+            }
+        }
+    }
+    //追號與投注紀錄樣式變更
+    .gr_game-info{
+        .gr_page__controls {
+            @include size(100vw, auto);
+            & .el-select {
+                display: block;
+                float: none;
+                width: 90%;
+                margin: 0 auto 1em;
+                & .el-input__icon{
+                    color: #4d4d4d;
+                }
+            }
+            & .el-input__inner {
+                border-width: 1px;
+                border-radius: 3px;
+                height: $gr_page__controls--height;
+            }
+            .gr_page__controls__search--submit{
+                width: 90%;
+                margin: 0 auto 1em;
+                .c_button--secondary{
+                    width: 100%;
+                }
+                .c_button__icon{
+                    display: none;
+                }
+            }
+            /*收合*/
+            &.is_active{
+                .gr_page__controls__toggle{
+                    padding-top: 1em;
+                    height: auto;
+                }
+                .gr_page__controls__toggle--submit{
+                    padding-top: 20px;
+                    & .gr_toggle__icon{
+                        transform: rotate(-135deg);
+                    }
+                }
+            }
+            .gr_page__controls__toggle{
+                width: 100%;
+                height: 0px;
+                overflow: hidden;
+                transition: all 0.5s;
+                & > .el-input {
+                    display: block;
+                    width: 90%;
+                    margin: 0 auto 1em;
+                }
+            }
+            .gr_page__vn__toggle{
+                & >.el-input{
+                    display: block;
+                    width: 90%;
+                    margin: 0 auto 1em;
+                }
+                & .gr_page__vn__datebox{
+                    display: table;
+                    width: 90%;
+                    margin: 0 auto;
+                }
+                & .gr_page__vn__date{
+                    display: table-row;
+                    width: 100%;
+                    & .gr_vn__date--item{
+                        display: table-cell;
+                        white-space: nowrap;
+                        vertical-align: middle;
+                        padding-bottom: 1em;
+                        &+.gr_vn__date--item{
+                            padding-left: 0;
+                        }
+                    }
+                }
+                & .el-date-editor.el-input{
+                    // width: calc( (100% - 16px) / 2);
+                }
+            }
+            .gr_page__controls__toggle--submit{
+                cursor: pointer;
+                width: 100%;
+                height: 36px;
+                position: relative;
+                text-align: center;
+                padding-top: 10px;
+                transition: all 0.25s;
+                & .gr_toggle__icon{
+                    display: inline-block;
+                    width: 14px;
+                    height: 14px;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-color: transparent #4d4d4d #4d4d4d transparent;
+                    transform: rotate(45deg);
+                    transition: all 0.25s;
+                }
+            }
+        }
+
+    }
+    .gr_game-info__menu{
+        background: #b5b09a;
+        color: #fff;
+        padding: 0 1em;
+        width: 100%;
+        overflow-y: hidden;
+        overflow-x: auto;
+        white-space: nowrap;
+        & .gr_menu__item{
+            cursor: pointer;
+            padding: 0 1em;
+            height: 36px;
+            line-height: 36px;
+            display: inline-block;
+            position: relative;
+            &.is_active{
+                &:after{
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border: 8px solid;
+                    border-color: transparent transparent #f2f2f2 transparent;
+                    bottom: 0;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+    }
+
+    .gr_report-list .gr_page__controls,
+    .gr_wallet-list .gr_page__controls,
+    .gr_winlose-list .gr_page__controls {
+        & .el-select {
+            width: $select_long_width_2;
+            & ~ span {
+                display: none;
+            }
+            & ~ button {
+                @include size($select_medium_size);
+                border-radius: 0;
+                box-shadow: none;
+                font-size: 0;
+                line-height: 23px;
+                margin: 0;
+                &::before {
+                    background: backgrounds(primary);
+                }
+                &::after,
+                &:active {
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+    .gr_report-list .gr_page__controls {
+        .el-date-editor--daterange {
+            width: $select_long_width_4;
+        }
+    }
+    .gr_winlose-list .gr_page__controls {
+        & .el-select {
+            width: $select_long_width;
+        }
+        .el-date-editor--daterange {
+            width: $select_long_width_3;
+            margin-right: 0px;
+        }
+    }
+    .gr_wallet-list .gr_page__controls {
+        & .el-select {
+            width: $select_long_width;
+            & ~ button {
+                display: block;
+            }
+        }
+        .el-date-editor--daterange {
+            width: $select_long_width_3;
+        }
+    }
+    .gr_sales-time {
+        .gr_page__controls {
+            float: left;
+            position: sticky;
+            top: 12px;
+            & .el-select {
+                width: 50vw;
+                & ~ button {
+                    display: block;
+                }
+            }
+        }
+    }
+    .gr_page__content {
+        padding: 0 0 40px 0;
+        & .table_default table {
+            border: none;
+            & tbody th,
+            & tbody td {
+                border: none;
+                position: relative;
+                text-align: left;
+                padding-right: 35px;
+            }
+            & tbody div:last-of-type {
+                & span:first-of-type {
+                    color: text_color(weak);
+                }
+            }
+            & tfoot td {
+                height: calc(100vh - #{$gr_page__nav--height + $gr_page__nav--height + 44px});
+            }
+            & i {
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+            }
+        }
+        .table_hover_bg {
+            tbody {
+                & td:hover {
+                    cursor: pointer;
+                    background: backgrounds(primary);
+                    border: none;
+                }
+                & tr:nth-child(even):hover td {
+                    background: lighten(backgrounds(default), 0.3%);
+                }
+            }
+        }
+    }
+
+
+
+    .gr_report-list .gr_page__content,
+    .gr_winlose-list .gr_page__content {
+        & .table_default table {
+            & tbody th,
+            & tbody td {
+                padding: 5px 10px;
+            }
+            & div {
+                line-height: 44px;
+            }
+        }
+    }
+
+
+
+    .gr_wallet-list .gr_page__content {
+        // padding-bottom: 76px;
+        & .table_default table {
+            & tbody th,
+            & tbody td {
+                padding: 5px 10px;
+            }
+        }
+    }
+
+
+
+    // 頁面沒有 gr_page__controls 且表格沒有數據時的高度
+    .gr_page__nav + .gr_page__content {
+        padding-top: 0px;
+        & .table_default tfoot td {
+            height: calc(100vh - #{$gr_page__nav--height + 44px});
+        }
+    }
+
+
+
+    .gr_page-content__footer {
+        @include size(100%, 76px);
+        background: backgrounds(secondary);
+        font-size: 0;
+        line-height: 18px;
+        min-width: 320px;
+        padding: 10px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 10;
+        & .gr_footer__header {
+            display: inline-block;
+            font-size: $font_size_small;
+            margin-right: 5px;
+            vertical-align: top;
+            width: 30px;
+        }
+        & .gr_footer__content {
+            display: inline-block;
+            font-size: $font_size_small;
+            vertical-align: top;
+            width: calc(100% - 35px);
+            & span {
+                float: right;
+            }
+        }
+        &::before {
+            @include background_gradient(false, to top, rgba(lighten($color_default, 40%), 0.3), rgba($color_default_invert, 0), rgba(lighten($color_default, 80%), 0.25));
+            @include pseudo;
+            @include size(100%, 15px);
+            bottom: 100%;
+            left: 0;
+        }
+        @include multi-lang {
+            .gr_footer__header {
+                width: 80px;
+            }
+            & .gr_footer__content {
+                width: calc(100% - 85px);
+            }
+        }
+    }
+    //日曆彈窗
+    .el-date-infobox{
+        .el-message-box{
+            margin-top: 5em;
+            border: none;
+            background: #f2f2f2;
+        }
+        .el-message-box__title{
+            border: none;
+            font-size: 100%;
+        }
+        .el-message-box__content{
+            position: relative;
+            height: 200px;
+            &:after,&:before{
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 5px;
+                background: linear-gradient(to bottom, rgba(153,153,153,0.5) 0%,rgba(153,153,153,0) 97%,rgba(153,153,153,0) 99%);
+            }
+            &:after{
+                transform: rotate(180deg);
+                bottom: 0;
+            }
+            &:before{
+                top: 0;
+            }
+        }
+    }
+    .el-date-infobox__daterange{
+        padding: 0 1em 1em;
+        & .el_daterange__item{
+            text-align: center;
+            display: inline-block;
+            width: calc((97% - 10px)/2);
+            border-radius: 3px;
+            padding: 1em;
+        }
+        & .is_active{
+            background: #f7931e;
+            color: #fff;
+        }
+    }
+    .el-date-infobox__submit{
+        overflow: hidden;
+        padding: 0.5em 0;
+        & .el_submit__item{
+            cursor: pointer;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            display: block;
+            float: left;
+            width: 50%;
+            &+.el_submit__item{
+                border-left: 1px solid #999999;
+            }
+        }
+        & .is_active{
+            color: #f7931e
+        }
+    }
+    //全部/官方/信用
+    .gr_page_links{
+        width: 90%;
+        margin: 0 auto 1em;
+        border-bottom: 1px solid #cccccc;
+    }
+    .gr_page_links--item{
+        cursor: pointer;
+        padding: 10px 0;
+        float: left;
+        width: calc( 100% / 4);
+        text-align: center;
+        margin-bottom: -2px;
+        border-bottom: 3px solid transparent;
+        &.is_active{
+            border-bottom: 3px solid #b5b09a;
+
+        }
+    }
+    .gr_page__draw {
+        width: 90%;
+        margin: 0 auto 1em;
+        text-align: center;
+        .el-input {
+            display: inline-block;
+            width: calc((100% - 16px) / 2);
+        }
+    }
+    .gr_sales-time .gr_page__content {
+        padding: 0px;
+        table tr {
+            td {
+                padding: 0;
+                > div {
+                    width: 100%;
+                    > div {
+                        padding: 5px 10px;
+                    }
+                }
+                $flashBg-w: 2px;
+                $flashBg-w2: 1px; // 販售 開獎上下的間距
+                $flashBg-color1: rgba(223, 240, 255, 1); // 選中的淡藍色
+                @keyframes flashBg {
+                    from {background-color: transparent;}
+                    20% {background-color: $flashBg-color1;}
+                    80% {background-color: $flashBg-color1;}
+                    to {background-color: transparent;}
+                }
+                @keyframes flashBg2 {
+                    from {
+                        border: $flashBg-w solid #ffffff;
+                        border-bottom: $flashBg-w2 solid #f2f2f2;
+                    }
+                    20% {
+                        border: $flashBg-w solid $flashBg-color1;
+                        border-bottom: $flashBg-w2 solid $flashBg-color1;
+                    }
+                    80% {
+                        border: $flashBg-w solid $flashBg-color1;
+                        border-bottom: $flashBg-w2 solid $flashBg-color1;
+                    }
+                    to {
+                        border: $flashBg-w solid #ffffff;
+                        border-bottom: $flashBg-w2 solid #f2f2f2;
+                    }
+                }
+                @keyframes flashBg3 {
+                    from {
+                        border: $flashBg-w solid #ffffff;
+                        border-top: $flashBg-w2 solid #f2f2f2;
+                    }
+                    20% {
+                        border: $flashBg-w solid $flashBg-color1;
+                        border-top: $flashBg-w2 solid $flashBg-color1;
+                    }
+                    80% {
+                        border: $flashBg-w solid $flashBg-color1;
+                        border-top: $flashBg-w2 solid $flashBg-color1;
+                    }
+                    to {
+                        border: $flashBg-w solid #ffffff;
+                        border-top: $flashBg-w2 solid #f2f2f2;
+                    }
+                }
+                .gr_sales-time__warp {
+                    position: relative;
+                    &.is_active {
+                        @include animate(flashBg, 1.5s);
+                        .gr_sales-time__selling {
+                            @include animate(flashBg2, 1.5s);
+                        }
+                        .gr_sales-time__winning {
+                            @include animate(flashBg3, 1.5s);
+                        }
+                    }
+                    .gr_sales-time__title {
+                        color: #000000;
+                        font-size: 14px;
+                        transition: 0.4s;
+                        padding: 6px 10px;
+
+                    }
+                    .gr_sales-time__selling, .gr_sales-time__winning {
+                        color: #0071bc;
+                        background-color: #ffffff;
+                        border: $flashBg-w solid #ffffff;
+                        vertical-align: top;
+                        // transition: 0.2s;
+                        > div {
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+                        [class*="--title"] {
+                            width: 37px;
+                            @include multi-lang {
+                                width: 50px;
+                            }
+                            @include multi-lang('th') {
+                                width: 65px;
+                            }
+                        }
+                        [class*="--txt"] {
+                            width: calc(100% - (37px + 10px));
+                            @include multi-lang {
+                                width: calc(100% - (50px + 10px));
+                            }
+                            @include multi-lang('th') {
+                                width: calc(100% - (65px + 10px));
+                            }
+                        }
+                    }
+                    .gr_sales-time__selling {
+                        border-bottom: $flashBg-w2 solid #f2f2f2;
+                    }
+                    .gr_sales-time__winning {
+                        border-top: $flashBg-w2 solid #f2f2f2;;
+                    }
+                }
+
+            }
+            &:nth-child(even) td, td {
+                background: #f2f2f2;
+            }
+        }
+    }
+}
+@media screen and (max-width: 980px) {
+    .gr_page__controls {
+    // 錢包紀錄的 账变类型 假 input
+    .el-accountsBalance {
+            position: relative;
+            width: calc((100vw - 36px) / 3);
+            height: 36px;
+            float: left;
+            margin-right: 0px;
+            .el-accountsBalance-input {
+                height: 36px;
+                position: relative;
+                .el-input {
+                    height: 100%;
+                    text-align: right;
+                    border-right: 1px solid #ccc;
+                    .el-input__icon {
+                        width: 100%;
+                        transform: translateY(-50%);
+                        text-align: right;
+                        &.el-icon-caret-top::before {
+                            transform: rotate(180deg);
+                            transition: 0.4s;
+                            position: absolute;
+                            top: 9px;
+                            right: 5px;
+                        }
+                        &.is-reverse {
+                            transform: translateY(-50%);
+                            &.el-icon-caret-top::before {
+                                transform: rotate(0deg);
+                            }
+                        }
+                    }
+                }
+            }
+            .el-accountsBalance-text {
+                position: absolute;
+                z-index: -1;
+                bottom: 0;
+                left: 0;
+                height: 36px;
+                line-height: 36px;
+                overflow: hidden;
+                white-space: nowrap;
+                padding: 0 10px;
+                width: 100%;
+                width: calc(100% - 25px);
+                font-size: $font_size_small;
+                @include multi-lang {
+
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,354 @@
+// ************************************************************
+// rwd
+// ************************************************************
+body {
+    &.bodyNoScroll {
+        height: 100%;
+        width: 100%;
+        overflow-y: hidden;
+        position: fixed;
+    }
+}
+@media screen and (min-width: 980px) {
+    .table_player {
+        // 桌面玩法的名人榜彈窗
+        .gr_news-message-box.gr_board-message-box {
+            transform: translate(0px, 30px) rotate(0deg);
+        }
+        .is_horizontal {
+            // 直頻
+            .gr_news-message-box.gr_board-message-box {
+                transform: rotate(90deg) translate(0px, 30px);
+            }
+        }
+    }
+}
+@media screen and (max-width: 979px) {
+    html {
+        height: 100%;
+    }
+    & body {
+        background-color: backgrounds(primary);
+        height: 100%;
+        text-size-adjust: 100%;
+        & > div:first-of-type {
+            min-height: 100%;
+            overflow: hidden;
+            &:not(.table_player) {
+                padding-top: 44px;
+            }
+            &.unsetOverflow {
+                // 為了子元素可以使用 position: sticky;
+                overflow: unset;
+            }
+        }
+        &.bodyNoScrollModal {
+            height: 100%;
+            width: 100%;
+            overflow-y: hidden;
+            position: fixed;
+        }
+
+        // &.scrollDown {
+        //     .gr_header,.gr_hamburgar{
+        //         transform: translateY(-50px);
+        //     }
+
+        //     .gr_games-header--320,
+        //     .gr_games-vn-header--320,
+        //     .gr_games-th-header--320 {
+        //         transform: translateY(-44px);
+        //     }
+        //     $gr_games-header-height: 67px;
+        //     .gr_game-history, .gr_game-th-history {
+        //         height: calc(100% - #{$gr_games-header-height});
+        //         top: $gr_games-header-height;
+        //     }
+        //     .gr_game-menu__toggle.is_active,.gr_game-menu__toggle,
+        //     .gr_game-vn-menu__toggle.is_active,.gr_game-vn-menu__toggle
+        //     .gr_game-th-menu__toggle.is_active,.gr_game-th-menu__toggle {
+        //         transition: all 0.3s ease;
+        //         top: 0px;
+        //         transform: translateY(-85px);
+        //     }
+        //     .gr_game-menu > div:first-child,
+        //     .gr_animation__prompt,
+        //     .gr_game-menu__toggle,
+        //     .gr_game-vn-menu__toggle,
+        //     .gr_game-th-menu__toggle {
+        //         opacity: 0;
+        //     }
+        //     .gr_games-header__button{
+        //         display: none;
+        //     }
+        //     .gr_game-select,.gr_current-game {
+        //         position: absolute;
+        //     }
+        // }
+        .table_player {
+            // 桌面玩法的名人榜彈窗
+            .gr_board-message-box {
+                width: 500px;
+                max-height: 82vh;
+                margin-top: 8vh;
+                overflow: visible;
+                .gr_news-message-box__close {
+                    top: 5px;
+                }
+                .gr_score-board {
+                    border-radius: 5px;
+                    .gr_board_title {
+                        width: 30%;
+                        img {
+                            margin-top: -45px;
+                        }
+                    }
+                    .gr_board_list {
+                        margin-top: 0px;
+                        border-radius: 5px;
+                        overflow: hidden;
+                    }
+                }
+                .gr_board_table--scroll {
+                    overflow: auto;
+                }
+            }
+            &[class*="lang_"] {
+                .gr_board_table--scroll {
+                    max-height: calc(82vh - 116px);
+                }
+            }
+            &.lang_cn {
+                .gr_board_table--scroll {
+                    max-height: calc(82vh - 96px);
+                }
+            }
+            .is_horizontal {
+                // 直頻
+                .gr_board-message-box {
+                    transform: rotate(90deg);
+                    max-height: 82vw;
+                    margin-top: 0;
+                    margin-right: 0;
+                    overflow: visible;
+                    max-width: 100%;
+                }
+            }
+            &[class*="lang_"] {
+                .is_horizontal {
+                    .gr_board_table--scroll {
+                        max-height: calc(82vw - 116px);
+                    }
+                }
+            }
+            &.lang_cn {
+                .is_horizontal {
+                    .gr_board_table--scroll {
+                        max-height: calc(82vw - 96px);
+                    }
+                }
+            }
+        }
+    }
+    .desktop {
+        overflow: hidden;
+        position: relative;
+        & body {
+            box-sizing: content-box;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            position: absolute;
+            left: 0;
+            padding-right: 17px;
+            width: calc(100% + 17px);
+            &[style*="overflow"] {
+                padding: 0;
+                width: 100%;
+            }
+            &[style*="overflow"][style*="padding"] {
+                width: calc(100% + 17px);
+            }
+        }
+    }
+    .gr_hamburger {
+        @include size(50px, 44px);
+        color: #ffcb85;
+        padding: 0 3px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: all 0.3s ease;
+        z-index: 200;
+        & .gr_hamburger__icon {
+            @include size(100%);
+            display: block;
+            padding: 2px;
+        }
+        & .gr_icon__decoration {
+            fill: none;
+            stroke-dasharray: 20 118.096;
+            stroke-dashoffset: 86;
+            stroke-linecap: square;
+            stroke-linejoin: round;
+            stroke-width: 1pt;
+            stroke: currentColor;
+            transition: all 0.8s cubic-bezier(0.6, 0.02, 0.2, 1);
+        }
+        &.is_active .gr_icon__decoration {
+            stroke-dasharray: 19 118.096;
+            stroke-dashoffset: 132;
+        }
+        &.is_back .gr_icon__decoration {
+            stroke-dasharray: 19 118.096;
+            stroke-dashoffset: 32;
+        }
+    }
+    @keyframes gr_game-hamburger__circle {
+        from, 20%, 40%, 60%, 80%, to {
+            animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        }
+        0% {
+            transform: translateY(0);
+        }
+        60% {
+            transform: translateY(23.5%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    @keyframes gr_game-hamburger__bar {
+        from, 20%, 40%, 60%, 80%, to {
+            animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        }
+        0% {
+            transform: scaleY(1);
+        }
+        60% {
+            transform: scaleY(0.3);
+        }
+        to {
+            transform: scaleY(1);
+        }
+    }
+    // gr_game-hamburger
+    .gr_game-hamburger {
+        @include size(50px, 44px);
+        color: #ffcb85;
+        padding: 6px 9px 10px;
+        position: fixed;
+        top: 0;
+        left: calc(100% - 50px);
+        & .gr_game-hamburger__icon {
+            @include size(100%);
+            display: block;
+            padding: 2px;
+            fill: none;
+            stroke: currentColor;
+        }
+        & .gr_icon__animation {
+            stroke-dasharray: 2 7;
+            stroke-dashoffset: 2;
+            stroke-width: 2pt;
+        }
+        & .gr_icon__decoration {
+            stroke-miterlimit: 10;
+            stroke-width: 0.75pt;
+        }
+        & .gr_icon__bar {
+            transform-origin: 0% 55%;
+        }
+        &::before {
+            @include pseudo;
+            @include size(0);
+            border-right: 7px solid transparent;
+            border-bottom: 6px solid backgrounds(primary);
+            border-left: 7px solid transparent;
+            bottom: 0;
+            opacity: 0;
+            left: 50%;
+            transform: translate(-50%, 100%);
+            transition: all 0.25s cubic-bezier(0.6, 0.02, 0.2, 1);
+            transition-delay: 0s;
+            visibility: hidden;
+        }
+        &.black::before {
+            border-bottom: 6px solid #333;
+        }
+        &.is_active {
+            & .gr_icon__animation {
+                stroke-dashoffset: -43;
+                transition: stroke-dashoffset 1s cubic-bezier(0.6, 0.02, 0.2, 1);
+            }
+            & .gr_icon__animation--2 {
+                transition-delay: 0.2s
+            }
+            & .gr_icon__animation--3 {
+                transition-delay: 0.4s
+            }
+            & .gr_icon__circle {
+                @include animate(gr_game-hamburger__circle, 0.5s);
+            }
+            & .gr_icon__bar {
+                @include animate(gr_game-hamburger__bar, 0.5s);
+            }
+            & ~ .gr_header__game-menu {
+                height: calc(100% - 44px); // 不可用vh，ios會把下面 StatusBar 的高算進去
+                opacity: 1;
+                padding: 0 0 10px;
+                transition-delay: 0s;
+                visibility: visible;
+            }
+            &::before {
+                opacity: 1;
+                transform: translate(-50%, 0);
+                transition-delay: 0.15s;
+                visibility: visible;
+            }
+            &::after {
+                @include pseudo;
+                @include size(100vw, calc(100% - 44px)); // 不可用vh，ios會把下面 StatusBar 的高算進去
+                background: rgba(0, 0, 0, 0.65);
+                min-width: 320px;
+                top: 44px;
+                right: 0;
+                z-index: -1;
+            }
+        }
+    }
+
+
+
+    // .gr_header,
+    // .gr_header + div {
+    //     transition: transform 0.3s ease;
+    // }
+    .gr_header + div {
+        top: 44px;
+    }
+    .is_hamburger-active {
+        & .gr_hamburger {
+            & .gr_icon__decoration {
+                stroke-dasharray: 19 118.096;
+                stroke-dashoffset: 132;
+            }
+        }
+        & .gr_header__my-favorites {
+            display: none;
+        }
+        & .gr_header__menu {
+            height: 100%;
+            opacity: 1;
+            visibility: visible;
+        }
+        & .gr_header {
+            background: #333333;
+            box-shadow: none;
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+

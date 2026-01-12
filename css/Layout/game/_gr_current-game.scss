@@ -1,0 +1,98 @@
+// ************************************************************
+// gr_current-game
+// ************************************************************
+
+.gr_current-game {
+    @include size(100%, 48px);
+    background: backgrounds(primary);
+    font-size: 0;
+    line-height: 28px;
+    min-width: 320px;
+    padding: 10px 0;
+    position: fixed;
+    z-index: 5;
+}
+.gr_current-game__inner {
+    background-image: linear-gradient(to bottom, #ffffff, #cccccc);
+    border: 1px solid #808080;
+    border-radius: 3px;
+    color: #4d4d4d;
+    height: 28px;
+    margin: 0 22px;
+    text-align: center;
+    & .gr_current-game__item {
+        @include size(calc(50% - 0.5px), 26px);
+        cursor: pointer;
+        display: inline-block;
+        font-size: $font_size;
+        line-height: 26px;
+        padding: 0;
+        & + .gr_current-game__item {
+            border-left: 1px solid #808080;
+            width: calc(50% + 0.5px);
+            &.is_active {
+                box-shadow: 2px 0 2px #b3b3b3 inset;
+            }
+        }
+    }
+    & .is_active {
+        background-image: linear-gradient(to bottom, #b3b3b3, #f2f2f2);
+        box-shadow: -2px 0 2px #b3b3b3 inset;
+        cursor: default;
+    }
+}
+
+
+
+
+
+@media screen and (min-width: 980px) {
+    .c_h-game-fastmenu {
+        float: left;
+        font-size: 0;
+        line-height: 44px;
+        & > div {
+            cursor: default;
+            display: inline-block;
+            font-size: $font_size_small;
+            vertical-align: middle;
+            & + div {
+                margin-left: 15px;
+            }
+        }
+        & .c_h-game-fastmenu__checkbox {
+            vertical-align: middle;
+        }
+    }
+}
+@media screen and (max-width: 979px) {
+    .c_h-game-fastmenu {
+        font-size: 0;
+        margin: 5px 22px;
+        & > div {
+            background: backgrounds(primary);
+            border-radius: 30px;;
+            border: 1px solid border_color(dark);
+            cursor: pointer;
+            display: inline-block;
+            font-size: $font_size;
+            line-height: 15px;
+            margin: 6px 0;
+            padding: 6px 0;
+            text-align: center;
+            width: calc(50% - 3px);
+            &:nth-of-type(2n) {
+                margin-left: 6px;
+            }
+            &.is_active {
+                background: #4d4d4d;
+                border-color: #4d4d4d;
+                color: text_color(default_invert);
+            }
+            &.is_disabled {
+                border-color: border_color(default);
+                color: #b3b3b3;
+            }
+        }
+    }
+}

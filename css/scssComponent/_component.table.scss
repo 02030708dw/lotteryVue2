@@ -1,0 +1,197 @@
+// ************************************************************
+// component.table
+// ************************************************************
+
+.table_default {
+    & table {
+        @include border(border_color(default));
+        font-size: $font_size_small;
+        width: 100%;
+    }
+    & thead {
+        @include background_gradient(ture, to bottom, $color_accent, $color_accent, darken($color_accent, 5%), ture);
+        box-shadow: 0 -4px 0 $color_accent_heavy inset;
+        color: text_color(default_invert);
+    }
+    & tbody {
+        background: backgrounds(secondary_light);
+        & th {
+            background: backgrounds(accent_heavy);
+            color: text_color(default);
+        }
+        & tr + tr th {
+            border-top: 1px solid backgrounds(primary);
+        }
+        & td {
+            background: backgrounds(secondary_light);
+            border-bottom: 1px solid border_color(light);
+        }
+    }
+    & tfoot td {
+        background: backgrounds(secondary_light);
+        height: 200px;
+    }
+    & th,
+    & td {
+        line-height: 22px;
+        padding: 5px;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+
+
+
+
+// 班馬紋
+.table_stripe {
+    & th + th {
+        border-right: 1px solid border_color(default);
+        border-left: 1px solid border_color(default);
+    }
+    & tbody {
+        & td {
+            background: backgrounds(primary);
+            border-bottom: none;
+            border-right: 1px solid border_color(default);
+            border-left: 1px solid border_color(default);
+            line-height: 18px;
+            word-break: break-all;
+        }
+        & tr:nth-child(even) td {
+            background: lighten(backgrounds(default), 0.3%);
+        }
+    }
+    & tfoot td {
+        background: backgrounds(primary);
+    }
+}
+// hover 變色
+.table_hover_bg {
+    tbody {
+        & tr:hover td {
+            background: lighten($color_secondary_heavy, 24%);
+        }
+    }
+}
+// 捲軸
+@mixin column_width($name, $v1: 20%, $v2: $v1, $v3: $v1, $v4: $v1, $v5: $v1, $v6: $v1, $v7: $v1, $v8: $v1) {
+    .c_table--scroll--#{$name} {
+        & th,
+        & td {
+            &:nth-of-type(1) {
+                width: $v1;
+            }
+            &:nth-of-type(2) {
+                width: $v2;
+            }
+            &:nth-of-type(3) {
+                width: $v3;
+            }
+            &:nth-of-type(4) {
+                width: $v4;
+            }
+            &:nth-of-type(5) {
+                width: $v5;
+            }
+            &:nth-of-type(6) {
+                width: $v6;
+            }
+            &:nth-of-type(7) {
+                width: $v7;
+            }
+            &:nth-of-type(8) {
+                width: $v8;
+            }
+        }
+    }
+}
+
+@include column_width(tracedetail, 16%, 14%, 14%, 14%, 14%, 14%, 14%);
+@include column_width(gametracer, 8%, 30%, 20%, 20%, 20%);
+@include column_width(gamewintracer, 8%, 15%, 15%, 15%, 15%, 15%, 15%);
+
+.c_table--scroll {
+    border: 1px solid border_color(default) \9;
+    height: 197px \9;
+    overflow-y: scroll \9;
+    & table {
+        border: none \9;
+        width: 100%;
+    }
+    & thead {
+        display: block;
+        overflow-y: scroll;
+        overflow-y: auto \9;
+        & th {
+            font-size: $font_size_small;
+        }
+    }
+    & tbody {
+        display: block;
+        overflow-y: scroll;
+        overflow-y: auto \9;
+        height: 175px;
+        height: auto \9;
+    }
+    & tr {
+        display: table;
+        width: 100%;
+        & th,
+        & td {
+            padding: 5px 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        & td {
+            & .el-input {
+                margin-right: 5px;
+                position: static;
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+
+
+
+
+// 投注頁追號
+.c_table--scroll--gametracer, .c_table--scroll--gamewintracer {
+    border: none \9;
+    & table {
+        & thead {
+            background: darken(backgrounds(default), 10%);
+            border-bottom: 1px solid border_color(dark);
+            height: 37px;
+            line-height: 23px;
+            th {
+                font-size: $font_size;
+                text-align: left;
+                @include multi-lang('vn') {
+                    font-size: $font_size_small;
+                }
+            }
+        }
+        & tbody {
+            height: 160px;
+            height: auto \9;
+        }
+        & tr {
+            & th,
+            & td {
+                text-align: center;
+                &:nth-of-type(2) {
+                    text-align: left;
+                }
+            }
+            & td {
+                border-bottom: 1px solid border_color(dark);
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+    }
+}

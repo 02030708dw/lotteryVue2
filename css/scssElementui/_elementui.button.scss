@@ -1,0 +1,159 @@
+// ************************************************************
+// elementui.button
+// ************************************************************
+
+@mixin btn_border($colour, $colour_hover: $colour, $background: lighten(backgrounds(default), 10%)) {
+    background-color: $background;
+    border-color: $colour;
+    color: $colour;
+    &:hover,
+    &:focus {
+        border-color: lighten($colour_hover, 5%);
+        color: lighten($colour_hover, 5%);
+    }
+    &:active {
+        border-color: darken($colour_hover, 5%);
+        color: darken($colour_hover, 5%);
+    }
+}
+@mixin btn_fill($background, $background_hover: $background, $colour: text_color(default_invert)) {
+    background-color: $background;
+    border-color: $background;
+    color: $colour;
+    &:hover,
+    &:focus {
+        background-color: lighten($background_hover, 5%);
+        border-color: lighten($background_hover, 5%);
+        color: $colour;
+    }
+    &:active {
+        background-color: darken($background_hover, 5%);
+        border-color: darken($background_hover, 5%);
+        color: $colour;
+    }
+}
+
+// button
+.el-button {
+    @include btn_border($color_accent, $color_primary);
+	padding: 6px 15px;
+	font-size: $font_size;
+    border-radius: 5px;
+    // @media screen and (max-width: 979px) {
+    //     @include multi-lang('vn') {
+    //         padding: 6px 8px;
+    //     }
+    // }
+}
+
+.el-button.is-loading:before {
+	background-color: rgba(lighten(backgrounds(default), 10%), 0.35);
+}
+
+.el-button.is-disabled,
+.el-button.is-disabled:focus,
+.el-button.is-disabled:hover {
+	color: border_color(light);
+	background-color: backgrounds(default);
+	border-color: border_color(light);
+}
+
+.el-button.is-disabled.is-plain,
+.el-button.is-disabled.is-plain:focus,
+.el-button.is-disabled.is-plain:hover {
+	background-color: backgrounds(default);
+	border-color: border_color(light);
+	color: border_color(light);
+}
+
+.el-button.is-active {
+    @include btn_border($color_primary);
+}
+
+.el-button.is-plain {
+    @include btn_border($color_accent, $color_primary);
+}
+
+.el-button--default,
+.el-button--default.is-active {
+    @include btn_fill($color_accent_heavy);
+}
+
+.el-button--default.is-plain {
+	@include btn_border($color_accent, $color_accent_heavy);
+}
+
+.el-button--primary {
+    @include btn_fill($color_primary);
+}
+
+.el-button--primary.is-plain {
+	@include btn_border($color_accent, $color_primary);
+}
+
+.el-button--success,
+.el-button--success.is-active {
+	@include btn_fill(backgrounds(secondary_heavy));
+}
+
+.el-button--success.is-plain {
+    @include btn_border($color_accent, backgrounds(secondary_heavy));
+}
+
+.el-button--warning,
+.el-button--warning.is-active {
+    @include btn_fill(darken(mix($color_primary, $color_light_heavy, 36%), 4%));
+}
+
+.el-button--warning.is-plain {
+    @include btn_border($color_accent, darken(mix($color_primary, $color_light_heavy, 36%), 4%));
+}
+
+.el-button--danger,
+.el-button--danger.is-active {
+	@include btn_fill($color_strong);
+}
+
+.el-button--danger.is-plain {
+	@include btn_border($color_accent, $color_strong);
+}
+
+.el-button--info,
+.el-button--info.is-active {
+	@include btn_fill($color_primary_heavy);
+}
+
+.el-button--info.is-plain {
+	@include btn_border($color_accent, $color_primary_heavy);
+}
+
+.el-button--large {
+	padding: 11px 19px;
+	font-size: $font_size_large;
+	border-radius: 5px
+}
+
+.el-button--small {
+	padding: 5px 9px;
+	font-size: $font_size_small;
+	border-radius: 5px;
+}
+
+.el-button--mini {
+	padding: 4px;
+	font-size: $font_size_small;
+	border-radius: 5px;
+}
+
+.el-button--text {
+	color: $color_primary;
+}
+
+.el-button--text:focus,.el-button--text:hover {
+	color: lighten($color_primary, 5%);
+}
+
+.el-button--text:active {
+	color: darken($color_primary, 5%);
+}
+

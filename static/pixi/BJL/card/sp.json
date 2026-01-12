@@ -1,0 +1,275 @@
+{
+"frames": {
+	"card0": {
+		"frame": {"x":434, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card1": {
+		"frame": {"x":434, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card10": {
+		"frame": {"x":372, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card11": {
+		"frame": {"x":372, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card12": {
+		"frame": {"x":372, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card13": {
+		"frame": {"x":372, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card14": {
+		"frame": {"x":372, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card15": {
+		"frame": {"x":310, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card16": {
+		"frame": {"x":310, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card17": {
+		"frame": {"x":310, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card18": {
+		"frame": {"x":310, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card19": {
+		"frame": {"x":310, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card2": {
+		"frame": {"x":434, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card20": {
+		"frame": {"x":310, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card21": {
+		"frame": {"x":248, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card22": {
+		"frame": {"x":248, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card23": {
+		"frame": {"x":248, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card24": {
+		"frame": {"x":496, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card25": {
+		"frame": {"x":248, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card26": {
+		"frame": {"x":248, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card27": {
+		"frame": {"x":186, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card28": {
+		"frame": {"x":186, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card29": {
+		"frame": {"x":186, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card3": {
+		"frame": {"x":434, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card30": {
+		"frame": {"x":186, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card31": {
+		"frame": {"x":186, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card32": {
+		"frame": {"x":186, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card33": {
+		"frame": {"x":124, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card34": {
+		"frame": {"x":124, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card35": {
+		"frame": {"x":124, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card36": {
+		"frame": {"x":124, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card37": {
+		"frame": {"x":124, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card38": {
+		"frame": {"x":124, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card39": {
+		"frame": {"x":62, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card4": {
+		"frame": {"x":434, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card40": {
+		"frame": {"x":62, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card41": {
+		"frame": {"x":62, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card42": {
+		"frame": {"x":62, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card43": {
+		"frame": {"x":62, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card44": {
+		"frame": {"x":62, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card45": {
+		"frame": {"x":0, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card46": {
+		"frame": {"x":0, "y":344, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card47": {
+		"frame": {"x":0, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card48": {
+		"frame": {"x":0, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card49": {
+		"frame": {"x":0, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card5": {
+		"frame": {"x":372, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card50": {
+		"frame": {"x":0, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card51": {
+		"frame": {"x":248, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card52": {
+		"frame": {"x":496, "y":258, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card6": {
+		"frame": {"x":496, "y":172, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card7": {
+		"frame": {"x":496, "y":86, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card8": {
+		"frame": {"x":496, "y":0, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	},
+	"card9": {
+		"frame": {"x":434, "y":430, "w":61, "h":85},
+		"spriteSourceSize": {"x":0,"y":0,"w":61,"h":85},
+		"sourceSize": {"w":61,"h":85}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 558, "h": 516},
+	"scale": "1"
+}
+}

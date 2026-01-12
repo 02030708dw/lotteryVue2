@@ -1,0 +1,110 @@
+// ************************************************************
+// gr_game-danshi
+// ************************************************************
+
+.gr_game-danshi {
+    background: backgrounds(primary);
+    padding: 20px 10px 10px 10px;
+}
+.gr_game-danshi__inner {
+    @media screen and (min-width: 980px) {
+        background: backgrounds(accent);
+    }
+    line-height: 31px;
+    padding: 10px 25px 20px;
+}
+.gr_game-danshi__button-area {
+    float: right;
+}
+.gr_button-area__upload {
+    display: inline-block;
+    margin-right: 7px;
+    position: relative;
+    & input {
+        @include size(100%);
+        font-size: 100px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        visibility: hidden;
+        z-index: 5;
+    }
+}
+.gr_game-danshi__select-bar {
+    float: left;
+    & .el-checkbox+.el-checkbox {
+        @include multi-lang('jp') {
+            margin-left: 9px;
+        }
+        @include multi-lang('vn') {
+            margin-left: 13px;
+        }
+    }
+    
+}
+.gr_game-danshi__panel {
+    @include size(100%, 185px);
+    border: 1px solid border_color(dark);
+    float: left;
+    margin-top: 10px;
+    position: relative;
+    & textarea,
+    & div {
+        line-height: 24px;
+    }
+    & textarea {
+        @include size(100%);
+        overflow-y: scroll;
+        padding: 8px 10px;
+        position: absolute;
+        resize: none;
+        z-index: 2;
+        background-color: rgba(248, 247, 242, 0);
+        &:focus + div {
+            display: none;
+        }
+    }
+    & div {
+        overflow: hidden;
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        bottom: 8px;
+        left: 10px;
+        z-index: 1;
+    }
+}
+@media screen and (max-width: 979px) {
+    .gr_game-danshi {
+        padding: 0;
+    }
+    .gr_game-danshi__inner {
+        padding: 15px;
+    }
+    .gr_game-danshi__button-area {
+        float: none;
+        text-align: right;
+    }
+    .gr_game-danshi__select-bar {
+        float: none;
+        margin: 8px 0 5px;
+        & + .gr_game-danshi__panel {
+            height: calc(100vh - 433px);
+            margin-top: 0;
+            min-height: 240px;
+        }
+    }
+    .gr_game-danshi__panel {
+        height: calc(100vh - 398px);
+        margin-bottom: 130px;
+        min-height: 285px;
+        & textarea,
+        & div {
+            font-size: $font_size_small;
+            line-height: 22px;
+            padding: 5px 8px;
+        }
+    }
+}

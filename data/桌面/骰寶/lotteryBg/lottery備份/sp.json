@@ -1,0 +1,50 @@
+{
+"frames": {
+	"206": {
+		"frame": {"x":0, "y":148, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	},
+	"205": {
+		"frame": {"x":0, "y":0, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	},
+	"乐利骰宝": {
+		"frame": {"x":0, "y":296, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	},
+	"北京": {
+		"frame": {"x":294, "y":148, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	},
+	"210": {
+		"frame": {"x":294, "y":0, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	},
+	"207": {
+		"frame": {"x":147, "y":0, "w":146, "h":148},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":148},
+		"sourceSize": {"w":146,"h":148}
+	},
+	"209": {
+		"frame": {"x":147, "y":149, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	},
+	"211": {
+		"frame": {"x":294, "y":296, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 441, "h": 444},
+	"scale": "1"
+}
+}

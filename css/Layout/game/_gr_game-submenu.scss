@@ -1,0 +1,139 @@
+// ************************************************************
+// gr_game-submenu
+// ************************************************************
+
+.gr_game-submenu {
+    line-height: 22px;
+    padding: 15px 20px 5px;
+}
+
+
+
+$gr_field__title--width: 80px;
+
+.gr_game-submenu__field {
+    margin: 0 0 0 $gr_field__title--width;
+    position: relative;
+    width: calc(100% - #{$gr_field__title--width});
+    @include multi-lang {
+        $gr_field__title--width: 125px;
+        margin: 0 0 0 $gr_field__title--width;
+        width: calc(100% - #{$gr_field__title--width});
+        & .gr_field__title {
+            width: $gr_field__title--width;
+        }
+    }
+}
+.gr_field__title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    width: $gr_field__title--width;
+}
+.gr_field__button {
+    @include border(border_color(default));
+    border-radius: border_radius(default);
+    cursor: pointer;
+    float: left;
+    line-height: 20px;
+    margin: 0 8px 10px 0;
+    min-width: 65px;
+    padding: 0 5px;
+    position: relative;
+    text-align: center;
+    transition: all 0.3s ease;
+    & .gr_button__text {
+        position: relative;
+        z-index: 2;
+    }
+    &::before,
+    &::after {
+        @include pseudo;
+        @include size(100%);
+        border-radius: 2px;
+        top: 0;
+        left: 0;
+        transition: all 0.3s ease;
+    }
+    &::before {
+        @include background_gradient(ture, to bottom, lighten(backgrounds(default), 10%), backgrounds(default));
+        opacity: 1;
+    }
+    &::after {
+        @include background_gradient(ture, to bottom, backgrounds(default), lighten(backgrounds(default), 10%));
+        opacity: 0;
+    }
+    &.is_active,
+    &.is_active:hover {
+        @include border(border_color(dark));
+        color: text_color(default_invert);
+        &::before {
+            @include background_gradient(ture, to bottom, darken(mix($color_secondary_heavy, $color_strong, 85%), 8%), lighten(mix($color_secondary_heavy, $color_strong, 85%), 15%));
+            box-shadow: 0 0 3px 0 shadow_color(light) inset;
+            opacity: 1;
+        }
+        &::after {
+            opacity: 0;
+        }
+    }
+    &:hover {
+        @include border(border_color(default));
+        &::before {
+            opacity: 0;
+        }
+        &::after {
+            opacity: 1;
+        }
+    }
+}
+.gr_kill-pair__button {
+    // @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+    // color: text_color(weak);
+    color: $russian ;
+    border: 1px $russian  solid;
+    border-radius: 3px;
+    float: right;
+    cursor: pointer;
+    position: relative;
+    top: 10px;
+    & .gr_gr_ball__inner {
+        border: 1px transparent solid;
+        display: inline-block;
+        padding: 2px 5px;
+        & i {
+            transform: scale(0.8);
+        }
+        & span {
+            font-size: 12px;
+        }
+    }
+    // &:hover {
+    //     @include background_gradient(ture, 135deg, darken($color_default_invert, 13.5%), $color_default_invert);
+    // }
+    &.is_active {
+        // @include background_gradient(ture, to bottom, lighten(mix($color_primary, $color_secondary, 97%), 0%), lighten($color_primary_heavy, 2.3%));
+        background-color: $russian;
+        border:1px solid $russian;
+        & .gr_gr_ball__inner {
+            // @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+            color: text_color(default_invert);
+            
+        }
+    }
+}
+
+
+@media screen and (max-width: 979px) {
+    .gr_kill-pair {
+        width: 100%;
+        text-align: right;
+        padding: 0 10px 0px;
+        .gr_kill-pair__button {
+            top: 0px;
+            right: 0px;
+            float: none;
+        }
+    }
+}
+

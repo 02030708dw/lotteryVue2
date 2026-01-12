@@ -1,0 +1,93 @@
+// ************************************************************
+// c_select
+// ************************************************************
+
+.c_select {
+    @include size(50px, 48px);
+    line-height: 48px;
+    position: relative;
+    text-align: center;
+    user-select: none;
+    z-index: 1;
+    @include multi-lang {
+         @include size(46px, 48px);
+    }
+    &.is_active .c_select__option-group {
+        display: block;
+    }
+    &.is_active .c_select__checked {
+        @include background_gradient(ture, to top, lighten(backgrounds(default), 10%), backgrounds(default));
+    }
+}
+
+
+
+
+
+
+
+
+.c_select__input {
+    opacity: 0;
+    position: absolute;
+}
+
+
+
+
+
+.c_select__checked {
+    @include background_gradient(ture, to bottom, lighten(backgrounds(default), 10%), backgrounds(default));
+    @include border(border_color(default));
+    border-radius: border_radius(default);
+    height: 36px;
+    line-height: 36px;
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    left: 4px;
+}
+
+
+
+
+
+.c_select__option-group {
+    background-color: rgba(backgrounds(primary), 0.95);
+    border: 1px solid rgba(shadow_color(default), 0.1);
+    border-bottom: none;
+    display: none;
+    height: auto;
+    overflow: hidden;
+    padding: 5px;
+    position: absolute;
+    right: -2px;
+    bottom: 48px;
+    left: -2px;
+    z-index: 1;
+    & .c_option-group__item {
+        border: 1px solid border_color(light);
+        display: block;
+        height: 36px;
+        line-height: 36px;
+        &:first-of-type {
+            border-radius: border_radius(default) border_radius(default) 0 0;
+        }
+        &:last-of-type {
+            border-radius: 0 0 border_radius(default) border_radius(default);
+        }
+        & + .c_option-group__item {
+            border-top: none;
+        }
+    }
+}
+
+
+
+
+
+@for $i from 1 through 3 {
+    .c_select__input:nth-child(#{$i}):checked ~ .c_select__option-group .c_option-group__item:nth-child(#{$i}) {
+        color: text_color(accent);
+    }
+}

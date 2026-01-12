@@ -1,0 +1,14 @@
+// ************************************************************
+// gr_game-vn-button-group
+// ************************************************************
+
+.gr_game-vn-button-group {
+    & button {
+        min-width: 81px \9;
+        &::before {
+            content: '';
+            display: block \9;
+            min-width: 81px;
+        }
+    }
+}

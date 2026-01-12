@@ -1,0 +1,79 @@
+// ************************************************************
+// gr_game-th-history
+// ************************************************************
+
+@media screen and (min-width: 980px) {
+    .gr_game-th-history {
+        display: none;
+    }
+}
+@media screen and (max-width: 979px) {
+    $gr_header-height: 44px;
+    $gr_games-header-height: 67px;
+    .gr_game-th-history {
+        @include size(100%, 0);
+        background: backgrounds(primary);
+        min-width: 320px;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0 10px;
+        position: fixed;
+        top: $gr_header-height + $gr_games-header-height;
+        bottom: 0;
+        left: 0;
+        transition: height 0.4s cubic-bezier(0.05, 0.1, 0.4, 1), opacity 0.4s cubic-bezier(0.05, 0.1, 0.4, 1), visibility 0.4s cubic-bezier(0.05, 0.1, 0.4, 1);
+        visibility: hidden;
+        z-index: 67;
+        &::before {
+            @include background_gradient(false, to bottom, lighten($color_default, 60%), rgba($color_default_invert, 0), rgba(lighten($color_default, 65%), 0.25));
+            @include pseudo;
+            @include size(100%, 15px);
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+        }
+        &.is_active {
+            height: calc(100% - #{$gr_header-height} - #{$gr_games-header-height});
+            opacity: 1;
+            transition: height 0s linear, opacity 0.4s cubic-bezier(0.05, 0.1, 0.4, 1), visibility 0.4s cubic-bezier(0.05, 0.1, 0.4, 1);
+            visibility: visible;
+        }
+    }
+    
+    .gr_game-th-history__button-group {
+        padding: 15px 12px;
+    }
+    
+    .gr_game-th-history__title {
+        border-bottom: 1px solid #c69c6d;
+        color: #c69c6d;
+        line-height: 24px;
+        padding-left: 2px;
+    }
+    
+    .gr_game-th-history__scroll-area {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: calc(100vh - 250px);
+        @media screen and (max-height: 540px) {
+            height: calc(100vh - 245px);
+        }
+    }
+    
+    .gr_game-th-history__list {
+        border-bottom: 1px dotted border_color(dark);
+        font-size: $font_size_small;
+        line-height: 28px;
+        & .gr_list__issue {
+            padding: 0 10px;
+        }
+        & .gr_list__code {
+            color: text_color(accent);
+            padding:0px;
+            &.gray {
+                padding: 0px 3px 0px 2px;
+                color: #4d4d4d;
+            }
+        }
+    }
+}

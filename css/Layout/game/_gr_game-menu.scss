@@ -1,0 +1,286 @@
+// ************************************************************
+// gr_game-menu
+// ************************************************************
+
+@media screen and (min-width: 980px) {
+    .gr_game-menu {
+        @include background_gradient(ture, to bottom, $color_accent, $color_accent, darken($color_accent, 5%), ture);
+        border-bottom: 3px solid border_color(accent_dark);
+        color: darken(text_color(default_invert), 10%);
+        margin: 0 auto;
+        max-width: 980px;
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+    }
+    .gr_game-menu__inner {
+        float: left;
+        width: calc(100% - 110px);
+        @include multi-lang("us") {
+            width: calc(100% - 160px);
+        }
+        @include multi-lang("th") {
+            width: calc(100% - 160px);
+        }
+        @include multi-lang("vn") {
+            width: calc(100% - 200px);
+        }
+    }
+    .gr_game-menu__bar {
+        float: left;
+        overflow: hidden;
+        width: calc(100% - 66px);
+    }
+    .gr_game-menu__group {
+        height: 33px;
+        line-height: 33px;
+        position: relative;
+        transition: all 0.25s ease-out;
+        white-space: nowrap;
+        & .gr_group__item {
+            background: transparent;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            transition: all 0.3s ease;
+            z-index: 5;
+            &:first-of-type .gr_item__text {
+                border-left-color: transparent;
+            }
+            &:last-of-type .gr_item__text {
+                border-right-color: transparent;
+            }
+        }
+        & .gr_item__text {
+            @include size(89.5px, 25px);
+            border-left: 1px solid currentColor;
+            border-right: 1px solid border_color(accent_dark);
+            display: inline-block;
+            line-height: 25px;
+            vertical-align: middle;
+        }
+        & .is_active {
+            @include background_gradient(ture, to bottom, rgba(backgrounds(default), 0.8), rgba(backgrounds(default), 0.8), rgba(backgrounds(accent), 0.7), ture);
+            color: text_color(primary);
+            & .gr_item__text {
+                border-color: transparent;
+            }
+            & + .gr_group__item .gr_item__text {
+                border-left-color: transparent;
+            }
+        }
+    }
+    
+    @keyframes pound {
+        50% {
+            transform: scale(1.15);
+        }
+    }
+    // 左右控制箭頭
+    .gr_game-menu__controller {
+        @include size(33px, 33px);
+        color: #ffffff;
+        cursor: pointer;
+        line-height: 33px;
+        position: relative;
+        text-align: center;
+        &::before {
+            @include pseudo;
+            @include size(1px, 25px);
+            position: absolute;
+            top: 5px;
+        }
+        & .gr_controller__arrow {
+            @include size(16px);
+            border: 1px solid currentColor;
+            border-radius: border_radius(rounded);
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            transform: scale(1);
+            &::before {
+                @include pseudo;
+                @include size(5px);
+                border: 1px solid currentColor;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+            }
+        }
+        &.is_disabled {
+            cursor: not-allowed;
+            & .gr_controller__arrow {
+                opacity: 0.5;
+            }
+        }
+        &:not(.is_disabled) .gr_controller__arrow {
+            @include animate(pound, 1s, infinite);
+        }
+    }
+    .gr_game-menu__controller--left {
+        float: left;
+        &::before {
+            border-right: 1px solid border_color(accent_dark);
+            box-shadow: 1px 0 0 currentColor;
+            right: 0;
+        }
+        & .gr_controller__arrow {
+            &::before {
+                border-top: none;
+                border-right: none;
+                transform: translate(-45%, -50%) rotate(45deg);
+            }
+        }
+    }
+    .gr_game-menu__controller--right {
+        float: right;
+        &::before {
+            border-left: 1px solid currentColor;
+            box-shadow: -1px 0 0 border_color(accent_dark);
+            left: 0;
+        }
+        & .gr_controller__arrow {
+            &::before {
+                border-bottom: none;
+                border-left: none;
+                transform: translate(-55%, -50%) rotate(45deg);
+            }
+        }
+    }
+    // 玩法切換
+    .gr_game-menu__toggle {
+        @include size(90px, 22px);
+        border: 1px solid currentColor;
+        border-radius: border_radius(default);
+        cursor: pointer;
+        font-size: 0;
+        float: right;
+        line-height: 20px;
+        margin: 6.5px 10px 0 0;
+        text-align: center;
+        & .gr_toggle__item {
+            display: inline-block;
+            font-size: $font_size_small;
+            width: 50%;
+            &:first-of-type:last-of-type {
+                width: 100%;
+            }
+        }
+        & .is_active {
+            background: text_color(default_invert);
+            color: text_color(primary);
+            cursor: default;
+        }
+        @include multi-lang("us") {
+            width: 140px;
+        }
+        @include multi-lang("th") {
+            width: 140px;
+        }
+        @include multi-lang("vn") {
+            width: 180px;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    $gr_games-header-height: 67px;
+
+    $gr_game-menu-height: 40px;
+    
+    .gr_game-menu {
+        min-width: 320px;
+        padding: $gr_games-header-height 0 $gr_game-menu-height;
+        & .el-collapse {
+            background: backgrounds(primary);
+        }
+        .gr_game-menu__content {
+            width: 100%;
+            height: calc(100% - 201px);
+            position: absolute;
+            overflow-y: scroll;
+            bottom: 0;
+            &.no_c_tab {
+                height: calc(100% - 151px);
+            }
+        }
+    }
+    .gr_game-menu--fantan {
+        // 320 番攤
+        // padding: 26px 0 40px;
+        > div {
+            &:first-of-type {
+            }
+        }
+        ~ div {
+            margin-top: -40px;
+            .gr_container--gamebox {
+                padding: 108px 15px 37px;
+            }
+        }
+        .gr_games-header__animation {
+            padding-bottom: 26px;
+        }
+        
+    }
+    .gr_game-menu__content {
+        background: backgrounds(primary);
+        min-height: 0;
+        position: relative;
+        z-index: 55;
+    }
+    .gr_game-menu__toggle {
+        min-width: 320px;
+        position: relative;
+        width: 100%;
+        z-index: 56;
+        &.is_active {
+            position: fixed;
+            left: 0;
+            z-index: 58;
+            & .gr_title__icon {
+                transform: rotate(180deg);
+            }
+            & .c_tab {
+                margin-top: 40px;
+                display: block;
+            }
+            & + .gr_game-menu__content {
+                margin-top: 40px;
+            }
+            & + .gr_game-menu__content.is_tab {
+                margin-top: 90px;
+            }
+        }
+        & .c_tab {
+            display: none;
+        }
+    }
+    .gr_game-menu__title {
+        @include size(100%, $gr_game-menu-height);
+        background: backgrounds(secondary_heavy);
+        color: text_color(default_invert);
+        line-height: $gr_game-menu-height;
+        min-width: 320px;
+        overflow: hidden;
+        padding: 0 49px 0 8px;
+        position: fixed;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        z-index: 56;
+        & .gr_title__icon {
+            line-height: $gr_game-menu-height;
+            position: absolute;
+            top: 0;
+            right: 30px;
+        }
+        &::before {
+            @include background_gradient(false, to bottom, lighten($color_default, 60%), rgba($color_default_invert, 0), rgba(lighten($color_default, 65%), 0.25));
+        }
+    }
+}

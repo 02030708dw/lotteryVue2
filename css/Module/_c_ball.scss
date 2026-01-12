@@ -1,0 +1,171 @@
+// ************************************************************
+// c_ball
+// ************************************************************
+
+// 尺寸設定
+$c_ball__size: (
+    large: 42,
+    medium: 36,
+    small: 30,
+    xsmall: 24
+);
+
+
+
+@each $name, $value in $c_ball__size {
+    .c_ball--#{$name} {
+        @include size($value * 1px);
+        font-size: $value / 6 * 4px;
+        & .c_ball__item {
+            @include size(100%, $value - 2 * 1px);
+            line-height: $value - 2 * 1px;
+        }
+    }
+}
+
+
+
+
+[class*="c_ball-"],
+[class*="c_rectangle-"] {
+    background: border_color(primary_dark);
+    border-radius: border_radius(rounded);
+    cursor: default;
+    display: inline-block;
+    padding: 1px;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    & [class*="__item"] {
+        @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+        border-radius: inherit;
+        color: lighten(text_color(secondary), 10%);
+        display: block;
+
+    }
+}
+
+[class*="c_ball--c"] {
+    background: #666666;
+    &.c_ball--c-r {
+        & .c_ball__item {
+            background: #ffbdbd;
+        }
+    }
+    &.c_ball--c-g {
+        & .c_ball__item {
+            background: #97dec1;
+        }
+    }
+    &.c_ball--c-b {
+        & .c_ball__item {
+            background: #88cffd;
+        }
+    }
+    &.c_ball--c-y {
+        & .c_ball__item {
+            background: #fffbdc;
+        }
+    }
+    & .c_ball__item {
+        color: darken(text_color(secondary), 5%);
+    }
+}
+
+
+
+[class*="c_rectangle-"] {
+    border-radius: border_radius(default);
+}
+
+
+
+
+
+// 尺寸設定
+$c_rectangle__size: (
+    large: 42,
+    medium: 36,
+    small: 32,
+    xsmall: 24
+);
+@function c_rectangle__size($name) {
+    @return map-get($c_rectangle__size, $name);
+}
+
+
+
+@each $name, $value in $c_rectangle__size {
+    .c_rectangle--#{$name} {
+        font-size: $value / 6 * 3px;
+        width: $value * 2.5px;
+        @include multi-lang('jp') {
+            font-size: $font-size-small
+        }
+        & .c_rectangle__item {
+            line-height: $value - 12 * 1px;
+            padding: 5px 0;
+            width: 100%;
+        }
+        @include multi-lang {
+            @if $name == 'xsmall' {
+                width: $value * 5px;
+            } @else {
+                width: $value * 4px;
+            }
+        }
+    }
+}
+
+
+
+
+
+.c_ball--link,
+.c_rectangle--link {
+        cursor: pointer;
+    &:hover {
+        @include animate(bounceIn, 0.75s);
+    }
+    &.is_active,
+    &.is_active:hover {
+        @include background_gradient(ture, to bottom, lighten(mix($color_primary, $color_secondary, 97%), 0%), lighten($color_primary_heavy, 2.3%));
+        & .c_ball__item,
+        & .c_rectangle__item {
+            @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+            color: text_color(default_invert);
+        }
+    }
+}
+// 番攤球顏色
+$ft_red_b: #fbb1a7;
+$ft_yellow_b: #ffe661;
+$ft_gray_b: #d8d8d8;
+$ft_green_b: #97dec1;
+.c_ball__1fantan {background-color: $ft_gray_b; background-image: linear-gradient(135deg, #e6e6e6 30%, #999999 130%) !important;}
+.c_ball__2fantan {background-color: $ft_green_b; background-image: linear-gradient(135deg, $ft_green_b 30%, #34939f 130%) !important;}
+.c_ball__3fantan {background-color: $ft_yellow_b; background-image: linear-gradient(135deg, $ft_yellow_b 30%, #e7a500 130%) !important;}
+.c_ball__4fantan {background-color: $ft_red_b; background-image: linear-gradient(135deg, $ft_red_b 30%, #e075a4 130%) !important;}
+.c_ball__1fantan, .c_ball__2fantan, .c_ball__3fantan, .c_ball__4fantan {filter: none /9 !important;}
+[class*='c_ball-'] [class*='__item'], [class*='c_rectangle-'] [class*='__item'],.number_ball span,.gr_game-history__list :first-of-type.text_color_fantan span, .gr_game-history__list :nth-of-type(2).text_color_fantan span {
+    &.c_ball__1fantan {background-color: $ft_gray_b; background-image: linear-gradient(135deg, #e6e6e6 30%, #999999 130%) !important;}
+    &.c_ball__2fantan {background-color: $ft_green_b; background-image: linear-gradient(135deg, $ft_green_b 30%, #34939f 130%) !important;}
+    &.c_ball__3fantan {background-color: $ft_yellow_b; background-image: linear-gradient(135deg, $ft_yellow_b 30%, #e7a500 130%) !important;}
+    &.c_ball__4fantan {background-color: $ft_red_b; background-image: linear-gradient(135deg, $ft_red_b 30%, #e075a4 130%) !important;}
+    &.c_ball__1fantan, &.c_ball__2fantan, &.c_ball__3fantan, &.c_ball__4fantan {filter: none /9 !important;}
+}
+// 密拾球色
+$ms_red_b: #fbb1a7;
+$ms_yellow_b: #ffe661;
+$ms_green_b: #97dec1;
+$ms_blue_b: #88cffd;
+.c_ball__1mishi {background: $ms_red_b;}
+.c_ball__2mishi {background: $ms_blue_b;}
+.c_ball__3mishi {background: $ms_yellow_b;}
+.c_ball__4mishi {background: $ms_green_b}
+[class*='c_ball-'] {
+    .c_ball__1mishi {background: $ms_red_b;}
+    .c_ball__2mishi {background: $ms_blue_b;}
+    .c_ball__3mishi {background: $ms_yellow_b;}
+    .c_ball__4mishi {background: $ms_green_b}
+}

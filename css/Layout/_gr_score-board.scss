@@ -1,0 +1,312 @@
+// ************************************************************
+// gr_score-board
+// ************************************************************
+
+$active_color: #393332;
+$normal_color: white;
+$rank_color:transparent,transparent,transparent,#5ec9ef,#f09a84,#a35eef,#95cc4a,#f385a7,#8499f0,#f2d06b;
+$rank_border:transparent,transparent,transparent,#26e5ff,#fb655b,#6e26ff,#c2e54a,#ff5aa4,#5b90fb,#ffb12c;
+$table_name: "bet","win";
+.gr_score-board{
+    background: url('~@IMG/scoreboard/board_bg.png');
+    .gr_board_title{
+        width: 80%;
+        max-width: 318px;
+        margin: 0 auto;
+        padding-top: 0.5em;
+        img{
+            width: 100%;
+        }
+    }
+}
+.gr_board_list{
+    .gr_board_tab{
+        text-align: center;
+        display: table;
+        width: 100%;
+        color: $normal_color;
+        .gr_board_tab--item{
+            cursor: pointer;
+            display: table-cell;
+            width: 50%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px 20px 0 0;
+            vertical-align: middle;
+            & > div{
+                width: 100%;
+                margin: 0 auto;
+                overflow: hidden;
+                border-radius: 20px 20px 0 0;
+                &:after{
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 6px;
+                    background: linear-gradient(to bottom, rgba(0,0,0,0) 10%,rgba(0,0,0,0.3) 100%);
+                }
+                span{
+                    display: block;
+                    padding: 0.5em 0.5em 0.5em 45px;
+                    &:after{
+                        content: '';
+                        position: absolute;
+                        background-color: $normal_color;
+                        left: 0;
+                        top: 0;
+                        bottom: 0;
+                        width: 45px;
+                    }
+                }
+            }
+            &.active{
+                & > div{
+                    span{
+                        &:before{
+                            content: '';
+                            position: absolute;
+                            z-index: 1;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            top: 0;
+                            border: 5px solid $active_color;
+                            border-bottom: none;
+                            border-radius: 20px 20px 0 0;
+                        }
+                        &:after{
+                            background-color: $active_color;
+                        }
+                    }
+                }
+            }
+        }
+        .gr_board_icon--bet{
+            background: linear-gradient(to right, rgba(2,219,221,1) 1%,rgba(42,140,229,1) 100%);
+            & > div{
+                span{
+                    &:after{
+                        background-image: url('~@IMG/scoreboard/bet_icon.png');
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 65% auto;
+                    }
+                }
+            }
+        }
+        .gr_board_icon--win{
+            background: linear-gradient(to right, rgba(242,80,74,1) 1%,rgba(237,46,112,1) 100%);
+            & > div {
+                span{
+                    &:after{
+                        background-image: url('~@IMG/scoreboard/win_icon.png');
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: 65% auto;
+                    }
+                }
+            }
+        }
+    }
+    .gr_board_table{
+        background: $normal_color;
+        width: 100%;
+        thead{
+            th{
+                color: $normal_color;
+                background: $active_color;
+                position: relative;
+                padding: 0.5em 0;
+                vertical-align: middle;
+                &+th{
+                    &:before{
+                        content: '';
+                        position: absolute;
+                        width: 1px;
+                        height: 40%;
+                        left: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background: $normal_color;
+                    }
+                }
+                &:first-child{
+                    width: 20%;
+                }
+                &:nth-child(2){
+                    width: 45%;
+                }
+                &:last-child{
+                    width: 35%;
+                }
+            }
+        }
+        tbody{
+            tr:nth-child(odd){
+                td{
+                    background: rgba($active_color,0.1);
+                }
+            }
+            td{
+                height: 45px;
+                vertical-align: middle;
+                position: relative;
+                &:first-child{
+                    text-align: center;
+                }
+                &:nth-child(2){
+                    text-indent: 10px;
+                }
+                &:last-child{
+                    text-align: center;
+                }
+            }
+            @for $i from 4 through 10 {
+                tr:nth-child(#{$i}){
+                    .gr_board_rank--icon{
+                        &:before{
+                            content: '#{$i}';
+                            // position: absolute;
+                            // top: 50%;
+                            // left: 50%;
+                            // transform: translate(-50%,-50%);
+                            display: inline-block;
+                            vertical-align: middle;
+                            text-align: center;
+                            line-height: 22px;
+                            color: $normal_color;
+                            font-weight: bold;
+                            font-size: 1.2em;
+                            width: 29px;
+                            height: 29px;
+                            border-radius: 100%;
+                            background: nth($rank_color,$i);
+                            border: 3px solid nth($rank_border,$i);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @for $i from 1 through length($table_name) {
+    $name: nth($table_name, $i);
+        .gr_table_style--#{$name}{
+            @for $t from 1 through 3 {
+                tr:nth-child(#{$t}){
+                    .gr_board_rank--icon{
+                        &:before{
+                            content: '';
+                            // position: absolute;
+                            // top: 0;
+                            // left: 50%;
+                            // transform: translate(-50%,0%);
+                            display: inline-block;
+                            vertical-align: middle;
+                            width: 38px;
+                            height: 38px;
+                            background-image: url('~@IMG/scoreboard/#{$name}0#{$t}.png');
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            background-size: contain;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .gr_board_update{
+        text-align: center;
+        background: darken( $normal_color, 7%);
+        padding: 0.5em;
+        font-size: 0.75em;
+        overflow: hidden;
+        span{
+            display: block;
+        }
+    }
+    .gr_board_empty {
+        text-align: center;
+        background: darken( $normal_color, 7%);
+        padding: 30px 0;
+    }
+}
+@media screen and (min-width: 480px) {
+    .gr_board_list{
+        // .gr_board_update{
+        //     text-align: left;
+        //     span{
+        //         display: inline-block;
+        //         vertical-align: top;
+        //         line-height: 18px;
+        //         &:last-child{
+        //             float: right;
+        //         }
+        //     }
+        // }
+    }
+}
+@media screen and (min-width: 980px) {
+    .gr_board_list{
+        .gr_board_tab{
+            .gr_board_tab--item{
+                & > div {
+                    width: 90%;
+                    position: relative;
+                }
+            }
+            .gr_board_icon--bet{
+                background: none;
+                & > div{
+                    background: linear-gradient(to right, rgba(2,219,221,1) 1%,rgba(42,140,229,1) 100%);
+                }
+            }
+            .gr_board_icon--win{
+                background: none;
+                & > div {
+                    background: linear-gradient(to right, rgba(242,80,74,1) 1%,rgba(237,46,112,1) 100%);
+                }
+            }
+        }
+        .gr_board_table--scroll{
+            background: #fff;
+            max-height: calc(100vh - 210px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        border-radius: 10px;
+        overflow: hidden;
+        .gr_board_update{
+            text-align: left;
+            span{
+                display: inline-block;
+                vertical-align: top;
+                line-height: 18px;
+                &:last-child{
+                    float: right;
+                }
+            }
+        }
+    }
+    .gr_board-message-box__content{
+        .gr_board_title{
+            img{
+                margin-top: -80px;
+            }
+        }
+    }
+    .gr_score-board{
+         border-radius: 10px;
+    }
+    .gr_news-message-box.gr_board-message-box{
+        transform: translateY(30px);
+        line-height: 25px;
+        overflow: visible;
+        background: transparent;
+        border-radius: 10px;
+        .gr_news-message-box__close{
+            stroke: $active_color;
+        }
+    }
+}

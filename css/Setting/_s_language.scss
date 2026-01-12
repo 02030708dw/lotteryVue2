@@ -1,0 +1,38 @@
+// ************************************************************
+// s_language
+// ************************************************************
+
+$s_language: "lang_cn", "lang_us", "lang_jp", "lang_th", "lang_vn";
+
+@mixin multi-lang($multi-lang: "ncn") {
+    @if $multi-lang == "all" {
+        @each $s_lang in $s_language {
+            .#{$s_lang} & {
+                @content;
+            }
+        }
+    } @else if $multi-lang == "ncn" {
+        @each $s_lang in $s_language {
+            @if $s_lang != "lang_cn" {
+                .#{$s_lang} & {
+                    @content;
+                }
+            }
+        }
+    } @else {
+        .lang_#{$multi-lang} & {
+            @content;
+        }
+    }
+}
+
+@mixin multi-lang-loop($image-detail: "") {
+    @each $s_lang in $s_language {
+        .#{$s_lang} & {
+            @if $image-detail != "" {
+                background-image: url(#{$s_image-path}/#{$s_lang}/#{$image-detail});
+            }
+            @content;
+        }
+    }
+}

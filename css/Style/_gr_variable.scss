@@ -1,0 +1,122 @@
+// ************************************************************
+// style  variable
+// ************************************************************
+
+// brand color setting
+$crusta      : #fb8032;
+$trinidad    : #e54c00;
+$satinlinen  : #eae7da;
+$gurkha      : #9f997d;
+$stormgray   : #70727f;
+$gunpowder   : #3e4052;
+$supernova   : #ffce00;
+$yellow      : #f9ff00;
+$tallpoppy   : #c1272d;
+$lochmara    : #0071BC;
+$night       : #000000;
+$day         : #ffffff;
+
+
+
+
+
+// ************************************************************
+// usage
+// ************************************************************
+
+$color__primary           : $crusta;
+$color__primary--heavy    : $trinidad;
+$color__secondary         : $satinlinen;
+$color__secondary--heavy  : $gurkha;
+$color__accent            : $stormgray;
+$color__accent--heavy     : $gunpowder;
+$color__warning           : $yellow;
+$color__warning--heavy    : $supernova;
+$color__success           : $lochmara;
+$color__danger            : $tallpoppy;
+$color__base              : $night;
+$color__base__invert      : $day;
+// $color__strong            : ;
+// $color__info              : ;
+
+$icon__color__base__invert: $day;
+// $icon__color__primary     : ;
+// $icon__color__secondary   : ;
+// $icon__color__accent      : ;
+// $icon__color__info        : ;
+// $icon__color__warning     : ;
+
+
+
+
+
+// $icon__color: (
+//     primary          : $icon__color__primary,            // #eb6b4b
+//     secondary        : $icon__color__secondary,          // #71beff
+//     accent           : $icon__color__accent,             // #b460bf
+//     info             : $icon__color__info,               // #5ac48e
+//     warning          : $icon__color__warning,            // #ffb940
+//     base_invert      : $icon__color__base__invert        // #ffffff
+// );
+// @function icon__color($name) {
+//     @return map-get($icon__color, $name);
+// }
+
+
+
+$background__color: (
+    primary          : $color__primary,                  // #eb6b4b
+    secondary        : $color__secondary,                // #52b9d6
+    accent           : $color__accent,                   // #b460bf
+    strong           : $color__strong,                   // #c1a07b
+    success          : $color__success,                  // #54c3bf
+    info             : $color__info,                     // #5ac48e
+    warning          : $color__warning,                  // #ffb940
+    weak             : darken($color__base__invert, 7%), // #ededed
+    default          : $color__default,                  // #4d4945
+    default_invert   : $color__default__invert,          // #f8f3f0
+    base             : $color__base,                     // #000000
+    base_invert      : $color__base__invert              // #ffffff
+);
+@function background__color($name) {
+    @return map-get($background__color, $name);
+}
+
+
+
+$border__color: (
+    base       : lighten($color__base, 81%),              // #cfcfcf
+    dark       : lighten($color__base, 50%),              // #808080
+    base_invert: $color__base__invert                     // #ffffff
+);
+@function border__color($name) {
+    @return map-get($border__color, $name);
+}
+
+
+$text__color: (
+    base            : lighten($color__base, 15%),         // #262626
+    default         : lighten($color__base, 30%),         // #4d4d4d
+    secondary       : lighten($color__base, 40%),         // #666666
+    weak            : lighten($color__base, 60%),         // #999999
+    base_invert     : $color__base__invert,               // #ffffff
+    default_invert  : darken($color__base__invert, 15%),  // #d9d9d9
+    secondary_invert: darken($color__base__invert, 25%),  // #bfbfbf
+    primary         : $color__primary,                    // #eb6b4b
+    warning         : $color__warning                     // #ffb940
+);
+@function text__color($name) {
+    @return map-get($text__color, $name);
+}
+
+
+// shadow
+$shadow__color: (
+    default: rgba($color__base, 0.55),
+    dark   : rgba($color__base, 0.75),
+    light  : rgba($color__base, 0.15)
+);
+@function shadow__color($name) {
+    @return map-get($shadow__color, $name);
+}
+

@@ -1,0 +1,20 @@
+{
+"frames": {
+	"c": {
+		"frame": {"x":76, "y":0, "w":73, "h":80},
+		"spriteSourceSize": {"x":0,"y":0,"w":73,"h":80},
+		"sourceSize": {"w":73,"h":80}
+	},
+	"f": {
+		"frame": {"x":0, "y":0, "w":75, "h":81},
+		"spriteSourceSize": {"x":0,"y":0,"w":75,"h":81},
+		"sourceSize": {"w":75,"h":81}
+	}
+
+},
+"meta": {
+	"image": "sp_cn.png",
+	"size": {"w": 150, "h": 82},
+	"scale": "1"
+}
+}

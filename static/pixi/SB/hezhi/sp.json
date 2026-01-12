@@ -1,0 +1,80 @@
+{
+"frames": {
+	"num04": {
+		"frame": {"x":0, "y":36, "w":47, "h":35},
+		"spriteSourceSize": {"x":0,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num05": {
+		"frame": {"x":48, "y":36, "w":46, "h":35},
+		"spriteSourceSize": {"x":0,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num06": {
+		"frame": {"x":0, "y":108, "w":47, "h":35},
+		"spriteSourceSize": {"x":0,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num07": {
+		"frame": {"x":0, "y":0, "w":47, "h":35},
+		"spriteSourceSize": {"x":0,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num08": {
+		"frame": {"x":0, "y":72, "w":47, "h":35},
+		"spriteSourceSize": {"x":0,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num09": {
+		"frame": {"x":48, "y":0, "w":46, "h":35},
+		"spriteSourceSize": {"x":1,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num10": {
+		"frame": {"x":93, "y":72, "w":43, "h":35},
+		"spriteSourceSize": {"x":3,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num11": {
+		"frame": {"x":136, "y":108, "w":40, "h":34},
+		"spriteSourceSize": {"x":3,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num12": {
+		"frame": {"x":92, "y":143, "w":43, "h":34},
+		"spriteSourceSize": {"x":3,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num13": {
+		"frame": {"x":95, "y":0, "w":42, "h":35},
+		"spriteSourceSize": {"x":3,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num14": {
+		"frame": {"x":92, "y":108, "w":43, "h":34},
+		"spriteSourceSize": {"x":3,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num15": {
+		"frame": {"x":95, "y":36, "w":42, "h":35},
+		"spriteSourceSize": {"x":2,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num16": {
+		"frame": {"x":48, "y":108, "w":43, "h":35},
+		"spriteSourceSize": {"x":3,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	},
+	"num17": {
+		"frame": {"x":48, "y":72, "w":44, "h":35},
+		"spriteSourceSize": {"x":3,"y":1,"w":47,"h":36},
+		"sourceSize": {"w":47,"h":36}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 177, "h": 178},
+	"scale": "1"
+}
+}

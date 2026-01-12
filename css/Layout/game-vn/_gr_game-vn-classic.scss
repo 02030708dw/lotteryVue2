@@ -1,0 +1,319 @@
+// ************************************************************
+// gr_game-vn-classic
+// ************************************************************
+@keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+    0% {transform: scale(0.9, 0.9);}
+    20% {transform: scale(1.2, 1.2);}
+    40% {transform: scale(0.95, 0.95);}
+    60% {transform: scale(1.05, 1.05);}
+    80% {transform: scale(0.98, 0.98);}
+    to {transform: scale(1, 1);}
+}
+$bor-color: #808080;
+.gr_game-vn-classic {
+    .gr_old-tab {
+        position: relative;
+        bottom: -1px;
+        .gr_old-tab--item {
+            position: relative;
+            display: inline-block;
+            width: calc(100% / 10);
+            text-align: center;
+            border: 1px solid $bor-color;
+            background-color: #d7d7d7;
+            padding: 10px 5px;
+            cursor: pointer;
+            &:not(:last-of-type) {
+                border-right-width: 0px;
+            }
+            span {
+                position: absolute;
+                background-color: #c1272d;
+                color: #ffffff;
+                min-width: 22px;
+                padding: 3px;
+                border-radius: 50px;
+                right: 3px;
+                top: -5px;
+            }
+            &.is_active {
+                border-bottom-width: 0px;
+                padding: 12px 5px;
+                background-color: #f2f2f2;
+                &:not(:last-of-type)::after {
+                    content: '';
+                    position: absolute;
+                    right: -5px;
+                    top: -1px;
+                    width: 5px;
+                    height: 100%;
+                    z-index: 1;
+                    background-image: linear-gradient(to right, #999999, transparent);
+                }
+            }
+        }
+    }
+    .gr_old-container {
+        border: 1px solid $bor-color;
+        padding: 10px;
+        .gr_old-num--item {
+            position: relative;
+            display: inline-block;
+            width: calc(100% / 10 - 14px);
+            text-align: center;
+            background: #9f997d;
+            padding: 1px;
+            margin: 7px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            color: gray;
+            cursor: pointer;
+            span {
+                background-color: #eeeeee;
+                background-image: linear-gradient(#ffffff, #dddddd);
+                width: 100%;
+                height: 100%;
+                display: block;
+                padding: 3px;
+                border-radius: 4px;
+            }
+            &:hover {
+                @include animate(bounceIn, 0.75s);
+            }
+            &.is_active {
+                background-color: #f5691c;
+                background-image: linear-gradient(to bottom, #fa8337, #f15000);
+                color: #ffffff;
+                span {
+                    background-image: linear-gradient(to bottom, #f15000, #fa8337);
+                }
+            }
+        }
+    }
+    &.is_disabled {
+        position: relative;
+        &::before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(242, 242, 242, 0.3);
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+    }
+}
+@media screen and (max-width: 979px) {
+    .gr_game-vn-classic {
+        float: left;
+        display: block;
+        padding: 0 0 120px;
+        width: 100%;
+        .gr_old-tab {
+            border-bottom: 1px solid #808080;
+            padding-bottom: 5px;
+            margin: 0px auto 10px auto;
+            .gr_old-tab--item {
+                width: calc(100% / 5);
+                color: #666666;
+                background-color: #cccccc;
+                border-color: #808080;
+                span {
+                    min-width: 21px;
+                    padding: 3px;
+                    transform: scale(0.8);
+                    transform-origin: right;
+                    right: 1px;
+                }
+                &.is_active {
+                    color: #ffffff;
+                    background-color: #fbb03b;
+                    padding: 10px 5px;
+                    border-bottom-width: 1px;
+                    &::after {
+                        display: none;
+                    }
+                }
+                &:not(:last-of-type) {
+                    border-right-width: 1px;
+                }
+            }
+        }
+        .gr_old-container {
+            padding: 0;
+            border-width: 0px;
+            margin: 0 auto;
+            text-align: center;
+            .gr_old-num--item {
+                width: calc(100% / 5 - 4px);
+                padding: 1px;
+                margin: 5px 2px;
+                span {
+                    padding: 6px;
+                }
+            }
+        }
+    }
+}
+
+$gr_section__title--width: 80px;
+
+.gr_game-vn--balls {
+    margin: 0 20px;
+    padding-top: 20px;
+    & .gr_game-vn--balls__select {
+        margin-left: $gr_section__title--width;
+    }
+    & .gr_game-vn--balls__controlls {
+        width: 100%;
+        margin: 5px auto;
+    }
+    & .gr_game-vn--balls__section {
+        padding: 0 0 0 $gr_section__title--width;
+        position: relative;
+        & + .gr_game-vn--balls__section {
+            border-top: 1px solid border_color(primary_light);
+            & .gr_section__bar {
+                padding-top: 15px;
+            }
+        }
+    }
+    & .gr_section__bar {
+        font-size: 0;
+        line-height: 37px;
+    }
+    & .gr_bar__label {
+        font-size: $font_size_small;
+        margin-right: 13px;
+        vertical-align: middle;
+        white-space: nowrap;
+        &:last-of-type {
+            margin: 0;
+        }
+    }
+    & .gr_section__body {
+        float: left;
+        font-size: $font_size_small;
+        margin-top: 15px;
+        & .gr_group__item {
+            display: inline-block;
+            margin: 0 10px 15px 0;
+            text-align: center;
+            & .gr_item__ball {
+                background: border_color(primary_dark);
+                border-radius: border_radius(rounded);
+                cursor: pointer;
+                display: inline-block;
+                font-size: 24px;
+                padding: 1px;
+            }
+            & .gr_ball__inner {
+                @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+                @include size(35px);
+                border-radius: inherit;
+                color: lighten(text_color(secondary), 10%);
+                display: block;
+                line-height: 35px;
+            }
+            & .gr_item__text {
+                margin-top: 5px;
+                min-width: 55px;
+            }
+            & .gr_item__ball:hover {
+                @include animate(bounceIn, 0.75s);
+            }
+            & .is_active,
+            & .is_active:hover {
+                @include background_gradient(ture, to bottom, lighten(mix($color_primary, $color_secondary, 97%), 0%), lighten($color_primary_heavy, 2.3%));
+                & .gr_ball__inner {
+                    @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                    color: text_color(default_invert);
+                }
+            }
+        }
+    }
+    & .gr_section__title {
+        color: text_color(primary);
+        font-weight: bold;
+        line-height: 37px;
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: $gr_section__title--width;
+        &:empty {
+            display: none;
+        }
+    }
+    & .gr_section__controller {
+        float: right;
+        font-size: $font_size_large;
+        margin-top: 15px;
+        padding-top: 1px;
+        text-align: center;
+        & .gr_group__item {
+            background: backgrounds(accent);
+            display: inline-block;
+            padding: 1px;
+            position: relative;
+            & .gr_item__text {
+                @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+                color: text_color(weak);
+                cursor: pointer;
+                display: block;
+                height: 33px;
+                line-height: 31px;
+                min-width: 33px;
+                padding: 0 3px;
+                position: relative;
+                z-index: 5;
+            }
+            &::before {
+                @include pseudo;
+                @include size(0);
+                background: $color_primary;
+                top: 0;
+                right: 0;
+                transition: all 0.3s ease;
+            }
+            &.is_active,
+            &.is_active:hover {
+                background: backgrounds(accent);
+                & .gr_item__text {
+                    background: backgrounds(accent);
+                    color: text_color(secondary);
+                }
+                &::before {
+                    display: none;
+                }
+            }
+            &:hover {
+                &::before {
+                    @include size(100%);
+                }
+            }
+        }
+        @include multi-lang {
+            font-size: $font-size-small;
+        }
+    }
+    @include multi-lang {
+        $gr_section__title--width: 125px;
+        .gr_game-vn--balls__select {
+            margin-left: $gr_section__title--width;
+            & .el-checkbox+.el-checkbox{
+                margin-left: 7px;
+            }
+
+        }
+        .gr_game-vn--balls__section {
+            padding: 0 0 0 $gr_section__title--width;
+        }
+        & .gr_section__title {
+            width: $gr_section__title--width;
+        }
+    }
+}

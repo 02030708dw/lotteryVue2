@@ -1,0 +1,473 @@
+// ************************************************************
+// gr_grid-vn
+// ************************************************************
+
+@keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+    0% {
+        transform: scale(0.9, 0.9);
+    }
+    20% {
+        transform: scale(1.2, 1.2);
+    }
+    40% {
+        transform: scale(0.95, 0.95);
+    }
+    60% {
+        transform: scale(1.05, 1.05);
+    }
+    80% {
+        transform: scale(0.98, 0.98);
+    }
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+
+
+
+
+@media screen and (min-width: 980px) {
+    .gr_grid-vn {
+        border: 1px solid border_color(dark);
+        font-size: 0;
+        line-height: 0;
+        text-align: center;
+        & .gr_col {
+            display: inline-block;
+            vertical-align: top;
+            width: 25%;
+            & + .gr_col {
+                border-left: 1px solid border_color(dark);
+            }
+        }
+        @for $i from 1 through 20 {
+            & .gr_col--#{$i} {
+                width: 5% * $i;
+            }
+        }
+        & .gr_component {
+            display: inline-block;
+            font-size: $font_size_small;
+            height: 54px;
+            line-height: 46px;
+            padding: 4px 2px;
+            vertical-align: middle;
+            width: 25%;
+            & + .gr_component {
+                border-left: 1px solid border_color(dark);
+            }
+            &:first-of-type:last-of-type {
+                width: 100%;
+            }
+            &:first-of-type:nth-last-of-type(5) {
+                width: 20%;
+                & ~ .gr_component {
+                    width: 20%;
+                }
+            }
+            & .gr_title__text {
+                display: block;
+                line-height: 20px;
+                & + .gr_title__input {
+                    display: block;
+                    margin: auto;
+                }
+            }
+        }
+        & .gr_component--number {
+            width: 30px;
+            &:nth-last-of-type(2) + .gr_component {
+                width: calc(100% - 30px);
+            }
+            & ~ .gr_component {
+                width: calc((100% - 30px) / 3);
+            }
+        }
+    }
+
+
+
+
+    .gr_grid-vn__header {
+        background: #666666;
+        color: #ffffff;
+        & .gr_component {
+            line-height: 18px;
+            height: auto;
+            font-size: $font_size;
+            padding: 2px 2px;
+        }
+    }
+
+
+
+    .gr_grid-vn__title {
+        background: backgrounds(secondary);
+        border: none;
+    }
+
+    .gr_grid-vn__content {
+        border-top: 1px solid border_color(dark);
+        &.is_error {
+            background: #fecacb;
+            &:hover {
+                background: #fecacb;
+            }
+        }
+        &:hover {
+            background: #c1dbe5;
+        }
+        &.gr_grid-vn__content--large {
+            & .gr_component {
+                line-height: 92px;
+                height: 100px;
+            }
+        }
+    }
+
+    .gr_component--number__input,
+    .gr_component--number__text {
+        vertical-align: middle;
+    }
+    .gr_component--number__button {
+        @include border(border_color(default));
+        border-radius: border_radius(default);
+        cursor: pointer;
+        display: inline-block;
+        font-size: $font_size_small;
+        line-height: 20px;
+        min-width: 65px;
+        padding: 0 5px;
+        position: relative;
+        text-align: center;
+        transition: all 0.3s ease;
+        & .gr_button__text {
+            position: relative;
+            z-index: 2;
+        }
+        &::before,
+        &::after {
+            @include pseudo;
+            @include size(100%);
+            border-radius: 2px;
+            top: 0;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        &::before {
+            @include background_gradient(ture, to bottom, lighten(backgrounds(default), 10%), backgrounds(default));
+            opacity: 1;
+        }
+        &::after {
+            @include background_gradient(ture, to bottom, backgrounds(default), lighten(backgrounds(default), 10%));
+            opacity: 0;
+        }
+        &:hover {
+            @include border(border_color(default));
+            &::before {
+                opacity: 0;
+            }
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+
+
+    .gr_grid-vn__title .gr_grid-vn__group .gr_group__list {
+        line-height: 16px;
+        & .is_close {
+            display: block;
+            padding-left: 17px;
+        }
+    }
+    .gr_grid-vn__group-title {
+        display: block;
+        line-height: 23px;
+        font-size: $font_size_small;
+        padding: 0 0 0 5px;
+        text-align: left;
+        & + .gr_grid-vn__group {
+            line-height: 23px;
+            display: block;
+        }
+    }
+    .gr_grid-vn__group {
+        display: inline-block;
+        font-size: 0;
+        line-height: 0;
+        padding: 0 0 0 5px;
+        text-align: left;
+        vertical-align: middle;
+        width: 100%;
+        & .gr_group__list {
+            display: inline-block;
+            font-size: $font_size_small;
+            line-height: 23px;
+            vertical-align: top;
+            width: 25%;
+        }
+        & .gr_list__item {
+            display: block;
+            float: left;
+            min-width: 55%;
+        }
+        & .gr_item__input,
+        & .gr_item__text {
+            vertical-align: middle;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    .gr_grid-vn {
+        font-size: 0;
+        line-height: 0;
+        margin: 0 10px;
+        & + .gr_grid-vn {
+            border-top: 1px solid border_color(primary_light);
+            margin-top: 8px;
+        }
+    }
+    .gr_grid-vn__header {
+        display: inline-block;
+        line-height: 44px;
+        min-width: 50%;
+        & .gr_header__text {
+            display: inline-block;
+            font-size: $font_size;
+            font-weight: bold;
+            min-width: 4em;
+            vertical-align: middle;
+        }
+    }
+    .gr_grid-vn__controller {
+        float: right;
+        font-size: $font_size;
+        margin-top: 5.5px;
+        text-align: center;
+        & .gr_controller__item {
+            display: inline-block;
+            padding: 1px;
+            & .gr_item__text {
+                color: text_color(weak);
+                cursor: default;
+                display: block;
+                height: 33px;
+                line-height: 31px;
+                min-width: 33px;
+                padding: 0 3px;
+            }
+            &.is_active,
+            &.is_active:hover {
+                background: backgrounds(accent);
+                & .gr_item__text {
+                    background: backgrounds(accent);
+                    color: text_color(secondary);
+                }
+            }
+        }
+    }
+    .gr_grid-vn__content {
+        & .gr_content__list {
+            line-height: 35px;
+            margin: 5px 0 10px;
+            @include multi-lang{
+                margin: 0px;
+                &:last-child{
+                    margin-bottom: 16px;
+                }
+            }
+        }
+        & .gr_list__title {
+            display: inline-block;
+            font-size: $font_size;
+            vertical-align: top;
+            width: 50px;
+            @include multi-lang{
+                width: 100%;
+            }
+        }
+        & .gr_list__body {
+            display: inline-block;
+            width: calc(100% - 50px);
+            @include multi-lang{
+                width: 100%;
+            }
+        }
+        & .gr_list__button {
+            background: border_color(primary_dark);
+            border-radius: border_radius(default);
+            cursor: default;
+            font-size: $font_size_small;
+            display: inline-block;
+            margin: 0 0 10px 8px;
+            padding: 1px;
+            position: relative;
+            text-align: center;
+            vertical-align: middle;
+            width: 75px;
+            @include multi-lang{
+                margin: 0 0 0px 8px;
+                &:first-child{
+                    margin-left: 0px;
+                }
+            }
+            & .gr_button__text {
+                @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+                border-radius: inherit;
+                color: lighten(text_color(secondary), 10%);
+                display: block;
+                line-height: 20px;
+                padding: 5px 0;
+                width: 100%;
+            }
+            &.is_active,
+            &.is_active:hover {
+                @include animate(bounceIn, 0.75s);
+                @include background_gradient(ture, to bottom, lighten(mix($color_primary, $color_secondary, 97%), 0%), lighten($color_primary_heavy, 2.3%));
+                & .gr_button__text {
+                    @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                    color: text_color(default_invert);
+                }
+            }
+            &.is_disabled,
+            &.is_disabled:hover {
+                animation: no;
+                background: #b3b3b3;
+                cursor: not-allowed;
+                & .gr_button__text {
+                    background: backgrounds(default);
+                    color: #b3b3b3;
+                }
+            }
+        }
+    }
+
+
+
+
+
+    .gr_col {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 0 2px;
+        text-align: center;
+        vertical-align: bottom;
+        &:first-of-type {
+            padding: 0;
+            text-align: right;
+            width: 20px;
+        }
+        &:last-of-type {
+            padding: 0;
+            text-align: left;
+            width: 56px;
+        }
+    }
+    .gr_component {
+        @include size(100%, auto);
+        display: inline-block;
+        font-size: $font_size;
+        line-height: 24px;
+        &:first-of-type:nth-last-of-type(3) {
+            &, & ~ .gr_component {
+                padding: 2px 1%;
+                text-align: center;
+                width: calc(100% / 3);
+            }
+        }
+    }
+    .gr_component__title {
+        font-weight: bold;
+    }
+    .gr_component__input {
+        width: 70px;
+        &.gr_component__input--long {
+            width: 100px;
+        }
+        & .gr_input__inner {
+            padding: 3px;
+            &.is_active,
+            &:focus,
+            &:hover {
+                // border-color: red;
+            }
+        }
+    }
+    .gr_component__icon {
+        @include size(24px);
+        display: inline-block;
+        text-align: center;
+        line-height: 0;
+        vertical-align: middle;
+        float: left;
+        &.gr_component__icon--delete {
+            line-height: 24px;
+            & .el-icon-close {
+                color: #b3b3b3;
+               
+            }
+        }
+        &.gr_component__icon--plus {
+            margin-left: 8px;
+        }
+    }
+
+
+
+
+
+    .gr_grid-vn__button {
+        background: border_color(primary_dark);
+        border-radius: border_radius(default);
+        cursor: default;
+        font-size: $font_size_large;
+        display: inline-block;
+        margin: 0 2% 12px 6%;
+        padding: 1px;
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+        width: 42%;
+        &:nth-of-type(2n) {
+            margin: 0 6% 12px 2%;
+        }
+        & .gr_button__text {
+            @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+            border-radius: inherit;
+            color: lighten(text_color(secondary), 10%);
+            display: block;
+            line-height: 20px;
+            padding: 5px 0;
+            width: 100%;
+        }
+        &.is_active,
+        &.is_active:hover {
+            @include animate(bounceIn, 0.75s);
+            @include background_gradient(ture, to bottom, lighten(mix($color_primary, $color_secondary, 97%), 0%), lighten($color_primary_heavy, 2.3%));
+            & .gr_button__text {
+                @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                color: text_color(default_invert);
+            }
+        }
+        &.is_disabled,
+        &.is_disabled:hover {
+            animation: no;
+            background: #b3b3b3;
+            cursor: not-allowed;
+            & .gr_button__text {
+                background: backgrounds(default);
+                color: #b3b3b3;
+            }
+        }
+    }
+}

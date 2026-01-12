@@ -1,0 +1,40 @@
+{
+"frames": {
+	"coldDown": {
+		"frame": {"x":0, "y":62, "w":212, "h":80},
+		"spriteSourceSize": {"x":0,"y":0,"w":212,"h":80},
+		"sourceSize": {"w":212,"h":80}
+	},
+	"icon": {
+		"frame": {"x":0, "y":234, "w":18, "h":17},
+		"spriteSourceSize": {"x":0,"y":0,"w":18,"h":17},
+		"sourceSize": {"w":18,"h":17}
+	},
+	"less": {
+		"frame": {"x":0, "y":184, "w":50, "h":49},
+		"spriteSourceSize": {"x":3,"y":7,"w":55,"h":62},
+		"sourceSize": {"w":55,"h":62}
+	},
+	"moneyPlace": {
+		"frame": {"x":0, "y":0, "w":264, "h":61},
+		"spriteSourceSize": {"x":0,"y":0,"w":264,"h":61},
+		"sourceSize": {"w":264,"h":61}
+	},
+	"mutiPlace": {
+		"frame": {"x":0, "y":143, "w":144, "h":40},
+		"spriteSourceSize": {"x":0,"y":0,"w":144,"h":40},
+		"sourceSize": {"w":144,"h":40}
+	},
+	"plug": {
+		"frame": {"x":51, "y":184, "w":50, "h":49},
+		"spriteSourceSize": {"x":3,"y":7,"w":55,"h":62},
+		"sourceSize": {"w":55,"h":62}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 265, "h": 252},
+	"scale": "1"
+}
+}

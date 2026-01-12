@@ -1,0 +1,40 @@
+{
+"frames": {
+	"X": {
+		"frame": {"x":81, "y":655, "w":74, "h":74},
+		"spriteSourceSize": {"x":10,"y":5,"w":91,"h":85},
+		"sourceSize": {"w":91,"h":85}
+	},
+	"bg": {
+		"frame": {"x":0, "y":0, "w":753, "h":654},
+		"spriteSourceSize": {"x":20,"y":34,"w":789,"h":703},
+		"sourceSize": {"w":789,"h":703}
+	},
+	"exampleIcon": {
+		"frame": {"x":81, "y":730, "w":24, "h":26},
+		"spriteSourceSize": {"x":0,"y":0,"w":24,"h":26},
+		"sourceSize": {"w":24,"h":26}
+	},
+	"icon": {
+		"frame": {"x":0, "y":655, "w":80, "h":99},
+		"spriteSourceSize": {"x":2,"y":0,"w":83,"h":100},
+		"sourceSize": {"w":83,"h":100}
+	},
+	"scroll_btn": {
+		"frame": {"x":156, "y":655, "w":14, "h":36},
+		"spriteSourceSize": {"x":4,"y":4,"w":23,"h":44},
+		"sourceSize": {"w":23,"h":44}
+	},
+	"scroll_line": {
+		"frame": {"x":754, "y":0, "w":6, "h":392},
+		"spriteSourceSize": {"x":3,"y":2,"w":12,"h":396},
+		"sourceSize": {"w":12,"h":396}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 761, "h": 757},
+	"scale": "1"
+}
+}

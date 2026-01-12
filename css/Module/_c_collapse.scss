@@ -1,0 +1,93 @@
+// ************************************************************
+// c_collapse
+// ************************************************************
+
+.c_collapse {
+    color: #666666;
+    font-size: $font_size_large;
+    line-height: 24px;
+    @include multi-lang {
+        font-size: $font_size;
+    }
+}
+
+
+
+
+
+.c_collapse__item {
+    & .c_item__header {
+        background: #f2f2f2;
+        border-bottom: 1px solid #b3b3b3;
+        height: auto;
+        padding: 12.5px 35px;
+        position: relative;
+        @include multi-lang {
+            padding-left: 25px;
+        }
+    }
+    & .c_item__arrow {
+        color: text_color(accent);
+        font-size: 12px;
+        line-height: inherit;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%) rotate(0deg);
+    }
+    & .c_item__content {
+        @extend %shadow_linear_gradient_default_inset;
+        background-color: #e6e6e6;
+        border-bottom: 1px solid #b3b3b3;
+        display: block !important;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        visibility: hidden;
+        & .c_content__link {
+            border-bottom: 1px solid #b3b3b3;
+            color: #666666;
+            display: block;
+            padding: 12.5px 15px 12.5px 35px;
+            position: relative;
+            @include multi-lang {
+                padding-left: 25px;
+            }
+        }
+        & .c_content__link.is_active {
+            color: text_color(accent);
+        }
+    }
+    & .c_content__inner {
+        @extend %shadow_linear_gradient_default_inset_invert;
+    }
+    &.is_active {
+        & .c_item__arrow {
+            transform: translateY(-50%) rotate(90deg);
+        }
+        & .c_item__content {
+            max-height: 800px;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+
+
+
+
+.c_collapse__item--link {
+    background: #f2f2f2;
+    border-bottom: 1px solid #b3b3b3;
+    height: auto;
+    padding: 12.5px 35px;
+    &.is_active {
+        color: text_color(accent);
+    }
+    @include multi-lang {
+        padding-left: 25px;
+    }
+}

@@ -1,0 +1,133 @@
+// ************************************************************
+// elementui.tabs
+// ************************************************************
+
+.el-tabs__nav {
+    font-size: 0;
+    position: relative;
+    top: 1px;
+    z-index: 2;
+}
+.el-tabs__item {
+    @include border(border_color(default));
+    border-bottom: none;
+    cursor: pointer;
+    display: inline-block;
+    font-size: $font_size_small;
+    line-height: 36px;
+    margin-top: 3px;
+    padding: 0 10px;
+    position: relative;
+    &.is-active {
+        background: backgrounds(primary);
+        color: text_color(primary);
+        margin: 0;
+        padding-top: 3px;
+        &::after {
+            border-width: 39px 0 0 70px;
+        }
+    }
+    & + & {
+        margin-left: -1px;
+    }
+    &::after {
+        @include pseudo;
+        border-style: solid;
+        border-width: 0;
+        border-color: transparent transparent transparent shadow_color(light);
+        top: 0;
+        left: calc(100% + 1px);
+    }
+}
+.el-tabs__content {
+    @extend %shadow_linear_gradient_default;
+    @include border(border_color(default));
+    background: backgrounds(primary);
+    padding: 20px 0;
+}
+
+
+
+
+
+// 選單
+.gr_nav-tabs {
+    background: #ffffff;
+    .el-tabs__header {
+        background: backgrounds(primary);
+        box-shadow: 0 0 5px shadow_color(default);
+        border-bottom: 1px solid #b3b3b3;
+        position: sticky;
+        top: 0;
+        transition: all 0.2s ease;
+        width: 255px;
+        width: 300px \9;
+        padding-right: 40px \9;
+        z-index: 2;
+    }
+    .el-tabs__nav {
+        top: 0;
+        text-align: center;
+    }
+    &.pinned {
+        .el-tabs__header {
+            .el-tabs__item {
+                margin: 5px 5%;
+                transform: scale(0.9);
+            }
+        }
+    }
+    .el-tabs__item {
+        border: none;
+        color: text_color(weak);
+        font-size: $font_size_xlarge;
+        line-height: 30px;
+        margin: 20px 5% 15px;
+        transition: all 0.2s ease;
+        width: 38%;
+        & .gr_nav-tabs__title,
+        & .gr_title__text {
+            vertical-align: middle;
+        }
+        & .gr_title__icon {
+            @include size(25px);
+            vertical-align: middle;
+            & .gr_icon__item {
+                fill: currentColor;
+            }
+            & .gr_icon__stroke {
+                fill: none;
+                stroke: currentColor;
+                stroke-width: 2;
+                stroke-miterlimit: 10;
+            }
+        }
+        &::after {
+            @include pseudo;
+            border: none;
+            top: 100%;
+            left: 0;
+            width: 100%;
+        }
+        &.is-active {
+            background: none;
+            color: text_color(accent);
+            padding-top: 0;
+            &::after {
+                border: 2px solid currentColor;
+            }
+        }
+        @include multi-lang {
+            font-size: $font_size_large;
+        }
+    }
+    .el-tabs__content {
+        background: none;
+        border: none;
+        padding: 0;
+        &::before {
+            display: none;
+        }
+    }
+}
+

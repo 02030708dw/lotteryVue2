@@ -1,0 +1,13 @@
+{
+    "env": {
+        "jest": true
+    },
+    "globals": {
+        "page": true,
+        "browser": true,
+        "flow": true
+    },
+    "rules": {
+        "camelcase": ["error", { "properties": "never" }]
+    }
+}

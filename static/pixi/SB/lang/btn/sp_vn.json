@@ -1,0 +1,80 @@
+{
+"frames": {
+	"clear": {
+		"frame": {"x":432, "y":124, "w":121, "h":123},
+		"spriteSourceSize": {"x":3,"y":4,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"clearc": {
+		"frame": {"x":182, "y":0, "w":127, "h":129},
+		"spriteSourceSize": {"x":0,"y":1,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"cleard": {
+		"frame": {"x":432, "y":248, "w":121, "h":123},
+		"spriteSourceSize": {"x":3,"y":4,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"double": {
+		"frame": {"x":310, "y":0, "w":121, "h":123},
+		"spriteSourceSize": {"x":3,"y":4,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"doublec": {
+		"frame": {"x":182, "y":130, "w":127, "h":129},
+		"spriteSourceSize": {"x":0,"y":1,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"doubled": {
+		"frame": {"x":310, "y":124, "w":121, "h":123},
+		"spriteSourceSize": {"x":3,"y":4,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"f": {
+		"frame": {"x":432, "y":0, "w":121, "h":123},
+		"spriteSourceSize": {"x":3,"y":4,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"fc": {
+		"frame": {"x":182, "y":260, "w":127, "h":128},
+		"spriteSourceSize": {"x":0,"y":2,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"fd": {
+		"frame": {"x":310, "y":248, "w":121, "h":123},
+		"spriteSourceSize": {"x":3,"y":4,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"order": {
+		"frame": {"x":0, "y":0, "w":181, "h":182},
+		"spriteSourceSize": {"x":0,"y":1,"w":182,"h":183},
+		"sourceSize": {"w":182,"h":183}
+	},
+	"orderc": {
+		"frame": {"x":0, "y":183, "w":181, "h":182},
+		"spriteSourceSize": {"x":1,"y":1,"w":182,"h":183},
+		"sourceSize": {"w":182,"h":183}
+	},
+	"orderd": {
+		"frame": {"x":0, "y":366, "w":181, "h":182},
+		"spriteSourceSize": {"x":0,"y":1,"w":182,"h":183},
+		"sourceSize": {"w":182,"h":183}
+	},
+	"remove": {
+		"frame": {"x":310, "y":372, "w":121, "h":123},
+		"spriteSourceSize": {"x":3,"y":4,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	},
+	"removec": {
+		"frame": {"x":182, "y":389, "w":127, "h":129},
+		"spriteSourceSize": {"x":0,"y":1,"w":127,"h":130},
+		"sourceSize": {"w":127,"h":130}
+	}
+
+},
+"meta": {
+	"image": "sp_vn.png",
+	"size": {"w": 554, "h": 549},
+	"scale": "1"
+}
+}

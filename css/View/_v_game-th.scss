@@ -1,0 +1,49 @@
+// ************************************************************
+// view game-vn
+// ************************************************************
+
+@import '~@CSS/main';
+
+// 共用組件
+@import '~@CSS/Module/game/c_grid';
+@import '~@CSS/Module/game/c_grid-tab';
+@import '~@CSS/Module/game/c_grid-toggle';
+@import '~@CSS/Module/game/c_tooltip';
+@import '~@CSS/Module/c_keyboard';
+
+// Layout
+
+@import '~@CSS/Layout/game/gr_games-header';
+@import '~@CSS/Layout/game-th/gr_game-history';
+@import '~@CSS/Layout/game-th/gr_games-th-header';
+@import '~@CSS/Layout/game-vn/gr_game-vn-button-group';
+@import '~@CSS/Layout/game-vn/gr_game-vn-info';
+@import '~@CSS/Layout/game-vn/gr_game-vn-prompt';
+@import '~@CSS/Layout/game-th/gr_game-th-classic';
+@import '~@CSS/Layout/game-vn/gr_grid-vn';
+@import '~@CSS/Layout/game-vn/gr_grid-vn-panel';
+@import '~@CSS/Layout/game-vn/gr_grid-vn-tooltip';
+@import '~@CSS/Layout/game/gr_game-controller';
+@import '~@CSS/Layout/game/gr_game-controller--sin';
+@import '~@CSS/Layout/game-vn/gr_game-controller';
+@import '~@CSS/Layout/game/gr_game-menu';
+@import '~@CSS/Layout/game-vn/gr_game-menu';
+@import '~@CSS/Layout/game-th/gr_game-submenu';
+@import '~@CSS/Layout/game/gr_game-danshi';
+// @import '~@CSS/Layout/game-vn/gr_city-table';
+// @import '~@CSS/Layout/game-vn/gr_area-table';
+// @import '~@CSS/Layout/game-vn/gr_game-vn';
+// @import '~@CSS/Layout/game-vn/gr_grid-vn-card';
+// @import '~@CSS/Layout/game/gr_game-menu';
+// @import '~@CSS/Layout/game-vn/gr_game-vn-selectBar';
+
+
+.lang_jp {
+    @import '~@CSS/Lang/JP/l_game-vn';
+}
+.lang_th {
+    @import '~@CSS/Lang/TH/l_game-vn';
+}
+.lang_vn {
+    @import '~@CSS/Lang/VN/l_game-vn';
+}

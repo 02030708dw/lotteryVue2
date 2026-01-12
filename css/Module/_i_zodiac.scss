@@ -1,0 +1,45 @@
+// ************************************************************
+// i_zodiac
+// ************************************************************
+
+// 信用玩法 grid--肖
+$i_zodiac: (
+    Rat     : '9px' ,
+    Ox      : '23px',
+    Tiger   : '17px',
+    Rabbit  : '18px',
+    Dragon  : '19px',
+    Snake   : '27px',
+    Horse   : '24px',
+    Goat    : '23px',
+    Monkey  : '22px',
+    Rooster : '25px',
+    Dog     : '23px',
+    Pig     : '18px'
+);
+
+[class*="i_zodiac"] {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+}
+
+@each $animal, $height in $i_zodiac {
+    $animal-index: index($i_zodiac, $animal $height);
+    .i_zodiac--#{$animal-index} {
+        @include background_image("~@IMG/icon/i_zodiac/i_zodiac--#{$animal-index}.svg");
+        height: #{$height};
+    }
+    // .is_active .i_zodiac--#{$animal-index} {
+    //     @include background_image("~@IMG/icon/i_zodiac/i_zodiac--#{$animal-index}--light.svg");
+    // }
+}
+
+.i_zodiac--narrow {
+    margin-right: 5px;
+    width: 25px;
+}
+
+.i_zodiac--wide {
+    width: 40px;
+}

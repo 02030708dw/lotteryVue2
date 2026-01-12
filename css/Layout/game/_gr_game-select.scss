@@ -1,0 +1,24 @@
+// ************************************************************
+// gr_game-select
+// ************************************************************
+
+.gr_game-select {
+    @include size(100%, 48px);
+    background: backgrounds(primary);
+    font-size: 0;
+    line-height: 28px;
+    min-width: 320px;
+    padding: 10px;
+    position: fixed;
+    z-index: 5;
+}
+.gr_game-select__select {
+    position: relative;
+    width: calc(50% - 3px);
+    & + & {
+        margin-left: 6px;
+    }
+    &:first-of-type:last-of-type {
+        width: 100%;
+    }
+}

@@ -1,0 +1,501 @@
+{
+    "frames": {
+        "seawood_00": {
+            "frame": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_01": {
+            "frame": { "x": 80, "y": 0, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_02": {
+            "frame": { "x": 160, "y": 0, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_03": {
+            "frame": { "x": 240, "y": 0, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_04": {
+            "frame": { "x": 320, "y": 0, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_05": {
+            "frame": { "x": 400, "y": 0, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_06": {
+            "frame": { "x": 0, "y": 100, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_07": {
+            "frame": { "x": 80, "y": 100, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_08": {
+            "frame": { "x": 160, "y": 100, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_09": {
+            "frame": { "x": 240, "y": 100, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_10": {
+            "frame": { "x": 320, "y": 100, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_11": {
+            "frame": { "x": 400, "y": 100, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_12": {
+            "frame": { "x": 0, "y": 200, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_13": {
+            "frame": { "x": 80, "y": 200, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_14": {
+            "frame": { "x": 160, "y": 200, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_15": {
+            "frame": { "x": 240, "y": 200, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_16": {
+            "frame": { "x": 320, "y": 200, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_17": {
+            "frame": { "x": 400, "y": 200, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_18": {
+            "frame": { "x": 0, "y": 300, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_19": {
+            "frame": { "x": 80, "y": 300, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_20": {
+            "frame": { "x": 160, "y": 300, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_21": {
+            "frame": { "x": 240, "y": 300, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_22": {
+            "frame": { "x": 320, "y": 300, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_23": {
+            "frame": { "x": 400, "y": 300, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_24": {
+            "frame": { "x": 0, "y": 400, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_25": {
+            "frame": { "x": 80, "y": 400, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_26": {
+            "frame": { "x": 160, "y": 400, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_27": {
+            "frame": { "x": 240, "y": 400, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_28": {
+            "frame": { "x": 320, "y": 400, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_29": {
+            "frame": { "x": 400, "y": 400, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_30": {
+            "frame": { "x": 0, "y": 500, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_31": {
+            "frame": { "x": 80, "y": 500, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_32": {
+            "frame": { "x": 160, "y": 500, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_33": {
+            "frame": { "x": 240, "y": 500, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_34": {
+            "frame": { "x": 320, "y": 500, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_35": {
+            "frame": { "x": 400, "y": 500, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_36": {
+            "frame": { "x": 0, "y": 600, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_37": {
+            "frame": { "x": 80, "y": 600, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_38": {
+            "frame": { "x": 160, "y": 600, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_39": {
+            "frame": { "x": 240, "y": 600, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_40": {
+            "frame": { "x": 320, "y": 600, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_41": {
+            "frame": { "x": 400, "y": 600, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_42": {
+            "frame": { "x": 0, "y": 700, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_43": {
+            "frame": { "x": 80, "y": 700, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_44": {
+            "frame": { "x": 160, "y": 700, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_45": {
+            "frame": { "x": 240, "y": 700, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_46": {
+            "frame": { "x": 320, "y": 700, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_47": {
+            "frame": { "x": 400, "y": 700, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_48": {
+            "frame": { "x": 0, "y": 800, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_49": {
+            "frame": { "x": 80, "y": 800, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_50": {
+            "frame": { "x": 160, "y": 800, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_51": {
+            "frame": { "x": 240, "y": 800, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_52": {
+            "frame": { "x": 320, "y": 800, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_53": {
+            "frame": { "x": 400, "y": 800, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_54": {
+            "frame": { "x": 0, "y": 900, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_55": {
+            "frame": { "x": 80, "y": 900, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_56": {
+            "frame": { "x": 160, "y": 900, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_57": {
+            "frame": { "x": 240, "y": 900, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_58": {
+            "frame": { "x": 320, "y": 900, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_59": {
+            "frame": { "x": 400, "y": 900, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        },
+        "seawood_60": {
+            "frame": { "x": 0, "y": 1000, "w": 80, "h": 100 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 100 },
+            "sourceSize": { "w": 80, "h": 100 }
+        }
+    },
+    "animations": {
+        "seawood": [
+            "seawood_00",
+            "seawood_01",
+            "seawood_02",
+            "seawood_03",
+            "seawood_04",
+            "seawood_05",
+            "seawood_06",
+            "seawood_07",
+            "seawood_08",
+            "seawood_09",
+            "seawood_10",
+            "seawood_11",
+            "seawood_12",
+            "seawood_13",
+            "seawood_14",
+            "seawood_15",
+            "seawood_16",
+            "seawood_17",
+            "seawood_18",
+            "seawood_19",
+            "seawood_20",
+            "seawood_21",
+            "seawood_22",
+            "seawood_23",
+            "seawood_24",
+            "seawood_25",
+            "seawood_26",
+            "seawood_27",
+            "seawood_28",
+            "seawood_29",
+            "seawood_30",
+            "seawood_31",
+            "seawood_32",
+            "seawood_33",
+            "seawood_34",
+            "seawood_35",
+            "seawood_36",
+            "seawood_37",
+            "seawood_38",
+            "seawood_39",
+            "seawood_40",
+            "seawood_41",
+            "seawood_42",
+            "seawood_43",
+            "seawood_44",
+            "seawood_45",
+            "seawood_46",
+            "seawood_47",
+            "seawood_48",
+            "seawood_49",
+            "seawood_50",
+            "seawood_51",
+            "seawood_52",
+            "seawood_53",
+            "seawood_54",
+            "seawood_55",
+            "seawood_56",
+            "seawood_57",
+            "seawood_58",
+            "seawood_59",
+            "seawood_60"
+        ]
+    },
+    "meta": {
+        "image": "sp.png",
+        "size": { "w": 480, "h": 1100 },
+        "scale": "1"
+    }
+}

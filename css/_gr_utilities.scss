@@ -1,0 +1,274 @@
+// ************************************************************
+// utilities
+// ************************************************************
+
+
+
+
+
+// usage => .u_inline-field > div
+.u_inline-field {
+    font-size: 0;
+    & > div {
+        display: inline-block;
+        font-size: $font_size;
+        margin-right: 16px;
+        vertical-align: middle;
+        & *[class*="input"],
+        & *[class*="select"] {
+            vertical-align: middle;
+        }
+        & > span {
+            vertical-align: middle;
+        }
+        @include multi-lang {
+            margin-right: 12px;
+        }
+        @include multi-lang('vn') {
+            font-size: $font_size_small;
+        }
+    }
+    &.u_fz--huge {
+        font-size: 0;
+        & > div {
+            font-size: $font_size_xlarge;
+        }
+    }
+    &.u_fz--large {
+        font-size: 0;
+        & > div {
+            font-size: $font_size_large;
+        }
+    }
+    &.u_fz--small {
+        font-size: 0;
+        & > div {
+            font-size: $font_size_small;
+        }
+    }
+}
+
+
+
+
+
+// 文字尺寸
+.u_fz {
+    font-size: $font_size;
+}
+.u_fz--huge {
+    font-size: $font_size_xlarge;
+}
+.u_fz--large {
+    font-size: $font_size_large;
+}
+.u_fz--small {
+    font-size: $font_size_small;
+}
+
+
+
+
+
+// 顯示 / 隱藏
+.u_show {
+    opacity: 1;
+    visibility: visible;
+
+}
+.u_hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+
+
+
+// usage => .u_d--none
+$display: (
+    block,
+    none,
+    inline-block
+);
+@include generate(display, $display);
+
+
+
+// usage => .u_c--auto
+$cursor: (
+    auto,
+    default,
+    pointer,
+    text,
+    not-allowed
+);
+@include generate(cursor, $cursor);
+
+
+
+// usage => .u_t--center
+$text-align: (
+    center,
+    right,
+    left
+);
+@include generate(text-align, $text-align);
+
+
+
+// usage => .u_f--right
+$float: (
+    right,
+    left,
+    none
+);
+@include generate(float, $float);
+
+
+
+// usage => .u_f--bold
+$font-weight: (
+    bold,
+    normal
+);
+@include generate(font-weight, $font-weight);
+
+
+
+// usage => .u_o--09
+$opacity: (
+    0.9,
+    0.7,
+    0.5,
+    0.2
+);
+@include generate(opacity, $opacity);
+
+
+
+// usage => .u_w--right
+$float: (
+    right,
+    left,
+    none
+);
+@include generate(float, $float);
+
+
+
+// usage => .u_"w"argin + -- + "10"~"100" + unit
+// ex. .u_w--100p, .u_h--20vw
+@include generate_length(width, 10, '%');
+@include generate_length(width, 10, 'vw');
+@include generate_length(height, 10, '%');
+@include generate_length(height, 10, 'vh');
+
+
+
+// usage => .u_"m"argin + -- + direction("t"op, "r"ight, "b"ottom, "l"eft) + "5"~"50"
+// ex. .u_m--t20, .u_m--r10
+@include generate_trbl(margin, 5, 10);
+// usage => .u_"p"adding + -- + direction("t"op, "r"ight, "b"ottom, "l"eft) + "5"~"50"
+// ex. .u_p--l5, .u_p--b20
+@include generate_trbl(padding, 5, 10);
+
+
+
+.u_underline {
+    text-decoration: underline;
+}
+
+
+
+.u_clearfix {
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
+}
+
+
+
+.u_hr--thin {
+    background: border_color(primary_light);
+    height: 1px;
+}
+.u_hr {
+    @extend %shadow_linear_gradient_dark_inset;
+    height: 8px;
+}
+
+// usage => .u_bg--primary
+// @each $name, $colour in $background__color {
+//     .u_bg--#{$name} {
+//         background: $colour;
+//     }
+// }
+// // usage => .u_br--base
+// @each $name, $colour in $border__color {
+//     .u_br--#{$name} {
+//         border-color: $colour;
+//     }
+// }
+// // usage => .u_txt--base_invert
+// @each $name, $colour in $text__color {
+//     .u_txt--#{$name} {
+//         color: $colour;
+//     }
+// }
+
+
+
+/*
+j_==js 使用的前綴，不可隨意增刪
+bg==背景(色)
+br==框線(色)
+txt==文字(色)
+primary==主要
+secondary==次要
+base==基礎
+title==標題
+body==內文
+accent==重點
+invert== 反轉
+*/
+
+// @each $name, $colour in $js_background__color {
+//     .j_bg--#{$name} {
+//         background: $colour;
+//     }
+// }
+
+// @each $name, $colour in $js_border__color {
+//     .j_br--#{$name} {
+//         border-color: $colour;
+//     }
+// }
+
+// @each $name, $colour in $js_button-background__color {
+//     .j_btn-bg--#{$name} {
+//         background: $colour;
+//     }
+// }
+
+// @each $name, $colour in $js_button-text__color {
+//     .j_btn-txt--#{$name} {
+//         color: $colour;
+//     }
+// }
+
+// @each $name, $colour in $js_text__color {
+//     .j_txt--#{$name} {
+//         color: $colour;
+//     }
+// }
+
+
+.u_pf--b0{
+    position: fixed;
+    bottom: 0;
+}

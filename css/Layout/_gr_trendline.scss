@@ -1,0 +1,296 @@
+// ************************************************************
+// gr_trendline
+// ************************************************************
+
+// 標題
+.gr_trendline__title {
+    background-color: #a88660;
+    color: text_color(default_invert);
+    padding: 9px 15px;
+    height: 38px;
+    p {
+        display: inline-block;
+    }
+    span {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 1.2rem;
+        line-height: 38px;
+        margin: -9px -10px;
+        width: 40px;
+        height: 38px;
+        text-align: center;
+    }
+    & .gr_title__button {
+        float: right;
+        border: #ffffff solid 1px;
+        margin-left: 10px;
+        margin-top: -5px;
+        line-height: 26px;
+        border-radius: 12px;
+        height: 29px;
+        min-width: 113px;
+        padding: 0 5px;
+        text-align: center;
+        cursor: pointer;
+        &:last-of-type {
+            margin-left: 0px;
+        }
+    }
+    & .selected {
+        background-color: #c60f25;
+        border: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .gr_trendline__title {
+        padding: 8px 15px;
+        height: 34px;
+        & .gr_title__button {
+            margin-left: 8px;
+            line-height: 28px;
+            height: 28px;
+            min-width: 76px;
+            @include multi-lang('jp') {
+                font-size: $font_size_small;
+                min-width: 55px;
+            }
+            @include multi-lang('cn') {
+                font-size: $font_size_small;
+                min-width: 79px;
+            }
+            @include multi-lang('vn') {
+                font-size: $font_size_small;
+                min-width: 64px;
+            }
+        }
+    }
+}
+
+@media (max-width: 375px) {
+    .gr_trendline__title {
+        p {
+            display: none;
+        }
+    }
+}
+
+
+
+
+// 主選單
+.gr_trendline__mainmenu {
+    background: $color_default_invert;
+    & .gr_mainmenu--main {
+        background: #404251;
+        color: text_color(default_invert);
+        & .is_active {
+            background: $color_default_invert;
+            color: text_color(default);
+        }
+        & .gr_mainmenu__item {
+            float: left;
+        }
+    }
+    & .gr_mainmenu--sub {
+        & .is_active {
+            color: text_color(accent);
+        }
+    }
+    & .gr_mainmenu__item {
+        cursor: pointer;
+        display: inline-block;
+        line-height: 22px;
+        padding: 8px 15px;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    & .is_active:hover {
+        cursor: default;
+        user-select: none;
+        text-decoration: none;
+    }
+}
+
+
+
+
+
+// 子選單
+.gr_trendline__submenu {
+    float: left;
+    & .gr_submenu__item {
+        line-height: 22px;
+    }
+    & .gr_submenu__item,
+    & .gr_item__text {
+        cursor: pointer;
+        display: inline-block;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    & .gr_item__text {
+        padding: 8px 15px;
+    }
+    & .is_active {
+        background: backgrounds(accent);
+        cursor: default;
+        user-select: none;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+
+
+
+
+// 控制面版
+.gr_trendline__control-panel {
+    float: right;
+    font-size: $font_size_small;
+    position: relative;
+    & .gr_control-panel__toggle-button {
+        cursor: pointer;
+        display: inline-block;
+    }
+    & .gr_toggle-button__text {
+        display: inline-block;
+        margin: 0 0 0 8px;
+        padding: 8px;
+    }
+    & .gr_toggle-button__icon {
+        @include circle(22px);
+        background: text_color(primary);
+        color: backgrounds(default);
+        line-height: 22px;
+        margin-right: 3px;
+        text-align: center;
+        transform: scale(0.7);
+    }
+}
+
+
+
+
+
+// 控制項
+.gr_trendline__controller {
+    background: backgrounds(accent);
+    font-size: $font_size_small;
+    & .gr_controller__group {
+        display: inline-block;
+        margin: 0 5px 0 15px;
+        & + .gr_controller__group {
+            & .gr_group__item {
+                padding: 2px 8px;
+            }
+        }
+    }
+    & .gr_group__item {
+        cursor: pointer;
+        display: inline-block;
+        line-height: 22px;
+        margin: 6px 6px 6px 0;
+        padding: 2px 0;
+    }
+    & .is_active {
+        background: $color_default_invert;
+        cursor: default;
+    }
+    &.fade-enter-active,
+    &.fade-leave-active {
+        transition: opacity .5s
+    }
+    &.fade-enter,
+    &.fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0
+    }
+}
+
+
+
+.gr_trendline__date-time-picker {
+    float: right;
+    margin: 5px 15px;
+    & > div,
+    & .gr_date-time-picker__text {
+        vertical-align: middle;
+    }
+    & button {
+        margin-left: 7px;
+        vertical-align: middle;
+    }
+}
+
+.el-popover{
+    background: transparent;
+    border: 0px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0), 0 0 6px 0 rgba(0, 0, 0, 0);
+    padding: 18px;
+    min-width: 55px;
+    font-size: 12px;
+    @include multi-lang {
+        min-width: 118px;
+    }
+    @include multi-lang('jp') {
+        min-width: 55px;
+    }
+}
+.gr_trendline__control-panel .el-popover div {
+    width: 480px;
+    position: absolute;
+    background: #fff;
+    min-width: 150px;
+    border-radius: 2px;
+    border: 1px solid #d1dbe5;
+    padding: 10px;
+    z-index: 2000;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04);
+    line-height: 2em;
+    top: 100%;
+    right: 0;
+    max-width: 70vw;
+}
+
+.gr_trendline__control-panel .el-popover ul {
+    list-style-type: disc;
+    margin-left: 15px;
+}
+
+#btn-tip.el-button--text {
+    color: text_color(primary);
+    padding: 0;
+    &:hover {
+        color: #fb8032;
+        text-decoration: underline;
+    }
+}
+
+#btn-tip.el-button {
+    background-color: transparent;
+    border-color: #70727f;
+    border-radius: 0;
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    .gr_trendline {
+        margin-top: -44px;
+        height: 100vh;
+    }
+    // 主選單
+    .gr_trendline__mainmenu {
+        & .gr_mainmenu {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    }
+}

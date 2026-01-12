@@ -1,0 +1,20 @@
+{
+"frames": {
+	"lotteryBg": {
+		"frame": {"x":0, "y":0, "w":146, "h":147},
+		"spriteSourceSize": {"x":0,"y":0,"w":146,"h":147},
+		"sourceSize": {"w":146,"h":147}
+	},
+	"lotteryCover": {
+		"frame": {"x":0, "y":148, "w":100, "h":95},
+		"spriteSourceSize": {"x":0,"y":0,"w":100,"h":95},
+		"sourceSize": {"w":100,"h":95}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 147, "h": 244},
+	"scale": "1"
+}
+}

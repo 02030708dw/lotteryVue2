@@ -1,0 +1,66 @@
+// ************************************************************
+// gr_pagination
+// ************************************************************
+
+.gr_pagination {
+    margin: 30px auto 0;
+    text-align: center;
+    width: 95%;
+}
+.gr_pagination__info {
+    display: block;
+    font-size: $font_size;
+    height: 28px;
+    line-height: 28px;
+    position: absolute;
+}
+.gr_pagination__controller {
+    color: $color_secondary_heavy;
+    display: inline-block;
+    font-size: $font_size;
+    vertical-align: middle;
+    & .gr_controller__link {
+        @include border(border_color(primary_dark));
+        @include size(28px);
+        color: $color_secondary_heavy;
+        float: left;
+        line-height: 26px;
+        vertical-align: middle;
+        & + .gr_controller__link {
+            border-left: none;
+        }
+        &:hover {
+            color: darken($color_secondary_heavy, 30%);
+        }
+        &.is_active {
+            background: $color_secondary_heavy;
+            color: text_color(default_invert);
+        }
+        &.is_disabled {
+            color: rgba($color_secondary_heavy, 0.5);
+            cursor: not-allowed;
+        }
+    }
+    & .gr_controller__link--more-link {
+        & i:last-of-type {
+            display: none;
+        }
+        &:hover {
+            & i {
+                display: none;
+            }
+            & i:last-of-type {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 979px) {
+    .gr_pagination__info {
+        position: relative;
+    }
+    .gr_pagination .gr_pagination__controller {
+        margin: 10px 0;
+    }
+}

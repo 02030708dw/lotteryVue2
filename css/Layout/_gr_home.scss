@@ -1,0 +1,497 @@
+// ************************************************************
+// gr_home
+// ************************************************************
+
+@keyframes wobble {
+    from {
+        transform: none;
+        transform-origin: 53% 100%;
+    }
+    15% {
+        transform: rotate(-30deg);
+    }
+    30% {
+        transform: rotate(35deg);
+    }
+    45% {
+        transform: rotate(-35deg);
+    }
+    60% {
+        transform: rotate(25deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+    to {
+        transform: none;
+        transform-origin: 53% 100%;
+    }
+}
+@keyframes zoom {
+    from {
+        transform: scale(1);
+    }
+    15% {
+        transform: scale(1.2);
+    }
+    30% {
+        transform: scale(1);
+    }
+    45% {
+        transform: scale(1.05);
+    }
+    60% {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+// body {
+//     overflow-x: hidden;
+// }
+.gr_home__lottery-category {
+    padding: 8px 12px;
+    min-height: calc(100vh - 156px);
+    &.not_submenu {
+        min-height: calc(100vh - 102px);
+    }
+
+}
+.gr_lottery__issue {
+    float: left;
+    position: relative;
+    margin-left: 30px;
+    margin-top: 40px;
+    div {
+        margin-bottom: 8px;
+        span {
+            margin-left: 5px;
+        }
+        svg, span {
+            vertical-align: middle;
+        }
+        .gr_lottery__coldtime {
+            color: #0071BC;
+        }
+    }
+
+}
+.gr_lottery__opencode {
+    width: 96%;
+    margin-left: 2%;
+    margin-top: 112px;
+    padding-top: 5px;
+    padding-left: 5px;
+    position: relative;
+    border-top: 1px solid #898069;
+}
+.gr_lottery-category__lottery {
+    @include box_shadow(0 4px 8px -3px shadow_color(default));
+    @include size(calc(50% - 20px), 241.5px);
+    background-position: center center;
+    background-size: cover;
+    float: left;
+    margin: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    border: 1px solid #898069;
+
+    // &::before,
+    // &::after {
+    //     @include pseudo;
+    //     @include size(160px, 125px);
+    //     background-position: center center;
+    //     background-repeat: no-repeat;
+    //     margin: 0 auto;
+    //     top: 10px;
+    //     right: 0;
+    //     left: 0;
+    //     transition: all 0.3s ease;
+    //     z-index: 2;
+    // }
+    // &::after {
+    //     opacity: 0.5;
+    // }
+    &:hover {
+        & .gr_lottery-category__link {
+            color: text_color(light_heavy);
+        }
+        & .gr_lottery-category__title {
+            &::before,
+            &::after {
+                @include box_shadow(0 0 3px $color_light);
+                background: $color_light;
+            }
+        }
+        &.c_lottery--disabled {
+            cursor: not-allowed;
+            & .gr_lottery-category__link {
+                cursor: inherit;
+            }
+        }
+    }
+}
+.gr_lottery-category__lottery2 {
+    // overflow: hidden;
+    &::before,
+    &::after {
+        animation-play-state:paused;
+        display: none;
+    }
+}
+.gr_lottery-category__lotteryBg {
+    position: relative;
+    float: left;
+    z-index: 1;
+    left: 15px;
+    height: 86.5px;
+    width: 110px;
+    // 桌面玩法懶加載
+    .gr_lottery-category__table_img {
+        width: 100%;
+    }
+    .circular {
+        width: 150px;
+        height: 20px;
+        position: absolute;
+        left: 50%;
+        top: 86%;
+        transform: translateX(-50%);
+        svg {
+            display: block;
+            overflow: visible;
+            path {
+                fill: none;
+                // stroke: #000000;
+                // stroke-miterlimit: 10
+            }
+            textPath {
+                // text-anchor: middle;
+                font-size: 12px;
+            }
+        }
+    }
+    .gr_lottery-category__bg {
+        width: 160px;
+        height: auto;
+    }
+}
+
+// 骰寶
+.c_lottery-class--K3_SB {
+    .gr_lottery-category__lotteryBg {
+        top: 10px;
+        .circular {
+            top: 81%;
+        }
+    }
+}
+// 魚蝦蟹
+.c_lottery-class--K3_YXX {
+    .gr_lottery-category__lotteryBg {
+        top: 10px;
+        .circular {
+            top: 86%;
+        }
+        svg {
+            textPath {
+                fill: #ffffff;
+            }
+        }
+    }
+}
+.c_lottery-class--PK10_BJL {
+    .gr_lottery-category__lotteryBg {
+        top: 10px;
+        .circular {
+            top: 90%;
+        }
+        svg {
+            textPath {
+                fill: #232037;
+            }
+        }
+    }
+}
+.gr_lottery-category__img {
+    position: relative;
+    float: left;
+    z-index: 1;
+    top: 15px;
+    left: 15px;
+    height: 86.5px;
+    width: 110px;
+}
+.gr_lottery-favorite {
+    position: absolute;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    right: 10px;
+    top: 10px;
+    border-radius: 50%;
+    border: 1px solid #5B513C;
+    text-align: center;
+    line-height: 50px;
+    z-index: 10;
+    svg {
+        // fill: url(#favoritesRed);
+        stroke-width: 0.5px;
+        stroke: #5B513C;
+        fill: none;
+    }
+    &.is_favorite {
+        svg {
+            fill: url(#favoritesRed);
+            stroke-width: 0;
+        }
+    }
+    // position: relative;
+    & .gr_tooltip__arrow,
+    & .gr_tooltip__popper {
+        opacity: 0;
+        position: absolute;
+        transition: opacity 0.3s linear;
+        visibility: hidden;
+        z-index: 60;
+    }
+    & .gr_tooltip__arrow {
+        @include triangle(#ffffff, up, 6px);
+        bottom: -10px;
+        right: 8px;
+        transform: translate(-50%, -100%);
+        z-index: 2;
+    }
+    & .gr_tooltip__popper {
+        background-color: #ffffff;
+        border-radius: border_radius(default);
+        color: rgba(0, 0, 0, 0.75);
+        font-size: 12px;
+        line-height: 1.2;
+        min-width: 10px;
+        padding: 7px 10px;
+        white-space: nowrap;
+        bottom: -32px;
+        right: 0px;
+        transform: translateX(0%);
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+    &.is_tooltip {
+        & .gr_tooltip__arrow,
+        & .gr_tooltip__popper {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+.gr_lottery-favorite320 {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    width: 30px;
+    svg {
+        stroke-width: 0.5px;
+        stroke: #999999;
+        fill: none;
+        vertical-align: middle;
+    }
+    &.is_favorite {
+        svg {
+            fill: #C4A974;
+            stroke-width: 0;
+        }
+    }
+    // position: relative;
+    & .gr_tooltip__arrow,
+    & .gr_tooltip__popper {
+        opacity: 0;
+        position: absolute;
+        transition: opacity 0.3s linear;
+        visibility: hidden;
+        z-index: 60;
+    }
+    & .gr_tooltip__arrow {
+        @include triangle(#ffffff, up, 6px);
+        bottom: -5px;
+        transform: translate(-50%, -100%);
+        z-index: 2;
+        left: 10px;
+    }
+    & .gr_tooltip__popper {
+        background-color: #ffffff;
+        border-radius: border_radius(default);
+        color: rgba(0, 0, 0, 0.75);
+        font-size: 12px;
+        line-height: 1.2;
+        min-width: 10px;
+        padding: 7px 10px;
+        white-space: nowrap;
+        bottom: -27px;
+        transform: translateX(0%);
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+        z-index: 1;
+    }
+    &.is_tooltip {
+        & .gr_tooltip__arrow,
+        & .gr_tooltip__popper {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    @media screen and (max-width: 320px) {
+    }
+}
+.gr_lottery-favorite320.downmenu {
+    svg {
+        stroke-width: 0.5px;
+        stroke: #999999;
+        fill: none;
+        vertical-align: middle;
+    }
+    &.is_favorite {
+        svg {
+            fill: url(#favoritesRed2);
+            stroke-width: 0;
+        }
+    }
+}
+.gr_lottery-category__background {
+    @include size(101%);
+    position: absolute;
+    left: -1px;
+    top: 0;
+    &.PK10_BJL {
+        opacity: 0.8;
+    }
+    &.VIETNAM {
+        opacity: 0.45;
+    }
+}
+.gr_lottery-category__link {
+    color: text_color(default_invert);
+    display: block;
+    font-size: $font_size_large;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+.gr_lottery-category__title {
+    @include background_gradient(ture, to bottom, $color_accent, $color_accent, darken($color_accent, 5%), ture);
+    @include size(100%, 33px);
+    line-height: 33px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    & .gr_title__text {
+        vertical-align: middle;
+    }
+    & .gr_title__icon {
+        @include size(24px);
+        &.i_blockade{
+            @include size(22px);
+            margin: 5px auto -5px auto;
+        }
+    }
+    &::before,
+    &::after {
+        @include pseudo;
+        @include circle(6px);
+        background: lighten($color_accent, 22%);
+        top: calc(100% / 2 - 3px);
+        left: 10px;
+        transition: all 0.3s ease;
+    }
+    &::after {
+        right: 10px;
+        left: auto;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    .gr_home__lottery-category {
+        margin: 0;
+        padding: 0 8;
+    }
+    .gr_lottery-category__lottery {
+        @include size(100%, auto);
+        //@include size(100%, calc(25.5vw + 33px));
+        margin: 3px 0;
+        min-height: 245px;
+        padding-bottom: 40px;
+        .gr_lottery-category__img {
+            height: 8vw;
+            width: 11vw;
+            min-height: 64px;
+            min-width: 83px;
+        }
+    }
+    .gr_lottery-category__link {
+        @include multi-lang {
+            font-size: $font_size_small;
+        }
+    }
+    .gr_lottery-category__title::before,
+    .gr_lottery-category__title::after {
+        display: none;
+    }
+    .gr_lottery-category__title .gr_title__icon {
+        @include multi-lang {
+            @include size(14px);
+            &.i_blockade{
+                margin: 0px auto -3px auto;
+            }
+        }
+    }
+    // 骰寶
+    .c_lottery-class--K3_SB {
+        .gr_lottery-category__lotteryBg {
+            .circular {
+                top: 81%;
+            }
+        }
+    }
+    // 魚蝦蟹
+    .c_lottery-class--K3_YXX {
+        .gr_lottery-category__lotteryBg {
+            .circular {
+                top: 86%;
+            }
+        }
+    }
+}
+.gr_home__lottery-category320 {
+    padding: 0;
+    background: #333;
+    min-height: calc(100vh - 44px);
+}
+@media screen and (max-width: 580px) {
+    .gr_lottery-category__lotteryBg {
+        .circular {
+            top: 70%;
+            svg {
+                path {
+                }
+                textPath {
+                    font-size: 10px;
+                    @include multi-lang() {
+                        font-size: 9px;
+                    }
+                }
+            }
+        }
+        .gr_lottery-category__bg {
+        }
+    }
+}

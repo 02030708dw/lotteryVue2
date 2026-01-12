@@ -1,0 +1,30 @@
+{
+"frames": {
+	"btn_active": {
+		"frame": {"x":0, "y":398, "w":256, "h":56},
+		"spriteSourceSize": {"x":5,"y":6,"w":265,"h":69},
+		"sourceSize": {"w":265,"h":69}
+	},
+	"btn_default": {
+		"frame": {"x":0, "y":455, "w":256, "h":56},
+		"spriteSourceSize": {"x":5,"y":6,"w":265,"h":69},
+		"sourceSize": {"w":265,"h":69}
+	},
+	"btn_disable": {
+		"frame": {"x":0, "y":512, "w":256, "h":56},
+		"spriteSourceSize": {"x":5,"y":6,"w":265,"h":69},
+		"sourceSize": {"w":265,"h":69}
+	},
+	"pop": {
+		"frame": {"x":0, "y":0, "w":595, "h":397},
+		"spriteSourceSize": {"x":0,"y":0,"w":595,"h":397},
+		"sourceSize": {"w":595,"h":397}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 596, "h": 569},
+	"scale": "1"
+}
+}

@@ -1,0 +1,119 @@
+// ************************************************************
+// gr_game-vn-info
+// ************************************************************
+
+.gr_game-vn-info-icon {
+    cursor: default;
+    display: inline-block;
+    line-height: 24px;
+    margin: 0 0 0 5px;
+    width: 20px;
+    height: 20px;
+}
+
+@media screen and (max-width: 980px) {
+    .gr_game-vn-info-icon {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+.gr_game-vn-info-text {
+    vertical-align: middle;
+}
+
+.gr_game-vn-info {
+    @include size(100%);
+    font-size: 0;
+    line-height: 0;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    z-index: 1001;
+    cursor: pointer;
+    & .gr_game-vn-info__popper {
+        background: backgrounds(primary);
+        box-shadow: 3px 3px 3px shadow_color(light);
+        max-height: calc(100% - 200px);
+        max-width: calc(100% - 20px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, -50%);
+        width: 400px;
+    }
+    & .gr_popper__header {
+        @include background_gradient(ture, to bottom, $color_accent, $color_accent, darken($color_accent, 5%), ture);
+        box-shadow: 0 -4px 0 $color_accent_heavy inset;
+        color: text_color(default_invert);
+        padding: 5px 0;
+        vertical-align: middle;
+    }
+    & .gr_header__title,
+    & .gr_header__body {
+        display: inline-block;
+        font-size: $font_size_small;
+        line-height: 20px;
+    }
+    & .gr_header__title {
+        width: 62px;
+        @include multi-lang {
+            width: 102px;
+        }
+    }
+    & .gr_header__body {
+        text-align: left;
+        width: calc(100% - 62px);
+        @include multi-lang {
+            width: calc(100% - 102px);
+        }
+    }
+    & .gr_popper__list {
+        &:nth-child(even) {
+            background: lighten(backgrounds(default), 0.3%);
+        }
+    }
+    & .gr_list__title,
+    & .gr_list__body {
+        display: inline-block;
+        font-size: $font_size_small;
+        vertical-align: middle;
+    }
+    & .gr_list__title {
+        line-height: 38px;
+        width: 62px;
+        @include multi-lang {
+            width: 102px;
+        }
+    }
+    & .gr_list__body {
+        line-height: 14px;
+        padding: 5px;
+        white-space: normal;
+        width: calc(100% - 62px);
+        text-align: left;
+        @include multi-lang {
+            width: calc(100% - 102px);
+        }
+    }
+    &.is_active {
+        opacity: 1;
+        visibility: visible;
+        &::after {
+            @include pseudo;
+            @include size(100vw, 100vh);
+            background: rgba(0, 0, 0, 0.65);
+            min-width: 320px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: -1;
+        }
+    }
+}

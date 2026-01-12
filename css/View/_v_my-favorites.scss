@@ -1,0 +1,17 @@
+// ************************************************************
+// view my-favorites
+// ************************************************************
+
+@import '~@CSS/main';
+
+@import '~@CSS/Layout/gr_my-favorites';
+
+.lang_jp {
+    @import '~@CSS/Lang/JP/l_my-favorites';
+}
+.lang_th {
+    @import '~@CSS/Lang/TH/l_my-favorites';
+}
+.lang_vn {
+    @import '~@CSS/Lang/VN/l_my-favorites';
+}

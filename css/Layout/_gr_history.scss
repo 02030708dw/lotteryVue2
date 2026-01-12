@@ -1,0 +1,360 @@
+// ************************************************************
+// gr_history
+// ************************************************************
+
+@media screen and (min-width: 980px) {
+    .gr_history {
+        padding: 15px 0 30px;
+    }
+    .gr_history__controls {
+        @include border(border_color(default));
+        background: backgrounds(primary);
+        line-height: 30px;
+        padding: 10px 15px;
+        text-align: right;
+        & .gr_controls__title {
+            float: left;
+            font-size: $font_size_large;
+        }
+        & .el-date-editor {
+            vertical-align: middle;
+        }
+    }
+    .gr_history__info {
+        @include border(border_color(default));
+        background: backgrounds(primary);
+        border-top: none;
+        min-height: calc(100vh - 100px);
+        padding: 10px 9px;
+        position: relative;
+        &::before {
+            @include background_gradient(false, to bottom, lighten($color_default, 60%), rgba($color_default_invert, 0), rgba(lighten($color_default, 65%), 0.25));
+            @include pseudo;
+            @include size(100%, 15px);
+            opacity: 0.3;
+            top: 0;
+            left: 0;
+        }
+        & .gr_info__list {
+            & + .gr_info__list {
+                border-top: 1px solid border_color(default);
+                margin-top: 5px;
+            }
+        }
+        & .gr_list__content {
+            text-align: center;
+        }
+        & .gr_list__number {
+            display: inline-block;
+            margin: 0 10px 10px;
+            width: calc(100%/3 - 20px);
+        }
+        & .gr_number__header {
+            cursor: default;
+            height: 44px;
+            line-height: 44px;
+        }
+        & .gr_number__content {
+            display: table;
+            width: 100%;
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    .gr_history__controls {
+        @include size(100vw, 44px);
+        background: backgrounds(secondary);
+        min-width: 320px;
+        position: fixed;
+        z-index: 50;
+        &::before {
+            @include background_gradient(false, to bottom, lighten($color_default, 60%), rgba($color_default_invert, 0), rgba(lighten($color_default, 65%), 0.25));
+            @include pseudo;
+            @include size(100%, 15px);
+            opacity: 0.3;
+            top: 100%;
+            left: 0;
+        }
+        & .gr_controls__select {
+            float: left;
+            margin-top: 6px;
+            width: 37%;
+        }
+        & .gr_controls__date-picker {
+            float: left;
+            margin-top: 6px;
+            width: calc(63% - 50px);
+        }
+        & .el-input__inner {
+            background: none;
+            border-radius: 0;
+            border-width: 0;
+            border-right-width: 1px;
+            color: text_color(secondary);
+            font-size: $font_size;
+            height: 32px;
+            padding: 3px 35px 3px 18px;
+            &,
+            &:hover,
+            &:focus {
+                border-color: currentColor;
+            }
+        }
+        & .el-input__icon {
+            color: #b5b09a;
+            right: 5px;
+        }
+        & .gr_controls__button {
+            @include size(50px, 44px);
+            float: left;
+            & .gr_button__icon {
+                @include size(26px);
+                display: inline-block;
+                vertical-align: middle;
+                & .st0 {
+                    fill: none;
+                    stroke: #b5b09a;
+                    stroke-miterlimit: 10;
+                    stroke-width: 1.5;
+                }
+                & .st1 {
+                    fill: #b5b09a;
+                }
+            }
+        }
+    }
+    .gr_history__info {
+        padding: 54px 10px 25px;
+        text-align: center;
+        & .gr_info__header {
+            font-size: 0;
+            line-height: 0;
+            position: relative;
+            &::before {
+                @include pseudo;
+                @include size(100%, 1px);
+                background: #666666;
+                bottom: 7px;
+                left: 0;
+            }
+            & .gr_header__list {
+                @include size(calc(100%/3 - 0.1px), 36px);
+                cursor: default;
+                display: inline-block;
+                font-size: $font_size;
+                line-height: 28px;
+                padding-bottom: 8px;
+                user-select: none;
+                &:first-of-type:last-of-type {
+                    &,
+                    & ~ .gr_header__decoration {
+                        width: 100%;
+                    }
+                }
+                &:first-of-type:nth-last-of-type(2) {
+                    &,
+                    & ~ .gr_header__list,
+                    & ~ .gr_header__decoration {
+                        width: 50%;
+                    }
+                }
+                &.is_active {
+                    &:nth-of-type(2) ~ .gr_header__decoration {
+                        transform: translateX(100%);
+                    }
+                    &:nth-of-type(3) ~ .gr_header__decoration {
+                        transform: translateX(200%);
+                    }
+                }
+            }
+            & .gr_header__decoration {
+                @include size(calc(100%/3), 3px);
+                background: #b5b09a;
+                position: absolute;
+                bottom: 7px;
+                left: 0;
+                transition: transform 0.3s ease;
+            }
+        }
+        & .gr_list__number {
+            display: block;
+            margin: 0 auto 10px;
+            max-width: 600px;
+            width: 100%;
+        }
+        & .gr_number__header {
+            cursor: default;
+            height: 44px;
+            line-height: 44px;
+        }
+        & .gr_number__content {
+            display: table;
+            width: 100%;
+        }
+    }
+    .el-select-dropdown {
+        position: fixed !important;
+    }
+}
+
+.gr_stock_history{
+    width: 100%;
+    display: table;
+    background: #f2f2f2;
+    dl{
+        &:nth-child(even){
+            background: #e2e2e2;
+        }
+        display: table-row;
+        dd,dt{
+            display: table-cell;
+            width: 33.3%;
+            height: 44px;
+            line-height: 44px;
+            border-left: 1px solid #b3b3b3;
+            &:first-child{
+                border-left: none;
+            }
+        }
+        dt{
+            color: #fff;
+            background: #5e5f6d;
+        }
+    }
+}
+
+.gr_info__list.gr_th_history {
+    .gr_list__content .gr_list__number {
+        display: inline-block;
+        margin: 15px 4% 25px;
+        width: 300px;
+        position: relative;
+        &.is_active {
+            z-index: 2;
+            .gr_number__header {
+                i {
+                    display: block;
+                }
+            }
+            .gr_number__openBtn {
+                height: 0;
+            }
+        }
+        .gr_number__header {
+            color: #fff;
+            background: #5e5f6d;
+            text-align: center;
+            cursor: context-menu;
+            position: relative;
+            height: 32px;
+            line-height: 32px;
+            i {
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                padding: 10px;
+                display: none;
+            }
+        }
+        .gr_number__openBtn {
+            color: #fff;
+            background: #5e5f6d;
+            text-align: center;
+            cursor: pointer;
+            height: 16px;
+            line-height: 16px;
+        }
+        .gr_number__prizeNun {
+            position: absolute;
+            width: 100%;
+            display: none;
+            dl:nth-of-type(even) {
+                dd, dt {
+                    background: #e2e2e2;
+                }
+            }
+            &.is_active {
+                display: block;;
+            }
+        }
+        .gr_number__prizeNun--title {
+            text-align: center;
+            color: #ffffff;
+            background-color: #c7b299;
+            line-height: 30px;
+            border-left: 1px solid #b3b3b3;
+            border-right: 1px solid #b3b3b3;
+        }
+        .gr_number__content--item {
+            display: table-row;
+            width: 100%;
+            height: 30px;
+            &:nth-of-type(even) {
+                background-color: #e2e2e2;
+            }
+            dt, dd {
+                &:first-of-type {
+                    border-left: 1px solid #b3b3b3;
+                }
+                display: table-cell;
+                padding: 5px 0;
+                border-right: 1px solid #b3b3b3;
+                border-bottom: 1px solid #b3b3b3;
+                width: calc(100% / 4);
+                vertical-align: middle;
+                text-align: center;
+            }
+        }
+        .gr_number__content{
+            dd span:last-of-type {
+                margin-left: 15px;
+            }
+        }
+        .gr_number__content-prizeNun {
+            display: table;
+            width: 100%;
+            .gr_number__content--item {
+                dt {
+                    width: 25%;
+                }
+                dd {
+                    width: 75%;
+                    padding: 0;
+                    border-left: 1px solid transparent;
+                    span {
+                        width: calc(100% / 3);
+                        height: 30px;
+                        line-height: 30px;
+                        display: block;
+                        float: left;
+                        &:not(:nth-of-type(3n+0)) {
+                            border-right: 1px solid #b3b3b3;
+                        }
+                        &:nth-of-type(4), &:nth-of-type(5), &:nth-of-type(6) {
+                            border-top: 1px solid #b3b3b3;
+                        }
+                        &.bigH {
+                            height: 60px;
+                            line-height: 60px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .gr_info__list.gr_th_history {
+        .gr_list__content .gr_list__number {
+            margin: 15px auto 25px auto;
+            display: block;
+        }
+    }
+}

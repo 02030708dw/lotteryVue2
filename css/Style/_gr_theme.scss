@@ -1,0 +1,109 @@
+// ************************************************************
+// style  theme
+// ************************************************************
+// gr_headaer
+// gr_home
+// gr_game
+// gr_list
+// ************************************************************
+
+// ************************************************************
+// theme  gr_header
+// ************************************************************
+
+// components\HeaderNav\
+.gr_header {
+    @include box_shadow(0 -4px 0 $color_primary_heavy inset, 0 -22px 0 darken($color_primary, 10.6%) inset, 0 -44px 0 $color_primary inset);
+    color: text_color(default_invert);
+}
+
+
+
+// 选单
+.gr_nav--nav-bar {
+    & .gr_item__link,
+    & .gr_games__link {
+        color: text_color(default_invert);
+        &.router-link-active {
+            color: text_color(light);
+        }
+    }
+    & .gr_nav__games--hover {
+        & .gr_games__link {
+            color: text_color(light);
+        }
+    }
+}
+
+
+
+
+
+// 用户资讯
+.gr_user-area {
+    @include box_shadow(4px 0 4px rgba($color_default, 0.3) inset, 0 -22px 0 lighten($color_default, 20%) inset, 0 -44px 0 lighten($color_default, 28.3%) inset);
+}
+.gr_user-area__icon {
+    & .gr_icon__stroke {
+        stroke: currentColor;
+    }
+    & .gr_icon__arrow {
+        fill: currentColor;
+    }
+}
+
+
+
+
+
+// 768 选单
+.gr_nav {
+    background: backgrounds(primary);
+    color: text_color(default);
+}
+.gr_nav__header {
+    @include box_shadow(0 -4px 0 $color_primary_heavy inset, 0 -22px 0 darken($color_primary, 10.6%) inset, 0 -44px 0 $color_primary inset);
+    color: text_color(default_invert);
+}
+.gr_nav__user-area {
+    & .gr_user-area__user-balance {
+        color: text_color(light);
+    }
+}
+.gr_nav .gr_nav-tabs {
+    & li {
+        & > a {
+            border-color: border_color(default);
+            color: text_color(secondary);
+            &.router-link-active {
+                color: text_color(accent);
+                &::before {
+                    background: currentColor;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+// Home\lottery_category.vue
+%lottery_category_shadow {
+    @include box_shadow(0 4px 8px -3px shadow_color(default));
+}
+%lottery_category_text_color {
+    color: text_color(default_invert);
+}
+%lottery_category_text_color_hover {
+    color: text_color(light_heavy);
+}
+%lottery_category_dot_color {
+    background: lighten($color_accent, 22%);
+}
+%lottery_category_dot_color_hover {
+    background: $color_light;
+    @include box_shadow(0 0 3px $color_light);
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta name="format-detection" content="telephone=no, email=no, adress=no" />
+        <link rel="shortcut icon" href="favicon.ico" />
+        <title></title>
+    </head>
+    <style>
+        body {
+            background: #e6e6e6;
+            margin: 0;
+            padding: 0;
+            font: 14px arial, 'Microsoft Yahei', 'Microsoft JhengHei', tahoma, Srial, helvetica, sans-serif;
+        }
+        @media screen and (max-width: 979px) {
+            body {
+                background: #f2f2f2;
+            }
+        }
+        #app {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            text-align: center;
+            padding-top: 0;
+        }
+        /* #app div {
+        padding-bottom: 8px;
+    } */
+        #app span {
+            background-color: #333333;
+            border-radius: 50%;
+            display: inline-block;
+            height: 8px;
+            margin: 0 5px 5px;
+            width: 8px;
+            -webkit-animation: d 800ms infinite ease;
+            animation: d 800ms infinite ease;
+        }
+        #app span:nth-of-type(2) {
+            -webkit-animation-delay: 100ms;
+            animation-delay: 100ms;
+        }
+        #app span:nth-of-type(3) {
+            -webkit-animation-delay: 200ms;
+            animation-delay: 200ms;
+        }
+        #app span:nth-of-type(4) {
+            -webkit-animation-delay: 300ms;
+            animation-delay: 300ms;
+        }
+        #app span:nth-of-type(5) {
+            -webkit-animation-delay: 400ms;
+            animation-delay: 400ms;
+        }
+        #app span:nth-of-type(6) {
+            -webkit-animation-delay: 500ms;
+            animation-delay: 500ms;
+        }
+        #app span:nth-of-type(7) {
+            -webkit-animation-delay: 600ms;
+            animation-delay: 600ms;
+        }
+        #app span:nth-of-type(8) {
+            -webkit-animation-delay: 700ms;
+            animation-delay: 700ms;
+        }
+        @-webkit-keyframes d {
+            10% {
+                background-color: #333333;
+            }
+            50% {
+                background-color: #bf0083;
+            }
+            90% {
+                background-color: #333333;
+            }
+        }
+        @keyframes d {
+            10% {
+                background-color: #333333;
+            }
+            50% {
+                background-color: #bf0083;
+            }
+            90% {
+                background-color: #333333;
+            }
+        }
+    </style>
+    <body>
+        <div id="app">
+            <span></span> <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+            <span></span>
+            <div>Loading...</div>
+        </div>
+        <script type="text/javascript">
+            var CDN = ''
+            var DIRECT_TITLE = ''
+            var DIRECT_LOGO = ''
+            var USER_LANG = ''
+            var startTime = +new Date()
+            var LANG_C_STAMP = ''
+            var LOTTERY_MENU = false
+            var MY_FAVORITES
+            var POPULAR_ENTRIES
+
+            // var RmUserInfo = { home: 'http://yahoo.com.tw' }
+            // var RmUserInfo = {enableLeaderBoard: true}
+            var RmUserInfo = {
+                isShowRetroBtn: 1,
+                isShowPointBar: 1,
+                isShowClassicBtn: 1
+            }
+            window.isUnity = false
+            function opUnity() {
+                window.isUnity = true
+            }
+            // 'serviceWorker' in navigator &&
+            //     window.addEventListener('load', () => {
+            //         // 建立sw.js
+            //         navigator.serviceWorker
+            //             .register(`/sw.js?t=${+new Date()}`)
+            //             .then(reg => console.log('Service Worker Success'))
+            //             // 註冊失敗
+            //             .catch(err => console.log('error: ', err))
+            //     })
+        </script>
+        <!-- built files will be auto injected -->
+    </body>
+</html>

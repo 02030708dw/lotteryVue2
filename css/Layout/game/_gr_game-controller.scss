@@ -1,0 +1,47 @@
+// ************************************************************
+// gr_game-controller
+// ************************************************************
+
+.gr_game-controller {
+    
+    & .c_slider__input .c_input__inner {
+        height: 30px;
+    }
+    & .gr_game-controller__row{
+        text-align: right;
+        & *{
+            display: inline-block;   
+        }
+        width: 100%;
+        & .gr_game-controller__total {
+
+        }
+        & .gr_game-controller__button-group {
+            text-align: right;
+            margin-left: 10px;
+            & button {
+                min-width: 81px \9;
+                &::before {
+                    content: '';
+                    display: block \9;
+                    min-width: 81px;
+                }
+            }
+        }
+    }
+    
+}
+
+
+
+.gr_game-controller__inner {
+    line-height: 44px;
+    padding: 20px;
+    & > div {
+        display: inline-block;
+        vertical-align: middle;
+        & + div {
+            margin-left: 12px;
+        }
+    }
+}

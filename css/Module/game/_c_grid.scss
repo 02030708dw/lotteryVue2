@@ -1,0 +1,430 @@
+// ************************************************************
+// c_grid
+// ************************************************************
+
+// 信用玩法 grid
+// 980 以上
+@media screen and (min-width: 980px) {
+    .c_h-game-grid {
+        border: 1px solid #808080;
+        font-size: 0;
+        line-height: 16px;
+        //
+        & [class*="c_col"] {
+            display: inline-block;
+            vertical-align: top;
+            & + [class*="c_col"] {
+                border-left: 1px solid #f2f2f2;
+            }
+        }
+        @for $i from 1 through 5 {
+            & .c_col:first-of-type:nth-last-of-type(#{$i}) {
+                &, & ~ .c_col {
+                    width: 100%/$i;
+                }
+            }
+            & .c_col--#{$i} {
+                width: $i*20% !important;
+                @if ($i == 5) {
+                    & + .c_col--#{$i} {
+                        border-left: none;
+                    }
+                }
+            }
+            & .c_col--g__#{$i} {
+                width: 100% / $i;
+                &:nth-of-type(#{$i}n+1) {
+                    border-left: none;
+                }
+            }
+        }
+        //
+        & .c_component {
+            display: inline-block;
+            font-size: $font_size;
+            padding: 4px 2px;
+            vertical-align: middle;
+            width: 100%;
+        }
+        & .c_component--align-left {
+            padding-right: 0;
+            padding-left: 2%;
+            text-align: left;
+        }
+        & .c_component:first-of-type:nth-last-of-type(4) {
+            width: 13%;
+            & ~ .c_component {
+                font-size: $font_size_small;
+                width: 15%;
+                &:last-of-type {
+                    text-align: left;
+                    width: 59%
+                }
+                & .c_ball--xsmall {
+                    margin: 0 2px 0 1px;
+                }
+            }
+            & + .c_component {
+                width: 13%;
+            }
+            @include multi-lang {
+                width: 23%;
+                & ~ .c_component {
+                    width: 13%;
+                    &:last-of-type {
+                        width: 51%;
+                    }
+                    & .c_ball--xsmall {
+                        margin: 0 3px;
+                    }
+                }
+            }
+        }
+        & .c_component:first-of-type:nth-last-of-type(3) {
+            width: 32%;
+            & ~ .c_component {
+                font-size: $font_size_small;
+                width: 37%;
+            }
+            & + .c_component {
+                width: 31%;
+            }
+        }
+        & .c_component:first-of-type:nth-last-of-type(2) {
+            width: 50%;
+            & ~ .c_component {
+                width: 50%;
+            }
+        }
+        & input {
+            vertical-align: middle;
+        }
+    }
+
+
+
+    .c_h-game-grid__header {
+        background: #666666;
+        color: #ffffff;
+        line-height: 22px;
+        min-height: 23px;
+        & .c_component {
+            padding: 0 2px;
+        }
+    }
+
+
+
+    .c_h-game-grid__title {
+        background: backgrounds(accent_heavy);
+        border: none;
+        line-height: 15px;
+        min-height: 23px;
+        & .c_component {
+            font-size: $font_size !important;
+            text-align: center !important;
+        }
+    }
+
+
+
+    [class*="c_col"] {
+        & .c_row {
+            border-top: 1px solid #f2f2f2;
+            &:hover {
+                background: #c1dbe5;
+                box-shadow: 1px 1px 0 #79a9c5 inset, -1px -1px 0 #79a9c5 inset;
+            }
+            &[disabled] {
+                background: inherit;
+                box-shadow: inherit;
+            }
+        }
+        & .is_active {
+            background: #c1dbe5;
+            &:hover {
+                background: #c1dbe5;
+                box-shadow: 1px 1px 0 #c1dbe5 inset, -1px -1px 0 #c1dbe5 inset;
+            }
+        }
+        & .is_dan-active {
+            background: #ffd371;
+            &:hover {
+                background: #ffd371;
+                box-shadow: 1px 1px 0 #ffd371 inset, -1px -1px 0 #ffd371 inset;
+            }
+        }
+        & .c_h-game-grid__header,
+        & .c_h-game-grid__header:hover {
+            background: #666666 !important;
+            border: none;
+            box-shadow: none !important;
+        }
+        & .c_h-game-grid__title,
+        & .c_h-game-grid__title:hover {
+            background: backgrounds(accent_heavy) !important;
+            border: none;
+            box-shadow: none !important;
+        }
+    }
+    [class*="c_col--1"],
+    [class*="c_col--2"],
+    [class*="c_col--3"],
+    [class*="c_col--4"],
+    [class*="c_col--5"] {
+        & > .c_row {
+            &:hover {
+                background: none;
+                box-shadow: none;
+            }
+        }
+    }
+
+    .c_h-game-grid--dantuo {
+        & .c_col {
+            & .c_row:hover {
+                background: #ffd371;
+                box-shadow: 1px 1px 0 #f97600 inset, -1px -1px 0 #f97600 inset;
+            }
+            & .is_active:hover {
+                background: #c1dbe5;
+                box-shadow: 1px 1px 0 #c1dbe5 inset, -1px -1px 0 #c1dbe5 inset;
+            }
+            & .is_dan-active:hover {
+                background: #ffd371;
+                box-shadow: 1px 1px 0 #ffd371 inset, -1px -1px 0 #ffd371 inset;
+            }
+        }
+    }
+}
+.is_strong {
+    color: #d10000;
+    &.c_h-game-grid__header,
+    &.c_h-game-grid__header:hover {
+        background: $color_strong !important;
+        color: text_color(default_invert);
+    }
+    & [class*="c_ball--"],
+    & [class*="c_rectangle--"] {
+        background: #d10000;
+        & [class*="__item"] {
+            color: inherit;
+        }
+    }
+    & [class*="c_dice--"] {
+        background: #f9453f;
+        border-color: #1a1a1a;
+        color: #ffffff;
+        & .c_dot {
+            background: #ffffff !important;
+        }
+    }
+}
+
+
+
+
+
+// 320 ~ 979
+@media screen and (max-width: 979px) {
+    .c_h-game-grid {
+        font-size: 0;
+        &:last-of-type {
+            padding-bottom: 130px;
+        }
+        & + &,
+        & > .c_row + .c_row {
+            margin-top: 1px;
+        }
+        & [class*="c_col"] {
+            display: inline-block;
+            vertical-align: top;
+            width: calc(100% / 3);
+            @include multi-lang {
+                width: 50%;
+            }
+        }
+        // is_active 樣式 - 球色改變
+        &:not(.c_h-game-grid--card) [class*="c_col"] {
+            &.is_active {
+                & [class*="c_ball--"],
+                & [class*="c_rectangle--"] {
+                    @include animate(bounceIn, 0.75s);
+                    @include background_gradient(ture, to bottom, lighten(mix($color_primary, $color_secondary, 97%), 0%), lighten($color_primary_heavy, 2.3%));
+                    & [class*="__item"] {
+                        @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                        color: text_color(default_invert);
+                    }
+                }
+                .is_strong {
+                    & [class*="c_ball--"],
+                    & [class*="c_rectangle--"] {
+                        background: #f9453f;
+                        & [class*="__item"] {
+                            background: #f9453f;
+                        }
+                    }
+                }
+                & .c_rectangle--secondary {
+                    background: border_color(dark);
+                    & [class*="__item"] {
+                        @include background_gradient(ture, to bottom, darken(mix($color_secondary_heavy, $color_strong, 85%), 8%), lighten(mix($color_secondary_heavy, $color_strong, 85%), 15%));
+                        box-shadow: 0 0 3px 0 shadow_color(light) inset;
+                    }
+                }
+                & .c_h-game-grid__item {
+                    background: backgrounds(accent_heavy);
+                }
+            }
+        }
+        // is_active 樣式 - col 底色改變
+        &.c_h-game-grid--card [class*="c_col"] {
+            &.is_active {
+                background: #c1dbe5;
+                box-shadow: 1px 1px 0 border_color(default_invert) inset, -1px -1px 0 border_color(default_invert) inset;
+            }
+            &.is_dan-active {
+                background: #ffd371;
+            }
+        }
+        @for $i from 1 through 5 {
+            @include multi-lang("all") {
+                & .c_col--#{$i} {
+                    width: $i*20%;
+                }
+            }
+            & .c_col--g__#{$i} {
+                width: 100% / $i;
+            }
+        }
+        //
+        & .c_component {
+            font-size: $font_size;
+            line-height: 28px;
+            padding: 2px 0 4px;
+            vertical-align: middle;
+        }
+        //
+        & .c_h-game-grid__item {
+            display: inline-block;
+            line-height: 0;
+            padding: 7px;
+        }
+    }
+
+
+
+    .c_h-game-grid__header {
+        background: #cccccc;
+        font-weight: bold;
+        padding: 0 10px;
+        position: relative;
+        .c_header__arrow {
+            @include size(16px);
+            border:1px solid currentColor;
+            border-radius: border_radius(rounded);
+            position: absolute;
+            top: calc(50% - 8px);
+            right: 18px;
+            &::before {
+                @include pseudo;
+                border: solid currentColor;
+                border-width: 0 0 1px 1px;
+                padding: 3px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -65%) rotate(-45deg);
+                transition: all 0.3s ease;
+            }
+        }
+        &.is_active {
+            & .c_header__arrow::before {
+                transform: translate(-50%, -35%) rotate(135deg);
+            }
+            & ~ .c_h-game-grid__content {
+                max-height: 2000px;
+                opacity: 1;
+                padding: 0 10px;
+                visibility: visible;
+            }
+        }
+    }
+    
+    .c_h-game-grid__content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0 10px;
+        transition: all 0.3s ease;
+        visibility: hidden;
+        & .c_content__title {
+            font-weight: bold;
+            text-align: center;
+            & .c_component:first-of-type:last-of-type {
+                line-height: 30px;
+            }
+        }
+        & .c_component {
+            text-align: center;
+        }
+        & .c_component:first-of-type:last-of-type,
+        & .c_component:first-of-type:nth-last-of-type(2) {
+            line-height: 52px;
+            padding: 0;
+            & + .c_component {
+                font-size: $font_size_small;
+                line-height: 12px;
+            }
+        }
+    }
+
+
+
+
+
+    .c_h-game-card {
+        border: 1px solid #999999;
+        margin: 10px 0;
+        padding: 0 5px;
+        &.is_active {
+            background: #c1dbe5;
+            border-color: #79a9c5;
+        }
+        &.is_dan-active {
+            background: #ffd371;
+            border-color: #f97600;
+        }
+        & [class*="c_ball--"] {
+            margin: 0 1.5px;
+        }
+        [class*="i_zodiac"] {
+            margin-right: 10px;
+        }
+    }
+    .c_h-game-card__header {
+        border-bottom: 1px solid #b3b3b3;
+        padding: 0 10px;
+        font-size: 0;
+        line-height: 30px;
+        & .c_header__title {
+            font-size: $font_size_large;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        & .c_header__odds {
+            font-size: $font_size_small;
+            vertical-align: text-bottom;
+        }
+    }
+    .c_h-game-card__content {
+        padding: 5px;
+        & .c_component {
+            display: inline-block;
+            margin: 0 2px;
+            &:first-of-type:last-of-type {
+                line-height: 28px;
+            }
+        }
+    }
+}
+

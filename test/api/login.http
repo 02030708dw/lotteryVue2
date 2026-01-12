@@ -1,0 +1,2 @@
+
+GET {{host}}/login/thirdparty/{{rmidF}}?thirdpartyUserId=label HTTP/1.1

@@ -1,0 +1,1123 @@
+// ************************************************************
+// gr_game-header
+// ************************************************************
+
+.gr_games-header,
+.gr_games-header--video .gr_games-header__inner {
+    @extend %shadow_linear_gradient_default_inset;
+}
+@keyframes beat{
+    60%{
+        transform: scale(1);
+        opacity:1;
+    }
+    70%{
+        transform: scale(1.1);
+        opacity:0.8;
+    }
+    80%{
+        transform: scale(1);
+        opacity:1;
+    }
+    90%{
+        transform: scale(1.1);
+        opacity:0.8;
+    }
+    100%{
+        transform: scale(1);
+        opacity:1;
+    }
+}
+.gr_my-favorites__icon {
+    // 避免切換時跑出來，須寫在這裡
+    @include size(16px);
+}
+@media screen and (min-width: 980px) {
+    .gr_games-header, .gr_games-header--video {
+        position: relative;
+    }
+    .gr_games-header{
+        // @extend %shadow_linear_gradient_default_inset;
+        background: #eae7da;
+        min-height: 140px;
+        text-align: center;
+        position: relative;
+        & > div {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .gr_games-lotteryStatus {
+            padding: 5px 10px;
+            text-align: left;
+            > div[class*="gr_games-lotteryStatus__"] {
+                display: inline-block;;
+            }
+        }
+    }
+    .gr_games-header__my-favorites {
+        @include size(0px, 23px);
+        cursor: pointer;
+        fill: none;
+        padding: 4.5px 0;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1pt;
+        stroke: #ff6473;
+        transition: fill 0.3s linear;
+        position: relative;
+        z-index: 4;
+        top: 85px;
+        float: left;
+        left: 7px;
+        & .gr_my-favorites__icon {
+            // @include size(16px, 100%);
+            animation-name: beat;
+            animation-duration:3s;
+            animation-iteration-count: infinite;
+        }
+        &.is_active {
+            fill: #ff6473;
+            // .gr_my-favorites__icon {
+            //     animation-name: beat;
+            //     animation-duration:1s;
+            // }
+        }
+        &::before {
+            @include pseudo;
+            @include size(300%, 120%);
+            top: 0;
+            left: -8px;
+        }
+    }
+}
+.gr_games-header__square {
+    @include size(286px, 100px);
+    @include box_shadow(0 6px 8px -8px shadow_color(dark));
+    background: rgba(mix(lighten($color_secondary_heavy, 28.5%), darken($color_secondary, 7.3%), 65%), 0.85);
+    border-radius: border_radius(large);
+    border: 1px solid #9f997d;
+    color: text_color(default);
+    margin-top: 10px;
+    padding: 7px 0;
+    position: relative;
+    @include multi-lang('vn') {
+        @include size(290px, 100px);
+    }
+    &:nth-of-type(3) {
+        margin-right: 1.4%;
+        @include multi-lang {
+            margin-right: 1%;
+        }
+    }
+    & strong {
+        font-weight: 600;
+        & + span {
+            padding-left: 5px;
+        }
+    }
+    // 紅點
+    &::before,
+    &::after {
+        @include pseudo;
+        @include circle(6px);
+        background: darken($color_strong, 9%);
+        top: 5px;
+        left: 5px;
+    }
+    &::after {
+        right: 5px;
+        left: auto;
+    }
+}
+.gr_games-header__ball-content {
+    & [class*="c_ball-"] {
+        margin: 15px 4px 0;
+
+    }
+}
+
+
+.gr_games-header__logo.lottery_158 ~ div .gr_games-header__ball-content,
+.gr_games-header__logo.lottery_160 ~ div .gr_games-header__ball-content {
+    margin-top: 10px;
+}
+
+.gr_games-header--video .gr_games-header__logo ~ div, // 视频
+.gr_games-header__logo[class*="klsf"] ~ div { // 幸運農場
+    &.gr_games-header__square {
+        &:nth-of-type(3) {
+            width: 271px;
+            @include multi-lang('vn') {
+                width: 290px;
+            }
+        }
+        &:nth-of-type(4) {
+            width: 471px;
+            line-height: 18px;
+        }
+    }
+    & .gr_games-header__ball-content {
+        & [class*="c_ball-"] {
+            margin-top: 15px;
+        }
+    }
+}
+
+// 股票彩
+.gr_games-header__logo.lottery_248.stock ~ div {
+    &.gr_games-header__square
+    > div:first-of-type {
+        margin: 5px 0 3px 0;
+        @include multi-lang('vn') {
+            margin: 0;
+        }
+        strong {
+            @include multi-lang('vn') {
+                display: block;
+            }
+        }
+    }
+}
+
+// 视频
+.gr_games-header--video {
+    & div.gr_games-header__square:last-of-type {
+        @include multi-lang("all") {
+            width: 551px;
+        }
+        @include multi-lang("vn") {
+            width: 540px;
+        }
+    }
+    & .gr_square__video-player {
+        @include size(70px, 100%);
+        border-left: 1px solid #9f997d;
+        cursor: pointer;
+        float: right;
+        font-size: $font_size_small;
+        @include multi-lang('vn') {
+            @include size(80px, 100%);
+        }
+    }
+    & .gr_video-player__icon {
+        @include size(46px);
+        background: url(~@IMG/icon/i_video-player--camera.svg) center center no-repeat;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        border-radius: border_radius(rounded);
+        display: inline-block;
+        margin: 8px 2px 5px 0;
+        &.is_active,&.is_video-active {
+            background-image: url(~@IMG/icon/i_video-player--camera-pause.svg);
+        }
+    }
+    & .gr_square__title {
+        float: left;
+        padding: 0 15px 0 25px;
+        text-align: left;
+        width: calc(100% - 70px);
+        @include multi-lang('vn') {
+            width: calc(100% - 80px);
+        }
+
+        @include multi-lang {
+            // width: 38%;
+            & .gr_title__text {
+                // position: absolute;
+                & span{
+                    float: left;
+                }
+            }
+            & .gr_title__winning-no {
+                display: block;
+            }
+        }
+    }
+    & .gr_video-player__tip {
+        position: absolute;
+        background: #ccc;
+        padding: 2px 5px;
+        border-radius: 5px;
+        top: -7px;
+        width: 130px;
+        margin-left: -28px;
+        z-index: 9;
+    }
+    & .gr_games-header__ball-content {
+        float: left;
+        width: calc(100% - 70px);
+        @include multi-lang('vn') {
+            width: calc(100% - 80px);
+        }
+        & [class*="--medium"] {
+            margin-top: 7px !important;
+        }
+        & [class*="c_ball--large"] {
+            margin-top: 5px !important;
+        }
+    }
+    & .gr_games-header__logo[class*="lottery_158"] ~ div .gr_games-header__ball-content,
+    & .gr_games-header__logo[class*="lottery_160"] ~ div .gr_games-header__ball-content {
+        & [class*="c_ball-"] {
+            margin: 17px 6px 0 !important;
+        }
+    }
+    // 重慶歡樂生肖 有視頻
+    // & .gr_games-header__logo.lottery_1 ~ div .gr_games-header__ball-content,
+    // & .gr_games-header__logo.lottery_120 ~ div .gr_games-header__ball-content {
+    //     .c_ball--large {
+    //         border-width: 2px;
+    //         border-style: solid;
+    //         background: #333333 no-repeat 2px center;
+    //         background-size: 95%;
+    //         position: relative;
+    //         .c_ball__item {
+    //             position: absolute;
+    //             width: 22px;
+    //             height: 22px;
+    //             border-radius: 50%;
+    //             font-size: 14px;
+    //             line-height: 22px;
+    //             top: -15px;
+    //             right: -7px;
+    //             color: #ffffff;
+    //             &::before {
+    //                 content: "";
+    //                 display: block;
+    //                 position: absolute;
+    //                 height: 0;
+    //                 width: 0;
+    //                 border-style: solid;
+    //                 border-color: #666666 transparent transparent transparent;
+    //                 border-width: 6px 2.5px 0 2.5px;
+    //                 bottom: -1px;
+    //                 left: -1px;
+    //                 transform: rotate(40deg);
+    //             }
+    //         }
+    //         &:first-of-type {
+    //             border-color: $animal-purple;
+    //             .c_ball__item {
+    //                 background: $animal-purple;
+    //                 &::before {
+    //                     border-top-color: $animal-purple;
+    //                 }
+    //             }
+    //         }
+    //         &:nth-of-type(2) {
+    //             border-color: $animal-yellow;
+    //             .c_ball__item {
+    //                 background: $animal-yellow;
+    //                 &::before {
+    //                     border-top-color: $animal-yellow;
+    //                 }
+    //             }
+    //         }
+    //         &:nth-of-type(3) {border-color: $animal-blue;
+    //             .c_ball__item {
+    //                 background: $animal-blue;
+    //                 &::before {
+    //                     border-top-color: $animal-blue;
+    //                 }
+    //             }
+    //         }
+    //         &:nth-of-type(4) {
+    //             border-color: $animal-red;
+    //             .c_ball__item {
+    //                 background: $animal-red;
+    //                 &::before {
+    //                     border-top-color: $animal-red;
+    //                 }
+    //             }
+    //         }
+    //         &:nth-of-type(5) {
+    //             border-color: $animal-green;
+    //             .c_ball__item {
+    //                 background: $animal-green;
+    //                 &::before {
+    //                     border-top-color: $animal-green;
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    & .gr_games-header__lottery-period {
+        float: right;
+        margin: 0;
+        & .gr_button-group__trendline {
+            margin: 0;
+        }
+        // @include multi-lang {
+        //     position: absolute;
+        //     top: 7px;
+        //     right: 85px;
+        // }
+    }
+    & .gr_lottery-period__button-group > div {
+        display: inline-block;
+    }
+    & [class*="c_button--"] {
+        border-radius: 10px;
+        padding: 2px 12px;
+    }
+}
+
+
+
+.gr_games-header__video {
+    background: #000;
+    color: text_color(default_invert);
+    height: 0;
+    overflow: hidden;
+    padding: 0 25px;
+    position: relative;
+    // transition: all 0.5s ease;
+    &.is_active {
+        height: 522px;
+    }
+    & .gr_video__header {
+        min-width: 320px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 2;
+        width: 100%;
+        padding-top: 10px;
+    }
+    & .gr_video__errorbox {
+        height: 100%;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 2;
+
+        .gr_errorbox__message {
+            font-size: 2em;
+            position: absolute;
+            top: 50%;
+            text-align: center;
+            width: 100%;
+            text-shadow: 1px 1px 1px shadow_color(dark), -1px -1px 1px shadow_color(dark);
+            z-index: 2;
+        }
+    }
+    & .gr_video__errorbox {
+        height: 100%;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 2;
+
+        .gr_errorbox__message {
+            font-size: 2em;
+            position: absolute;
+            top: 50%;
+            text-align: center;
+            width: 100%;
+            text-shadow: 1px 1px 1px shadow_color(dark), -1px -1px 1px shadow_color(dark);
+            z-index: 2;
+        }
+    }
+    // 下期開獎期數
+    & .vjs-openissue {
+        height: 60px;
+        position: relative;
+        float: left;
+        padding: 5px 8px 5px 69px;
+        background-color: rgba(4, 0, 0, 0.6);
+        border: 1px solid #f7c684;
+        border-radius: 8px;
+        background-repeat: no-repeat;
+        background-size: auto 80%;
+        background-position: 5% center;
+        background-image: url('/static/image/gr_video/gr_video--logo.svg');
+        & p {
+            &:first-of-type {
+                color: #f7c684;
+                padding: 3px 0;
+                @include multi-lang {
+                    padding: 5px 0;
+                }
+                span {
+                    color: #e6e6e6;
+                }
+            }
+            color: #e6e6e6;
+            font: $font_size_large $font_family;
+        }
+    }
+    // 視頻電話號碼
+    & .vjs-phone {
+        float: right;
+        background-color: rgba(4, 0, 0, 0.6);
+        border: 1px solid #f7c684;
+        border-radius: 8px;
+        top: 10px;
+        white-space: nowrap;
+        p {
+            font-family: $font_family;
+            font-size: 16px;
+            padding: 8px 15px;
+        }
+    }
+    & .vjs-fullscreen-control {
+        position: absolute !important;
+        right: 0;
+    }
+    & .vjs-hd-control {
+        position: absolute !important;
+        right: 40px;
+        cursor: pointer;
+    }
+    & .vjs-loading-spinner,
+    & .vjs-modal-dialog-content,
+    & .vjs-control-text {
+        display: none;
+    }
+    & .vjs-tech {
+        @include size(100%);
+    }
+    .vjs-button > .vjs-icon-placeholder:before {
+        line-height: 1.95;
+    }
+    & .vjs-fullscreen .gr_video__header {
+        @include size(100%, 35px);
+        padding: 16px 10px;
+    }
+    & .vjs-live-control {
+       display: none !important;
+    }
+}
+.video-js .vjs-big-play-button {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    margin: auto;
+}
+
+@media screen and (max-width: 979px) {
+    .gr_games-header__video {
+        height: auto;
+        min-width: 320px;
+        padding: 0;
+        .gr_video__header {
+           padding: 10px 6px 0;
+        }
+        & .gr_video-box {
+            position: fixed;
+            z-index: 66;
+        }
+    }
+    .gr_last__balls--fantan {
+        .gr_balls__text {
+            color: #747a80;
+            &.text_color_accent {
+                color: #fb8032 !important;
+            }
+            // 和球三位數時 文字縮小
+            &.threeNum {
+                span {
+                    padding: 0 3px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .gr_games-header__video {
+        height: auto;
+        min-width: 320px;
+        padding: 0;
+        .gr_video__header {
+            padding: 6px 6px 0;
+        }
+        & .vjs-openissue {
+            height: 35px;
+            padding: 2px 5px 2px 40px;
+            border-radius: 5px;
+            & p {
+                font-size: $font_size_small;
+                &:first-of-type {
+                    padding: 0;
+                    @include multi-lang {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+        & .vjs-phone {
+            border-radius: 5px;
+            p {
+                font-size: $font_size_small;
+                padding: 5px;
+            }
+        }
+    }
+}
+.gr_games-header__lottery-period {
+    margin-top: 10px;
+    margin-left: 1.8%;
+    text-align: center;
+    white-space: nowrap;
+    // 按鈕
+    & .gr_lottery-period__button-group div {
+        &.gr_button-group__history{
+            margin: 3px auto;
+        }
+        line-height: normal;
+        width: 30px;
+        height: 30px;
+        & button,a{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            & span{
+                @include box_shadow(0px 0px 3px shadow_color(default));
+                background-color: #fff;
+                color: darken(text_color(weak), 50%);
+                border-radius: 5px;
+                padding: 2px 10px;
+                position: absolute;
+                bottom: 25px;
+                left: 50%;
+                transform: translateX(-50%);
+                transition: all 0.4s ease;
+                opacity: 0;
+                visibility: hidden;
+                z-index: 5;
+                &::before{
+                    @include triangle($color_default_invert, down, 6px);
+                    left: calc(100% / 2);
+                    top: calc(100% + 2px);
+                    transform: translateX(-50%);
+                }
+            }
+            &:hover{
+                & span{
+                    bottom: 30px;
+                    transition: all 0.4s ease;
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+    }
+    // 歷史獎期表格
+    & .gr_lottery-period__info {
+        background: backgrounds(primary);
+        border-radius: border_radius(large);
+        box-shadow: 3px 3px 10px shadow_color(default);
+        display: none;
+        font-size: $font_size_small;
+        padding: 0 8px 8px;
+        position: absolute;
+        top: 45px;
+        right: 120px;
+        z-index: 50;
+        // 历史奖号 span
+        & span {
+            line-height: 26px;
+            display: block;
+        }
+        .text_color_fantan {
+            ~ span {
+                display: inline-block;
+                span {
+                    display: inline-block;
+                }
+                &.gr_list__code--difColor {
+                    // display: inline-block;
+                    // font-size: 0;
+                    span {
+                        // font-size: 12px;
+                        &:not(.light) {
+                            color: #747a80;
+                        }
+                    }
+                }
+            }
+            &.threeNum {
+                span {
+                    padding: 0 3px;
+                }
+            }
+        }
+        // 历史奖号 close icon
+        & i {
+            color: $color_secondary_heavy;
+            cursor: pointer;
+            display: block;
+            float: right;
+            line-height: 26px;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            right: 11px;
+        }
+        &.active {
+            display: block;
+        }
+    }
+    & table {
+        background-color: mix(lighten($color_secondary_heavy, 28.5%), darken($color_secondary, 7.3%), 65%);
+        display: inline-table;
+        min-width: 190px;
+        height: 139px;
+        vertical-align: middle;
+        width: auto;
+        & td {
+            border-top: 1px solid backgrounds(secondary);
+            // height: 27px;
+            // line-height: 27.5px;
+            padding: 9.5px 0 9.5px 6px;
+            & + td {
+                padding: 9.5px 6px 9.5px 12px;
+            }
+            .text_color_fantan {
+                // 番攤
+                &:first-of-type, &:nth-of-type(2) {
+                    display: inline-block;
+                    margin-right: 3px;
+                    span {
+                        border: 1px solid #747a80;
+                        display: block;
+                        border-radius: 10px;
+                        min-width: 18px;
+                        height: 18px;
+                        // padding: 0 2px;
+                        line-height: 18px;
+                        text-align: center;
+                        color: #666666;
+                    }
+                }
+                &:first-of-type {
+                    span {
+                        @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+                    }
+                }
+            }
+        }
+        & tfoot td {
+            height: 115px;
+            padding: 0;
+            vertical-align: middle;
+        }
+        & tr:first-of-type td {
+            border: none;
+        }
+    }
+    @include multi-lang {
+        & [class*="c_button--"] {
+            width: 100%;
+        }
+    }
+}
+// pk10 & mark6 patch
+.gr_games-header__logo {
+    &[class*="pk10"] ~ .gr_games-header__lottery-period,
+    &[class*="mark6"] ~ .gr_games-header__lottery-period,
+    &[class*="kl"] ~ .gr_games-header__lottery-period,
+    &[class*="klsf"] ~ .gr_games-header__lottery-period {
+        & .gr_lottery-period__info {
+            top: 10px;
+            right:65px;
+        }
+    }
+}
+.gr_games-header__logo {
+    &[class*="ssc_ft"] ~ .gr_games-header__square {
+        & .gr_lottery-period__info {
+            top: 45px;
+            right:14px;
+        }
+    }
+}
+
+// 预设样式
+.gr_games-header__logo:not([class*="pk10"]):not([class*="mark6"]):not([class*="klsf"]):not([class~="kl"]) ~ .gr_games-header__lottery-period {
+    float: right;
+    margin: 0;
+    & .gr_lottery-period__button-group {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    // 历史奖号 button
+    & .gr_lottery-period__button-group {
+        margin: 0 16px 0 0;
+        @include multi-lang('vn') {
+            margin: 0 14px 0 0;
+        }
+    }
+    & .gr_button-group__history {
+        display: none;
+    }
+    // 开奖官网，号码走势
+    & .gr_button-group__trendline {
+        margin-top: 8px;
+    }
+    & .gr_lottery-period__info {
+        & span,
+        & i {
+            display: none;
+        }
+        border-radius: 0;
+        box-shadow: none;
+        display: inline-block;
+        font-size: $font_size_small;
+        padding: 0;
+        position: static;
+    }
+    & table {
+        & td {
+            padding: 8px 0 0 5px;
+            & + td {
+                padding: 0 4px 0 10px;
+            }
+        }
+    }
+}
+
+.gr_games-header__logo:not([class*="klsf"]) ~ .gr_games-header__lottery-period {
+    // button是直式的話，提示泡泡從左邊出來
+    & .gr_lottery-period__button-group {
+        & button,a{
+            & span{
+                top: 50%;
+                right: 30px;
+                left: auto;
+                bottom: auto;
+                transform: translateY(-50%);
+                transition: all 0.2s ease;
+                opacity: 1;
+                &::before{
+                    @include triangle($color_default_invert, right, 6px);
+                    left: calc(100% - 1px);
+                    top: 0;
+                    transform: translateY(50%);
+                }
+            }
+            &:hover{
+                & span{
+                    transition: all 0.2s ease;
+                    right: 35px;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+.gr_games-header--320 {
+    display: none;
+}
+$gr_games-header-height: 67px;
+
+@media screen and (max-width: 979px) {
+    .gr_games-header--320 {
+        @include size(100%, $gr_games-header-height);
+        display: block;
+        font-size: 0;
+        position: fixed;
+        left: 0;
+        z-index: 60;
+        & .gr_games-header__my-favorites {
+            @include size(16px, 23px);
+            cursor: pointer;
+            display: inline-block;
+            fill: none;
+            padding: 4.5px 0;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1pt;
+            stroke: #f15a24;
+            transition: fill 0.3s linear;
+            vertical-align: middle;
+            position: relative;
+            z-index: 4;
+            & .gr_my-favorites__icon {
+                // @include size(100%);
+            }
+            &.is_active {
+                fill: #f15a24;
+            }
+            &::before {
+                @include pseudo;
+                @include size(300%, 120%);
+                top: 0;
+                left: -8px;
+            }
+        }
+        & .gr_games-header__title {
+            vertical-align: middle;
+            position: relative;
+            z-index: 1;
+        }
+        &::before {
+            display: none;
+        }
+        &.gr_games-headerFt--320 {
+            // 番攤
+            top: 44px;
+        }
+
+    }
+    .gr_games-header__button {
+        @include size(16px, 16px);
+        background: #333333;
+        border-radius: 100%;
+        cursor: pointer;
+        display: inline-block;
+        line-height: 15px;
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+        z-index: 4;
+        & .gr_button__icon {
+            @include size(7px, 8px);
+            fill: #ffffff;
+            width: 8px;
+        }
+        & .gr_icon--shadow {
+            fill: #a7a9ac;
+            opacity: 0.8;
+        }
+        &::before {
+            @include pseudo;
+            @include size(200%, 200%);
+            top: -5px;
+            left: -8px;
+        }
+    }
+    .gr_games-header__sectoin {
+        font-size: $font_size;
+        padding: 0 8px;
+    }
+    .gr_games-header__title {
+        height: 24px;
+        line-height: 24px;
+    }
+    .gr_games-header__desc {
+        @include size(110px, 36px);
+        display: inline-block;
+        font-size: $font_size_small;
+        line-height: 18px;
+        text-align: center;
+        vertical-align: top;
+        & .gr_desc__time {
+            background: #f7931e;
+            border-radius: 18px;
+            color: text_color(default_invert);
+            display: inline-block;
+            height: 18px;
+            min-width: 80px;
+            padding: 0 5px;
+        }
+        &.is_empty {
+            line-height: 36px;
+        }
+    }
+    .gr_games-header__last {
+        border-left: 1px solid border_color(default);
+        display: inline-block;
+        font-size: $font_size_small;
+        line-height: 18px;
+        padding-left: 10px;
+        vertical-align: top;
+        & .gr_last__balls {
+            font-size: 0;
+        }
+        & .gr_balls__text {
+            font-size: $font_size_small;
+            vertical-align: middle;
+        }
+        & .gr_balls__text--c-r {
+            color: #c1272d;
+        }
+        & .gr_balls__text--c-b {
+            color: #29abe2;
+        }
+        & .gr_balls__text--c-g {
+            color: #39b54a;
+        }
+        & .gr_balls__line {
+            @include size(1px, 18px);
+            background: border_color(default);
+            display: inline-block;
+            margin: 0 2px;
+            vertical-align: middle;
+        }
+    }
+    //番攤
+    .gr_last__balls--fantan {
+        .text_color_accent_invert {
+            border: 1px solid #747a80;
+            border-radius: 10px;
+            display: inline-block;
+            min-width: 18px;
+            height: 18px;
+            // padding: 0 2px;
+            text-align: center;
+            margin-right: 5px;
+            color: #666666;
+            &:first-of-type {
+                @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+            }
+        }
+        p {
+            &.gr_balls__text {
+                display: inline-block;
+                span {
+                    padding: 0 5px;
+                }
+            }
+        }
+    }
+    // 密拾
+    .gr_last__balls--mishi {
+        .text_color_accent_invert {
+            border: 1px solid #747a80;
+            border-radius: 10px;
+            display: inline-block;
+            min-width: 18px;
+            height: 18px;
+            // padding: 0 2px;
+            text-align: center;
+            margin-right: 5px;
+            color: #666666;
+        }
+    }
+    .gr_games-lotteryStatus-warp {
+        width: 100%;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        .gr_games-lotteryStatus-toggle {
+            font-size: 14px;
+            background-color: #8e7c66;
+            color: #ffffff;
+            padding: 2px 10px;
+            border-radius: 5px;
+            min-width: 50px;
+            float: right;
+            position: relative;
+            &::before{
+                @include triangle($color_default_invert, up, 6px);
+                left: 50%;
+                bottom: -3px;
+                transform: translateX(-50%);
+                z-index: 2;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.4s all;
+            }
+        }
+        .gr_games-lotteryStatus {
+            opacity: 0;
+            visibility: hidden;
+            font-size: 12px;
+            background-color: #fff;
+            color: #1a1a1a;
+            border-radius: 5px;
+            padding: 5px 10px;
+            position: absolute;
+            right: 0;
+            top: 25px;
+            z-index: 1;
+            transition: 0.4s all;
+            @include box_shadow(0px 0px 3px shadow_color(default));
+        }
+        &.is_active {
+            .gr_games-lotteryStatus-toggle {
+                &::before{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            .gr_games-lotteryStatus {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    .gr_games-header__history-toggle {
+        font-size: $font_size_small;
+        padding: 5px;
+        position: absolute;
+        right: 0;
+        bottom: 3px;
+        text-align: right;
+        width: calc(100% - 110px);
+        & .gr_history-toggle__icon {
+            @include size(20px);
+            background: #f7931e;
+            border-radius: border_radius(rounded);
+            color: text_color(default_invert);
+            display: inline-block;
+            line-height: 20px;
+            text-align: center;
+            transform: rotate(0deg) scale(0.7);
+        }
+        &.is_active {
+            & .gr_history-toggle__icon {
+                transform: rotate(180deg) scale(0.7);
+            }
+        }
+    }
+    .gr_games-header__button-group {
+        font-size: 0;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    .gr_button-group__button {
+        display: inline-block;
+        padding: 5.5px 8px 5.5px 4px;
+    }
+
+
+    .gr_games-header__animation {
+        padding-bottom: 22px;
+        @include multi-lang {
+            padding-bottom: 42px;
+        }
+        & .gr_animation__prompt {
+            width: 100%;
+            background: backgrounds(accent_heavy);
+            font-size: $font_size_small;
+            line-height: 16px;
+            padding: 5px 10px;
+            position: fixed;
+            z-index: 66;
+            @include multi-lang {
+                height: 42px;
+                & * {
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                &::before {
+                    @include pseudo;
+                    height: 100%;
+                    display: inline-block;
+                    vertical-align: middle;
+                    position: relative;
+                }
+            }
+        }
+    }
+}
+
+.gr_games-stock_header{
+    .gr_games-header__square{
+        width: 300px;
+    }
+    .gr_games-header__logo:not([class*="pk10"]):not([class*="mark6"]):not([class*="klsf"]):not([class~="kl"]) ~ .gr_games-header__lottery-period .gr_lottery-period__button-group{
+        margin: 0 7px 0 0;
+    }
+}

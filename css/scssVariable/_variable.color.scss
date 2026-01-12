@@ -1,0 +1,111 @@
+// ************************************************************
+// variable.color
+// ************************************************************
+
+// color setting
+$tangerine      : #fb8032;
+$theavy         : #e54c00;
+$skin           : #eae7da;
+$coffee         : #9f997d;
+$iron           : #70727f;
+$iheavy         : #3e4052;
+$goose          : #ffce00;
+$glight         : #f9ff00;
+$russian        : #c1272d;
+$sky            : #0071BC;
+$night          : #000000;
+$day            : #ffffff;
+$animal-purple  : #916eff;
+$animal-yellow  : #eaad00;
+$animal-blue    : #29abe2;
+$animal-red     : #ff6666;
+$animal-green   : #1ca074;
+
+
+
+// ************************************************************
+// usage
+// ************************************************************
+
+$color_primary           : $tangerine;
+$color_primary_heavy     : $theavy;
+$color_secondary         : $skin;
+$color_secondary_heavy   : $coffee;
+$color_accent            : $iron;
+$color_accent_heavy      : $iheavy;
+$color_light             : $glight;
+$color_light_heavy       : $goose;
+$color_strong            : $russian;
+$color_primary_invert    : $sky;
+$color_default           : $night;
+$color_default_invert    : $day;
+
+
+
+$backgrounds: (
+    default        : darken($color_default_invert, 10%),                                                // #e6e6e6
+    primary        : darken($color_default_invert, 5%),                                                 // #f2f2f2
+    secondary      : $color_secondary,                                                                  // #eae7da
+    secondary_light: lighten($color_secondary, 7.5%),                                                   // #f8f7f2
+    secondary_heavy: mix(lighten($color_secondary_heavy, 15%), darken($color_secondary, 30%), 65%),     // #bbb598
+    accent         : darken($color_default_invert, 15.5%),                                              // #d7d7d7
+    accent_heavy   : darken($color_default_invert, 20%)                                                 // #cccccc
+);
+@function backgrounds($background_name) {
+    @return map-get($backgrounds, $background_name);
+}
+
+
+
+$text_color: (
+    default       : lighten($color_default, 10%),       // #1a1a1a
+    primary       : lighten($color_default, 30%),       // #4d4d4d
+    secondary     : lighten($color_default, 40%),       // #666666
+    accent        : $color_primary,                     // #fb8032
+    strong        : $color_strong,                      // #c1272d
+    weak          : lighten($color_default, 60%),       // #999999
+    default_invert: $color_default_invert,              // #ffffff
+    accent_invert : $color_primary_invert,              // #0071BC
+    light         : $color_light,                       // #f9ff00
+    light_heavy   : $color_light_heavy                  // #ffce00
+);
+@function text_color($name) {
+    @return map-get($text_color, $name);
+}
+
+
+
+$border_color: (
+    default       : lighten($color_default, 70%),                                                     // #b3b3b3
+    dark          : lighten($color_default, 50%),                                                     // #808080
+    light         : lighten($color_default, 80%),                                                     // #cccccc
+    primary       : lighten($color_secondary_heavy, 7%),                                              // #aea992
+    primary_dark  : $color_secondary_heavy,                                                           // #9f997d
+    primary_light : mix(lighten($color_secondary_heavy, 23%), darken($color_secondary, 19%), 56%),    // #ccc7b1
+    accent_dark   : $color_accent_heavy,                                                              // #3e4052
+    default_invert: $color_default_invert                                                             // #ffffff
+);
+@function border_color($name) {
+    @return map-get($border_color, $name);
+}
+
+
+
+// shadow
+$shadow_color: (
+    default: rgba($color_default, 0.55),
+    dark   : rgba($color_default, 0.75),
+    light  : rgba($color_default, 0.15)
+);
+@function shadow_color($name) {
+    @return map-get($shadow_color, $name);
+}
+
+// 欢乐生肖標準色
+.colorList__ {
+    &purple {color: $animal-purple !important;}
+    &yellow {color: $animal-yellow !important;}
+    &blue {color: $animal-blue !important;}
+    &red {color: $animal-red !important;}
+    &green {color: $animal-green !important;}
+}

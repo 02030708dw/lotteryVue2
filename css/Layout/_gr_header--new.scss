@@ -1,0 +1,234 @@
+// ************************************************************
+// gr_header
+// ************************************************************
+
+@media screen and (max-width: 979px) {
+    .gr_header__menu {
+        @include size(100vw, 0);
+        background: #333333;
+        min-width: 320px;
+        opacity: 0;
+        overflow: hidden;
+        padding: 42px 6px 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: all 0.3s cubic-bezier(0.05, 0.1, 0.4, 1);
+        visibility: hidden;
+        z-index: 100;
+        & .gr_menu__inner {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        & .gr_menu__list {
+            border-bottom: 1px solid border_color(dark);
+            line-height: 26px;
+            margin: 0 7px;
+        }
+        & .gr_list__item {
+            border-top: 1px solid border_color(dark);
+            position: relative;
+        }
+        & .gr_item__link {
+            display: block;
+            padding: 12px;
+        }
+        & .router-link-active::after {
+            @include pseudo;
+            @include size(12px, 17px);
+            background: shadow_color(default) url(~@IMG/icon/i_mark.svg) center center no-repeat;
+            box-shadow: 2px 2px 3px shadow_color(default);
+            top: -1px;
+            right: 17px;
+        }
+    }
+    .desktop .gr_menu__inner {
+        padding-right: 23px;
+        width: calc(100% + 40px);
+    }
+
+
+
+
+
+    .gr_header__game-menu {
+        background: backgrounds(primary);
+        height: 0;
+        min-width: 320px;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0;
+        position: fixed;
+        top: 44px;
+        left: 0;
+        transition: all 0.5s cubic-bezier(0.05, 0.1, 0.4, 1);
+        transition-delay: 0.15s;
+        visibility: hidden;
+        width: 100vw;
+        z-index: 100;
+        & [class*="c_menu--"] {
+            width: 100%;
+            height: 70px;
+            display: inline-block;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        & .gr_game-menu__header {
+            border-bottom: 1px solid border_color(default);
+            padding: 8px 0 0px 0;
+            position: relative;
+            text-align: left;
+            box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.3);
+            // &::before {
+            //     @include background_gradient(false, to bottom, lighten($color_default, 60%), rgba($color_default_invert, 0), rgba(lighten($color_default, 65%), 0.25));
+            //     @include pseudo;
+            //     @include size(100%, 15px);
+            //     opacity: 0.3;
+            //     top: 100%;
+            //     left: 0;
+            // }
+            [class*="gr_game-menu__arrow"] {
+                cursor: pointer;
+                width: 34px;
+                height: 107px;
+                top: 0px;
+                display: block;
+                position: absolute;
+                text-align: center;
+                z-index: 2;
+                background-color: #f2f2f2;
+                line-height: 8em;
+                display: none ;
+                &::before {
+                    @include pseudo;
+                    @include size(15px);
+                    position: relative;
+                    border-radius: 2px;
+                    transform: rotate(45deg);
+                    border-style: solid;
+                    border-color: #c5c5c5;
+                    border-width: 0px;
+                    display: inline-block;
+                }
+                &::after {
+                    @include pseudo;
+                    @include size(1px, 80%);
+                    top: 10%;
+                    background-color: #c5c5c5;
+                }
+                &.is_active {
+                    display: block;
+                }
+            }
+            .gr_game-menu__arrow--prev {
+                left: 0;
+                &::before {
+                    border-bottom-width: 1px;
+                    border-left-width: 1px;
+                    right: -5px;
+                }
+                &::after {
+                    right: 0px;
+                }
+            }
+            .gr_game-menu__arrow--next {
+                right: 0;
+                &::before {
+                    border-top-width: 1px;
+                    border-right-width: 1px;
+                    left: -5px;
+                }
+                &::after {
+                    left: 0px;
+                }
+            }
+            .gr_game-menu__btnWa {
+                height: 99px;
+                display: block;
+                overflow: hidden;
+                margin: 0 auto;
+                position: relative;
+                // width: calc(100% - 80px);
+                // padding: 0 40px;
+                .gr_game-menu__btnGroup {
+                    // padding: 0 40px;
+                    position: absolute;
+                    transition: all 0.1s;
+                }
+            }
+        }
+        & .gr_header__button {
+            width: 100px;
+            display: inline-block;
+            border-radius: 0px;
+            color: #666666;
+            cursor: pointer;
+            line-height: 25px;
+            padding: 0px 0 16px 0;
+            text-align: center;
+            position: relative;
+            &.is_active {
+                color: #f15a24;
+                border-bottom: 2px solid #f15a24;
+            }
+            & a {
+                &::after {
+                    @include pseudo;
+                    opacity: .7;
+                    background: url(~@IMG/icon/i_menu--lottery--shadow.svg) center center no-repeat;
+                    bottom: 5px;
+                    z-index: -1;
+                    left: 50%;
+                    width: 50px;
+                    height: 8px;
+                    transform: translateX(-50%);
+                }
+            }
+            & span {
+                width: 100%;
+                line-height: 14px;
+                padding: 15px 0 0 0;
+                vertical-align: middle;
+                display: inline-block;
+            }
+        }
+        & .gr_game-menu__content {
+            margin: 15px 0px;
+            height: calc(100% - 115px);
+            overflow-x: hidden;
+            overflow-y: auto;
+            &.black {
+                background: #333;
+                height: 100%;
+            }
+            &.bodyNoScroll  {
+                height: 100%;
+                width: 100%;
+                overflow-y: hidden;
+            }
+        }
+    }
+    html.ios.iphone.mobile {
+        .gr_header__game-menu{
+            & .gr_game-menu__content {
+                margin: 15px 0px;
+                width: 100%;
+                overflow:hidden;
+                overflow-y:scroll;
+                -webkit-overflow-scrolling: touch;
+                & > div {
+                    min-height: 101%;
+                }
+                &.bodyNoScroll  {
+                    height: 100%;
+                    width: 100%;
+                    overflow-y: hidden;
+                }
+            }
+        }
+    }
+
+}
+
+

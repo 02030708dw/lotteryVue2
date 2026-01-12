@@ -1,0 +1,110 @@
+// ************************************************************
+// gr_news-events
+// ************************************************************
+
+.gr_news-events__list {
+    border-bottom: 1px solid border_color(default);
+    font-size: 0;
+    margin-right: 15px;
+    & .gr_list__title {
+        line-height: 22px;
+        position: relative;
+        padding: 8.5px 32px 8.5px 6px;
+    }
+    & .gr_title__date {
+        font-size: $font_size_small;
+        display: inline-block;
+        vertical-align: top;
+    }
+    & .gr_title__icon {
+        margin: 0 12px;
+        vertical-align: top;
+    }
+    & .gr_title__text {
+        @include singleline_ellipsis;
+        color: text_color(weak);
+        display: inline-block;
+        font-size: $font_size;
+        vertical-align: top;
+        width: calc(100% - 130px);
+    }
+    & .gr_title__arrow {
+        color: text_color(secondary);
+        font-size: $font_size_small;
+        position: absolute;
+        top: 13.5px;
+        right: 12px;
+        transform: rotate(0deg);
+    }
+    & .gr_list__body {
+        color: text_color(secondary);
+        font-size: $font_size;
+        line-height: normal;
+        padding: 0 32px 10px 119px;
+    }
+    &.is_active {
+        color: text_color(accent);
+        border-bottom: 2px solid currentColor;
+        & .gr_title__arrow {
+            transform: rotate(90deg);
+        }
+        & .gr_title__text {
+            color: text_color(accent);
+            white-space: normal;
+        }
+    }
+}
+.gr_news-events__empty {
+    text-align: center;
+}
+
+
+
+
+
+@media screen and (min-width: 980px) {
+    .gr_news-events {
+        height: 100%;
+        overflow-y: auto;
+        position: relative;
+    }
+    .gr_news-events__empty {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 979px) {
+    .gr_news-events__list {
+        margin-right: 0;
+        & .gr_list__title {
+            padding-left: 10px;
+        }
+        & .gr_title__icon {
+            display: none;
+        }
+        & .gr_title__text {
+            color: text_color(secondary);
+            padding-left: 6px;
+            width: calc(100% - 85px);
+        }
+        & .gr_list__body {
+            border-top: 1px solid border_color(default);
+            margin: 7.5px 30px 0;
+            padding: 15px 0 20px;
+        }
+        &:last-of-type {
+            padding-bottom: 10px;
+        }
+    }
+    .gr_news-events__empty {
+        height: calc(100vh - 44px);
+        line-height: calc(100vh - 54px);
+    }
+}

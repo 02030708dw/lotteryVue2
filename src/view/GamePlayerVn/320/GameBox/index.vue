@@ -1,0 +1,26 @@
+<template>
+    <component
+        :is="VN_gameType"
+        :isFast="isFast"
+    />
+</template>
+<script>
+    import currentVNGame from '@C/games/components/VN/currentVNGame'
+    import Old from './Old'
+    import Input from './Input'
+    import Quick from './Quick'
+    import Balls from './Balls'
+    export default {
+        name: 'GameBoxVN320',
+        extends: currentVNGame,
+        components: {
+            Old,
+            Input,
+            Quick,
+            Balls
+        },
+        props: {
+            isFast: Boolean
+        }
+    }
+</script>

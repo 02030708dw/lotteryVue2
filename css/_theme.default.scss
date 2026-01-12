@@ -1,0 +1,70 @@
+// ************************************************************
+// theme  default
+// ************************************************************
+
+%shadow_linear_gradient_default {
+    position: relative;
+    &::before {
+        @include background_gradient(false, to bottom, lighten($color_default, 60%), rgba($color_default_invert, 0), rgba(lighten($color_default, 65%), 0.25));
+        @include pseudo;
+        @include size(100%, 15px);
+        opacity: 0.3;
+        top: 100%;
+        left: 0;
+    }
+}
+%shadow_linear_gradient_default_inset {
+    @extend %shadow_linear_gradient_default;
+    &::before {
+        top: 0;
+    }
+}
+%shadow_linear_gradient_default_invert {
+    position: relative;
+    &::before {
+        @include background_gradient(false, to top, lighten($color_default, 60%), rgba($color_default_invert, 0), rgba(lighten($color_default, 65%), 0.25));
+        @include pseudo;
+        @include size(100%, 15px);
+        opacity: 0.3;
+        bottom: 100%;
+        left: 0;
+    }
+}
+%shadow_linear_gradient_default_inset_invert {
+    @extend %shadow_linear_gradient_default_invert;
+    &::before {
+        bottom: 0;
+    }
+}
+
+
+
+
+
+%shadow_linear_gradient_dark {
+    position: relative;
+    &::before {
+        @include background_gradient(ture, to bottom, lighten($color_default, 60%), lighten($color_default, 74%));
+        @include pseudo;
+        @include size(100%, 8px);
+        top: 100%;
+        left: 0;
+    }
+}
+%shadow_linear_gradient_dark_inset {
+    @extend %shadow_linear_gradient_dark;
+    &::before {
+        top: 0;
+    }
+}
+%shadow_linear_gradient_dark_invert {
+    position: relative;
+    &::before {
+        @include background_gradient(false, to top, rgba(lighten($color_default, 40%), 0.3), rgba($color_default_invert, 0), rgba(lighten($color_default, 80%), 0.25));
+        @include pseudo;
+        @include size(100%, 15px);
+        bottom: 100%;
+        left: 0;
+    }
+}
+

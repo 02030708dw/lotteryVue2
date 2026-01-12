@@ -1,0 +1,17 @@
+// ************************************************************
+// view trendline
+// ************************************************************
+
+@import '~@CSS/main';
+
+@import '~@CSS/Layout/gr_trendline';
+
+.lang_jp {
+    @import '~@CSS/Lang/JP/l_trendline';
+}
+.lang_th {
+    @import '~@CSS/Lang/TH/l_trendline';
+}
+.lang_vn {
+    @import '~@CSS/Lang/VN/l_trendline';
+}

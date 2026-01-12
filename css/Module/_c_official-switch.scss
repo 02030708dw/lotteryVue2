@@ -1,0 +1,67 @@
+// ************************************************************
+// c_official-switch
+// ************************************************************
+
+@mixin no-gr_section__controller {
+    @media screen and (max-width: 979px) {
+        .gr_official .gr_section__title {
+            position: absolute;
+        }
+    }
+}
+
+@mixin no-gr_section__controller__only {
+    @media screen and (max-width: 979px) {
+        .gr_official .gr_official__section:first-of-type .gr_section__body {
+            @include multi-lang {
+                margin-top: 0px;
+            }
+        }
+    }
+}
+
+@mixin gr_section__body--width($gr_section__body--width: 60%, $diff-lang-gr_section__body--width: false) {
+    @media screen and (min-width: 980px) {
+        .gr_section__body {
+            width: $gr_section__body--width;
+            @if $diff-lang-gr_section__body--width != false {
+                @include multi-lang {
+                    width: $diff-lang-gr_section__body--width;
+                }
+            }
+        }
+    }
+}
+
+@mixin rectangle-switch($rectangle-switch: "en") {
+    @if $rectangle-switch == "all" {
+        .gr_official .gr_section__body .gr_item__ball {
+            border-radius: 0;
+            font-size: $font_size_xlarge;
+            & .gr_ball__inner {
+                @include size(auto, 32px);
+                line-height: 32px;
+                padding: 0 6px;
+                min-width: 98px;
+            }
+            @include multi-lang {
+                font-size: $font_size_large;
+            }
+        }
+    } @else if $rectangle-switch == "en" {
+        .gr_official .gr_section__body .gr_item__ball {
+            font-size: $font_size_xlarge;
+            @include multi-lang {
+                border-radius: 0;
+                font-size: $font_size_large;
+                & .gr_ball__inner {
+                    @include size(auto, 32px);
+                    line-height: 32px;
+                    min-width: 98px;
+                    padding: 0 6px;
+                }
+            }
+        }
+    }
+}
+

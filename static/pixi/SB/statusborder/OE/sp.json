@@ -1,0 +1,20 @@
+{
+"frames": {
+	"even": {
+		"frame": {"x":0, "y":0, "w":33, "h":32},
+		"spriteSourceSize": {"x":0,"y":0,"w":33,"h":32},
+		"sourceSize": {"w":33,"h":32}
+	},
+	"odd": {
+		"frame": {"x":0, "y":33, "w":33, "h":34},
+		"spriteSourceSize": {"x":0,"y":0,"w":33,"h":34},
+		"sourceSize": {"w":33,"h":34}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 34, "h": 68},
+	"scale": "1"
+}
+}

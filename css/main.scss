@@ -1,0 +1,15 @@
+// ************************************************************
+// main
+// ************************************************************
+
+@import 'scssVariable/variable.color';
+@import 'scssVariable/variable';
+
+@import 'Setting/s_image-path';
+@import 'Setting/s_language';
+@import 'Setting/s_lottery-category';
+
+@import 'mixin';
+@import 'theme.default';
+
+@import 'Module/c_official-switch';

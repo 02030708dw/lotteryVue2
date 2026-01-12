@@ -1,0 +1,127 @@
+// ************************************************************
+// gr_game-vn-submenu
+// ************************************************************
+@media screen and (min-width: 980px) {
+    .gr_game-vn-submenu {
+        line-height: 22px;
+        padding: 10px;
+        $gr_field__title--width: 80px;
+
+        .gr_game-submenu__field {
+            margin: 0 0 0 $gr_field__title--width;
+            position: relative;
+            width: calc(100% - #{$gr_field__title--width});
+            @include multi-lang {
+                $gr_field__title--width: 125px;
+                margin: 0 0 0 $gr_field__title--width;
+                width: calc(100% - #{$gr_field__title--width});
+                & .gr_field__title {
+                    width: $gr_field__title--width;
+                }
+            }
+        }
+        .gr_field__title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(-100%);
+            width: $gr_field__title--width;
+        }
+        .gr_field__button {
+            @include border(border_color(default));
+            border-radius: border_radius(default);
+            cursor: pointer;
+            float: left;
+            line-height: 20px;
+            margin: 10px 8px 0px 0;
+            min-width: 65px;
+            padding: 0 5px;
+            position: relative;
+            text-align: center;
+            transition: all 0.3s ease;
+            & .gr_button__text {
+                position: relative;
+                z-index: 2;
+            }
+            &::before,
+            &::after {
+                @include pseudo;
+                @include size(100%);
+                border-radius: 2px;
+                top: 0;
+                left: 0;
+                transition: all 0.3s ease;
+            }
+            &::before {
+                @include background_gradient(ture, to bottom, lighten(backgrounds(default), 10%), backgrounds(default));
+                opacity: 1;
+            }
+            &::after {
+                @include background_gradient(ture, to bottom, backgrounds(default), lighten(backgrounds(default), 10%));
+                opacity: 0;
+            }
+            &.is_active,
+            &.is_active:hover {
+                @include border(border_color(dark));
+                color: text_color(default_invert);
+                &::before {
+                    @include background_gradient(ture, to bottom, darken(mix($color_secondary_heavy, $color_strong, 85%), 8%), lighten(mix($color_secondary_heavy, $color_strong, 85%), 15%));
+                    box-shadow: 0 0 3px 0 shadow_color(light) inset;
+                    opacity: 1;
+                }
+                &::after {
+                    opacity: 0;
+                }
+            }
+            &:hover {
+                @include border(border_color(default));
+                &::before {
+                    opacity: 0;
+                }
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+        & .gr_game-controller__row{
+            text-align: right;
+            float: right;
+        }
+
+    }
+}
+
+@media screen and (max-width: 979px) {
+    .gr_game-vn-submenu {
+        padding: 0 5px;
+        .gr_game-vn-submenu_content {
+            display: flex;
+            line-height: 22px;
+            justify-content: space-between;
+        }
+        .gr_field__button {
+            border: 1px solid #808080;
+            border-radius: border_radius(default);
+            cursor: pointer;
+            width: 100%;
+            margin: 0 2px;
+            margin-top: 10px;
+            text-align: center;
+            &.is_active,
+            &.is_active:hover {
+                @include border(border_color(white));
+                background-color: #F7931E;
+                color: text_color(default_invert);
+            }
+            &:hover {
+                @include border(border_color(default));
+                &::before {
+                    opacity: 0;
+                }
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

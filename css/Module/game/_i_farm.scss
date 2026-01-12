@@ -1,0 +1,51 @@
+// ************************************************************
+// i_farm
+// ************************************************************
+
+// 信用玩法 grid--肖
+$i_farm: (
+    watermelon  : '13px',
+    coconut     : '23px',
+    durian      : '28px',
+    grapefruit  : '24px',
+    pineapple   : '28px',
+    grape       : '25px',
+    litchi      : '22px',
+    cherry      : '29px',
+    strawberry  : '26px',
+    tomato      : '22px',
+    pear        : '28px',
+    apple       : '20px',
+    peach       : '27px',
+    orange      : '28px',
+    wintermelon : '15px',
+    carrot      : '29px',
+    pumpkin     : '18px',
+    eggplant    : '23px',
+    dog         : '21px',
+    cow         : '20px'
+);
+
+[class*="i_farm"] {
+    display: inline-block;
+    margin-top: -4px;
+    vertical-align: middle;
+    width: 28px;
+}
+
+@each $fruit, $height in $i_farm {
+    $fruit-index: index($i_farm, $fruit $height);
+    @if $fruit-index < 10 {
+        .i_farm--0#{$fruit-index} {
+            @include background_image("~@IMG/icon/i_farm/i_farm--#{$fruit-index}.svg");
+            height: #{$height};
+        }
+    } @else {
+        .i_farm--#{$fruit-index} {
+            @include background_image("~@IMG/icon/i_farm/i_farm--#{$fruit-index}.svg");
+            height: #{$height};
+        }
+    }
+}
+
+

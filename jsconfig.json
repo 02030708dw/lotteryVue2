@@ -1,0 +1,19 @@
+{
+    "include": [
+      "src/**/*"
+    ],
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@UTIL": [
+          "src/util/index"
+        ],
+        "@UTIL/*": [
+          "src/util/*"
+        ],
+        "@C": [
+          "src/components/*"
+        ]
+      }
+    }
+  }

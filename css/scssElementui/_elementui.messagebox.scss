@@ -1,0 +1,623 @@
+// ************************************************************
+// elementui.messagebox
+// ************************************************************
+
+.el-message-box__wrapper {
+    user-select: none;
+}
+.el-message-box {
+    @include border(border_color(dark));
+    border-radius: border_radius(large);
+    box-shadow: 3px 3px 10px shadow_color(default);
+    user-select: text;
+    width: 400px;
+}
+.el-message-box__header {
+    padding: 10px 0 0;
+    & .el-message-box__rebet {
+        position: absolute;
+        right: 50px;
+        top: 6px;
+        font-size: 12px;
+    }
+}
+.el-message-box__title {
+    border-bottom: 1px solid border_color(dark);
+    color: text_color(primary);
+    font-size: $font_size_small;
+    font-weight: normal;
+    height: auto;
+    padding: 0 25px 10px 15px;
+}
+.el-message-box__close {
+    font-size: $font_size_small;
+    top: 10px;
+    right: 25px;
+    &:hover {
+        color: $color_accent_heavy;
+    }
+}
+.el-message-box__content {
+    color: text_color(primary);
+    padding: 20px 25px 0 15px;
+}
+.el-message-box__detail {
+    color: text_color(primary);
+    font-size: $font_size;
+}
+.el-message-box__status {
+    font-size: 26px !important;
+    top: auto;
+    transform: translate(0);
+    & + div {
+        font-size: $font_size;
+        font-weight: bold;
+    }
+}
+.el-message-box__message {
+    font-size: $font_size_small;
+    margin-left: 40px !important;
+    & p {
+        line-height: 26px;
+    }
+}
+.el-message-box__btns {
+    padding: 15px 25px 15px 15px;
+    & button {
+        margin: 5px !important;
+    }
+}
+@media screen and (max-width: 405px) {
+    .el-message-box__btns {
+        & button {
+            width: 100%;
+        }
+    }
+}
+
+// type = info
+.el-message-box__status.el-icon-information {
+    color: $color_accent;
+}
+// type = success
+.el-message-box__status.el-icon-circle-check {
+    color: $color_primary;
+}
+// type = warning
+.el-message-box__status.el-icon-warning {
+    color: $color_light_heavy;
+}
+// type = error
+.el-message-box__status.el-icon-circle-cross {
+    color: $color_strong;
+}
+
+// 投注页弹窗
+.el-game-message-box {
+    width: 500px;
+    & div[class*="__game"]:not(.el-message-box__game-content) {
+        font-size: $font_size;
+        line-height: 20px;
+    }
+    & .el-message-box__header {
+        padding: 10px 0 8px;
+    }
+    & .el-message-box__content {
+        padding: 0 25px;
+    }
+    & .el-message-box__game-content {
+        @include border(border_color(dark));
+        background: backgrounds(secondary_light);
+        height: 198px;
+        line-height: 26px;
+        margin: 8px 0 0;
+        overflow-y: scroll;
+        word-break: break-all;
+        &.stock {
+            .el-game-content__table .el-table__col {
+                @include multi-lang {
+                    width: calc(90% / 5);
+                    &:last-of-type {
+                        width: 10%;
+                    }
+                }
+                &:nth-of-type(5) .el-table__component {
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+    & .el-game-content__inner {
+        padding: 2px 10px;
+    }
+    & .el-message-box__game-total {
+        padding: 10px 0 6px 25px;
+        & div,
+        & span {
+            display: inline-block;
+            margin-right: 8px;
+        }
+        & .el-message-box__game-balance {
+            display: block;
+        }
+    }
+    & .el-message-box__btns {
+        font-size: $font_size_small;
+        padding-top: 0;
+        & > span {
+            padding-right: 5px;
+        }
+    }
+    @include multi-lang {
+        width: 680px;
+    }
+}
+
+.c_message-box__panel {
+    position: relative;
+}
+
+.el-game-content__table {
+    font-size: 0;
+    text-align: center;
+    & .el-table__col {
+        display: inline-block;
+        vertical-align: top;
+        width: 22.5%;
+        & + .el-table__col {
+            border-left: 1px solid backgrounds(secondary_light);
+        }
+        &:first-of-type:nth-last-of-type(4) {
+            width: 32.5%;
+        }
+        &:nth-of-type(5) {
+            width: 10%;
+            & .el-table__component {
+                font-size: $font_size_large;
+            }
+        }
+        @include multi-lang {
+            width: 16%;
+            &:first-of-type {
+                width: calc(46% - 43px);
+
+                &:nth-last-of-type(4) {
+                    width: 46%;
+                }
+            }
+            &:nth-of-type(2) {
+                width: 22%;
+            }
+            &:nth-of-type(5) {
+                width: 43px;
+            }
+        }
+    }
+    & .el-table__title {
+        background: backgrounds(accent_heavy);
+        & ~ .el-table__row {
+            margin: 2px 0;
+            @include multi-lang {
+                .el-table__col {
+                    &:first-of-type {
+                        text-align: left;
+                        padding: 0 8px;
+                    }
+                }
+            }
+        }
+    }
+    & .el-table__component {
+        font-size: $font_size_small;
+    }
+}
+
+//投注页弹窗 - 越南彩
+.el-game-vn-message-box {
+    width: 880px;
+    .el-message-box__game-vn-title {
+        float: left;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .u_f--right {
+        color: red;
+    }
+    .el-message-box__game-vn-content {
+        border: 1px solid #808080;
+        background: #f8f7f2;
+        height: 198px;
+        margin: 8px 0 0;
+        overflow-y: auto;
+        overflow-x: auto;
+        word-break: break-all;
+        font-size: $font_size_small;
+        table {
+            white-space: nowrap;
+            &.el-game-vn-content__table {
+                text-align: center;
+                width: 100%;
+                tr {
+                    th,
+                    td {
+                        padding: 8px 5px;
+                        vertical-align: middle;
+                        &:first-child {
+                            min-width: 40px;
+                            border-left: 0px;
+                        }
+                        &:nth-of-type(3) {
+                            min-width: 250px;
+                            width: 250px;
+                            line-height: 16px;
+                            white-space: initial;
+                            word-break: keep-all;
+                        }
+                        &:last-child {
+                            border-right: 1px solid #808080;
+                        }
+                    }
+                }
+                thead {
+                    tr {
+                        background-color: #cccccc;
+                        th {
+                            border-left: 1px solid #808080;
+                            border-bottom: 1px solid #808080;
+                        }
+                    }
+                }
+                tbody {
+                    tr {
+                        border-bottom: 1px solid #808080;
+                        position: relative;
+                        td {
+                            border-left: 1px solid #808080;
+                            position: relative;
+                            overflow: hidden;
+                            .el-icon-close {
+                                color: red;
+                                cursor: pointer;
+                                position: relative;
+                                font-size: $font_size_small;
+                                font-weight: bold;
+                                width: 100%;
+                                height: 15px;
+                                background-color: #c1dbe5;
+                                display: none;
+                                &:before {
+                                    position: absolute;
+                                    transform: translate(-50%, -50%);
+                                    left: 50%;
+                                    top: 50%;
+                                }
+                            }
+                        }
+                        &:hover,
+                        &.stop {
+                            td {
+                                &::before {
+                                    @include pseudo;
+                                    background-color: #c1dbe5;
+                                    position: absolute;
+                                    width: 100%;
+                                    height: 100vh;
+                                    top: 0px;
+                                    left: 0px;
+                                }
+                                .el-table__component {
+                                    position: relative;
+                                }
+                                &:first-child .el-table__component {
+                                    display: none;
+                                }
+                            }
+                            .el-icon-close {
+                                display: block;
+                            }
+                        }
+                        &.stop {
+                            td {
+                                &::before {
+                                    @include pseudo;
+                                    background-color: #fecacb;
+                                    position: absolute;
+                                    width: 100%;
+                                    height: 100vh;
+                                    top: 0px;
+                                    left: 0px;
+                                }
+                                .el-icon-close {
+                                    background-color: #fecacb;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .c_message-box__panel {
+        text-align: right;
+        .el-message-box__game-vn-total {
+            font-size: 14px;
+            display: inline-block;
+            & > div {
+                display: inline-block;
+            }
+        }
+        .el-message-box__btns {
+            display: inline-block;
+            font-size: $font_size_small;
+        }
+    }
+}
+
+// 最新公告弹窗
+.el-news-message-box {
+    width: 500px;
+    & div[class*="__news"] {
+        font-size: $font_size_small;
+        line-height: 22px;
+    }
+    & .el-message-box__header {
+        padding: 10px 0 0;
+    }
+    & .el-message-box__news-content {
+        height: 250px;
+        margin: 10px 0 0 10px;
+        max-height: calc(100vh - 140px);
+        min-height: 100px;
+        overflow-y: scroll;
+        padding: 2px 10px;
+        word-break: break-all;
+    }
+}
+
+// 投注詳情
+.el-detail-message-box {
+    width: 500px;
+    & .gr_page-detail.gr_page-detail--box {
+        margin: 0;
+        & .gr_page-detail__head {
+            padding: 10px 25px;
+        }
+        & .gr_page-detail__body {
+            padding: 10px 25px 20px 25px;
+        }
+        & .right {
+            padding: 0 25px 15px 15px;
+        }
+    }
+}
+
+.el-feedback-message-box {
+    & .el-message-box__content {
+        padding: 12px 12px 5px;
+    }
+    & .el-message-box__content__input,
+    & .el-message-box__content__textarea {
+        @include border(border_color(dark));
+        background: backgrounds(secondary_light);
+        padding: 10px;
+    }
+    .el-message-box__content__title {
+        color: #000000;
+        font-size: $font_size_small;
+    }
+    .el-message-box__content__text {
+        color: #757575;
+        font-size: $font_size_small;
+        margin-top: 5px;
+    }
+    & .el-message-box__content__input {
+        @include size(100%, 28px);
+        margin: 5px 0 10px;
+    }
+    & .el-message-box__content__textarea {
+        @include size(100%, 198px);
+        line-height: 20px;
+        margin: 5px 0 0;
+        resize: none;
+    }
+    & .el-message-box__btns {
+        padding: 0 12px 10px;
+        text-align: center;
+        & button {
+            margin: 5px 0 !important;
+        }
+    }
+}
+
+// app 下載
+.gr_app-message-box {
+    border: none;
+    text-align: center;
+    padding: 0;
+    position: relative;
+    width: 880px;
+}
+
+.gr_app-message-box__prompt {
+    background: #24356a;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 100;
+    line-height: 72px;
+    & .gr_google-play {
+        margin-left: 15px;
+        vertical-align: middle;
+    }
+}
+
+.gr_app-message-box__header {
+    font-size: 21px;
+    line-height: 28px;
+    padding: 0 45px 5px 40px;
+}
+
+.gr_app-message-box__close {
+    @include size(22px);
+    cursor: pointer;
+    position: absolute;
+    top: 23px;
+    right: 30px;
+    fill: none;
+    stroke: #b3b3b3;
+    stroke-miterlimit: 10;
+}
+.gr_app-message-box--android .gr_app-message-box__close {
+    stroke: #ffffff;
+}
+
+.gr_app-message-box__content {
+    margin: 10px;
+    max-height: 56vh;
+    overflow-y: auto;
+    & > [class*="gr_pop"] {
+        @include size(190px);
+        background-position: center;
+        border: 6px solid #24356a;
+        border-radius: 25px;
+        box-shadow: 4px 4px 6px shadow_color(light);
+        display: inline-block;
+        font-size: $font_size;
+        margin: 20px 16px 50px;
+        position: relative;
+    }
+    & .gr_pop__num {
+        @include size(38px);
+        background: #ffffff;
+        border: 4px solid #24356a;
+        box-shadow: 1px 1px 3px shadow_color(light) inset;
+        border-radius: border_radius(rounded);
+        font-size: 18px;
+        line-height: 30px;
+        position: absolute;
+        top: -16px;
+        left: -16px;
+    }
+    & .gr_pop__text {
+        position: absolute;
+        right: -6px;
+        left: -6px;
+        top: 108%;
+    }
+}
+$systems: "android", "ios";
+@each $system in $systems {
+    .gr_app-message-box--#{$system} {
+        @for $i from 1 through 6 {
+            & .gr_pop__#{$i} {
+                @include multi-lang-loop("gr_app/gr_#{$system}-pop__#{$i}.png");
+            }
+        }
+    }
+}
+
+.el-scroll-content-message-box {
+    & .el-message-box__content {
+        padding: 5px;
+    }
+    & .el-message-box__btns {
+        display: none;
+    }
+}
+
+// news 下載
+.gr_news-message-box {
+    border: none;
+    color: text_color(primary);
+    text-align: center;
+    padding: 0;
+    position: relative;
+    width: 880px;
+}
+.gr_news-message-box__close {
+    @include size(22px);
+    cursor: pointer;
+    fill: none;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    stroke: #b3b3b3;
+    stroke-miterlimit: 10;
+}
+.gr_news-message-box__header {
+    font-size: 21px;
+    line-height: 28px;
+    padding: 15px 45px 5px 40px;
+    & .gr_header__text {
+        vertical-align: middle;
+    }
+}
+.gr_news-message-box__content {
+    font-size: $font_size;
+    margin: 10px 25px;
+    height: 56vh;
+    text-align: left;
+}
+
+@media screen and (max-width: 979px) {
+    .el-message-box__wrapper {
+        min-width: 320px;
+    }
+    .el-message-box {
+        max-width: calc(100% - 40px);
+    }
+
+    .el-message-box__game-content {
+        display: none;
+    }
+    // 投注頁彈窗
+    .el-game-message-box {
+        & .el-message-box__game-total {
+            padding-top: 0;
+            width: 100%;
+        }
+    }
+
+    .gr_app-message-box {
+        padding-top: 33px;
+    }
+    .gr_app-message-box__prompt {
+        font-size: $font_size_xlarge;
+        line-height: 22px;
+        margin-bottom: 70px;
+        padding: 6px 45px 5px 40px;
+        position: relative;
+        & .gr_google-play {
+            box-shadow: 5px 5px 8px shadow_color(default);
+            margin-left: 0;
+            position: absolute;
+            top: calc(100% + 14px);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    .gr_app-message-box__header {
+        font-size: $font_size_large;
+        line-height: 24px;
+    }
+    .gr_app-message-box__close {
+        @include size(18px);
+        top: 7.5px;
+        right: 20px;
+        z-index: 2;
+    }
+    .gr_app-message-box--android .gr_app-message-box__close {
+        stroke: #b3b3b3;
+    }
+}
+
+.el-game-content__table.el-game-content__table--six {
+    .el-table__col {
+        width: 18%;
+        &:last-child {
+            width: 10%;
+        }
+    }
+}
+.el-message-box-medium {
+    width: 600px;
+}

@@ -1,0 +1,8 @@
+POST {{host}}/api/v1/game/gameConfigNF/1.1.1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "roomMasterId": "{{rmid}}",
+    "menuType": "3",
+    "userId": "{{userId}}"
+}

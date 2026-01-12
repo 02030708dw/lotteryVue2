@@ -1,0 +1,1157 @@
+// ************************************************************
+// gr_playinfo
+// ************************************************************
+
+.playinfo_bg{
+    border-left: 1px solid #b3b3b3;
+    border-right: 1px solid #b3b3b3;
+    background: url("~@IMG/playinfo/bg.jpg") top;
+    background-size: cover;
+    background-attachment: fixed;
+}
+//玩法MENU
+.playinfo_menu{
+    position: relative;
+    margin: 0 1em;
+    &:before{
+        @include pseudo;
+        left: -1em;
+        right: -1em;
+        height: 10px;
+        background: linear-gradient(to bottom, rgba(151,151,151,0.7) 0%,rgba(151,151,151,0) 100%);
+    }
+    &:after{
+        @include pseudo;
+        width: 100%;
+        height: 1px;
+        background: #808080;
+        bottom: 2px;
+    }
+}
+.playinfo_type{
+    display: inline-block;
+    font-size: 16px;
+    padding-top: 10px;
+    position: relative;
+    div{
+        overflow: hidden;
+    }
+    ul{
+        white-space: nowrap;
+        transition: all 0.4s ease-in-out;
+    }
+    li{
+        display: inline-block;
+        padding: 1em 2em 0.8em;
+        cursor: pointer;
+        &.active{
+            color: #9e005d;
+            position: relative;
+            &:after{
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                bottom: 0;
+                left: 50%;
+                margin-left: -3px;
+                border: 6px solid;
+                border-color: transparent transparent #808080 transparent;
+            }
+        }
+    }
+    .playinfo_type_prev{
+        display: none;
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+        &:after{
+            @include pseudo;
+            width: 10px;
+            height: 10px;
+            border: 2px solid;
+            border-color: transparent transparent #808080 #808080;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%) rotate(45deg);
+        }
+    }
+    .playinfo_type_next{
+        display: none;
+        position: absolute;
+        width: 45px;
+        height: 45px;
+        bottom: 0;
+        right: 0;
+        cursor: pointer;
+        &:after{
+            @include pseudo;
+            width: 10px;
+            height: 10px;
+            border: 2px solid;
+            border-color: #808080 #808080 transparent transparent;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%) rotate(45deg);
+        }
+    }
+    @media screen and (max-width: 979px) {
+        width: 100%;
+        padding-left: 40px;
+        padding-right: 40px;
+        clear: both;
+        overflow: hidden;
+        .playinfo_type_prev{
+            display: block;
+        }
+        .playinfo_type_next{
+            display: block;
+        }
+    }
+}
+.playinfo_tab{
+    padding-top: 20px;
+    text-align: left;
+    li{
+        cursor: pointer;
+        display: inline-block;
+        border-radius: 100px;
+        overflow: hidden;
+        border: 1px solid;
+        border-color: #808080;
+        margin-left: 5px;
+        &:last-child {
+            margin-top: 5px;
+        }
+        &.active{
+            border:1px solid transparent;
+            p{
+                color: #fff;
+                background: linear-gradient(to left, rgba(121,42,170,1) 11%,rgba(121,42,170,1) 11%,rgba(99,130,255,1) 100%);
+            }
+        }
+        p{
+            padding: 0.1em 1em;
+        }
+
+    }
+}
+//標題共用
+.playinfo_title{
+    background: #892589;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    padding: 0.2em 2em;
+    border-radius: 50px;
+    display: inline-block;
+    box-shadow: 0px 10px 15px 0px rgba(106, 1, 121, 0.3);
+    margin: 2em 0 1em;
+}
+//販售時間
+.playinfo_saletime{
+    text-align: left;
+    position: relative;
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    ul{
+        padding: 1.5em 0;
+        border-radius: 10px;
+        background: linear-gradient(to bottom, rgba(220,240,247,1) 1%,rgba(255,255,255,1) 100%);
+        position: relative;
+        z-index: 1;
+        text-align: center;
+    }
+    li{
+        display: inline-block;
+        vertical-align: top;
+        width: 196px;
+        margin: 10px 10px;
+        text-align: left;
+        @media screen and (max-width: 979px) {
+            display: block;
+            width: 50%;
+            min-width: 200px;
+            margin: 0 auto;
+            &+li{
+                padding-top: 2em;
+            }
+        }
+    }
+    &:after{
+        @include pseudo;
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+        bottom: 20px;
+        left: -15px;
+        background: linear-gradient(to bottom, rgba(255,255,255,0) 11%,rgba(255,255,255,0.5) 100%);
+    }
+}
+.playinfo_saletime--tit{
+    .item_logo{
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        width: 66px;
+        height: 55px;
+        margin-right: 5px;
+        &:after{
+            @include pseudo;
+            width: 70%;
+            height: 5px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-40%);
+            border-radius: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 68%);
+        }
+    }
+    .item_title{
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 20px;
+        position: relative;
+        padding: 5px;
+        &:after{
+            @include pseudo;
+            left: 0;
+            right: 0;
+            height: 2px;
+            bottom: 0px;
+            background: linear-gradient(to right, rgba(41,171,226,1) 0%,rgba(102,45,145,1) 100%);
+        }
+    }
+}
+.playinfo_saletime--data{
+    padding-left: 5px;
+    padding-top: 10px;
+    line-height: 1.5em;
+    .item_text{
+        position: relative;
+        padding-left: 10px;
+        letter-spacing: -0.5px;
+        &:before{
+            @include pseudo;
+            border-radius: 100%;
+            width: 4px;
+            height: 4px;
+            background: #666666;
+            top: 50%;
+            margin-top: -1px;
+            left: 0;
+        }
+    }
+}
+//右側固定選單
+.playinfo_nav_btn{
+    cursor: pointer;
+    display: none;
+    position: fixed;
+    z-index: 2;
+    top: auto;
+    bottom: 61%;
+    right: 1em;
+    border-radius: 100%;
+    overflow: hidden;
+    & span {
+        background: linear-gradient(to right, rgba(147,39,143,1) 1%,rgba(41,124,226,1) 100%);
+        width: 35px;
+        height: 35px;
+        display: block;
+    }
+    &:after{
+        @include pseudo;
+        width: 50%;
+        height: 2px;
+        background: #fff;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        transition: all 0.5s ease-in-out;
+    }
+    &:before{
+        @include pseudo;
+        height: 50%;
+        width: 2px;
+        background: #fff;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        transition: all 0.5s ease-in-out;
+    }
+    @media screen and (max-width: 979px) {
+        display: block;
+        opacity: 0.57;
+    }
+}
+.playinfo_nav{
+    position: fixed;
+    z-index: 2;
+    top: 110px;
+    left: calc(50% + 300px);
+    width: 140px;
+    text-align: center;
+    color: #333333;
+    display: inline-block;
+    overflow: hidden;
+    &.playinfo_nav--short {
+        padding: 1.5em 0;
+    }
+    .playinfo_wa{
+        padding: 3em 0px;
+        background-color: transparent !important;
+        display: block;
+    }
+    div{
+        max-height: 37vh;
+        overflow: hidden;
+        @media screen and (max-width: 979px) {
+            height: 100%;
+        }
+    }
+    ul{
+        transition: all 0.4s ease-in-out;
+    }
+    li{
+        cursor: pointer;
+        padding: 1em 0;
+        position: relative;
+        &+li:after{
+            @include pseudo;
+            border-radius: 100%;
+            width: 7px;
+            height: 7px;
+            background: rgba(#cccccc,0.6);
+            left: 50%;
+            margin-left: -3.5px;
+            top: -3.5px;
+        }
+        pre {
+            background: none;
+            margin: 0;
+            padding: 0px;
+            min-width: 75px;
+            overflow: hidden;
+            border-radius: 50px;
+            & span{
+                width: 100%;
+                height: 100%;
+                display: block;
+                padding: 6px 12px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+        &:hover pre {
+            border-radius: 50px;
+            overflow: hidden;
+            background-clip:padding-box,border-box;
+            background-origin:padding-box,border-box;
+            background-image:linear-gradient(135deg,#edeef3,#fff),linear-gradient(to left, rgba(41,124,226,1) 0%,rgba(147,39,143,1) 100%);
+            border:1px transparent solid;
+            border: 1px solid rgba(107, 71, 175, 0.8) \9;
+            background-image:linear-gradient(135deg,transparent,transparent),linear-gradient(to bottom, transparent 0%,transparent 100%) \9;
+            & span{
+                padding: 5px 10px;
+                border-radius: 50px;
+            }
+         }
+        &.active,&.active:hover{
+            span{
+                color: #fff;
+            }
+            pre{
+                box-shadow: 0px 5px 15px 0px rgba(106, 1, 121, 0.3);
+                border-radius: 50px;
+                border:0px transparent solid;
+                & span{
+                    background: linear-gradient(to left, rgba(41,124,226,1) 0%,rgba(147,39,143,1) 100%);
+                    border:0px transparent solid;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    padding: 7px 10px;
+                }
+            }
+        }
+    }
+
+    *[class*="playinfo_nav_"]{
+        display: block;
+        position: absolute;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        left: calc(50% - 15px);
+        opacity: 0.5;
+        transition: opacity .2s ease-in-out, transform .5s ease-in-out .2s;
+        &:after{
+            @include pseudo;
+            width: 10px;
+            height: 10px;
+            border: 2px solid;
+            border-color: #333333 #333333 transparent transparent;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+    }
+    *[class*="playinfo_nav_"]:hover{
+        opacity: 1;
+        border-radius: 50px;
+        background-clip:padding-box,border-box;
+        background-origin:padding-box,border-box;
+        background-image:linear-gradient(135deg,#edeef3,#fff),linear-gradient(to left, rgba(41,124,226,1) 0%,rgba(147,39,143,1) 100%);
+        border: 1px transparent solid;
+        border: 1px solid rgba(107, 71, 175, 0.8) \9;
+        background-image:linear-gradient(135deg,transparent,transparent),linear-gradient(to bottom, transparent 0%,transparent 100%) \9;
+        @media screen and (max-width: 979px) {
+            border: 0px transparent solid;
+            background-image:linear-gradient(135deg,transparent,transparent),linear-gradient(to left, transparent 0%,transparent 100%)
+        }
+    }
+    @media screen and (max-width: 979px) {
+        // display: none;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.4 all;
+        background: #fff;
+        box-shadow: 4px 4px 6px rgba(51, 51, 102, 0.2);
+        // top:230px;
+        top: 38vh;
+        left: auto;
+        bottom: auto;
+        right: 45px;
+        width: 50%;
+        max-height: 60vh;
+        color: #999;
+        border-radius: 10px;
+        padding: 3em 0;
+        ul{
+            // overflow: auto;
+        }
+        li{
+            &.active{
+                color: #c1007c;
+            }
+            &+li:after{
+                border-radius: 0;
+                width: 90%;
+                height: 1px;
+                background: #b3b3b3;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        *[class*="playinfo_nav_"]:after{
+            border-color: #999 #999 transparent transparent;
+        }
+    }
+}
+.playinfo_nav_prev{
+    top: 0.5em;
+    animation: nav_prev_shakeup .5s ease-in-out alternate infinite;
+    &:after{
+        transform: translate(-50%, -40%) rotate(-45deg);
+    }
+    @media screen and (max-width: 979px) {
+        display: none;
+    }
+}
+
+.playinfo_nav_next{
+    bottom: 0.5em;
+    animation: nav_next_shakedown .5s ease-in-out alternate infinite;
+    &::before{
+        border:2px solid #000;
+    }
+    &:after{
+        transform: translate(-50%, -60%) rotate(135deg);
+    }
+    @media screen and (max-width: 979px) {
+        display: none;
+    }
+}
+@media screen and (max-width: 979px) {
+    .active{
+        &>.playinfo_nav_btn{
+            opacity: 1;
+
+            &:after{
+                transform: translate(-50%,-50%) rotate(135deg);
+            }
+            &:before{
+                transform: translate(-50%,-50%) rotate(135deg);
+            }
+        }
+        &>.playinfo_nav{
+            // display: block;
+            opacity: 1;
+            visibility: visible;
+            transition: 0.4 all;
+            // transition: opacity .2s ease-in-out, transform .5s ease-in-out .2s;
+        }
+    }
+}
+
+// 320 背景遮罩
+.playinfo_mask {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0, 0.2);
+    top:0;
+}
+
+//goTop
+.playinfo_gotop{
+    position: fixed;
+    z-index: 2;
+    bottom: 3em;
+    left: calc(50% + 420px);
+    cursor: pointer;
+    width: 38px;
+    height: auto;
+    background: url("~@IMG/playinfo/icon_go_top.svg") center no-repeat;
+    background-size: 200%;
+    text-align: center;
+    padding-top: 75px;
+    animation: gotop_shakedown .5s ease-in-out alternate infinite;
+    opacity: 0.8;
+    @media screen and (max-width: 979px) {
+        left: auto;
+        right: 0.5em;
+        opacity: 0.57;
+        &:hover{
+            opacity: 1;
+        }
+    }
+}
+.playinfo_gotop:hover{
+    opacity: 1;
+}
+.playinfo_gotop--rocket {
+    transition: transform 2s ease;
+    transform: translate3d(0, -1100px, 0);
+}
+.playinfo_gotop--enter-active, .playinfo_gotop--leave-active {
+    transition: opacity .5s;
+}
+.playinfo_gotop--enter, .playinfo_gotop--leave-to {
+    opacity: 0;
+}
+
+//左側內容偏移
+.playinfo_container{
+    width: 760px;
+    margin-left: calc(50% - 430px);
+    @media screen and (max-width: 979px) {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+//玩法說明
+.playinfo_rules{
+    .playinfo_rules_tit{
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        width: 26px;
+        height: 26px;
+        background: #4d4d4d;
+        border-radius: 100%;
+        font-size: 12px;
+        box-shadow: 1px 1px 2px rgba(20%,20%,40%,0.3) inset,4px 4px 6px rgba(20%,20%,40%,0.2);
+
+        span{
+           position: absolute;
+           width: 100%;
+           padding: 0 3px;
+           text-align: center;
+           top: 50%;
+           left: 0;
+           transform: translateY(-50%);
+           color: #fff;
+           font-size: 2.5em;
+        }
+        span:first-child{
+            &:before {
+                @include pseudo;
+                background: #fff;
+                border-radius: 2px;
+                height: 4px;
+                width: 15px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+            &:after {
+                @include pseudo;
+                background: #fff;
+                border-radius: 2px;
+                height: 15px;
+                width: 4px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                transition: all 0.5s ease-in-out;
+            }
+
+            &.active {
+                &:after {
+                    transform: translate(-50%,-50%) rotate(90deg);
+                }
+            }
+        }
+        span:nth-child(2){
+            left: 150%;
+            color: #000;
+            font-size: 1.2em;
+            white-space:nowrap;
+            padding: 10px;
+        }
+    }
+    .active{
+        .playinfo_rules_tit{
+            background: #e23959;
+        }
+    }
+    &>li{
+        &:not(.playinfo_rules_infocard) {
+            position: relative;
+            &:after{
+                @include pseudo;
+                width: 5px;
+                top: 0;
+                left: 11px;
+                bottom: 0;
+                background: #e23959;
+            }
+            &.no-line:after{
+                background: none;
+            }
+            >.playinfo_rules_items{
+                &.active{
+                    max-height: 6000px;
+                    opacity: 1;
+                    padding: 10px;
+                    visibility: visible;
+                }
+            }
+        }
+        &.playinfo_rules_infocard {
+            width: 85%;
+            text-align: left;
+            background: #fff;
+            margin: 1.5em auto;
+            border-radius: 8px;
+            box-shadow: 4px 4px 6px rgba(51, 51, 102, 0.2);
+            overflow: hidden;
+            position: relative;
+            padding: 1.2em 1.5em;
+            font-size: 16px;
+            line-height: 1.6em;
+        }
+    }
+}
+.playinfo_rules_items{
+    width: 85%;
+    margin: 0 auto;
+    padding-bottom: 1em;
+
+    // 收合
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    &>li{
+        text-align: left;
+        background: #fff;
+        margin-top: 1.5em;
+        padding: 1em 2.7em 1em 1.5em;
+        border-radius: 8px;
+        box-shadow: 4px 4px 6px rgba(20%,20%,40%,0.2);
+        overflow: hidden;
+        position: relative;
+        min-height: 130px;
+        transition: all 0.4s ease;
+        cursor: pointer;
+
+        &.playinfo_rules_infocard {
+            padding: 1.2em 1.5em;
+            font-size: 20px;
+            min-height: initial;
+            & .playinfo_rules_items--info {
+                font-size: 14px;
+                padding-left: 5px;
+                line-height: 1.5em;
+            }
+
+            & .playinfo_rules_infocard--stepinfo {
+                display: inline-block;
+                max-width: 90%;
+                vertical-align: top;
+            }
+        }
+        &>p{
+            padding-left: 5px;
+            line-height: 1.5em;
+        }
+        //點擊後
+        &.active{
+            .playinfo_rules_items--more{
+                i:before{
+                    transform: translate(-50%,-70%) rotate(45deg);
+                }
+            }
+            .playinfo_rules_items--ex{
+                top: 0;
+            }
+        }
+    }
+    @media screen and (max-width: 979px) {
+        transform: translateX(1em);
+        &>li{
+            padding-bottom: 3.5em;
+            cursor: auto;
+
+            &.active>p {
+                transition: opacity 0.5s ease;
+                opacity: 0;
+            }
+        }
+    }
+    @media screen and (min-width: 425px) and (max-width: 979px) {
+        &>li{
+            min-height: 150px;
+        }
+    }
+    @media screen and (max-width: 424px) {
+        &>li{
+            min-height: 170px;
+        }
+    }
+}
+
+.playinfo_rules_items--tit{
+    width: 85%;
+    position: relative;
+    font-size: 20px;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.4em;
+    padding-left: 5px;
+    &:after{
+        @include pseudo;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, rgba(41,171,226,1) 1%,rgba(41,171,226,1) 60%,rgba(255,255,255,1) 60%,rgba(255,255,255,1) 61%,rgba(41,171,226,1) 61%,rgba(102,45,145,1) 92%,rgba(255,255,255,1) 92%,rgba(255,255,255,1) 93%,rgba(102,45,145,1) 93%,rgba(158,0,93,1) 100%);
+    }
+
+    .sub-title {
+        font-size: 0.8em;
+    }
+}
+.playinfo_rules_items--more{
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    z-index: 1;
+    text-align: right;
+    margin-top: 0.5em;
+    cursor: pointer;
+    i{
+        position: relative;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+        background: #4d4d4d;
+        &:before{
+            @include pseudo;
+            width: 7px;
+            height: 7px;
+            border-width: 2px;
+            border-style: solid;
+            border-color: transparent #fff #fff transparent;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-20%) rotate(-135deg);
+            transition: all 0.5s ease-in-out;
+        }
+    }
+    span{
+        display: none;
+    }
+    @media screen and (max-width: 979px) {
+        right: 50%;
+        bottom: 10px;
+        transform: translateX(50%);
+        border-radius: 50px;
+        overflow: hidden;
+        i{
+            display: none;
+        }
+        span{
+            display: block;
+            color: #fff;
+            background: linear-gradient(to right, rgba(147,39,143,1) 1%,rgba(41,124,226,1) 100%);
+            padding: 0.5em 1em;
+            min-width: 120px;
+            text-align: center;
+        }
+    }
+}
+.playinfo_rules_items--ex{
+    position: absolute;
+    background: #fff;
+    padding: 1.5em;
+    width: 100%;
+    left: 0;
+    top: 100%;
+    transition: all 0.5s ease-in-out;
+    .playinfo_rules_items--ex_info{
+        width: 55%;
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 2em;
+        p{
+            padding-left: 5px;
+            line-height: 1.5em;
+        }
+    }
+    .playinfo_rules_items--ex_img{
+        display: inline-block;
+        vertical-align: top;
+        width: 39%;
+        .playinfo_rules_items--ex_img-2{
+            width: 50px;
+            height: 50px;
+            background: url("~@IMG/playinfo/icon_ex_bg.svg") 0 0 no-repeat;
+            background-size: cover;
+            @include multi-lang {
+                background: url("~@IMG/playinfo/icon_ex_bg--en.svg") 0 0 no-repeat;
+            }
+            @include multi-lang('th') {
+                background: url("~@IMG/playinfo/icon_ex_bg--th.svg") 0 0 no-repeat;
+            }
+        }
+    }
+    @include multi-lang {
+        .playinfo_rules_items--ex_img{
+            .playinfo_rules_items--ex_img-2{
+                margin-top: 0.5em;
+            }
+            p{
+                margin-bottom: 0.5em;
+                width: 100%;
+            }
+        }
+    }
+
+    @media screen and (max-width: 979px) {
+        padding: 1em 1.5em 2.5em 1.5em;
+
+        .playinfo_rules_items--ex_info{
+            width: 100%;
+        }
+        .playinfo_rules_items--ex_img{
+            display: none;
+        }
+    }
+}
+.playinfo_rules_items--ex_tit{
+    width: 100%;
+    position: relative;
+    font-size: 20px;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 5px;
+    &:after{
+        @include pseudo;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, rgba(41,171,226,1) 1%,rgba(102,45,145,1) 100%);
+    }
+}
+.playinfo_rules_items--ex_img{
+    padding: 0 1.2em;
+    position: relative;
+    &:before{
+        @include pseudo;
+        width: 1px;
+        height: 60%;
+        background: #ccc;
+        bottom: 1em;
+        left: 0;
+        @include multi-lang{
+            bottom: 0.5em;
+        }
+    }
+    *[class*="playinfo_rules_items--ex_"]{
+        padding-bottom: 1.5em;
+        @include multi-lang{
+            padding-bottom: 0.6em;
+        }
+        p{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        ul{
+            max-width: 155px;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 0;
+        }
+        li{
+            display: inline-block;
+            vertical-align: middle;
+            width: 23px;
+            height: 24px;
+            line-height: 24px;
+            margin-left: 4px;
+            text-align: center;
+            background: #b3b3b3;
+            color: #fff;
+            border-radius: 100%;
+            font-size: 14px;
+            margin: 1px 4px;
+            &.bg-none{
+              background: #fff;
+            }
+            &.text-style{
+              border-radius: 0;
+              background: #fff;
+              color: #000;
+              width: 100%;
+              line-height: 15px;
+              text-align: left;
+              margin-left: 0;
+              height: auto;
+            }
+        }
+        >div{
+            display: inline-block;
+            >div{
+                margin-left: 0px;
+                line-height: 20px;
+                &.c_dice--medium{
+                    margin: 0 4px;
+                }
+            }
+        }
+        &.padding-none{
+            padding-bottom: 0;
+            >p{
+                vertical-align: top;
+            }
+        }
+    }
+    .playinfo_rules_items--ex_lottery{
+        li {
+            background: #d4145a;
+            &.light {
+                background: rgba(212, 20, 90, 0.3);
+            }
+        }
+
+        p {
+            vertical-align: top;
+        }
+        &>div{
+            span{
+                &:first-child{
+                    padding: 0px;
+                }
+                padding: 0px 1px;
+            }
+        }
+        &>table{
+            p{
+                font-size: 14px;
+            }
+        }
+
+    }
+    .playinfo_rules_items--ex_bet{
+        .order{
+            position: relative;
+            &:before{
+                @include pseudo;
+                width: 2px;
+                height: 10px;
+                left: 50%;
+                bottom: -1em;
+                margin-left: -1px;
+                background: #000;
+            }
+            &:after{
+                @include pseudo;
+                width: 7px;
+                height: 7px;
+                left: 50%;
+                bottom: -1em;
+                border-width: 2px;
+                border-style: solid;
+                border-color: transparent #000 #000 transparent;
+                transform: translateX(-50%) rotate(45deg);
+            }
+            @include multi-lang{
+                &:before,&:after{
+                    background:transparent;
+                    border-color: transparent transparent transparent transparent;
+                }
+            }
+        }
+        span {
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+    }
+    .playinfo_rules_items--ex_lottery{
+        .select{
+           position: relative;
+           &:before{
+                @include pseudo;
+                width: 31px;
+                height: 27px;
+                border: 1px solid red;
+                top: -2px;
+                left: -4px;
+           }
+           &+.select{
+            &:after{
+                @include pseudo;
+                width: 2px;
+                background: #fff;
+                height: 25px;
+                top: -2px;
+                left: -4px;
+                transform: translate(-1px,1px);
+                z-index: 2;
+             }
+           }
+
+        }
+
+        .select--narrow {
+            position: relative;
+            &:before{
+                 @include pseudo;
+                 width: 100%;
+                 height: 100%;
+                 border: 1px solid red;
+                 top: 0px;
+                 left: 0px;
+            }
+            &+.select--narrow{
+             &:after{
+                 @include pseudo;
+                 width: 2px;
+                 background: #fff;
+                 height: 88%;
+                 top: 0px;
+                 left: 0px;
+                 transform: translate(-1px,1px);
+                 z-index: 2;
+              }
+            }
+
+         }
+
+        .select + .newline:after{
+            width: 0;
+        }
+
+    }
+}
+
+.lang_us {
+    .playinfo_rules_items--ex{
+        padding-right: 1em;
+    }
+
+    .playinfo_rules_items--ex_info{
+        margin-right: 5px;
+    }
+
+    .playinfo_rules_items--ex_img{
+        background-size: 39% auto;
+        padding: 0 1.2em;
+        .playinfo_rules_items--ex_img-2{
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+        }
+
+        p{
+            display: block;
+            font-size: 12px;
+        }
+    }
+
+    .playinfo_rules_items--more{
+        bottom: 0.5em;
+    }
+
+    .playinfo_nav {
+        // width: 80px;
+    }
+
+    .playinfo_nav pre{
+        background: none;
+        margin: 0;
+        font-size: 12px;
+    }
+
+    @media screen and (max-width: 979px) {
+        .active > .playinfo_nav {
+            width: 50%;
+        }
+    }
+}
+
+
+@keyframes opacity1In{
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.1;
+    }
+}
+@keyframes opacity3In{
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes gotop_shakedown {
+    100% {
+        bottom: 2.5em;
+    }
+}
+@keyframes nav_prev_shakeup {
+    100% {
+        top: 0.1em;
+    }
+}
+@keyframes nav_next_shakedown {
+    100% {
+        bottom: 0.1em;
+    }
+}

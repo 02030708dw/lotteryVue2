@@ -1,0 +1,43 @@
+// ************************************************************
+// c_keyboard
+// ************************************************************
+
+.c_keyboard {
+    width: 100%;
+    height: 40%;
+    position: fixed;
+    bottom: -40%;
+    z-index: 999;
+    transition: 0.4s all;
+    .numeric-keyboard {
+        td {
+            font-size: 20px;
+            vertical-align: middle;
+
+            &[data-icon=clean] {
+                &::before {
+                    @include pseudo;
+                    background: #000;
+                    border-radius: 2px;
+                    height: 2px;
+                    width: 16px;
+                    left: 16.5%;
+                    transform: translate(-50%,-50%) rotate(45deg);
+                }
+                &::after {
+                    @include pseudo;
+                    background: #000;
+                    border-radius: 2px;
+                    height: 2px;
+                    width: 16px;
+                    left: 16.5%;
+                    transform: translate(-50%,-50%) rotate(135deg);
+                }
+            }
+        }
+    }
+    &.is_active {
+        transition: 0.4s all;
+        bottom: 0px;
+    }
+}

@@ -1,0 +1,60 @@
+// ************************************************************
+// _gr_game-vn-selectBar
+// ************************************************************
+
+@media screen and (max-width: 979px) {
+    .gr_game-vn-selectBar {
+        line-height: 31px;
+        ul {
+            width: 100%;
+            list-style: none;
+            margin: 10px auto 15px auto;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #bbb598;
+            li {
+                min-width: calc(300px / 3);
+                display: inline-block;
+                text-align: center;
+                padding: 5px;
+                span {
+                    border: 1px solid #d0d0d0;
+                    border-radius: 5px;
+                    width: 100%;
+                    height: 100%;
+                    display: inline-block;
+                    position: relative;
+                    &::before, &::after {
+                        content: "";
+                        border: 3px solid #666666;
+                        border-left: 0;
+                        border-top: 0;
+                        height: 13px;
+                        width: 8px;
+                        position: absolute;
+                        top: -4px;
+                        right: -1px;
+                        transform: rotate(45deg);
+                        z-index: 2;
+                        visibility: hidden;
+                        opacity: 0;
+                        transition: 0.4s all;
+                    }
+                    &::after {
+                        border: 7px solid #f2f2f2;
+                        z-index: 1;
+                    }
+                }
+                &.is_checkbox {
+                    span {
+                       border-color: #666666;
+                       &::before, &::after {
+                            content: "";
+                            visibility: visible;
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

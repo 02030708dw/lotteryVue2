@@ -1,0 +1,94 @@
+// ************************************************************
+// c_lottery-category
+// ************************************************************
+
+@each $s_lottery-class, $s_lottery in $s_lottery-category {
+    $short-path: "#{$s_lottery-category-path}/#{$s_lottery-class-prefix}#{$s_lottery-class}/";
+    // 產出分類
+    // .#{$s_lottery-class-prefix}#{$s_lottery-class} {
+    //     @include multi-lang-loop("#{$short-path}#{$s_lottery-class-prefix}#{$s_lottery-class}-bg.png");
+    // }
+    // 產出各彩種
+    @for $i from 1 through length($s_lottery) {
+        $index: nth($s_lottery, $i);
+        .#{$s_lottery-prefix}#{$index}::before {
+            z-index: 1;
+            @include multi-lang-loop("#{$short-path}#{$s_lottery-prefix}#{$index}.svg");
+        }
+        @if (str-index(#{$s_lottery-class}, VN)) {
+            .gr_games-vn-header__logo:not(.pure).lottery_#{$index} {
+                z-index: 1;
+                @include multi-lang-loop("#{$short-path}#{$s_lottery-prefix}#{$index}.svg");
+            }
+        } @else if (str-index(#{$s_lottery-class}, PURE)) {
+            .pure.lottery_#{$index} {
+                z-index: 1;
+                @include multi-lang-loop("#{$short-path}#{$s_lottery-prefix}#{$index}.svg");
+            }
+        } @else {
+            .gr_games-header__logo.lottery_#{$index} {
+                z-index: 1;
+                @include multi-lang-loop("#{$short-path}#{$s_lottery-prefix}#{$index}.svg");
+            }
+        }
+    }
+    // 暫不開放
+    // .#{$s_lottery-class-prefix}#{$s_lottery-class}.#{$s_lottery-prefix}disabled::after {
+    //     @include multi-lang-loop("#{$short-path}#{$s_lottery-prefix}disabled.svg");
+    // }
+}
+
+// .pure.lottery_212 {
+//     background-image: url(~@IMG/lang_us/c_lottery-category/c_lottery-class--VN_5M/c_lottery--212--pure.svg);
+//     @include size(95px, 95px);
+//     background-position: center center;
+//     background-repeat: no-repeat;
+//     position: relative;
+// }
+
+//越南彩
+.c_lottery--vietnam {
+    &::before{
+        background-image: url(~@IMG/lang_cn/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg);
+        @include multi-lang("us") {background-image: url(~@IMG/lang_us/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg);}
+        @include multi-lang("th") {background-image: url(~@IMG/lang_th/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg);}
+        @include multi-lang("jp") {background-image: url(~@IMG/lang_jp/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg);}
+        @include multi-lang("vn") {background-image: url(~@IMG/lang_vn/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg);}
+        @include multi-lang("id") {background-image: url(~@IMG/lang_id/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg);}
+        @include multi-lang("kh") {background-image: url(~@IMG/lang_kh/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg);}
+    }
+    &.c_lottery--disabled::after {
+        background-image: url(~@IMG/lang_kh/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam--disabled.svg);
+    }
+}
+.c_lottery--223 {
+    &::before{
+        background-image: url(/static/image/lang_cn/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg);
+        @include multi-lang("us") {background-image: url(/static/image/lang_us/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg);}
+        @include multi-lang("th") {background-image: url(/static/image/lang_th/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg);}
+        @include multi-lang("jp") {background-image: url(/static/image/lang_jp/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg);}
+        @include multi-lang("vn") {background-image: url(/static/image/lang_vn/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg);}
+        @include multi-lang("id") {background-image: url(/static/image/lang_id/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg);}
+        @include multi-lang("kh") {background-image: url(/static/image/lang_kh/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg);}
+    }
+    &.c_lottery--disabled::after {
+        background-image: url(/static/image/lang_cn/c_lottery-category/c_lottery-class--VN_30S/c_lottery--disabled.svg);
+    }
+}
+
+.c_lottery--256 {
+    &::before{
+        background-image: url(/static/image/lang_cn/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg);
+        @include multi-lang("us") {background-image: url(/static/image/lang_us/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg);}
+        @include multi-lang("th") {background-image: url(/static/image/lang_th/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg);}
+        @include multi-lang("jp") {background-image: url(/static/image/lang_jp/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg);}
+        @include multi-lang("vn") {background-image: url(/static/image/lang_vn/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg);}
+        @include multi-lang("id") {background-image: url(/static/image/lang_id/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg);}
+        @include multi-lang("kh") {background-image: url(/static/image/lang_kh/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg);}
+    }
+    &.c_lottery--disabled::after {
+        background-image: url(/static/image/lang_cn/c_lottery-category/c_lottery-class--VN_256/c_lottery--disabled.svg);
+    }
+}
+
+

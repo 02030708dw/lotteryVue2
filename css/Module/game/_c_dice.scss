@@ -1,0 +1,173 @@
+// ************************************************************
+// component.dice
+// ************************************************************
+
+.c_dice-cup {
+    @include box_shadow(0 6px 8px -8px shadow_color(dark));
+    @include size(278px, 99px);
+    border-radius: 85px 85px 0 0;
+    font-size: 0;
+    padding: 40px 0 22px;
+    position: relative;
+    text-align: center;
+    &::before,
+    &::after {
+        @include pseudo;
+        background-color: mix(lighten($color_secondary_heavy, 28.5%), darken($color_secondary, 7.3%), 65%);
+        border-radius: 3px 3px 0 0;
+        box-shadow: 0 -5px 0px lighten(backgrounds(secondary_heavy), 2%) inset;
+    }
+    &::before {
+        @include size(92%, 6px);
+        left: 4%;
+        bottom: 8px;
+    }
+    &::after {
+        @include size(100%, 8px);
+        box-shadow: 0 -1px 0px darken(backgrounds(secondary_heavy), 15%) inset,  0 -6px 0px lighten(backgrounds(secondary_heavy), 5%) inset;
+        left: 0;
+        bottom: 0;
+    }
+    & [class*="c_dice--"] {
+        margin: 0 2.5px;
+    }
+}
+
+
+
+
+
+.c_dice-text {
+    font-size: $font_size;
+    position: absolute;
+    top: 13px;
+    right: 0;
+    left: 0;
+    text-align: center;
+    z-index: 5;
+}
+
+
+
+
+
+.c_dice-cup--top {
+    @include size(86%, 85px);
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 -2px 3px shadow_color(light) inset, 0 -1px 1px rgba(darken(backgrounds(secondary_heavy), 3%), 0.3) inset;
+    border-radius: inherit;
+    position: absolute;
+    top: 0;
+    left: 7%;
+    z-index: 2;
+    &::before,
+    &::after {
+        @include pseudo;
+    }
+    &::before {
+        @include size(79%, 70px);
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 7%, rgba(255, 255, 255, 0.8) 10%, rgba(255, 255, 255, 0.5) 18%, rgba(255, 255, 255, 0) 100%);
+        border-radius: 100%;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    &::after {
+        @include size(10px, 8px);
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 30px 0 0 30px;
+        transform: skewX(-55deg) skewY(15deg);
+        top: 32px;
+        left: 40%;
+    }
+}
+
+
+
+
+
+// 尺寸設定
+$c_dice__size: (
+    large: 45,
+    medium: 38,
+    small: 30,
+    xsmall: 25
+);
+
+
+
+@each $name, $value in $c_dice__size {
+    $c_dot__size: index($c_dice__size, $name $value);
+    .c_dice--#{$name} {
+        @include size($value * 1px);
+        font-size: $value / 2 - 4 * 1px;
+        line-height: $value - 2 * 1px;
+        & .c_dot {
+            @include size(9px - $c_dot__size);
+        }
+        &.c_dice--long {
+            width: $value * 2.5px;
+        }
+    }
+}
+
+
+
+[class*="c_dice--"] {
+    @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+    border: 1px solid border_color(primary);
+    border-radius: border_radius(default);
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    & .c_dot {
+        background: #333333;
+        border-radius: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    //
+    & .c_dot:first-of-type:last-of-type,
+    & .c_dot:first-of-type:nth-last-of-type(4) {
+        &,
+        & ~ .c_dot {
+            background: #c1272d;
+        }
+    }
+    //
+    & .c_dot:first-of-type:nth-last-of-type(2),
+    & .c_dot:first-of-type:nth-last-of-type(3),
+    & .c_dot:first-of-type:nth-last-of-type(4),
+    & .c_dot:first-of-type:nth-last-of-type(5),
+    & .c_dot:first-of-type:nth-last-of-type(6) {
+        transform: translate(-170%, -170%);
+        & + .c_dot {
+            transform: translate(70%, 70%);
+        }
+    }
+
+    & .c_dot:first-of-type:nth-last-of-type(4),
+    & .c_dot:first-of-type:nth-last-of-type(5),
+    & .c_dot:first-of-type:nth-last-of-type(6) {
+        & ~ .c_dot:nth-of-type(3) {
+            transform: translate(70%, -170%);
+        }
+        & ~ .c_dot:nth-of-type(4) {
+            transform: translate(-170%, 70%);
+        }
+    }
+    & .c_dot:first-of-type:nth-last-of-type(6) {
+        & ~ .c_dot:nth-of-type(5) {
+            transform: translate(-170%, -50%);
+        }
+        & ~ .c_dot:nth-of-type(6) {
+            transform: translate(70%, -50%);
+        }
+    }
+    @include multi-lang {
+        font-size: $font_size_small;
+    }
+}

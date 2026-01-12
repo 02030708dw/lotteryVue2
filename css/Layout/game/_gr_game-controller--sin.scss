@@ -1,0 +1,184 @@
+// ************************************************************
+// gr_game-controller--sin
+// ************************************************************
+
+.gr_game-controller--sin {
+    padding: 10px;
+    & .gr_game-controller__button-group {
+        @include multi-lang("all") {
+            float: right;
+            margin: 0;
+            width: 240px;
+            text-align: right;
+        }
+    }
+    & .c_input--medium {
+        margin-right: 4px;
+        @include multi-lang {
+            margin: 0px 0px 0px 4px;
+        }
+    }
+}
+
+
+
+
+
+// chips
+$i_chip: (
+    "green",
+    "yellow",
+    "orange",
+    "red",
+    "pink",
+    "blue"  
+);
+
+$i_chip__path: "~@IMG/icon/i_chip--";
+
+@for $i from 1 through length($i_chip) {
+    $i_chip--color: nth($i_chip, $i);
+    .gr_game-controller__money:nth-of-type(#{$i}) .gr_money__chip {
+        background-image: url(#{$i_chip__path}#{$i_chip--color}.svg);
+    }
+}
+
+.gr_game-controller__money {
+    cursor: pointer;
+    display: inline-block;
+    line-height: 40px;
+    margin: 0 0 0 10px;
+    position: relative;
+    text-align: center;
+    z-index: 5;
+    &:hover {
+        & .gr_money__chip {
+            transform: translateY(5%);
+        }
+    }
+    &.is_active {
+        & .gr_money__chip {
+            @include animate(chip, 0.8s);
+        }
+        & .gr_money__coin {
+            @include animate(coinWarp, 0.8s);
+            animation-delay: 0.3s;
+            visibility: visible;
+            &::before {
+                @include animate(coin, 0.8s);
+                animation-delay: 0.3s;
+            }
+        }
+    }
+}
+
+.gr_game-controller__chip {
+    // cursor: pointer;
+    // background-size: 100%;
+    // background-repeat: no-repeat;
+    // width:33px;
+    // height:33px;
+    // @include multi-lang("all"){background-image: url(~@IMG/icon/i_chip_us.png);}
+    // @include multi-lang("cn") {background-image: url(~@IMG/icon/i_chip_cn.png);}
+
+    // // background-image: url(~@IMG/icon/i_chip_cn.png);
+    // // @include multi-lang("us") {background-image: url(~@IMG/icon/i_chip_us.png);}
+    // // @include multi-lang("th") {background-image: url(~@IMG/icon/i_chip_us.png);}
+    // // @include multi-lang("jp") {background-image: url(~@IMG/icon/i_chip_us.png);}
+    // // @include multi-lang("vn") {background-image: url(~@IMG/icon/i_chip_us.png);}
+    // // @include multi-lang("id") {background-image: url(~@IMG/icon/i_chip_us.png);}
+    // // @include multi-lang("kh") {background-image: url(~@IMG/icon/i_chip_us.png);}
+}
+.i_chip--us, .i_chip--cn {
+    border-radius: 50%;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    margin-right: 8px;
+}
+
+.gr_money__chip {
+    @include size(40px);
+    background-repeat: no-repeat;
+    border-radius: border_radius(rounded);
+    box-shadow: 2px 2px 6px shadow_color(default);
+    color: #ffffff;
+    transform: translateY(0) scale3d(1, 1, 1);
+    transition: all 0.1s ease;
+}
+.gr_money__coin {
+    display: inline-block;
+    opacity: 0;
+    position: absolute;
+    top: -45%;
+    left: calc(50% - 5px);
+    visibility: hidden;
+    &::before {
+        content: '';
+        @include size(10px);
+        background: lighten($color_light_heavy, 12%);
+        border-radius: border_radius(rounded);
+        box-shadow: 1px 1px 0 $color_light_heavy;
+        display: block;
+    }
+}
+
+
+
+
+
+@keyframes chip {
+    from {
+      transform: translateY(5%) scale3d(1, 1, 1);
+    }
+
+    30% {
+      transform: translateY(10%) scale3d(1, 0.8, 1);
+    }
+
+    40% {
+      transform: translateY(-10%) scale3d(1, 1.25, 1);
+    }
+
+    50% {
+      transform: translateY(5%) scale3d(1, 0.9, 1);
+    }
+
+    65% {
+      transform: translateY(0%) scale3d(1, 1.05, 1);
+    }
+
+    75% {
+      transform: scale3d(1, 0.95, 1);
+    }
+
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+}
+
+// 平板破版調整
+@keyframes coinWarp {
+    from {
+        transform: translateY(280%);
+    }
+    2% {
+        opacity: 0.1;
+    }
+    25% {
+        transform: translateY(0%);
+    }
+    65% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+}
+@keyframes coin {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}

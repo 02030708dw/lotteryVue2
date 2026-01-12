@@ -1,0 +1,19 @@
+// ************************************************************
+// generate class
+// ************************************************************
+
+.shadow_linear {
+    @extend %shadow_linear_gradient_default;
+}
+
+@each $name, $colour in $backgrounds {
+  .bg_#{$name} {
+    background: $colour;
+  }
+}
+
+@each $name, $colour in $text_color {
+  .text_color_#{$name} {
+    color: $colour;
+  }
+}

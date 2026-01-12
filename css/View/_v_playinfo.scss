@@ -1,0 +1,17 @@
+// ************************************************************
+// view playinfo
+// ************************************************************
+
+@import '~@CSS/main';
+
+@import '~@CSS/Layout/gr_playinfo';
+
+.lang_jp {
+    @import '~@CSS/Lang/JP/l_playinfo';
+}
+.lang_th {
+    @import '~@CSS/Lang/TH/l_playinfo';
+}
+.lang_vn {
+    @import '~@CSS/Lang/VN/l_playinfo';
+}

@@ -1,0 +1,170 @@
+// ************************************************************
+// icon
+// ************************************************************
+
+// usage => i_news
+@include generate_icon(news, svg, 28px, 27px);
+// usage => i_letter--close
+@include generate_icon(letter--close, svg, 21px, 21px);
+// usage => i_letter--open
+@include generate_icon(letter--open, svg, 21px, 21px);
+
+
+// usage => i_delete
+@include generate_icon(delete, svg, 18px, 18px);
+// usage => i_plus
+@include generate_icon(plus, svg, 22px, 24px);
+// usage => i_ramdon
+@include generate_icon(ramdon, svg, 20px, 14px);
+// usage => i_clear
+@include generate_icon(clear, svg, 20px, 18px);
+// usage => i_return
+@include generate_icon(return, svg, 12px);
+// usage => i_trend
+@include generate_icon(trend, svg, 28px);
+// usage => i_play
+@include generate_icon(play, svg, 20px);
+[class*="--disabled"] .i_play {
+  opacity: 0.6;
+}
+// usage => i_detailedNumber
+@include generate_icon(detailedNumber, svg, 20px);
+// usage => i_betting--980
+@include generate_icon(betting--980, svg, 22px, 22px);
+// usage => i_betting--320
+@include generate_icon(betting--320, svg, 20px, 20px);
+// usage => i_history
+@include generate_icon(history, svg, 30px, 30px);
+// usage => i_playinfo
+@include generate_icon(playinfo, svg, 30px, 30px);
+
+// usage => i_lottery-period--official-website
+@include generate_icon(lottery-period--official-website, svg, 30px, 30px);
+// usage => i_lottery-period--history
+@include generate_icon(lottery-period--history, svg, 30px, 30px);
+// usage => i_lottery-period--trendline
+@include generate_icon(lottery-period--trendline, svg, 30px, 30px);
+
+// usage => i_question
+@include generate_icon(question, svg, 28px, 28px);
+// usage => i_animal
+@include generate_icon(animal, svg, 28px, 28px);
+
+// // usage => i_menu--lotteryCn
+// @include generate_icon(menu--lotteryCn, svg, 40px, 40px);
+// // usage => i_menu--lotteryVn
+// @include generate_icon(menu--lotteryVn, svg, 40px, 40px);
+// // usage => i_menu--lotteryMas
+// @include generate_icon(menu--lotteryMas, svg, 40px, 40px);
+
+
+
+$cn:'~@IMG/lang_cn/c_lottery-menu';
+$us:'~@IMG/lang_us/c_lottery-menu';
+$th:'~@IMG/lang_th/c_lottery-menu';
+$jp:'~@IMG/lang_jp/c_lottery-menu';
+$kh:'~@IMG/lang_kh/c_lottery-menu';
+$vn:'~@IMG/lang_vn/c_lottery-menu';
+$id:'~@IMG/lang_id/c_lottery-menu';
+
+.c_menu--{
+  @include multi-lang('cn'){
+      &lotteryVn {background-image: url(#{$cn + '/c_menu--lotteryVn.svg'});}
+      &lotteryMas {background-image: url(#{$cn + '/c_menu--lotteryMas.svg'});}
+      &lotteryTable {background-image: url(#{$cn + '/c_menu--lotteryTable.svg'});}
+      &lotterySTOCK {background-image: url(#{$cn + '/c_menu--lotterySTOCK.svg'});}
+      &lotteryTh {background-image: url(#{$cn + '/c_menu--lotteryTh.svg'});}
+      &lotteryBJL {background-image: url(#{$cn + '/c_menu--lotteryBJL.svg'});}
+      &lotteryMY {background-image: url(#{$cn + '/c_menu--lotteryMY.svg'});}
+      &lotteryLA {background-image: url(#{$cn + '/c_menu--lotteryLA.svg'});}
+  }
+  @include multi-lang('us'){
+      &lotteryVn {background-image: url(#{$us + '/c_menu--lotteryVn.svg'});}
+      &lotteryMas {background-image: url(#{$us + '/c_menu--lotteryMas.svg'});}
+      &lotteryTable {background-image: url(#{$us + '/c_menu--lotteryTable.svg'});}
+      &lotterySTOCK {background-image: url(#{$us + '/c_menu--lotterySTOCK.svg'});}
+      &lotteryTh {background-image: url(#{$us + '/c_menu--lotteryTh.svg'});}
+      &lotteryBJL {background-image: url(#{$us + '/c_menu--lotteryBJL.svg'});}
+      &lotteryMY {background-image: url(#{$us + '/c_menu--lotteryMY.svg'});}
+      &lotteryLA {background-image: url(#{$us + '/c_menu--lotteryLA.svg'});}
+  }
+  @include multi-lang('th'){
+      &lotteryVn {background-image: url(#{$th + '/c_menu--lotteryVn.svg'});}
+      &lotteryMas {background-image: url(#{$th + '/c_menu--lotteryMas.svg'});}
+      &lotteryTable {background-image: url(#{$th + '/c_menu--lotteryTable.svg'});}
+      &lotterySTOCK {background-image: url(#{$th + '/c_menu--lotterySTOCK.svg'});}
+      &lotteryTh {background-image: url(#{$th + '/c_menu--lotteryTh.svg'});}
+      &lotteryBJL {background-image: url(#{$th + '/c_menu--lotteryBJL.svg'});}
+      &lotteryMY {background-image: url(#{$th + '/c_menu--lotteryMY.svg'});}
+      &lotteryLA {background-image: url(#{$th + '/c_menu--lotteryLA.svg'});}
+  }
+  @include multi-lang('jp'){
+      &lotteryVn {background-image: url(#{$jp + '/c_menu--lotteryVn.svg'});}
+      &lotteryMas {background-image: url(#{$jp + '/c_menu--lotteryMas.svg'});}
+      &lotteryTable {background-image: url(#{$jp + '/c_menu--lotteryTable.svg'});}
+      &lotterySTOCK {background-image: url(#{$jp + '/c_menu--lotterySTOCK.svg'});}
+      &lotteryTh {background-image: url(#{$jp + '/c_menu--lotteryTh.svg'});}
+      &lotteryBJL {background-image: url(#{$jp + '/c_menu--lotteryBJL.svg'});}
+      // &lotteryMY {background-image: url(#{$jp + '/c_menu--lotteryMY.svg'});}
+  }
+
+  @include multi-lang('vn'){
+      &lotteryVn {background-image: url(#{$vn + '/c_menu--lotteryVn.svg'});}
+      &lotteryMas {background-image: url(#{$vn + '/c_menu--lotteryMas.svg'});}
+      &lotteryTable {background-image: url(#{$vn + '/c_menu--lotteryTable.svg'});}
+      &lotterySTOCK {background-image: url(#{$vn + '/c_menu--lotterySTOCK.svg'});}
+      &lotteryTh {background-image: url(#{$vn + '/c_menu--lotteryTh.svg'});}
+      &lotteryBJL {background-image: url(#{$vn + '/c_menu--lotteryBJL.svg'});}
+      &lotteryMY {background-image: url(#{$vn + '/c_menu--lotteryMY.svg'});}
+      &lotteryLA {background-image: url(#{$vn + '/c_menu--lotteryLA.svg'});}
+  }
+  @include multi-lang('kh'){}
+  @include multi-lang('id'){}
+}
+
+// usage => i_game-vn-prompt
+@include generate_icon(game-vn-prompt, svg, 28px, 28px);
+
+//封鎖停押
+.i_blockade {
+  @include size(20px);
+    background-color: #f9ae3b;
+    display: inline-block;
+    position: relative;
+    border-radius: 50%;
+    &::after{
+      content: "封";
+      position: absolute;
+      z-index: 1;
+      color: #fff;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    @include multi-lang {
+      &::after{
+        content: "－";
+        font-size: 2.6em;
+        top: 42%;
+      }
+    }
+}
+// usage => i_dateLottery
+@include generate_icon(dateLottery, svg, 20px, 20px);
+
+// usage => i_chip--cn
+@include generate_icon(chip--cn, svg, 40px, 40px);
+// usage => i_chip--us
+@include generate_icon(chip--us, svg, 40px, 40px);
+
+// usage => i_user
+@include generate_icon(user, svg, 12px, 12px);
+
+// usage => i_closed
+@include generate_icon(closed, svg, 32px, 32px);
+
+// usage => i_closed--new
+@include generate_icon(closed--new, svg, 32px, 32px);
+
+// usage => i_funnel
+@include generate_icon(funnel, svg, 15px, 15px);

@@ -1,0 +1,651 @@
+// ************************************************************
+// gr_game-vn-submenu
+// ************************************************************
+@media screen and (min-width: 980px) {
+    .gr_game-vn-submenu2 {
+        padding: 0;
+        .gr_under--line {
+            height: 1px;
+            border-bottom: 1px solid #808080;
+            margin: 15px -10px;
+        }
+        .gr_section__bar {
+            &.is_disabled {
+                position: relative;
+                &::before {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    background: rgba(242, 242, 242, 0.3);
+                    top: 0;
+                    left: 0;
+                    z-index: 3;
+                }
+                .gr_bagGroup__button {
+                    color: #a2a2a2;
+                    border-color: #a2a2a2;
+                }
+                .gr_bold__text {
+                    z-index: 4;
+                    position: relative;
+                }
+            }
+            margin-bottom: 20px;
+        }
+        .el-checkbox {
+            span.is_odds {
+                color: #c1272d;
+            }
+            &.disable {
+                color: rgb(188, 188, 188);
+                .c_checkbox__inner {
+                    border-color: rgb(188, 188, 188);
+                    cursor: default;
+                }
+                span.is_odds {
+                    color: rgb(188, 188, 188);
+                }
+            }
+        }
+        [class*="c_input--"] {
+            position: relative;
+            // width: 348px;
+            i {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .i_funnel {
+                left: 5px;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    border-right: 1px solid #d3d3d3;
+                    width: 1px;
+                    height: 100%;
+                    right: -5px;
+                }
+            }
+            .c_input__inner {
+                padding: 4px 8px 4px 30px;
+            }
+            .el-icon-circle-close {
+                color: #9f9f9f;
+                right: -1px;
+                padding: 7px;
+                cursor: pointer;
+                &:hover {
+                    color: grey;
+                }
+            }
+        }
+        .gr_bagGroup__button {
+            margin: 0;
+            padding: 3px 10px;
+            line-height: 10px;
+            color: #c1272d;
+            border: 1px #c1272d solid;
+            border-radius: 3px;
+            cursor: pointer;
+            &.is_active {
+                background: #c1272d;
+                color: #ffffff;
+            }
+        }
+        .gr_bold {
+            float: right;
+            div {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .gr_bold__btn {
+                min-width: 472px;
+                .gr_field__button {
+                    @include border(border_color(default));
+                    border-radius: border_radius(default);
+                    cursor: pointer;
+                    float: left;
+                    line-height: 20px;
+                    margin: 0 8px 0px 0;
+                    min-width: 40px;
+                    padding: 0 5px;
+                    position: relative;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    &:last-child {
+                        margin: 0;
+                    }
+                    & .gr_button__text {
+                        position: relative;
+                        z-index: 2;
+                    }
+                    &::before,
+                    &::after {
+                        @include pseudo;
+                        @include size(100%);
+                        border-radius: 2px;
+                        top: 0;
+                        left: 0;
+                        transition: all 0.3s ease;
+                    }
+                    &::before {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            lighten(backgrounds(default), 10%),
+                            backgrounds(default)
+                        );
+                        opacity: 1;
+                    }
+                    &::after {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            backgrounds(default),
+                            lighten(backgrounds(default), 10%)
+                        );
+                        opacity: 0;
+                    }
+                    &.is_active,
+                    &.is_active:hover {
+                        @include border(border_color(dark));
+                        color: text_color(default_invert);
+                        &::before {
+                            @include background_gradient(
+                                ture,
+                                to bottom,
+                                darken(
+                                    mix(
+                                        $color_secondary_heavy,
+                                        $color_strong,
+                                        85%
+                                    ),
+                                    8%
+                                ),
+                                lighten(
+                                    mix(
+                                        $color_secondary_heavy,
+                                        $color_strong,
+                                        85%
+                                    ),
+                                    15%
+                                )
+                            );
+                            box-shadow: 0 0 3px 0 shadow_color(light) inset;
+                            opacity: 1;
+                        }
+                        &::after {
+                            opacity: 0;
+                        }
+                    }
+                    &:hover {
+                        @include border(border_color(default));
+                        &::before {
+                            opacity: 0;
+                        }
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+        .gr_quick {
+            float: right;
+            div {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .gr_quick__btn {
+                min-width: 472px;
+                .gr_field__button {
+                    @include border(border_color(default));
+                    border-radius: border_radius(default);
+                    cursor: pointer;
+                    float: left;
+                    line-height: 20px;
+                    margin: 0 8px 0px 0;
+                    min-width: 40px;
+                    padding: 0 5px;
+                    position: relative;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    &:last-child {
+                        margin: 0;
+                    }
+                    & .gr_button__text {
+                        position: relative;
+                        z-index: 2;
+                    }
+                    &::before,
+                    &::after {
+                        @include pseudo;
+                        @include size(100%);
+                        border-radius: 2px;
+                        top: 0;
+                        left: 0;
+                        transition: all 0.3s ease;
+                    }
+                    &::before {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            lighten(backgrounds(default), 10%),
+                            backgrounds(default)
+                        );
+                        opacity: 1;
+                    }
+                    &::after {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            backgrounds(default),
+                            lighten(backgrounds(default), 10%)
+                        );
+                        opacity: 0;
+                    }
+                    &.is_active,
+                    &.is_active:hover {
+                        color: text_color(default_invert);
+                        &::before {
+                            background-color: #f5691c;
+                            background-image: linear-gradient(
+                                to bottom,
+                                #fa8337,
+                                #f15000
+                            );
+                            color: #ffffff;
+                            span {
+                                background-image: linear-gradient(
+                                    to bottom,
+                                    #f15000,
+                                    #fa8337
+                                );
+                            }
+                            opacity: 1;
+                        }
+                        &::after {
+                            opacity: 0;
+                        }
+                    }
+                    &:hover {
+                        @include border(border_color(default));
+                        &::before {
+                            opacity: 0;
+                        }
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 979px) {
+    .gr_game-vn-submenu2 {
+        padding: 0;
+        .gr_under--line {
+            height: 1px;
+            border-bottom: 1px solid #808080;
+            margin: 15px -10px;
+        }
+        .gr_section__bar {
+            float: right;
+            &.is_disabled {
+                position: relative;
+                &::before {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    background: rgba(242, 242, 242, 0.3);
+                    top: 0;
+                    left: 0;
+                    z-index: 3;
+                }
+                .gr_bagGroup__button {
+                    color: #a2a2a2;
+                    border-color: #a2a2a2;
+                }
+                .gr_bold__text {
+                    z-index: 4;
+                    position: relative;
+                }
+            }
+            margin-bottom: 20px;
+        }
+        .el-checkbox {
+            span.is_odds {
+                color: #c1272d;
+            }
+            &.disable {
+                color: rgb(188, 188, 188);
+                .c_checkbox__inner {
+                    border-color: rgb(188, 188, 188);
+                    cursor: default;
+                }
+                span.is_odds {
+                    color: rgb(188, 188, 188);
+                }
+            }
+        }
+        [class*="c_input--"] {
+            position: relative;
+            // width: 348px;
+            i {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            .i_funnel {
+                left: 5px;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    border-right: 1px solid #d3d3d3;
+                    width: 1px;
+                    height: 100%;
+                    right: -5px;
+                }
+            }
+            .c_input__inner {
+                padding: 4px 8px 4px 30px;
+            }
+            .el-icon-circle-close {
+                color: #9f9f9f;
+                right: -1px;
+                padding: 7px;
+                cursor: pointer;
+                &:hover {
+                    color: grey;
+                }
+            }
+        }
+        .gr_bagGroup__button {
+            margin: 0;
+            padding: 3px 10px;
+            line-height: 10px;
+            color: #c1272d;
+            border: 1px #c1272d solid;
+            border-radius: 3px;
+            cursor: pointer;
+            &.is_active {
+                background: #c1272d;
+                color: #ffffff;
+            }
+        }
+        .gr_bold {
+            float: right;
+            div {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .gr_bold__btn {
+                .gr_field__button {
+                    @include border(border_color(default));
+                    border-radius: border_radius(default);
+                    cursor: pointer;
+                    line-height: 20px;
+                    margin: 0 8px 0px 0;
+                    min-width: 40px;
+                    padding: 0 5px;
+                    position: relative;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    &:last-child {
+                        margin: 0;
+                    }
+                    & .gr_button__text {
+                        position: relative;
+                        z-index: 2;
+                    }
+                    &::before,
+                    &::after {
+                        @include pseudo;
+                        @include size(100%);
+                        border-radius: 2px;
+                        top: 0;
+                        left: 0;
+                        transition: all 0.3s ease;
+                    }
+                    &::before {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            lighten(backgrounds(default), 10%),
+                            backgrounds(default)
+                        );
+                        opacity: 1;
+                    }
+                    &::after {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            backgrounds(default),
+                            lighten(backgrounds(default), 10%)
+                        );
+                        opacity: 0;
+                    }
+                    &.is_active,
+                    &.is_active:hover {
+                        @include border(border_color(dark));
+                        color: text_color(default_invert);
+                        &::before {
+                            @include background_gradient(
+                                ture,
+                                to bottom,
+                                darken(
+                                    mix(
+                                        $color_secondary_heavy,
+                                        $color_strong,
+                                        85%
+                                    ),
+                                    8%
+                                ),
+                                lighten(
+                                    mix(
+                                        $color_secondary_heavy,
+                                        $color_strong,
+                                        85%
+                                    ),
+                                    15%
+                                )
+                            );
+                            box-shadow: 0 0 3px 0 shadow_color(light) inset;
+                            opacity: 1;
+                        }
+                        &::after {
+                            opacity: 0;
+                        }
+                    }
+                    &:hover {
+                        @include border(border_color(default));
+                        &::before {
+                            opacity: 0;
+                        }
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+        .gr_quick {
+            float: left;
+            div {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            .gr_quick__btn {
+                .gr_field__button {
+                    @include border(border_color(default));
+                    border-radius: border_radius(default);
+                    cursor: pointer;
+                    line-height: 20px;
+                    margin: 0 8px 0px 0;
+                    min-width: 40px;
+                    padding: 0 5px;
+                    position: relative;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    &:last-child {
+                        margin: 0;
+                    }
+                    & .gr_button__text {
+                        position: relative;
+                        z-index: 2;
+                    }
+                    &::before,
+                    &::after {
+                        @include pseudo;
+                        @include size(100%);
+                        border-radius: 2px;
+                        top: 0;
+                        left: 0;
+                        transition: all 0.3s ease;
+                    }
+                    &::before {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            lighten(backgrounds(default), 10%),
+                            backgrounds(default)
+                        );
+                        opacity: 1;
+                    }
+                    &::after {
+                        @include background_gradient(
+                            ture,
+                            to bottom,
+                            backgrounds(default),
+                            lighten(backgrounds(default), 10%)
+                        );
+                        opacity: 0;
+                    }
+                    &.is_active,
+                    &.is_active:hover {
+                        color: text_color(default_invert);
+                        &::before {
+                            background-color: #f5691c;
+                            background-image: linear-gradient(
+                                to bottom,
+                                #fa8337,
+                                #f15000
+                            );
+                            color: #ffffff;
+                            span {
+                                background-image: linear-gradient(
+                                    to bottom,
+                                    #f15000,
+                                    #fa8337
+                                );
+                            }
+                            opacity: 1;
+                        }
+                        &::after {
+                            opacity: 0;
+                        }
+                    }
+                    &:hover {
+                        @include border(border_color(default));
+                        &::before {
+                            opacity: 0;
+                        }
+                        &::after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+        .gr_quick320 {
+            margin-bottom: 10px;
+            .gr_field__button {
+                @include border(border_color(default));
+                border-radius: border_radius(default);
+                cursor: pointer;
+                line-height: 20px;
+                margin: 0 2px;
+                float: left;
+                width: calc(20% - 4px);
+                padding: 0 2px;
+                margin-top: 5px;
+                position: relative;
+                text-align: center;
+                transition: all 0.3s ease;
+                font-size: 12px;
+                & .gr_button__text {
+                    position: relative;
+                    z-index: 2;
+                }
+                &::before,
+                &::after {
+                    @include pseudo;
+                    @include size(100%);
+                    border-radius: 2px;
+                    top: 0;
+                    left: 0;
+                    transition: all 0.3s ease;
+                }
+                &::before {
+                    @include background_gradient(
+                        ture,
+                        to bottom,
+                        lighten(backgrounds(default), 10%),
+                        backgrounds(default)
+                    );
+                    opacity: 1;
+                }
+                &::after {
+                    @include background_gradient(
+                        ture,
+                        to bottom,
+                        backgrounds(default),
+                        lighten(backgrounds(default), 10%)
+                    );
+                    opacity: 0;
+                }
+                &.is_active,
+                &.is_active:hover {
+                    color: text_color(default_invert);
+                    &::before {
+                        background-color: #f5691c;
+                        background-image: linear-gradient(
+                            to bottom,
+                            #fa8337,
+                            #f15000
+                        );
+                        color: #ffffff;
+                        span {
+                            background-image: linear-gradient(
+                                to bottom,
+                                #f15000,
+                                #fa8337
+                            );
+                        }
+                        opacity: 1;
+                    }
+                    &::after {
+                        opacity: 0;
+                    }
+                }
+                &:hover {
+                    @include border(border_color(default));
+                    &::before {
+                        opacity: 0;
+                    }
+                    &::after {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        .gr_bagGroup__button {
+            line-height: normal;
+        }
+    }
+}

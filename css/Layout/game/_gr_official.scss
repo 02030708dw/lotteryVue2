@@ -1,0 +1,447 @@
+// ************************************************************
+// gr_official
+// ************************************************************
+
+@keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+    0% {
+        transform: scale(0.9, 0.9);
+    }
+    20% {
+        transform: scale(1.2, 1.2);
+    }
+    40% {
+        transform: scale(0.95, 0.95);
+    }
+    60% {
+        transform: scale(1.05, 1.05);
+    }
+    80% {
+        transform: scale(0.98, 0.98);
+    }
+    to {
+        transform: scale(1, 1);
+    }
+}
+
+
+
+$gr_section__title--width: 80px;
+
+.gr_official {
+    margin: 0 20px;
+    padding-top: 20px;
+    & .gr_official__select {
+        margin-left: $gr_section__title--width;
+    }
+    & .gr_official__controlls {
+        width: 100%;
+        margin: 5px auto;
+    }
+    & .gr_official__section {
+        padding: 0 0 0 $gr_section__title--width;
+        position: relative;
+        & + .gr_official__section {
+            border-top: 1px solid border_color(primary_light);
+            & .gr_section__bar {
+                padding-top: 15px;
+            }
+        }
+    }
+    & .gr_section__bar {
+        font-size: 0;
+        line-height: 37px;
+    }
+    & .gr_bar__label {
+        font-size: $font_size_small;
+        margin-right: 13px;
+        vertical-align: middle;
+        white-space: nowrap;
+        &:last-of-type {
+            margin: 0;
+        }
+    }
+    & .gr_section__body {
+        float: left;
+        font-size: $font_size_small;
+        margin-top: 15px;
+        & .gr_group__item {
+            display: inline-block;
+            margin: 0 10px 15px 0;
+            text-align: center;
+            & .gr_item__ball {
+                background: border_color(primary_dark);
+                border-radius: border_radius(rounded);
+                cursor: pointer;
+                display: inline-block;
+                font-size: 24px;
+                padding: 1px;
+            }
+            & .gr_ball__inner {
+                @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+                @include size(35px);
+                border-radius: inherit;
+                color: lighten(text_color(secondary), 10%);
+                display: block;
+                line-height: 35px;
+            }
+            & .gr_item__text {
+                margin-top: 5px;
+                min-width: 55px;
+            }
+            & .gr_item__ball:hover {
+                @include animate(bounceIn, 0.75s);
+            }
+            & .is_active,
+            & .is_active:hover {
+                @include background_gradient(ture, to bottom, lighten(mix($color_primary, $color_secondary, 97%), 0%), lighten($color_primary_heavy, 2.3%));
+                & .gr_ball__inner {
+                    @include background_gradient(ture, to bottom, lighten($color_primary_heavy, 2.3%), lighten(mix($color_primary, $color_secondary, 97%), 0%));
+                    color: text_color(default_invert);
+                }
+            }
+        }
+    }
+    & .gr_section__title {
+        color: text_color(primary);
+        font-weight: bold;
+        line-height: 37px;
+        position: absolute;
+        top: 15px;
+        left: 0;
+        width: $gr_section__title--width;
+        &:empty {
+            display: none;
+        }
+    }
+    & .gr_section__controller {
+        float: right;
+        font-size: $font_size_large;
+        margin-top: 15px;
+        padding-top: 1px;
+        text-align: center;
+        & .gr_group__item {
+            background: backgrounds(accent);
+            display: inline-block;
+            padding: 1px;
+            position: relative;
+            & .gr_item__text {
+                @include background_gradient(ture, 135deg, $color_default_invert, darken($color_default_invert, 13.5%));
+                color: text_color(weak);
+                cursor: pointer;
+                display: block;
+                height: 33px;
+                line-height: 31px;
+                min-width: 33px;
+                padding: 0 3px;
+                position: relative;
+                z-index: 5;
+            }
+            &::before {
+                @include pseudo;
+                @include size(0);
+                background: $color_primary;
+                top: 0;
+                right: 0;
+                transition: all 0.3s ease;
+            }
+            &.is_active,
+            &.is_active:hover {
+                background: backgrounds(accent);
+                & .gr_item__text {
+                    background: backgrounds(accent);
+                    color: text_color(secondary);
+                }
+                &::before {
+                    display: none;
+                }
+            }
+            &:hover {
+                &::before {
+                    @include size(100%);
+                }
+            }
+        }
+        @include multi-lang {
+            font-size: $font-size-small;
+        }
+    }
+    @include multi-lang {
+        $gr_section__title--width: 125px;
+        .gr_official__select {
+            margin-left: $gr_section__title--width;
+            & .el-checkbox+.el-checkbox{
+                margin-left: 7px;
+            }
+
+        }
+        .gr_official__section {
+            padding: 0 0 0 $gr_section__title--width;
+        }
+        & .gr_section__title {
+            width: $gr_section__title--width;
+        }
+    }
+}
+
+// 快3
+.gr_official--k3 {
+    padding: 30px 0 20px;
+    text-align: center;
+    & .gr_official__inner {
+        font-size: 0;
+    }
+    & .gr_official__group {
+        display: inline-block;
+        line-height: 0;
+    }
+    & .gr_group__inner {
+        margin: 0 auto;
+        max-width: 150px;
+    }
+    & .gr_group__list {
+        margin: 5px 0;
+    }
+    & .gr_list__inner {
+        border: 1px solid transparent;
+        border-radius: border_radius(large);
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 5px;
+        padding: 7px;
+        &.is_active {
+            background: backgrounds(accent_heavy);
+            border-color: backgrounds(accent_heavy);
+        }
+        &:hover {
+            // border-color: $color_primary;
+            @include animate(bounceIn, 0.75s);
+        }
+    }
+    & .gr_list__text {
+        font-size: $font_size_small;
+        line-height: 14px;
+        margin: 3px 0 15px;
+    }
+    & [class*="c_dice--"] ~ [class*="c_dice--"] {
+        margin-left: 5px;
+    }
+}
+
+.number_select_content--jsk3-hezhi {
+    & .gr_section__body {
+        margin: 0 auto;
+        width: 512px;
+    }
+}
+
+// 自訂的寬
+.differentWidth {
+    @include multi-lang('jp') {
+        $differentWidth: 145px;
+        .gr_game-submenu .gr_game-submenu__field {
+            margin: 0 0 0 $differentWidth;
+            width: calc(100% - $differentWidth);
+            .gr_field__title {
+                width: $differentWidth;
+            }
+        }
+        .gr_game-prompt {
+            margin-left: 165px;
+        }
+        .gr_official .gr_official__section {
+            padding: 0 0 0 $differentWidth;
+            .gr_section__title {
+                width: $differentWidth;
+            }
+        }
+    }
+
+    @include multi-lang('vn') {
+        $differentWidth: 165px;
+        .gr_game-submenu .gr_game-submenu__field {
+            margin: 0 0 0 $differentWidth;
+            width: calc(100% - $differentWidth);
+            .gr_field__title {
+                width: $differentWidth;
+            }
+        }
+        .gr_game-prompt {
+            margin-left: 185px;
+        }
+        .gr_official .gr_official__section {
+            padding: 0 0 0 $differentWidth;
+            .gr_section__title {
+                width: $differentWidth;
+            }
+        }
+    }
+
+}
+
+
+@media screen and (max-width: 979px) {
+    .gr_official {
+        margin: 0 10px;
+        padding-top: 10px;
+        padding-bottom: 130px;
+        & .gr_official__select {
+            margin-left: 10px;
+            padding-bottom: 15px;
+            @include multi-lang("all") {
+                margin-left: 10px;
+            }
+        }
+        & .gr_official__section {
+            @include multi-lang("all") {
+                padding: 0;
+            }
+        }
+        & .gr_section__bar {
+            padding: 52px 17px 5px;
+
+            // & ~ .gr_section__body {
+            //     margin-top: 0 !important;
+
+            & .gr_section__controller {
+                top: 0 !important;
+            }
+        }
+        & .gr_bar__label {
+            background: backgrounds(primary);
+            border-radius: 30px;;
+            border: 1px solid border_color(dark);
+            cursor: pointer;
+            display: inline-block;
+            font-size: $font_size;
+            line-height: 15px;
+            margin: 6px 0;
+            padding: 6px 0;
+            text-align: center;
+            width: calc(50% - 3px);
+            & + .gr_bar__label {
+                font-size: $font_size;
+                margin-left: 0;
+            }
+            &:nth-of-type(2n) {
+                margin-left: 6px;
+            }
+            &.is_active {
+                background: #4d4d4d;
+                border-color: #4d4d4d;
+                color: text_color(default_invert);
+            }
+        }
+        & .gr_bar__checkbox {
+            display: none;
+        }
+        & .gr_official__section {
+            & + .gr_official__section .gr_section__bar {
+                padding-top: 52px;
+            }
+            @include multi-lang("all") {
+                padding: 0;
+            }
+        }
+        & .gr_section__title {
+            top: 0;
+            @include multi-lang {
+                float: left;
+                position: relative;
+                width: 100%;
+            }
+            &:empty {
+                & ~ div {
+                    margin-top: 0;
+                    @include multi-lang {
+                        top: 0;
+                    }
+                }
+                & ~ .gr_section__body {
+                    margin-top: 52px;
+                }
+                &:first-child:nth-last-of-type(2) {
+                    & ~ .gr_section__body {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+        & .gr_section__body {
+            margin-top: 52px;
+            width: 100%;
+            & .gr_group__item {
+                margin: 0 11px 15px;
+                &:first-child:nth-last-of-type(11),
+                &:first-child:nth-last-of-type(11) ~ .gr_group__item {
+                    margin: 0 6px 15px;
+                }
+            }
+        }
+        & .gr_section__controller {
+            margin-top: 1px;
+            padding-top: 1px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            @include multi-lang {
+                font-size: $font_size_large;
+                top: 37px;
+            }
+            & .gr_group__item {
+                background: none;
+                & .gr_item__text {
+                    background: none;
+                }
+                &::before {
+                    display: none;
+                }
+                &.is_active,
+                &.is_active:hover {
+                    background: none;
+                }
+            }
+        }
+        @include multi-lang {
+            padding-bottom: 124px;
+        }
+    }
+    // 快3
+    .gr_official--k3 {
+        & .gr_official__group {
+           width: calc(100%/3);
+            & .gr_group__list {
+                margin: 10px 0;
+            }
+            & .gr_list__inner--nohover:hover {
+                border: transparent;
+            }
+        }
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 609px) {
+    .gr_official .gr_section__body {
+        & .gr_body__group {
+            margin: 0 auto;
+            max-width: 300px;
+        }
+        & .gr_group__item {
+            &:first-child:nth-last-of-type(11) ~ li:nth-of-type(7) {
+                margin: 0 6px 15px 24.5px;
+            }
+        }
+    }
+    // 快3
+    .gr_official--k3 {
+        & .gr_official__group {
+            width: 50%;
+        }
+    }
+}

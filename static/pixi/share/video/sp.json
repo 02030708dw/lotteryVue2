@@ -1,0 +1,35 @@
+{
+"frames": {
+	"close": {
+		"frame": {"x":47, "y":44, "w":42, "h":43},
+		"spriteSourceSize": {"x":2,"y":2,"w":46,"h":46},
+		"sourceSize": {"w":46,"h":46}
+	},
+	"fullScreen": {
+		"frame": {"x":47, "y":0, "w":43, "h":43},
+		"spriteSourceSize": {"x":1,"y":2,"w":46,"h":46},
+		"sourceSize": {"w":46,"h":46}
+	},
+	"off": {
+		"frame": {"x":0, "y":0, "w":46, "h":45},
+		"spriteSourceSize": {"x":0,"y":0,"w":46,"h":46},
+		"sourceSize": {"w":46,"h":46}
+	},
+	"on": {
+		"frame": {"x":0, "y":46, "w":46, "h":38},
+		"spriteSourceSize": {"x":0,"y":4,"w":46,"h":46},
+		"sourceSize": {"w":46,"h":46}
+	},
+	"smallScreen": {
+		"frame": {"x":0, "y":85, "w":39, "h":39},
+		"spriteSourceSize": {"x":4,"y":4,"w":46,"h":46},
+		"sourceSize": {"w":46,"h":46}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 91, "h": 125},
+	"scale": "1"
+}
+}

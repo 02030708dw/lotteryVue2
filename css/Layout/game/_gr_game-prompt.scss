@@ -1,0 +1,178 @@
+// ************************************************************
+// gr_game-prompt
+// ************************************************************
+
+@media screen and (min-width: 980px) {
+    .gr_game-prompt {
+        margin-left: 100px;
+        @include multi-lang {
+            margin-left: 145px;
+        }
+    }
+
+    .gr_game-prompt__tooltip {
+        display: inline-block;
+        font-size: $font_size_small;
+        line-height: 18px;
+        position: relative;
+        &::before {
+            @include triangle(backgrounds(secondary), up, 8px);
+            opacity: 0;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            transition: all 0.3s ease;
+            visibility: hidden;
+            z-index: 5;
+        }
+        & .gr_tooltip__item {
+            background: backgrounds(primary);
+            color: darken(border_color(primary_dark), 20%);
+            display: block;
+            line-height: 20px;
+            & .gr_item__icon {
+                @include size(20px);
+            }
+            & .gr_item__text {
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+        & .gr_tooltip__popper {
+            background: backgrounds(secondary);
+            opacity: 0;
+            padding: 5px 10px;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            transition: all 0.3s ease;
+            visibility: hidden;
+            width: 295px;
+            z-index: 6;
+            & span {
+                width: auto;
+                text-align: justify;
+            }
+        }
+        &.is_active {
+            &::before,
+            & .gr_tooltip__popper {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    // 歡樂生肖
+    &.happy_animal {
+        .happy_animal--title {
+            font-weight: bold;
+        }
+        .gr_tooltip__popper {
+            width: 450px;
+        }
+        .gr_tooltip__popper--colorList {
+            padding: 5px 10px 0;
+            P {
+                display: inline-block;
+                width: calc(100% / 5);
+                @include multi-lang('th') {
+                    width: calc(100% / 3);
+                }
+                @include multi-lang('vn') {
+                    width: calc(100% / 2);
+                }
+                &:last-of-type {
+                    margin-right: 0px;
+                }
+            }
+        }
+        .gr_tooltip__popper--num {
+            padding: 20px 10px 8px;
+            p {
+                display: inline-block;
+                width: 36px;
+                height: 36px;
+                line-height: 34px;
+                font-size: 14px;
+                border: 1px solid #8b8169;
+                background-color: #ffffff;
+                border-radius: 50%;
+                text-align: center;
+                vertical-align: middle;
+                position: relative;
+                margin-right: 5px;
+                @include multi-lang {
+                    background-color: #333333;
+                }
+                > span:first-of-type {
+                    display: inline-block;
+                    line-height: 21px;
+                    @include multi-lang {
+                        width: 100%;
+                        height: 100%;
+                        background-position: center center;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                    }
+                }
+                > span:nth-of-type(2) {
+                    position: absolute;
+                    display: block;
+                    top: -18px;
+                    right: -10px;
+                    border-radius: 50%;
+                    width: 24px;
+                    height: 24px;
+                    line-height: 24px;
+                    color: #ffffff;
+                    text-align: center;
+                    background-color: #666666;
+                    border: 1px solid #ffffff;
+                    box-shadow: 2px 2px 3px shadow_color(default);
+                    &::before, &::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        height: 0;
+                        width: 0;
+                        border-style: solid;
+                    }
+                    &::before {
+                        border-color: #ffffff transparent transparent transparent;
+                        border-width: 5px 3px 0 3px;
+                        bottom: -1.5px;
+                        left: -2.5px;
+                        transform: rotate(43deg);
+                    }
+                    &::after {
+                        border-color: #666666 transparent transparent transparent;
+                        border-width: 6px 2.5px 0 2.5px;
+                        bottom: -1px;
+                        left: -1px;
+                        transform: rotate(40deg);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 979px) {
+    .gr_game-prompt {
+        color: darken(border_color(primary_dark), 20%);
+        cursor: pointer;
+        display: inline-block;
+        font-size: $font_size_small;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 12px;
+        & .gr_game-prompt__icon {
+            @include size(20px);
+        }
+        & .gr_game-prompt__text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}

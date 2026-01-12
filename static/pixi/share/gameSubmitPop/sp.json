@@ -1,0 +1,20 @@
+{
+"frames": {
+	"gameSubmitOfPop": {
+		"frame": {"x":0, "y":702, "w":753, "h":654},
+		"spriteSourceSize": {"x":0,"y":0,"w":753,"h":654},
+		"sourceSize": {"w":753,"h":654}
+	},
+	"gameSubmitPop": {
+		"frame": {"x":0, "y":0, "w":753, "h":701},
+		"spriteSourceSize": {"x":0,"y":0,"w":753,"h":701},
+		"sourceSize": {"w":753,"h":701}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 754, "h": 1357},
+	"scale": "1"
+}
+}

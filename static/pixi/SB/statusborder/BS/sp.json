@@ -1,0 +1,20 @@
+{
+"frames": {
+	"big": {
+		"frame": {"x":0, "y":50, "w":49, "h":50},
+		"spriteSourceSize": {"x":0,"y":0,"w":49,"h":50},
+		"sourceSize": {"w":49,"h":50}
+	},
+	"small": {
+		"frame": {"x":0, "y":0, "w":50, "h":49},
+		"spriteSourceSize": {"x":0,"y":0,"w":50,"h":49},
+		"sourceSize": {"w":50,"h":49}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 51, "h": 101},
+	"scale": "1"
+}
+}

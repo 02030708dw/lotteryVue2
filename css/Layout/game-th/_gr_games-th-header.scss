@@ -1,0 +1,677 @@
+// ************************************************************
+// gr_games-th-header
+// ************************************************************
+
+.gr_games-th-header,
+.gr_games-th-header--video .gr_games-header__inner {
+    @extend %shadow_linear_gradient_default_inset;
+}
+@keyframes beat{
+    60%{
+        transform: scale(1);
+        opacity:1;
+    }
+    70%{
+        transform: scale(1.1);
+        opacity:0.8;
+    }
+    80%{
+        transform: scale(1);
+        opacity:1;
+    }
+    90%{
+        transform: scale(1.1);
+        opacity:0.8;
+    }
+    100%{
+        transform: scale(1);
+        opacity:1;
+    }
+}
+.gr_my-favorites__icon {
+    // 避免切換時跑出來，須寫在這裡
+    @include size(16px);
+}
+@media screen and (min-width: 980px) {
+    .gr_games-th-header, .gr_games-th-header--video {
+        position: relative;
+    }
+    .gr_games-th-header,
+    .gr_games-th-header--video .gr_games-header__inner {
+        background: #eae7da;
+        // height: 140px;
+        text-align: center;
+        z-index: 10;
+        & > div {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 2em;
+        }
+        .gr_games-th-header__logo + .gr_games-th-header__square {
+            @include multi-lang('vn') {
+                line-height: 1.2em;
+                div span {
+                    width: 100%;
+                    display: inline-block;
+                }
+            }
+        }
+        .gr_games-th-lotteryStatus {
+            padding: 5px 10px 0 10px;
+            text-align: left;
+            > div[class*="gr_games-th-lotteryStatus__"] {
+                display: inline-block;;
+            }
+        }
+    }
+    .gr_games-th-header__my-favorites {
+        @include size(0px, 23px);
+        cursor: pointer;
+        fill: none;
+        padding: 4.5px 0;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1pt;
+        stroke: #ff6473;
+        transition: fill 0.3s linear;
+        position: relative;
+        z-index: 4;
+        top: 85px;
+        float: left;
+        left: 7px;
+        & .gr_my-favorites__icon {
+            // @include size(16px, 100%);
+            animation-name: beat;
+            animation-duration:3s;
+            animation-iteration-count: infinite;
+        }
+        &.is_active {
+            fill: #ff6473;
+        }
+        &::before {
+            @include pseudo;
+            @include size(300%, 120%);
+            top: 0;
+            left: -8px;
+        }
+    }
+}
+
+.gr_games-th-header__logo {
+    @include size(95px, 95px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    &::before {
+        @include pseudo;
+        @include size(100%, 12px);
+        background: radial-gradient(ellipse at center, rgba($color_default, 0.3) 0%, rgba($color_default, 0.1) 25%, rgba(255, 255, 255, 0) 40%);
+        bottom: -6px;
+        left: 5%;
+    }
+    &.lottery_242 {
+        @include multi-lang("cn") {background-image: url('~@IMG/lang_cn/c_lottery-category/c_lottery-class--TH/c_lottery--242.svg');}
+        @include multi-lang("jp") {background-image: url('~@IMG/lang_jp/c_lottery-category/c_lottery-class--TH/c_lottery--242.svg');}
+        @include multi-lang("us") {background-image: url('~@IMG/lang_us/c_lottery-category/c_lottery-class--TH/c_lottery--242.svg');}
+        @include multi-lang("th") {background-image: url('~@IMG/lang_th/c_lottery-category/c_lottery-class--TH/c_lottery--242.svg');}
+        @include multi-lang("vn") {background-image: url('~@IMG/lang_vn/c_lottery-category/c_lottery-class--TH/c_lottery--242.svg');}
+    }
+    &.lottery_243 {
+        @include multi-lang("cn") {background-image: url('~@IMG/lang_cn/c_lottery-category/c_lottery-class--TH_30S/c_lottery--243.svg');}
+        @include multi-lang("jp") {background-image: url('~@IMG/lang_jp/c_lottery-category/c_lottery-class--TH_30S/c_lottery--243.svg');}
+        @include multi-lang("us") {background-image: url('~@IMG/lang_us/c_lottery-category/c_lottery-class--TH_30S/c_lottery--243.svg');}
+        @include multi-lang("th") {background-image: url('~@IMG/lang_th/c_lottery-category/c_lottery-class--TH_30S/c_lottery--243.svg');}
+        @include multi-lang("vn") {background-image: url('~@IMG/lang_vn/c_lottery-category/c_lottery-class--TH_30S/c_lottery--243.svg');}
+    }
+
+}
+.gr_games-th-header__square {
+    @include size(271px, 100px);
+    @include box_shadow(0 6px 8px -8px shadow_color(dark));
+    background: rgba(mix(lighten($color_secondary_heavy, 28.5%), darken($color_secondary, 7.3%), 65%), 0.85);
+    border-radius: border_radius(large);
+    border: 1px solid #9f997d;
+    color: text_color(default);
+    margin: 10px 0.55% 0 0;
+    padding: 7px 0;
+    position: relative;
+    z-index: 1;
+    & strong {
+        font-weight: 600;
+        & + span {
+            padding-left: 5px;
+        }
+    }
+    // 紅點
+    &::before,
+    &::after {
+        @include pseudo;
+        @include circle(6px);
+        background: darken($color_strong, 9%);
+        top: 5px;
+        left: 5px;
+    }
+    &::after {
+        right: 5px;
+        left: auto;
+    }
+    &.is_active {
+        background-color: #ffebc7;
+    }
+    &.gr_games-th-header__square--medium {
+        margin: 10px 1.4% 0;
+        // vertical-align: top;
+        width: 311px;
+    }
+    &.gr_games-th-header__square--long {
+        line-height: 1.9em;
+        @include multi-lang("all") {
+            line-height: 1.9em;
+        }
+        vertical-align: top;
+        padding: 0;
+        width: 470px;
+        & ~ .gr_games-th-header__lottery-period {
+            width: 40px;
+        }
+    }
+}
+// 頭部開獎號
+.gr_games-th-header__warp {
+    .gr_games-th-header__number {
+        cursor: pointer;
+        margin: 0 auto;
+        opacity: 0;
+        visibility: hidden;
+        &.is_active {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .gr_game-info__number {
+        margin: 0px auto;
+        cursor: pointer;
+        width: 380px;
+        .gr_number__content {
+            border: 1px solid #8b8169;
+            .gr_number__content--item {
+                &:nth-of-type(1) {
+                    background-color: #c7b299;
+                    .gr_number__item--title {
+                        border-bottom: 1px solid #8b8169;
+                    }
+                }
+                &:nth-of-type(2) {
+                    background-color: #dfdcce;
+                }
+                .gr_number__item--title, .gr_number__item--content {
+                    border-right: 1px solid #8b8169;
+                    line-height: 26px;
+                    &:last-of-type {
+                        border-right: 0px;
+                    }
+                    span {
+                        display: inline;
+                    }
+                }
+            }
+        }
+    }
+}
+// 頭部開獎號 - 展開
+.gr_games-th-header__history {
+    cursor: pointer;
+    margin: 0 auto;
+    opacity: 0;
+    visibility: hidden;
+    border: 1px solid #b3b3b3;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    cursor: move;
+    position: absolute;
+    user-select: none;
+    z-index: 60;
+    width: 380px;
+    .gr_number__header {
+        border: 1px solid #5e5f6d;
+        cursor: inherit;
+        line-height: 25px;
+        text-align: right;
+    }
+    .gr_header__close {
+        @include size(30px);
+        padding: 7px;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 5px;
+        vertical-align: middle;
+        stroke: #ffffff;
+        stroke-miterlimit: 10;
+        & .gr_close__icon {
+            @include size(100%);
+            display: block;
+        }
+    }
+    .gr_number__content {
+        line-height: 20px;
+    }
+    .gr_number__content--item {
+        &:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        dl, dd, dt, span {
+            height: 31px;
+            line-height: 30px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        // dt, span {
+        //     border-bottom: 1px solid #b3b3b3;
+        // }
+       .gr_number__item--content {
+            border-right: 1px solid #b3b3b3;
+            &:last-of-type {
+                border-right: 0px;
+            }
+       }
+       .gr_number__item--title {
+           width: 25%;
+           &:last-of-type {
+            border-right: 0px;
+           }
+       }
+
+    }
+    .gr_number__prizeNun {
+        .gr_number__prizeNun--title {
+            width: 100%;
+            display: block;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            background-color: #c7b299;
+            color: #ffffff;
+        }
+        .gr_number__content-prizeNun {
+            display: table;
+            width: 100%;
+            .gr_number__content--item {
+                &::before {
+                    content: '';
+                    width: 100%;
+                    height: 1px;
+                    display: block;
+                    position: absolute;
+                    border-bottom: 1px solid #b3b3b3;
+                }
+                dt, dd {
+                    display: table-cell;
+                }
+                dt {
+                    width: 25%;
+                    border-right: 1px solid #b3b3b3;
+                }
+                dd {
+                    width: 75%;
+                    vertical-align: middle;
+                    text-align: center;
+                    span {
+                        width: calc(100% / 3);
+                        display: block;
+                        float: left;
+                        &:not(:nth-of-type(3n+0)) {
+                            border-right: 1px solid #b3b3b3;
+                        }
+                        &:nth-of-type(4), &:nth-of-type(5), &:nth-of-type(6) {
+                            border-top: 1px solid #b3b3b3;
+                        }
+                    }
+                }
+            }
+        }
+        .gr_number__content--title {
+            width: 100%;
+            display: block;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            background: #5e5f6d;
+            color: #ffffff;
+        }
+    }
+    &.is_active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.gr_games-th-header__lottery-period {
+    margin-right: 5px;
+    text-align: center;
+    white-space: nowrap;
+    height: 100%;
+    width: 30px;
+    position: relative;
+    z-index: 4;
+    // 按鈕
+    & .gr_lottery-period__button-group {
+        left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+        z-index: 3;
+        & div {
+            &.gr_button-group__history{
+                margin: 3px auto;
+            }
+            line-height: normal;
+            width: 30px;
+            height: 30px;
+            & button,a{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                & span{
+                    @include box_shadow(0px 0px 3px shadow_color(default));
+                    background-color: #fff;
+                    color: darken(text_color(weak), 50%);
+                    border-radius: 5px;
+                    padding: 2px 10px;
+                    position: absolute;
+                    top: 50%;
+                    right: 30px;
+                    transform: translateY(-50%);
+                    transition: all 0.2s ease;
+                    opacity: 1;
+                    visibility: hidden;
+                    z-index: 5;
+                    &::before{
+                        @include triangle($color_default_invert, right, 6px);
+                        left: calc(100% - 1px);
+                        top: 0;
+                        transform: translateY(50%);
+                    }
+                }
+                &:hover{
+                    & span{
+                        transition: all 0.2s ease;
+                        right: 35px;
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+            }
+        }
+    }
+}
+// 视频
+.gr_games-th-header--video {
+    .gr_games-th-header__square--long {
+        width: 520px;
+    }
+    .gr_games-th-header__warp,
+    .gr_square__video-player,
+    .gr_games-th-header__lottery-period {
+        display: inline-block;
+        vertical-align: top;
+    }
+    .gr_games-th-header__warp {
+        .gr_game-info__number {
+            width: 380px;
+        }
+    }
+    .gr_square__video-player {
+        @include size(70px, 90%);
+        border-left: 1px solid #9f997d;
+        cursor: pointer;
+        float: right;
+        font-size: $font_size_small;
+        position: relative;
+        top: 5%;
+        line-height: 18px;
+        @include multi-lang('vn') {
+            @include size(80px, 100%);
+        }
+        .gr_video-player__tip {
+            position: absolute;
+            background: #ccc;
+            padding: 2px 5px;
+            border-radius: 5px;
+            top: -7px;
+            width: 130px;
+            margin-left: -28px;
+            z-index: 9;
+        }
+        .gr_video-player__icon {
+            @include size(46px);
+            background: url(~@IMG/icon/i_video-player--camera.svg) center center no-repeat;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            border-radius: border_radius(rounded);
+            display: inline-block;
+            margin: 8px 2px 5px 0;
+            &.is_active,&.is_video-active {
+                background-image: url(~@IMG/icon/i_video-player--camera-pause.svg);
+            }
+        }
+    }
+    .gr_games-th-header__lottery-period {
+        float: none;
+        margin: 0 0 0 8px;
+    }
+    // ~ .gr_games-th-header__history {
+    //     width: 380px;
+    // }
+    .gr_animation__youtube {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+        iframe, object, embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .gr_animation__prompt {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            color: white;
+            background: rgba(53, 52, 52, 0.8);
+            height: 40px;
+            line-height: 40px;
+            padding: 0 0 0 5px;
+        }
+        .gr_prompt__close {
+            cursor: pointer;
+            float: right;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 10px;
+        }
+    }
+}
+
+
+
+
+.gr_games-th-header--320 {
+    display: none;
+}
+$gr_games-th-header-height: 67px;
+
+@media screen and (max-width: 980px) {
+    .gr_games-th-header--320 {
+        @include size(100%, $gr_games-th-header-height);
+        display: block;
+        font-size: 0;
+        position: fixed;
+        left: 0;
+        z-index: 60;
+        & .gr_games-th-header__my-favorites {
+            @include size(15px, 23px);
+            position: relative;
+            z-index: 5;
+            cursor: pointer;
+            display: inline-block;
+            fill: none;
+            padding: 4.5px 0;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: 1pt;
+            stroke: #f15a24;
+            transition: fill 0.3s linear;
+            vertical-align: middle;
+            & .gr_my-favorites__icon {
+                @include size(100%);
+            }
+            &.is_active {
+                fill: #f15a24;
+            }
+        }
+        & .gr_games-th-header__title {
+            vertical-align: middle;
+            position: relative;
+            z-index: 1;
+        }
+        &::before {
+            display: none;
+        }
+        .gr_games-th-lotteryStatus-warp {
+            // position: relative;
+            // display: inline-block;
+            width: 100%;
+            position: absolute;
+            top: 5px;
+            right: 6px;
+            .gr_games-th-lotteryStatus-toggle {
+                font-size: 14px;
+                background-color: #8e7c66;
+                color: #ffffff;
+                padding: 1px 5px;
+                border-radius: 5px;
+                min-width: 50px;
+                position: relative;
+                float: right;
+                height: 21px;
+                line-height: 21px;
+                @include multi-lang('vn') {
+                    padding: 2px 3px;
+                }
+                &::before{
+                    @include triangle($color_default_invert, up, 6px);
+                    left: 50%;
+                    bottom: -3px;
+                    transform: translateX(-50%);
+                    z-index: 2;
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            }
+            .gr_games-th-lotteryStatus {
+                opacity: 0;
+                visibility: hidden;
+                font-size: 12px;
+                background-color: #fff;
+                color: #1a1a1a;
+                border-radius: 5px;
+                padding: 5px 10px;
+                position: absolute;
+                top: 25px;
+                right: 0;
+                z-index: 1;
+                @include box_shadow(0px 0px 3px shadow_color(default));
+            }
+            &.is_active {
+                .gr_games-th-lotteryStatus-toggle {
+                    &::before{
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+                .gr_games-th-lotteryStatus {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+    }
+    .gr_games-th-header__button {
+        @include size(31px, 14px);
+        background: #333333;
+        border-radius: border_radius(default);
+        cursor: pointer;
+        display: inline-block;
+        line-height: 13px;
+        text-align: center;
+        vertical-align: middle;
+        z-index: 4;
+        & .gr_button__icon {
+            @include size(7px, 8px);
+            fill: #ffffff;
+            width: 8px;
+        }
+        & .gr_icon--shadow {
+            fill: #a7a9ac;
+            opacity: 0.8;
+        }
+        &::before {
+            display: none;
+        }
+
+    }
+    .gr_games-header__last {
+        .gr_last__balls {
+            .gr_balls__text:nth-of-type(odd) {
+                margin-right: 4px;
+            }
+        }
+    }
+    .gr_games-th-header__button-group {
+        display: block;
+        font-size: 0;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+    .gr_button-group__button {
+        display: inline-block;
+        padding: 0px 8px 5.5px 4px;
+        position: relative;
+        top: 3px;
+    }
+    .gr_animation__youtube {
+        position: fixed;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+        width: 100%;
+        z-index: 66;
+        iframe, object, embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .gr_games-th-header__animation {
+        padding-bottom: 26px;
+        // position: fixed;
+        // height: 100%;
+        // width: 100%;
+        // z-index: 66;
+        // top: 151px;
+        .gr_animation__prompt {
+            width: 100%;
+            background: backgrounds(accent_heavy);
+            font-size: $font_size_small;
+            line-height: 16px;
+            padding: 5px 10px;
+            position: fixed;
+            z-index: 51;
+        }
+    }
+}

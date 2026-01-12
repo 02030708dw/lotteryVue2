@@ -1,0 +1,78 @@
+// ************************************************************
+// c_input
+// ************************************************************
+
+// 尺寸設定
+$c_input__length: (
+    shortest: 50px,
+    short: 65px,
+    medium: 90px,
+    long: 125px,
+    auto: auto,
+    full: 100%
+);
+@function c_input__length($name) {
+    @return map-get($c_input__length, $name);
+}
+
+@each $name, $value in $c_input__length {
+    .c_input--#{$name} {
+        width: #{$value};
+    }
+}
+
+
+
+
+
+[class*="c_input--"] {
+    border-radius: border_radius(default);
+    display: inline-block;
+    vertical-align: middle;
+    
+    & .c_input__inner {
+        background: #ffffff;
+        border: 1px solid text_color(weak);
+        border-radius: inherit;
+        color: text_color(default);
+        display: block;
+        font-size: $font_size_small;
+        padding: 3px 8px;
+        width: 100%;
+        &::placeholder {
+            color: text_color(weak);
+        }
+        &:hover,
+        &:focus {
+            border-color: text_color(secondary);
+        }
+        &[disabled] {
+            background: inherit;
+            &:hover,
+            &:focus {
+                border: 1px solid text_color(weak);
+            }
+        }
+    }
+    &.is_strong .c_input__inner {
+        border-color: text_color(strong);
+    }
+    &.text_color_strong .c_input__inner {
+        color: text_color(strong);
+    }
+    &.c_input--inline{
+        .c_input__inner{
+            display: inline-block;
+            width: 70%;
+            margin-right: 5px;
+        }
+    }
+}
+
+.c_input--shortest,
+.c_input--short {
+    & .c_input__inner {
+        text-align: center;
+    }
+}
+

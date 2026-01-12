@@ -1,0 +1,40 @@
+{
+"frames": {
+	"chicken": {
+		"frame": {"x":0, "y":150, "w":75, "h":74},
+		"spriteSourceSize": {"x":9,"y":3,"w":84,"h":77},
+		"sourceSize": {"w":84,"h":77}
+	},
+	"crab": {
+		"frame": {"x":76, "y":150, "w":74, "h":74},
+		"spriteSourceSize": {"x":10,"y":3,"w":84,"h":77},
+		"sourceSize": {"w":84,"h":77}
+	},
+	"fish": {
+		"frame": {"x":84, "y":0, "w":74, "h":77},
+		"spriteSourceSize": {"x":10,"y":0,"w":84,"h":77},
+		"sourceSize": {"w":84,"h":77}
+	},
+	"gourd": {
+		"frame": {"x":151, "y":78, "w":74, "h":74},
+		"spriteSourceSize": {"x":10,"y":3,"w":84,"h":77},
+		"sourceSize": {"w":84,"h":77}
+	},
+	"shrimp": {
+		"frame": {"x":0, "y":0, "w":83, "h":74},
+		"spriteSourceSize": {"x":1,"y":3,"w":84,"h":77},
+		"sourceSize": {"w":84,"h":77}
+	},
+	"tiger": {
+		"frame": {"x":0, "y":75, "w":81, "h":74},
+		"spriteSourceSize": {"x":3,"y":3,"w":84,"h":77},
+		"sourceSize": {"w":84,"h":77}
+	}
+
+},
+"meta": {
+	"image": "sp.png",
+	"size": {"w": 226, "h": 225},
+	"scale": "1"
+}
+}

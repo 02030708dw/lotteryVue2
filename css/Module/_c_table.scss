@@ -1,0 +1,49 @@
+// ************************************************************
+// c_table
+// ************************************************************
+
+
+.c_table {
+    & table {
+        width: 100%;
+    }
+    & th,
+    & td {
+        line-height: 22px;
+        padding: 5px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    & .c_table__link--more {
+        color: #69644d;
+    }
+}
+
+
+//
+.c_table--secondary {
+    & table {
+        & thead {
+            background: darken(backgrounds(default), 10%);
+            border-top: 1px solid border_color(dark);
+            border-bottom: 1px solid border_color(dark);
+            height: 37px;
+            th {
+                font-size: $font_size;
+                line-height: 23px;
+                font-size: $font_size_small;
+            }
+        }
+    }
+    & tfoot td {
+        padding-top: 25px;
+    }
+    &.c_table--hover {
+        & tbody {
+            & tr:hover td {
+                background: backgrounds(secondary);
+                cursor: pointer;
+            }
+        }
+    }
+}

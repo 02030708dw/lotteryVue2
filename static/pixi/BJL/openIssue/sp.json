@@ -1,0 +1,60 @@
+{
+    "frames": {
+        "BJL_BK_W_cn": {
+            "frame": { "x": 149, "y": 0, "w": 156, "h": 98 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 156, "h": 98 },
+            "sourceSize": { "w": 156, "h": 98 }
+        },
+        "BJL_BK_W_en": {
+            "frame": { "x": 305, "y": 0, "w": 174, "h": 98 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 174, "h": 98 },
+            "sourceSize": { "w": 174, "h": 98 }
+        },
+        "BJL_PY_W_cn": {
+            "frame": { "x": 0, "y": 98, "w": 155, "h": 98 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 155, "h": 98 },
+            "sourceSize": { "w": 155, "h": 98 }
+        },
+        "BJL_PY_W_en": {
+            "frame": { "x": 155, "y": 98, "w": 160, "h": 99 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 160, "h": 99 },
+            "sourceSize": { "w": 160, "h": 99 }
+        },
+        "BJL_TIE_W_cn": {
+            "frame": { "x": 315, "y": 98, "w": 112, "h": 116 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 112, "h": 116 },
+            "sourceSize": { "w": 112, "h": 116 }
+        },
+        "BJL_TIE_W_en": {
+            "frame": { "x": 0, "y": 0, "w": 149, "h": 91 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 149, "h": 91 },
+            "sourceSize": { "w": 149, "h": 91 }
+        },
+        "BJL_open_bg": {
+            "frame": { "x": 0, "y": 214, "w": 416, "h": 235 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 416, "h": 235 },
+            "sourceSize": { "w": 416, "h": 235 }
+        }
+    },
+    "meta": {
+        "version": "1.0",
+        "image": "sp.png",
+        "format": "RGBA8888",
+        "size": { "w": 479, "h": 449 },
+        "scale": "1"
+    }
+}
