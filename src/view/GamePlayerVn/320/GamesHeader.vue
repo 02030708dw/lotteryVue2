@@ -120,6 +120,7 @@
                     <i class="i_lottery-period--history" />
                 </div>
             </div>
+            <div class="gr_games-vn-header__desc">122323</div>
         </div>
     </div>
 </template>

@@ -10,7 +10,7 @@ const rmids = {
     ao: '109',
     cr: '109',
     lang: '109',
-    develop: '286',
+    develop: '266',
     2015: '160',
     prod: '266'
 }
@@ -38,7 +38,7 @@ const op = {
     ao: 'testOP1',
     cr: 'testOP1',
     lang: 'testOP1',
-    develop: 'test04',
+    develop: 'web',
     2015: 'test',
     prod: 'web'
 }
@@ -82,10 +82,10 @@ const rmid = config.rmid || rmids[config.env] || ''
 const md5Last3Num = md5.update(rmid).digest('hex').slice(-3).toLocaleLowerCase()
 const prefix = `/login/thirdparty/${rmid}-${md5Last3Num}`
 const target = urls[config.env]
-let login = `${prefix}?token=${config.id}`
+let login = `${prefix}?thirdpartyUserId=${config.id}`
 config.currency && (login += `&currency=${config.currency}`)
 login += `&op=${config.op}`
-config.token && (login += `&token=${config.token}`)
+config.token && (login += `&thirdpartyUserId=${config.token}`)
 
 module.exports = {
     port: config.port,
