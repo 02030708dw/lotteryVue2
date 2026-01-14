@@ -1,38 +1,26 @@
 <template>
     <div>
         <HeaderNav />
-        <div
-            ref="container"
-            v-if="!VN_isLoading"
-        >
-            <GamesHeader />
+        <div ref="container" v-if="!VN_isLoading">
+            <GamesHeader :handleHistoryToggle="handleHistoryToggle" />
             <GameMenu :isGameMenuActive="isGameMenuActive" v-show="!showGameBox" />
             <GameSubMenu v-show="!showGameBox" />
 
-            <VN
-                class="gr_game-vn"
-                :currentGame="gameNameArr[VN_subMenuIndex]"
-                v-show="!showGameBox && !isGameMenuActive"
-            />
-            <VN
-                class="gr_game-vn"
-                :currentGame="gameNameArr[VN_gameType][VN_subMenuIndex]"
-                v-show="!showGameBox && !isGameMenuActive"
-            />
+            <VN class="gr_game-vn" :currentGame="gameNameArr[VN_subMenuIndex]"
+                v-show="!showGameBox && !isGameMenuActive" />
+            <VN class="gr_game-vn" :currentGame="gameNameArr[VN_gameType][VN_subMenuIndex]"
+                v-show="!showGameBox && !isGameMenuActive" />
             <GameBox v-show="showGameBox && !isGameMenuActive" :isFast="isFast" />
             <div class="gr_game-gameGroup" v-if="!isGameMenuActive">
                 <GameStatistics v-show="!showGameBox" />
-                <GameControlls
-                    :handleGameBox="handleGameBox"
-                    :showGameBox="showGameBox"
-                    :setIsFast="setIsFast"
-                    :isFast="isFast"
-                />
+                <GameControlls :handleGameBox="handleGameBox" :showGameBox="showGameBox" :setIsFast="setIsFast"
+                    :isFast="isFast" />
             </div>
-             <InfoBox />
+            <InfoBox />
             <GameInfo />
         </div>
-         <!--  <GameRecord v-show="!isShowDemo && !gameVN.isLoading && !gameVN.isBallsLoading" />
+        <GamesHistoryMobile v-if="VN_isLocal && historyToggle" :handleHistoryToggle="handleHistoryToggle" />
+        <!--  <GameRecord v-show="!isShowDemo && !gameVN.isLoading && !gameVN.isBallsLoading" />
         <MessageBox
             :zIndex="1996"
             className="el-detail-message-box"
@@ -48,6 +36,7 @@
 </template>
 <style lang="scss" scoped>
 @import '~@CSS/main.scss';
+
 .gr_game-gameGroup {
     width: 100%;
     display: block;
@@ -63,7 +52,7 @@ import HeaderNav from '@C/HeaderNav/'
 import GamesHeader from './GamesHeader'
 import GameMenu from './GameMenu'
 import GameSubMenu from './GameSubMenu'
-
+import GamesHistoryMobile from './GamesHistoryMobile'
 import GameBox from './GameBox/'
 import GameStatistics from './GameStatistics'
 import GameControlls from './GameControlls'
@@ -87,7 +76,7 @@ export default {
     beforeDestroy() {
         this.$root.$off('back', this.back)
     },
-    destroyed () {
+    destroyed() {
         window.removeEventListener('scroll', this.scrollDown)
         document.body.removeEventListener('scroll', this.scrollDown)
     },
@@ -100,8 +89,12 @@ export default {
             'VN_nowStopId',
             'VN_nowblockedId',
             'VN_gameSubmit',
-            'VN_localIssue'
-        ])
+            'VN_localIssue',
+            'getPopActive'
+        ]),
+        historyToggle() {
+            return this.getPopActive.VNhistory
+        }
     },
     methods: {
         ...mapActions([
@@ -109,8 +102,8 @@ export default {
             _M.SET_STOP_AND_OVER_VN_DATA
         ]),
         handleGameBox(showList = []) {
-            const isStop = showList.find(({methodId, issue}) => this.VN_nowStopId[methodId + (this.VN_localIssue || issue)])
-            const isBlocked = showList.find(({methodId, cityId}) => this.VN_nowblockedId[methodId] || this.VN_nowblockedId[cityId])
+            const isStop = showList.find(({ methodId, issue }) => this.VN_nowStopId[methodId + (this.VN_localIssue || issue)])
+            const isBlocked = showList.find(({ methodId, cityId }) => this.VN_nowblockedId[methodId] || this.VN_nowblockedId[cityId])
             const fn = () => {
                 this.showGameBox = true
                 this[_M.SET_HEADER_NAV_IS_BACK](true)
@@ -139,7 +132,12 @@ export default {
         },
         setIsFast(bool) {
             this.isFast = bool
-        }
+        },
+        handleHistoryToggle() {
+            console.log(123);
+
+            this[_M.SET_POP_ACTIVE]({ VNhistory: !this.getPopActive.VNhistory })
+        },
     },
     components: {
         HeaderNav,
@@ -152,7 +150,8 @@ export default {
         GameStatistics,
         GameControlls,
         InfoBox,
-        GameInfo
+        GameInfo,
+        GamesHistoryMobile
     }
 }
 </script>

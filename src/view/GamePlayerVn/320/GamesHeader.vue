@@ -3,53 +3,52 @@
         <div class="gr_games-vn-header__inner  u_clearfix">
             <div class="">
                 <div class="gr_games-vn-header__my-favorites  gr_my-favorites__tooltip"
-                    :class="{is_active: isInFavorites, is_tooltip: isTip}"
-                    v-if="!isW88 && !isOneLotGame"
-                    @click="setMyFavorites"
-                >
+                    :class="{ is_active: isInFavorites, is_tooltip: isTip }" v-if="!isW88 && !isOneLotGame"
+                    @click="setMyFavorites">
                     <svg class="gr_my-favorites__icon" viewBox="0 0 17.85 16.11">
-                        <path d="M8.93,3.15C8.17-.47,2.14-.66.77,3.65c-2.18,6.79,6.67,9,8.16,12,1.48-3.07,10.32-5.25,8.15-12C15.71-.66,9.68-.47,8.93,3.15Z" />
+                        <path
+                            d="M8.93,3.15C8.17-.47,2.14-.66.77,3.65c-2.18,6.79,6.67,9,8.16,12,1.48-3.07,10.32-5.25,8.15-12C15.71-.66,9.68-.47,8.93,3.15Z" />
                     </svg>
                     <span class="gr_tooltip__arrow" />
-                    <div class="gr_tooltip__popper">{{$t(tipTxt)}}</div>
+                    <div class="gr_tooltip__popper">{{ $t(tipTxt) }}</div>
                 </div>
-                <span class="gr_games-vn-header__title">{{currentTitle}}</span>
-                <div
-                    class="gr_games-vn-lotteryStatus-warp"
-                    @click.stop="toggleStatus"
-                    :class="{is_active: isStatusActive}"
-                    v-if="getDataArr['VN_ALL'] && getSellTime"
-                >
-                    <div class="gr_games-vn-lotteryStatus-toggle">{{$t('timetable_003')}}</div>
-                    <div v-if="!VN_isLocal || lang !== 'vn'" class="gr_games-vn-lotteryStatus" :style="{'max-width': maxWStatus}" ref="lotteryStatus">
+                <span class="gr_games-vn-header__title">{{ currentTitle }}</span>
+                <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
+                    :class="{ is_active: isStatusActive }" v-if="getDataArr['VN_ALL'] && getSellTime">
+                    <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
+                    <div v-if="!VN_isLocal || lang !== 'vn'" class="gr_games-vn-lotteryStatus"
+                        :style="{ 'max-width': maxWStatus }" ref="lotteryStatus">
                         <div class="gr_games-vn-lotteryStatus__sold">
                             <span class="gr_games-vn-lotteryStatus__sold--title">
                                 <!-- {{$t('贩售:')}} -->
-                                {{$t('timetable_001')}}
+                                {{ $t('timetable_001') }}
                             </span>
                             <span class="gr_games-vn-lotteryStatus__sold--txt">
-                                {{$t(getSellTime.selling[0], {
+                                {{ $t(getSellTime.selling[0], {
                                     '0': getSellTime.selling[1],
-                                    '1': getSellTime.selling[2]}
-                                )}}
+                                    '1': getSellTime.selling[2]
+                                }
+                                ) }}
                             </span>
                             <span>;</span>
                         </div>
                         <div class="gr_games-vn-lotteryStatus__time">
                             <span class="gr_games-vn-lotteryStatus__time--title">
                                 <!-- {{$t('开奖:')}} -->
-                                {{$t('timetable_002')}}
+                                {{ $t('timetable_002') }}
                             </span>
                             <span class="gr_games-vn-lotteryStatus__time--txt">
-                                {{$t(getSellTime.winning[0], {
+                                {{ $t(getSellTime.winning[0], {
                                     '0': getSellTime.winning[1],
                                     '1': getSellTime.winning[2],
-                                    '2': getSellTime.winning[3]}
-                                )}}
+                                    '2': getSellTime.winning[3]
+                                }
+                                ) }}
                             </span>
                         </div>
                     </div>
-                    <div v-else class="gr_games-vn-lotteryStatus" :style="{'max-width': maxWStatus}" ref="lotteryStatus">
+                    <div v-else class="gr_games-vn-lotteryStatus" :style="{ 'max-width': maxWStatus }"
+                        ref="lotteryStatus">
                         <div class="gr_games-vn-lotteryStatus__sold">
                             <span class="gr_games-vn-lotteryStatus__sold--txt">
                                 Nhận cược và mở thưởng từ 05:00 hôm nay đến 07:00 ngày mai
@@ -66,8 +65,8 @@
             </div>
             <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
                 <span class="gr_desc__draw" v-if="isOpen">
-                     <!-- {{$t("目前尚未开放奖期")}} -->
-                    {{$t('common_003')}}
+                    <!-- {{$t("目前尚未开放奖期")}} -->
+                    {{ $t('common_003') }}
                 </span>
                 <span v-else>
                     <!-- 第{0}期 -->
@@ -75,44 +74,40 @@
                         <strong place="0">{{ VN_localIssue }}</strong>
                     </i18n>
                     <span class="gr_desc__draw">
-                        <strong>{{localTimer}}</strong>
+                        <strong>{{ localTimer }}</strong>
                     </span>
                 </span>
             </div>
             <div class="gr_games-vn-header__desc" v-else>
                 <span class="gr_desc__draw" v-if="isOpen">
-                     <!-- {{$t("目前尚未开放奖期")}} -->
-                    {{$t('common_003')}}
+                    <!-- {{$t("目前尚未开放奖期")}} -->
+                    {{ $t('common_003') }}
                 </span>
                 <span v-else>
                     <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_S']">
                         <!-- 南 -->
-                        {{$t("vn_t_048")}}
-                        <strong>{{VN_S_timer}}</strong>
+                        {{ $t("vn_t_048") }}
+                        <strong>{{ VN_S_timer }}</strong>
                     </span>
                     <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_C']">
                         <!-- 中 -->
-                        {{$t("vn_t_049")}}
-                        <strong>{{VN_C_timer}}</strong>
+                        {{ $t("vn_t_049") }}
+                        <strong>{{ VN_C_timer }}</strong>
                     </span>
                     <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_N']">
                         <!-- 北 -->
-                        {{$t("vn_t_050")}}
-                        <strong>{{VN_N_timer}}</strong>
+                        {{ $t("vn_t_050") }}
+                        <strong>{{ VN_N_timer }}</strong>
                     </span>
                 </span>
             </div>
             <div class="gr_games-vn-header__button-group">
-                <div class="gr_button-group__button  u_c--pointer"  v-if="isShowOfficalPage && !isHideOfficalPage">
-                    <a
-                        v-if="!isShowDemo"
-                        class="i_lottery-period--official-website"
-                        :href="openOfficalPage"
-                        target="_blank"
-                    >
+                <div class="gr_button-group__button  u_c--pointer" v-if="isShowOfficalPage && !isHideOfficalPage">
+                    <a v-if="!isShowDemo" class="i_lottery-period--official-website" :href="openOfficalPage"
+                        target="_blank">
                         <!-- 开奖官网 -->
                         <span>
-                            {{$t('common_006')}}
+                            {{ $t('common_006') }}
                         </span>
                     </a>
                 </div>
@@ -120,7 +115,16 @@
                     <i class="i_lottery-period--history" />
                 </div>
             </div>
-            <div class="gr_games-vn-header__desc">122323</div>
+            <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
+                <dt class="gr_number__nubmer_new--title">
+                    <i class="gr_item__title--icon">{{ 8 }}</i>
+                    <span class="gr_number__nubmer_new"> {{ lastNumber[8] }}</span>
+                </dt>
+                <dt class="gr_number__nubmer_new--title">
+                    <i class="gr_item__title--icon">{{ 7 }}</i>
+                    <span class="gr_number__nubmer_new"> {{ lastNumber[7] }}</span>
+                </dt>
+            </div>
         </div>
     </div>
 </template>
@@ -148,6 +152,19 @@ export default {
         clearTimeout(this.tipTimer)
         clearTimeout(this.setFavoritingTimer)
     },
+    props: {
+        handleHistoryToggle: {
+            type: Function,
+            required: true
+        }
+    },
+    watch: {
+        VN_currentlottery(newVal, oldVal) {
+            console.log('[Header320 watch]', this._uid, 'old=', oldVal && oldVal.name, 'new=', newVal && newVal.name)
+            this[_M.SET_GAME_LASTNUMBER_VN]()
+            this[_M.GET_GAME_LASTNUMBER_VN]()
+        }
+    },
     methods: {
         ...mapActions([
             _M.T_GAME_TOOLS,
@@ -155,7 +172,9 @@ export default {
             _M.SET_HEADER_NAV_IS_BACK,
             _M.SET_MY_FAVORITES,
             _M.SET_HISTORY,
-            _M.SET_POP_ACTIVE
+            _M.SET_POP_ACTIVE,
+            _M.GET_GAME_LASTNUMBER_VN,
+            _M.SET_GAME_LASTNUMBER_VN
         ]),
         // showTools() {
         //     this.gameModeTemp = this.gameShowMode
@@ -204,16 +223,16 @@ export default {
         },
         // 導向到歷史獎期頁面
         goHistory() {
-            this[_M.SET_HISTORY]({path: this.$route.fullPath, mode: 'add'})
+            this[_M.SET_HISTORY]({ path: this.$route.fullPath, mode: 'add' })
             this[_M.SET_HEADER_NAV_IS_BACK](true)
             this.$router.push(this.openHistory)
         },
         toggleStatus() {
-            this[_M.SET_POP_ACTIVE]({gameStatus: !this.isStatusActive})
+            this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
             const lot = this.$refs.lotteryStatus
             lot.offsetWidth >= lot.offsetParent.offsetWidth &&
                 (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
-        }
+        },
     },
     computed: {
         ...mapGetters([
@@ -239,7 +258,8 @@ export default {
             'isOneLotGame',
             'hideOw',
             'lang',
-            'isShowDemo'
+            'isShowDemo',
+            'VN_lastNumber'
         ]),
         currentTitle() {
             return this.VN_isLocal
@@ -319,6 +339,9 @@ export default {
         isHideOfficalPage() {
             const lottery = this.VN_isLocal || 'vn'
             return this.hideOw[lottery]
+        },
+        lastNumber() {
+            return this.VN_lastNumber.split(',')
         }
     }
 }

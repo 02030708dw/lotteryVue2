@@ -532,8 +532,25 @@ $gr_games-vn-header-height: 60px;
         position: relative;
         top: 3px;
     }
-
-
+    .gr_number__nubmer_new--title{
+        font-size: 12px;
+    }
+    .gr_item__title--icon{
+            margin: 0.3em 0;
+            display: inline-block;
+            text-align: center;
+            line-height: 20px;
+            width: 20px;
+            height: 20px;
+            color: #fff;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOC41MDQ0OCIgaGVpZ2h0PSIxOC44MDk1NiIgdmlld0JveD0iMCAwIDE4LjUwNDQ4IDE4LjgwOTU2Ij48dGl0bGU+6LOH55SiIDE8L3RpdGxlPjxnIGlkPSLlnJblsaRfMiIgZGF0YS1uYW1lPSLlnJblsaQgMiI+PGcgaWQ9IuWcluWxpF8xLTIiIGRhdGEtbmFtZT0i5ZyW5bGkIDEiPjxwYXRoIGQ9Ik05LjI1MjQ1LDMuMTg1NjlBNi4yMTg2OCw2LjIxODY4LDAsMSwxLDMuMDQzMzYsOS40MTQzNyw2LjIxNjUyLDYuMjE2NTIsMCwwLDEsOS4yNTI0NSwzLjE4NTY5Wk05LjI1MjQ1LDBsMS4zMzg5NCwyLjA2OTgxTDEyLjQ3NzI3LjU2ODUzbC41Mjg2LDIuMzkzNjQsMi4yOTI5Mi0uNzUwNDFMMTQuOTkzNyw0LjYyNjJsMi4zOTUzMS4wODExOUwxNi4yNzE5Miw2Ljg3ODc3bDIuMjMyNTYuODkyMzZMMTYuNzE5MzMsOS40MzQ3NWwxLjc4NTE1LDEuNjAyODUtMi4yNTIxNS45NTQzNCwxLjEzNjY4LDIuMTA5NC0yLjQzNTcuMTIyMzcuMzQ1NDgsMi4zNzQxLTIuMzMzMy0uNzEwMDdMMTIuNDc3MjcsMTguMjQxbC0xLjk0NzA2LTEuNDgxMjdMOS4yNTI0NSwxOC44MDk1Niw3LjkzMjYzLDE2LjczOTcyLDYuMDQ2MzQsMTguMjQxbC0uNTQ4MTUtMi4zOTM2NC0yLjI3MzM2Ljc1MDQ1LjMwNTA4LTIuNDE0OS0yLjQxNDQ0LS4wODE1NkwyLjIzMDk0LDExLjkzMDgsMCwxMS4wMzc2LDEuODA0NjksOS4zNzQsMCw3Ljc3MTEzbDIuMjUyMTEtLjk1MzU1TDEuMTE1NDcsNC43MDczOSwzLjU3MDMsNC41ODU4MiwzLjIyNDgyLDIuMjExNzZsMi4zMzM3MS43MTAwNy40ODc4LTIuMzUzM0w3Ljk5NDI0LDIuMDQ5Wm0wLDIuNTc2NzhhNi44Mjc2LDYuODI3NiwwLDEsMS02LjgzOCw2LjgzNzU5LDYuODI4NDYsNi44Mjg0NiwwLDAsMSw2LjgzOC02LjgzNzU5WiIgc3R5bGU9ImZpbGw6I2M2OWM2ZDtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L2c+PC9zdmc+');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+        .gr_games-vn-header__nubmer_new{
+            display: flex;
+        }
     .gr_games-vn-header__animation {
         padding-bottom: 22px;
         & .gr_animation__prompt {
