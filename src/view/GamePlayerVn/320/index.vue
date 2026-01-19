@@ -134,8 +134,6 @@ export default {
             this.isFast = bool
         },
         handleHistoryToggle() {
-            console.log(123);
-
             this[_M.SET_POP_ACTIVE]({ VNhistory: !this.getPopActive.VNhistory })
         },
     },

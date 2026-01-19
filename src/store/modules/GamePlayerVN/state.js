@@ -5,6 +5,7 @@ export default {
     VN_jsDynamicConfig: {},
     VN_lastNumber: '',
     VN_lastIssue: '',
+    VN_lastNumber_V2: [],
     VN_area: {},
     VN_gameConfig: {},
     VN_game: {

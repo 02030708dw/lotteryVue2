@@ -510,6 +510,8 @@ export const SET_GAME_CONFIG_VN_DATA = 'SET_GAME_CONFIG_VN_DATA'
 export const GET_GAME_LASTNUMBER_VN = 'GET_GAME_LASTNUMBER_VN'
 /** 設定越南彩最新號碼 */
 export const SET_GAME_LASTNUMBER_VN = 'SET_GAME_LASTNUMBER_VN'
+/** 設定越南彩最新號碼V2 */
+export const SET_GAME_LASTNUMBER_VN_V2 = 'SET_GAME_LASTNUMBER_VN_V2'
 /** 設定越南彩獎期城市 */
 export const SET_VN_AREA_DATA = 'SET_VN_AREA_DATA'
 /** 設定越南彩資料 */
