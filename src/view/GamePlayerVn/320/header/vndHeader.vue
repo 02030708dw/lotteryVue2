@@ -74,6 +74,7 @@ export default defineComponent({
 
         .r {
             .l();
+            gap: 0;
             color: @fg;
             overflow: hidden;
 

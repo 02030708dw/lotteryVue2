@@ -4,7 +4,7 @@
             <vnd-header>
                 <template #top>
                     <div class="l">
-                        <span>{{ VN_localIssue }}</span>
+                        <span>{{ VN_localIssue|fIssue }}</span>
                         <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
                             <dt class="gr_number__nubmer_new--title">
                                 <i class="gr_item__title--icon">{{ 8 }}</i>
@@ -17,6 +17,7 @@
                         </div>
                     </div>
                     <div class="r">
+                        <span>{{ VN_lastIssue | fIssue}}</span>
                         <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
                                 <span class="gr_desc__draw" v-if="isOpen">
                                     <!-- {{$t("目前尚未开放奖期")}} -->
@@ -97,10 +98,15 @@ export default {
     },
     watch: {
         VN_currentlottery(newVal, oldVal) {
-            console.log('[Header320 watch]', this._uid, 'old=', oldVal && oldVal.name, 'new=', newVal && newVal.name)
+            // console.log('[Header320 watch]', this._uid, 'old=', oldVal && oldVal.name, 'new=', newVal && newVal.name)
             this[_M.SET_GAME_LASTNUMBER_VN]()
             this[_M.GET_GAME_LASTNUMBER_VN]()
         }
+    },
+    filters:{
+      fIssue(v=''){
+          return v.substring(4,v.length)
+      }
     },
     methods: {
         ...mapActions([
@@ -196,7 +202,8 @@ export default {
             'hideOw',
             'lang',
             'isShowDemo',
-            'VN_lastNumber'
+            'VN_lastNumber',
+            'VN_lastIssue'
         ]),
         currentTitle() {
             return this.VN_isLocal
