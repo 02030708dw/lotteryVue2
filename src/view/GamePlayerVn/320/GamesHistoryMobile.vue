@@ -58,7 +58,7 @@ export default {
                 const rows = formatVNBingoCode((it && it.code) || '')
                 return {
                     issue: it && it.issue,
-                    rows: Array.isArray(rows) ? rows.slice().reverse() : []
+                    rows: Array.isArray(rows) ? rows.slice() : []
                 }
             })
 
