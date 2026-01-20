@@ -1,0 +1,41 @@
+@space-between:space-between;
+@space-around:space-around;
+@space-evenly:space-evenly;
+@center:center;
+@stretch:stretch;
+@f_start:flex-start;
+@f_end:flex-end;
+@start:start;
+@end:end;
+@vertical:column;
+@horizontal:row;
+@f_act:#fff;
+@b_act:orange;
+@primary_color:#f97f32;
+.mouse_h(@s:1.1){
+  cursor: pointer;
+  &:hover{
+    transform: scale(@s);
+  }
+}
+.flex_default{
+  display: flex;
+}
+.centerFlex(@type:@horizontal;@row:@center;@col:@center){
+  &:extend(.flex_default);
+  flex-direction: @type;
+  justify-content: @row;
+  align-items: @col;
+}
+.overFlex(@type:@horizontal;@row:@f_start;@col:@f_start){
+  &:extend(.flex_default);
+  flex-direction: @type;
+  justify-content: @row;
+  align-items: @col;
+}
+.topCenterFlex(@type:@vertical,@row:@f_start,@col:@center){
+  &:extend(.flex_default);
+  flex-direction: @type;
+  justify-content: @row;
+  align-items: @col;
+}

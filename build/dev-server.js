@@ -30,7 +30,12 @@ var compiler = webpack(webpackConfig)
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
     publicPath: webpackConfig.output.publicPath,
     quiet: true,
-    logLevel: 'error'
+    logLevel: 'error',
+    watchOptions: {
+        ignored: /node_modules/,
+        poll: 1000,          // 每 1s 轮询一次
+        aggregateTimeout: 300
+    }
 })
 
 const args = process.argv.slice(2)
