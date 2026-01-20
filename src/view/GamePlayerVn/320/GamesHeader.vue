@@ -1,7 +1,7 @@
 <template>
     <div class="gr_games-vn-header  gr_games-vn-header--320  gr_container bg_secondary">
         <div class="gr_games-vn-header__inner  u_clearfix">
-            <vnd-header>
+            <vnd-header @onExtra="headerClick">
                 <template #top>
                     <div class="l">
                         <span>{{ VN_lastIssue | fIssue }}</span>
@@ -176,6 +176,15 @@ export default {
             lot.offsetWidth >= lot.offsetParent.offsetWidth &&
             (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
         },
+        headerClick(t){
+            switch (t) {
+                case 'his':
+                    return this.goHistory()
+                case 'betRecord':
+                case 'award':
+                case 'per':
+            }
+        }
     },
     computed: {
         ...mapGetters([
