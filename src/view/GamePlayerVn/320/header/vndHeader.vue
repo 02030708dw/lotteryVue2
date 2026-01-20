@@ -19,21 +19,21 @@ export default defineComponent({
         </div>
         <div class="bott">
             <div class="btn" @click="$emit('onExtra','his')">{{ $t('history') }}</div>
-            <div class="btn" @click="$emit('onExtra','betRecord')">{{ $t('投注记录') }}</div>
-            <div class="empty btn" v-if="showEmptyBtn" @click="$emit('openAwardHis')">
-                {{ $t('recentOpen') }}
-                <slot name="btnnr"/>
-            </div>
-            <div class="btn" :class="sp?'act':''" @click="$emit('onExtra','per')">{{ $t('periodC') }}&nbsp;&nbsp;
-                <p class="perIcon" :style="{transform:sp?'rotate(0deg)':'rotate(180deg)'}">
-                    <svg data-v-80a21654="" t="1715154575055" style="transform: rotate(180deg);"
-                         viewBox="0 0 1024 1024"
-                         version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4352" width="12" height="12">
-                        <path data-v-80a21654="" d="M0 170.666667 1024 170.666667 512 853.333333Z" p-id="4353"
-                              fill="#ffffff"></path>
-                    </svg>
-                </p>
-            </div>
+            <!--            <div class="btn" @click="$emit('onExtra','betRecord')">{{ $t('投注记录') }}</div>
+                        <div class="empty btn" v-if="showEmptyBtn" @click="$emit('onExtra','award')">
+                            {{ $t('recentOpen') }}
+                            <slot name="btnnr"/>
+                        </div>
+                        <div class="btn" :class="sp?'act':''" @click="$emit('onExtra','per')">{{ $t('periodC') }}&nbsp;&nbsp;
+                            <p class="perIcon" :style="{transform:sp?'rotate(0deg)':'rotate(180deg)'}">
+                                <svg data-v-80a21654="" t="1715154575055" style="transform: rotate(180deg);"
+                                     viewBox="0 0 1024 1024"
+                                     version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4352" width="12" height="12">
+                                    <path data-v-80a21654="" d="M0 170.666667 1024 170.666667 512 853.333333Z" p-id="4353"
+                                          fill="#ffffff"></path>
+                                </svg>
+                            </p>
+                        </div>-->
         </div>
     </div>
 </template>
@@ -89,8 +89,8 @@ export default defineComponent({
 
     .bott {
         //height: 0.9rem;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         gap: 5px;
 
         > div {

@@ -1,10 +1,10 @@
 <template>
     <div class="gr_games-vn-header  gr_games-vn-header--320  gr_container bg_secondary">
         <div class="gr_games-vn-header__inner  u_clearfix">
-            <vnd-header>
+            <vnd-header @onExtra="headerClick">
                 <template #top>
                     <div class="l">
-                        <span>{{ VN_localIssue|fIssue }}</span>
+                        <span>{{ VN_lastIssue |fIssue }}</span>
                         <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
                             <dt class="gr_number__nubmer_new--title">
                                 <i class="gr_item__title--icon">{{ 8 }}</i>
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="r">
-                        <span>{{ VN_lastIssue | fIssue}}</span>
+                        <span>{{ VN_localIssue | fIssue}}</span>
                         <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
                                 <span class="gr_desc__draw" v-if="isOpen">
                                     <!-- {{$t("目前尚未开放奖期")}} -->
@@ -176,6 +176,15 @@ export default {
             lot.offsetWidth >= lot.offsetParent.offsetWidth &&
             (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
         },
+        headerClick(t){
+            switch (t) {
+                case 'his':
+                    return this.goHistory()
+                case 'betRecord':
+                case 'award':
+                case 'per':
+            }
+        }
     },
     computed: {
         ...mapGetters([
