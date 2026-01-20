@@ -4,20 +4,20 @@
             <vnd-header>
                 <template #top>
                     <div class="l">
-                        <span>{{ VN_localIssue|fIssue }}</span>
+                        <span>{{ VN_lastIssue | fIssue }}</span>
                         <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
                             <dt class="gr_number__nubmer_new--title">
-                                <i class="gr_item__title--icon">{{ 8 }}</i>
-                                <span class="gr_number__nubmer_new"> {{ lastNumber[8] }}</span>
+                                <i class="gr_item__title--icon grand_prize">{{ 0 }}</i>
+                                <span class="gr_number__nubmer_new"> {{ lastNumber[lastNumber.length - 1] }}</span>
                             </dt>
                             <dt class="gr_number__nubmer_new--title">
-                                <i class="gr_item__title--icon">{{ 1 }}</i>
-                                <span class="gr_number__nubmer_new"> {{ lastNumber[7] }}</span>
+                                <i class="gr_item__title--icon">{{ 8 }}</i>
+                                <span class="gr_number__nubmer_new"> {{ lastNumber[0] }}</span>
                             </dt>
                         </div>
                     </div>
                     <div class="r">
-                        <span>{{ VN_lastIssue | fIssue}}</span>
+                        <span>{{  VN_localIssue | fIssue}}</span>
                         <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
                                 <span class="gr_desc__draw" v-if="isOpen">
                                     <!-- {{$t("目前尚未开放奖期")}} -->
