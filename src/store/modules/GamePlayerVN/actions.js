@@ -29,17 +29,17 @@ export default {
      * @param {any} { dispatch, commit, state }
      */
     [_M.RESET_GAME_VN]({ commit, dispatch }) {
-        dispatch(_M.GAME_ORDER_VN_SUBMIT, {type: 5})
-        dispatch(_M.GAME_ORDER_VN_SUBMIT, {type: 8})
+        dispatch(_M.GAME_ORDER_VN_SUBMIT, { type: 5 })
+        dispatch(_M.GAME_ORDER_VN_SUBMIT, { type: 8 })
         dispatch(_M.SET_GAME_VN_DATA, {
             VN_subMenuIndex: 0,
             VN_menuIndex: 0,
             lotteryId: 0
         })
         commit(_M.SET_FLIP_TIMEER_VN_DATA, {
-            VN_S: {...defaultFlipTimer}, // VN_S
-            VN_C: {...defaultFlipTimer}, // VN_C
-            VN_N: {...defaultFlipTimer} // VN_N
+            VN_S: { ...defaultFlipTimer }, // VN_S
+            VN_C: { ...defaultFlipTimer }, // VN_C
+            VN_N: { ...defaultFlipTimer } // VN_N
         })
         commit(_M.SET_COLD_DOWN_VN_DATA, {
             VN_S: false,
@@ -98,7 +98,7 @@ export default {
      * 設定越南彩資料
      * @param {any} { state, commit }
      */
-    [_M.SET_GAME_VN_DATA] ({ commit }, payload) {
+    [_M.SET_GAME_VN_DATA]({ commit }, payload) {
         commit(_M.SET_GAME_VN_DATA, payload)
     },
     /**
@@ -106,7 +106,7 @@ export default {
      * @param {any} { state, commit }
      * @param {Object} payload 是否更新獎期
      */
-    [_M.GET_COLD_DOWN_VN_DATA] ({ commit, rootGetters, dispatch }, payload) {
+    [_M.GET_COLD_DOWN_VN_DATA]({ commit, rootGetters, dispatch }, payload) {
         const param = { menuType: 3, issueCount: 1 }
         const options = { isPromise: true }
         const fetchCountdownConfig = () => {
@@ -121,7 +121,7 @@ export default {
                     const errorCode = +data.result
                     if (errorCode === 0) {
                         const { countdownData, nowTime, stop_bet } = data.data
-                        countdownData.forEach(({function_type, issueDate, lotteryId}) => {
+                        countdownData.forEach(({ function_type, issueDate, lotteryId }) => {
                             tempData[function_type] = {
                                 function_type,
                                 ...issueDate[0],
@@ -162,22 +162,25 @@ export default {
         }
         const fetchAreaIssue = () => {
             handleAjax(API.areaIssue, param, rootGetters, options)
-                .then(({data}) => commit(_M.SET_VN_AREA_DATA, data))
+                .then(({ data }) => commit(_M.SET_VN_AREA_DATA, data))
                 .catch(() => setTimeout(fetchAreaIssue, 5000))
         }
         fetchCountdownConfig()
         fetchAreaIssue()
         fetchStopBetNumber({ commit, rootGetters })
     },
-    [_M.SET_GAME_LASTNUMBER_VN] ({ commit }, payload) {
+    [_M.SET_GAME_LASTNUMBER_VN]({ commit }, payload) {
         commit(_M.SET_GAME_LASTNUMBER_VN, payload)
+    },
+    [_M.SET_GAME_LASTNUMBER_VN_V2]({ commit }, payload) {
+        commit(_M.SET_GAME_LASTNUMBER_VN_V2, payload)
     },
     /**
      * 取得越南彩最新號碼
      * @param {any} { state, commit }
      * @param {Object} payload fatch 參數
      */
-    [_M.GET_GAME_LASTNUMBER_VN] ({ commit, rootGetters }) {
+    [_M.GET_GAME_LASTNUMBER_VN]({ commit, rootGetters }) {
         const options = { isPromise: true }
         const {
             VN_lastIssue = '',
@@ -193,8 +196,15 @@ export default {
         let retry = 5
         const fetchlastNumber = () => {
             const { name: menuCode, lottery: lotteryId } = VN_currentlottery
+            console.log({ menuCode, lotteryId }, rootGetters, options);
+            handleAjax(API.vnLatestDrawV2, { menuCode, lotteryId }, rootGetters, options)
+                .then(({ data }) => {
+                    const obj = data[menuCode]
+
+                    commit(_M.SET_GAME_LASTNUMBER_VN_V2, obj)
+                })
             handleAjax(API.vnLatestDraw, { menuCode, lotteryId }, rootGetters, options)
-                .then(({data}) => {
+                .then(({ data }) => {
                     const { code: lastNumber, issue: lastIssue } = data[menuCode]
                     const obj = { lastNumber, lastIssue }
                     // 沒獎期間隔2秒就更新
@@ -217,11 +227,11 @@ export default {
      * @param {any} { state, commit }
      * @param {Object} payload fatch 參數
      */
-    [_M.GET_GAME_CONFIG_VN_DATA] ({ commit, rootGetters }, payload = { menuType: 3 }) {
+    [_M.GET_GAME_CONFIG_VN_DATA]({ commit, rootGetters }, payload = { menuType: 3 }) {
         const options = { isPromise: true }
         const fetchGameConfigNF = () => {
             handleAjax(API.gameConfigNF, payload, rootGetters, options)
-                .then(({data: {vnBlockedMethod, ...data}}) => {
+                .then(({ data: { vnBlockedMethod, ...data } }) => {
                     commit(_M.SET_GAME_CONFIG_VN_DATA, data)
                     commit(_M.SET_BLOCKED_VN_DATA, vnBlockedMethod)
                     rootGetters.getVue().$root.$emit('blocked')
@@ -235,7 +245,7 @@ export default {
      * @param {any} { state, commit }
      * @param {Number} payload 金額
      */
-    [_M.SET_GAME_AREA_VN_MONEY] ({ commit }, payload) {
+    [_M.SET_GAME_AREA_VN_MONEY]({ commit }, payload) {
         commit(_M.SET_GAME_AREA_VN_MONEY, payload)
     },
     /**
@@ -268,9 +278,9 @@ export default {
                 if (errorCode === 0) {
                     getters.VN_isOld
                         ? instance.$root.$emit('reset')
-                        : instance.$root.$emit('reset', {times: ''})
-                    getters.VN_isOld && dispatch(_M.GAME_ORDER_VN_SUBMIT, {type: 5})
-                    ;(!payload || getters.VN_isOld) && dispatch(_M.GAME_ORDER_VN_SUBMIT, {type: 1, showList: []})
+                        : instance.$root.$emit('reset', { times: '' })
+                    getters.VN_isOld && dispatch(_M.GAME_ORDER_VN_SUBMIT, { type: 5 })
+                        ; (!payload || getters.VN_isOld) && dispatch(_M.GAME_ORDER_VN_SUBMIT, { type: 1, showList: [] })
                 }
             },
             afterClose() {
@@ -305,7 +315,7 @@ export default {
      * @param {Object} payload 項目及是否快速投注
      */
     [_M.GAME_ORDER_VN_SUBMIT_REMOVE]({ commit }, payload) {
-        const {index, isFast = true} = payload
+        const { index, isFast = true } = payload
         const type = isFast ? 2 : 4
         commit(_M.GAME_ORDER_VN_SUBMIT, {
             type,

@@ -90,6 +90,8 @@ export const API = {
     historyBalls: ApiFn('game/historyBalls'),
     /** 越南投注頁歷史獎號 */
     vnLatestDraw: ApiFn('game/vnLatestDraw'),
+    /** 越南投注頁歷史獎號2 */
+    vnLatestDrawV2: ApiFn('game/vnLatestDrawV2'),
     /** 越南歷史獎號 */
     vnHistoryBall: ApiFn('game/vnHistoryBall'),
     /** 抓表頭時間用 */

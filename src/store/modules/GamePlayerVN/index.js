@@ -49,7 +49,7 @@ const getters = {
     },
     VN_nowblockedId: (state, getters) => {
         let obj = {}
-        getters.VN_nowblockedData.forEach(({methodId, lotteryId}) => {
+        getters.VN_nowblockedData.forEach(({ methodId, lotteryId }) => {
             const key = methodId || lotteryId
             obj[key] = true
         })
@@ -136,6 +136,8 @@ const getters = {
     VN_jsDynamicConfig: state => state.VN_jsDynamicConfig,
     VN_lastNumber: state => state.VN_lastNumber,
     VN_lastIssue: state => state.VN_lastIssue,
+    VN_lastNumber_V2: state => state.VN_lastNumber_V2,
+    VN_lastIssue_V2: state => state.VN_lastIssue_V2,
     VN_currentlottery: (state, getters) => getters.lotteryListLocalVN[getters.VN_lotteryId],
     VN_localArea: (state, getters) => (getters.VN_currentlottery || {}).name,
     VN_isLocal: state => +state.VN_game.lotteryId,
@@ -246,7 +248,7 @@ const getters = {
     },
     VN_nowStopId: (state, getters) => {
         let obj = {}
-        getters.VN_nowStopData.forEach(({methodId, issue}) => {
+        getters.VN_nowStopData.forEach(({ methodId, issue }) => {
             const key = methodId + issue
             obj[key] = true
         })
@@ -289,7 +291,7 @@ const getters = {
         return obj
     },
     VN_StopNumberFilter: (state, getters) => {
-        return getters.VN_gameSubmit.showList.filter(({cityId, methodId, issue, codes}) => {
+        return getters.VN_gameSubmit.showList.filter(({ cityId, methodId, issue, codes }) => {
             if (getters.VN_stopNumberCalc[`${cityId}_${issue}_${methodId}`]) {
                 let bool = false
                 getters.VN_stopNumberCalc[`${cityId}_${issue}_${methodId}`].forEach((code) => {
@@ -304,8 +306,8 @@ const getters = {
         })
     },
     VN_StopNumberFastFilter: (state, getters) => {
-        const {cityId, issue, codes} = getters.VN_gameOrder
-        return getters.VN_gameOrder.showList.filter(({methodId}) => {
+        const { cityId, issue, codes } = getters.VN_gameOrder
+        return getters.VN_gameOrder.showList.filter(({ methodId }) => {
             if (getters.VN_stopNumberCalc[`${cityId}_${issue}_${methodId}`]) {
                 let bool = false
                 getters.VN_stopNumberCalc[`${cityId}_${issue}_${methodId}`].forEach((code) => {
@@ -325,7 +327,7 @@ const getters = {
     },
     VN_nowStopAndOverId: (state, getters) => {
         let obj = {}
-        getters.VN_nowStopAndOverData.forEach(({methodId, issue}) => {
+        getters.VN_nowStopAndOverData.forEach(({ methodId, issue }) => {
             const key = methodId + issue
             obj[key] = true
         })

@@ -23,7 +23,7 @@ const orderMethod = {
             let newOrder = {}
             Object.entries(order).forEach(([key, val]) => (newOrder[+key + insRowNum] = val))
             state.VN_gameOrder.showList = [...data.showList, ...showList]
-            state.VN_gameOrder.order = {...data.order, ...newOrder}
+            state.VN_gameOrder.order = { ...data.order, ...newOrder }
             state.VN_gameOrder.orderRowNum += orderRowNum
             state.VN_gameOrder.ltMoneyAmout += ltMoneyAmout
         } else {
@@ -34,7 +34,7 @@ const orderMethod = {
     4: (state, payload) => {
         const { money, nums, tNums } = state.VN_gameOrder.showList[payload.index]
         state.VN_gameOrder.showList.splice(payload.index, 1)
-        const orderRowNum = state.VN_gameOrder.showList.map(({id}) => id).unique().length
+        const orderRowNum = state.VN_gameOrder.showList.map(({ id }) => id).unique().length
         state.VN_gameOrder.orderRowNum = orderRowNum
         state.VN_gameOrder.ltMoneyAmout -= money
         state.VN_gameOrder.ltProjectNum -= tNums || nums
@@ -51,7 +51,7 @@ const orderMethod = {
     6: (state, payload) => {
         state.VN_gameOrder.showList.forEach((list, i) => {
             state.VN_gameOrder.showList[i].cityList = list.cityList.filter((city) => {
-                const {issue, pos} = city
+                const { issue, pos } = city
                 const bool = issue.replace('-', '') >= payload.issueAreaDate[pos]
                 if (!bool) {
                     list.methodVal.forEach((val, j) => {
@@ -117,6 +117,14 @@ export default {
         state.VN_lastIssue = lastIssue
     },
     /**
+     * 設定越南彩最新號碼V2
+     * @param {any} state Global Stroe
+     * @param {any} payload  號碼區金額数组
+     */
+    [_M.SET_GAME_LASTNUMBER_VN_V2](state, payload = {}) {
+        state.VN_lastNumber_V2 = payload
+    },
+    /**
      * 設定越南彩獎期城市
      * @param {any} state Global Stroe
      * @param {any} payload  獎期城市
@@ -138,7 +146,7 @@ export default {
      * @param {any} payload  Object 要存進去的資料
      */
     [_M.SET_GAME_VN_DATA](state, payload) {
-        state.VN_game = {...state.VN_game, ...payload}
+        state.VN_game = { ...state.VN_game, ...payload }
     },
     /**
      * 越南彩彈窗資料

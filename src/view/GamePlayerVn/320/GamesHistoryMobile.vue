@@ -1,24 +1,36 @@
 <template>
     <div class="vn-history-mobile">
         <div class="vn-history-mobile__panel" ref="panel">
-            <!-- 右上角关闭 -->
-            <!-- <button class="vn-history-mobile__close" type="button" @click="handleHistoryToggle">
-                ×
-            </button> -->
-
             <div class="vn-history-mobile__content">
-                <dl class="vn-history-mobile__item" v-for="(number, ranking) in formatPrize" :key="ranking">
-                    <dt class="vn-history-mobile__level">
-                        <i class="vn-history-mobile__badge">
-                            {{ formatPrize.length - (ranking + 1) }}
-                        </i>
-                    </dt>
+                <!-- 表头：5列期号 -->
+                <div class="vn-history-mobile__head">
+                    <div class="vn-history-mobile__headLevel">奖期</div>
+                    <div class="vn-history-mobile__headCol" v-for="(col, idx) in cols" :key="idx">
+                        {{ formatIssue(col.issue) }}
+                    </div>
+                </div>
 
-                    <!-- 内容：按你截图那种居中一行文本展示 -->
-                    <dd class="vn-history-mobile__nums">
-                        {{ formatLine(number) }}
-                    </dd>
-                </dl>
+                <!-- 表体：9行(0~8)，每行5列 -->
+                <div class="vn-history-mobile__list">
+                    <dl class="vn-history-mobile__item" v-for="(level, rowIndex) in levels" :key="level">
+                        <dt class="vn-history-mobile__level">
+                            <i class="vn-history-mobile__badge">
+                                {{ level }}
+                            </i>
+                        </dt>
+
+                        <dd class="vn-history-mobile__nums">
+                            <div class="vn-history-mobile__grid">
+                                <div class="vn-history-mobile__col" v-for="(col, cIdx) in cols" :key="cIdx">
+                                    <div class="vn-history-mobile__num"
+                                        v-for="(v, i) in normalizeCell(col.rows[rowIndex])" :key="i">
+                                        {{ v || '-' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
             </div>
         </div>
     </div>
@@ -37,13 +49,39 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['VN_lastNumber']),
-        formatPrize() {
-            return formatVNBingoCode(this.VN_lastNumber)
+        ...mapGetters(['VN_lastNumber_V2']),
+
+        // 取最新 5 期，每期把 code 格式化成 9 行，并 reverse 成：8 在上，0 在下
+        cols() {
+            const src = Array.isArray(this.VN_lastNumber_V2) ? this.VN_lastNumber_V2 : []
+            const raw = src.slice(0, 5).map(it => {
+                const rows = formatVNBingoCode((it && it.code) || '')
+                return {
+                    issue: it && it.issue,
+                    rows: Array.isArray(rows) ? rows.slice() : []
+                }
+            })
+
+            // 不足 5 列补空列（防止布局乱）
+            const rowCount = raw[0].rows.length || 9
+            while (raw.length < 5) {
+                raw.push({ issue: '', rows: Array.from({ length: rowCount }, () => '-') })
+            }
+            return raw
+        },
+
+        // 行数（一般 9）
+        rowCount() {
+            return this.cols[0].rows.length || 0
+        },
+
+        // 左侧等级：8 ~ 0
+        levels() {
+            const n = this.rowCount
+            return Array.from({ length: n }, (_, i) => (n - 1) - i)
         }
     },
     mounted() {
-        // 无遮罩：用全局监听实现“点外部关闭”
         document.addEventListener('mousedown', this.onGlobalDown, true)
         document.addEventListener('touchstart', this.onGlobalDown, true)
     },
@@ -55,18 +93,33 @@ export default {
         onGlobalDown(e) {
             const panel = this.$refs.panel
             if (!panel) return
-            // 点到弹窗内部不关
             if (panel.contains(e.target)) return
-            // 点到外部 -> 通知父组件关闭（父组件 v-if 置 false）
             this.handleHistoryToggle()
         },
-        formatLine(number) {
-            // formatVNBingoCode 可能返回 array / string，这里统一成一行字符串
-            if (Array.isArray(number)) {
-                const list = number.filter(v => v !== null && v !== undefined && v !== '')
-                return list.length ? list.join(',') : '-'
+
+        // 20260119-1920 => 1920（你要完整就直接 return issue）
+        formatIssue(issue) {
+            if (!issue) return ''
+            const parts = String(issue).split('-')
+            return parts[1] || issue
+        },
+
+        // 单元格统一成数组（多条就换行显示）
+        normalizeCell(cell) {
+            if (Array.isArray(cell)) {
+                const list = cell
+                    .flat()
+                    .map(v => (v == null ? '' : String(v)).trim())
+                    .filter(Boolean)
+                return list.length ? list : ['-']
             }
-            return number || '-'
+            if (typeof cell === 'string') {
+                const s = cell.trim()
+                if (!s) return ['-']
+                const arr = s.split(',').map(x => x.trim()).filter(Boolean)
+                return arr.length ? arr : [s]
+            }
+            return ['-']
         }
     }
 }
@@ -82,21 +135,18 @@ export default {
     transform: translateX(-50%);
     border-radius: 12px;
     width: calc(100% - 24px);
-    max-width: 300px;
+    max-width: 360px;
+    /* 原来 300 太窄，5列会挤；这里放宽 */
 
-    /* 卡片阴影 */
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
 
-    /* 顶部三角（像“从点击处展开”） */
+    /* 顶部三角（在外层，不会被 panel 的 overflow 裁掉） */
     &::before {
         content: '';
         position: absolute;
         top: -8px;
-
-        /* 三角默认居中；如果你要偏右，比如靠近按钮：改成 70% 之类 */
         left: 50%;
         transform: translateX(-50%);
-
         width: 0;
         height: 0;
         border-left: 9px solid transparent;
@@ -111,33 +161,72 @@ export default {
     background: #fff;
     border-radius: 12px;
     overflow: hidden;
-
-}
-
-.vn-history-mobile__close {
-    position: absolute;
-    right: 6px;
-    top: 6px;
-    width: 32px;
-    height: 32px;
-    border: 0;
-    background: transparent;
-    font-size: 22px;
-    line-height: 32px;
-    cursor: pointer;
-    color: #666;
 }
 
 .vn-history-mobile__content {
     max-height: 70vh;
     overflow-y: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
 }
 
-/* 行样式 + 隔行黑白条纹（白/浅灰） */
-.vn-history-mobile__item {
+/* ===== 头部：期号 5 列 ===== */
+.vn-history-mobile__head {
+    display: grid;
+    grid-template-columns: 40px repeat(5, 1fr);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #f7f7f7;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.vn-history-mobile__headLevel {
+    height: 28px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #333;
+
+    /* 对齐竖线 */
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 6px;
+        bottom: 6px;
+        width: 1px;
+        background: rgba(0, 0, 0, 0.12);
+    }
+}
+
+.vn-history-mobile__headCol {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #333;
+    border-left: 1px solid rgba(0, 0, 0, 0.06);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.vn-history-mobile__list {
+    min-width: 0;
+}
+
+/* 行样式 + 隔行条纹 */
+.vn-history-mobile__item {
+    display: flex;
+    align-items: stretch;
 
     padding: 2px 5px;
     border-bottom: 1px solid rgba(210, 170, 90, 0.45);
@@ -160,9 +249,9 @@ export default {
     flex: 0 0 40px;
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
 
-    /* 左侧竖线分隔（像你截图那种） */
     &::after {
         content: '';
         position: absolute;
@@ -174,39 +263,61 @@ export default {
     }
 }
 
-/* badge 基础：用背景图当图标，文字藏掉做兜底 */
-.vn-history-mobile__badge {
-    width: 24px;
-    height: 24px;
-    display: block;
-
-    text-indent: -9999px;
-    overflow: hidden;
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-/* 内容居中展示 */
+/* dd：放 5 列 grid */
 .vn-history-mobile__nums {
     flex: 1;
-    padding: 0 10px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1.25;
-    color: #444;
-    word-break: break-word;
+    padding: 0;
+    margin: 0;
 }
+
+/* 5 列格子 */
+.vn-history-mobile__grid {
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.vn-history-mobile__col {
+    padding: 3px 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1px;
+}
+
+/* ✅ 数字在格子内不换行，太长就省略 */
+.vn-history-mobile__num {
+    text-align: center;
+    font-size: 10px;
+    /* 关键：压缩字号 */
+    line-height: 1.05;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* ✅ 行左右 padding 再压一点 */
+.vn-history-mobile__item {
+    padding: 2px 3px;
+}
+
 
 .vn-history-mobile__item {
     .vn-history-mobile__badge {
         width: 20px;
         height: 20px;
+        display: block;
+
         color: #fff;
         text-indent: 0;
         text-align: center;
         line-height: 20px;
+
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
         background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOC41MDQ0OCIgaGVpZ2h0PSIxOC44MDk1NiIgdmlld0JveD0iMCAwIDE4LjUwNDQ4IDE4LjgwOTU2Ij48dGl0bGU+6LOH55SiIDE8L3RpdGxlPjxnIGlkPSLlnJblsaRfMiIgZGF0YS1uYW1lPSLlnJblsaQgMiI+PGcgaWQ9IuWcluWxpF8xLTIiIGRhdGEtbmFtZT0i5ZyW5bGkIDEiPjxwYXRoIGQ9Ik05LjI1MjQ1LDMuMTg1NjlBNi4yMTg2OCw2LjIxODY4LDAsMSwxLDMuMDQzMzYsOS40MTQzNyw2LjIxNjUyLDYuMjE2NTIsMCwwLDEsOS4yNTI0NSwzLjE4NTY5Wk05LjI1MjQ1LDBsMS4zMzg5NCwyLjA2OTgxTDEyLjQ3NzI3LjU2ODUzbC41Mjg2LDIuMzkzNjQsMi4yOTI5Mi0uNzUwNDFMMTQuOTkzNyw0LjYyNjJsMi4zOTUzMS4wODExOUwxNi4yNzE5Miw2Ljg3ODc3bDIuMjMyNTYuODkyMzZMMTYuNzE5MzMsOS40MzQ3NWwxLjc4NTE1LDEuNjAyODUtMi4yNTIxNS45NTQzNCwxLjEzNjY4LDIuMTA5NC0yLjQzNTcuMTIyMzcuMzQ1NDgsMi4zNzQxLTIuMzMzMy0uNzEwMDdMMTIuNDc3MjcsMTguMjQxbC0xLjk0NzA2LTEuNDgxMjdMOS4yNTI0NSwxOC44MDk1Niw3LjkzMjYzLDE2LjczOTcyLDYuMDQ2MzQsMTguMjQxbC0uNTQ4MTUtMi4zOTM2NC0yLjI3MzM2Ljc1MDQ1LjMwNTA4LTIuNDE0OS0yLjQxNDQ0LS4wODE1NkwyLjIzMDk0LDExLjkzMDgsMCwxMS4wMzc2LDEuODA0NjksOS4zNzQsMCw3Ljc3MTEzbDIuMjUyMTEtLjk1MzU1TDEuMTE1NDcsNC43MDczOSwzLjU3MDMsNC41ODU4MiwzLjIyNDgyLDIuMjExNzZsMi4zMzM3MS43MTAwNy40ODc4LTIuMzUzM0w3Ljk5NDI0LDIuMDQ5Wm0wLDIuNTc2NzhhNi44Mjc2LDYuODI3NiwwLDEsMS02LjgzOCw2LjgzNzU5LDYuODI4NDYsNi44Mjg0NiwwLDAsMSw2LjgzOC02LjgzNzU5WiIgc3R5bGU9ImZpbGw6I2M2OWM2ZDtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L2c+PC9zdmc+');
     }
 
