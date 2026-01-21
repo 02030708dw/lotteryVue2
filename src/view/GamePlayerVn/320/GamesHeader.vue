@@ -3,9 +3,9 @@
         <div class="gr_games-vn-header__inner  u_clearfix">
             <vnd-header @onExtra="headerClick">
                 <template #top>
-                    <div class="l">
+                    <div class="l js-vn-history-trigger" @click.stop="handleHistoryToggle">
                         <span>{{ VN_lastIssue | fIssue }}</span>
-                        <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
+                        <div class="gr_games-vn-header__nubmer_new" v-if="VN_isLocal">
                             <dt class="gr_number__nubmer_new--title">
                                 <i class="gr_item__title--icon grand_prize">{{ 0 }}</i>
                                 <span class="gr_number__nubmer_new"> {{ lastNumber[lastNumber.length - 1] }}</span>
@@ -15,46 +15,49 @@
                                 <span class="gr_number__nubmer_new"> {{ lastNumber[0] }}</span>
                             </dt>
                         </div>
+                        <span class="vn-arrow-wrap" :class="{ 'is-open': getPopActive.VNhistory }" v-if="VN_isLocal">
+                            <i class="el-icon-arrow-down"></i>
+                        </span>
                     </div>
                     <div class="r">
-                        <span>{{  VN_localIssue | fIssue}}</span>
+                        <span>{{ VN_localIssue | fIssue }}</span>
                         <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
-                                <span class="gr_desc__draw" v-if="isOpen">
-                                    <!-- {{$t("目前尚未开放奖期")}} -->
-                                    {{ $t('common_003') }}
-                                </span>
+                            <span class="gr_desc__draw" v-if="isOpen">
+                                <!-- {{$t("目前尚未开放奖期")}} -->
+                                {{ $t('common_003') }}
+                            </span>
                             <span v-else>
-<!--                                    &lt;!&ndash; 第{0}期 &ndash;&gt;
+                                <!--                                    &lt;!&ndash; 第{0}期 &ndash;&gt;
                                     <i18n path="common_001" tag="span">
                                         <strong place="0">{{ VN_localIssue }}</strong>
                                     </i18n>-->
-                                    <span class="gr_desc__draw">
-                                        <strong>{{ localTimer }}</strong>
-                                    </span>
+                                <span class="gr_desc__draw">
+                                    <strong>{{ localTimer }}</strong>
                                 </span>
+                            </span>
                         </div>
                         <div class="gr_games-vn-header__desc" v-else>
-                                <span class="gr_desc__draw" v-if="isOpen">
-                                    <!-- {{$t("目前尚未开放奖期")}} -->
-                                    {{ $t('common_003') }}
-                                </span>
+                            <span class="gr_desc__draw" v-if="isOpen">
+                                <!-- {{$t("目前尚未开放奖期")}} -->
+                                {{ $t('common_003') }}
+                            </span>
                             <span v-else>
-                                    <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_S']">
-                                        <!-- 南 -->
-                                        {{ $t('vn_t_048') }}
-                                        <strong>{{ VN_S_timer }}</strong>
-                                    </span>
-                                    <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_C']">
-                                        <!-- 中 -->
-                                        {{ $t('vn_t_049') }}
-                                        <strong>{{ VN_C_timer }}</strong>
-                                    </span>
-                                    <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_N']">
-                                        <!-- 北 -->
-                                        {{ $t('vn_t_050') }}
-                                        <strong>{{ VN_N_timer }}</strong>
-                                    </span>
+                                <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_S']">
+                                    <!-- 南 -->
+                                    {{ $t('vn_t_048') }}
+                                    <strong>{{ VN_S_timer }}</strong>
                                 </span>
+                                <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_C']">
+                                    <!-- 中 -->
+                                    {{ $t('vn_t_049') }}
+                                    <strong>{{ VN_C_timer }}</strong>
+                                </span>
+                                <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_N']">
+                                    <!-- 北 -->
+                                    {{ $t('vn_t_050') }}
+                                    <strong>{{ VN_N_timer }}</strong>
+                                </span>
+                            </span>
                         </div>
                     </div>
                 </template>
@@ -63,15 +66,15 @@
     </div>
 </template>
 <script>
-import {mapActions, mapGetters} from 'vuex'
-import {warnMessageBox} from '@UTIL'
-import {getData} from '@V/SalesTime/config/data'
+import { mapActions, mapGetters } from 'vuex'
+import { warnMessageBox } from '@UTIL'
+import { getData } from '@V/SalesTime/config/data'
 import RollTxt from './header/rollTxt.vue'
 import VndHeader from './header/vndHeader.vue'
 
 export default {
     name: 'GamesHeader320',
-    components: {VndHeader, RollTxt},
+    components: { VndHeader, RollTxt },
     data() {
         return {
             gameModeTemp: 0,
@@ -103,10 +106,10 @@ export default {
             this[_M.GET_GAME_LASTNUMBER_VN]()
         }
     },
-    filters:{
-      fIssue(v=''){
-          return v.substring(4,v.length)
-      }
+    filters: {
+        fIssue(v = '') {
+            return v.substring(4, v.length)
+        }
     },
     methods: {
         ...mapActions([
@@ -166,17 +169,17 @@ export default {
         },
         // 導向到歷史獎期頁面
         goHistory() {
-            this[_M.SET_HISTORY]({path: this.$route.fullPath, mode: 'add'})
+            this[_M.SET_HISTORY]({ path: this.$route.fullPath, mode: 'add' })
             this[_M.SET_HEADER_NAV_IS_BACK](true)
             this.$router.push(this.openHistory)
         },
         toggleStatus() {
-            this[_M.SET_POP_ACTIVE]({gameStatus: !this.isStatusActive})
+            this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
             const lot = this.$refs.lotteryStatus
             lot.offsetWidth >= lot.offsetParent.offsetWidth &&
-            (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
+                (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
         },
-        headerClick(t){
+        headerClick(t) {
             switch (t) {
                 case 'his':
                     return this.goHistory()
@@ -280,7 +283,7 @@ export default {
         },
         // 判斷是否為自開彩
         isOpLocal() {
-            const {is_op_local = false} = this.VN_currentlottery || {}
+            const { is_op_local = false } = this.VN_currentlottery || {}
             return is_op_local
         },
         // 是否要顯示'開獎官網'按鈕

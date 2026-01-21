@@ -5,32 +5,39 @@
 .gr_games-vn-header {
     @extend %shadow_linear_gradient_default_inset;
 }
-@keyframes beat{
-    60%{
+
+@keyframes beat {
+    60% {
         transform: scale(1);
-        opacity:1;
+        opacity: 1;
     }
-    70%{
+
+    70% {
         transform: scale(1.1);
-        opacity:0.8;
+        opacity: 0.8;
     }
-    80%{
+
+    80% {
         transform: scale(1);
-        opacity:1;
+        opacity: 1;
     }
-    90%{
+
+    90% {
         transform: scale(1.1);
-        opacity:0.8;
+        opacity: 0.8;
     }
-    100%{
+
+    100% {
         transform: scale(1);
-        opacity:1;
+        opacity: 1;
     }
 }
+
 .gr_my-favorites__icon {
     // 避免切換時跑出來，須寫在這裡
     @include size(16px);
 }
+
 @media screen and (min-width: 980px) {
     .gr_games-vn-header {
         background: #eae7da;
@@ -38,22 +45,28 @@
         text-align: center;
         z-index: 10;
         position: relative;
-        & > div {
+
+        &>div {
             display: inline-block;
             vertical-align: middle;
             line-height: 2em;
+
             @include multi-lang('vn') {
                 line-height: 1.2em;
             }
         }
+
         .gr_games-vn-lotteryStatus {
             padding: 5px 10px 0 10px;
             text-align: left;
-            > div[class*="gr_games-vn-lotteryStatus__"] {
-                display: inline-block;;
+
+            >div[class*="gr_games-vn-lotteryStatus__"] {
+                display: inline-block;
+                ;
             }
         }
     }
+
     .gr_games-vn-header__my-favorites {
         @include size(0px, 23px);
         cursor: pointer;
@@ -69,15 +82,18 @@
         top: 85px;
         float: left;
         left: 7px;
+
         & .gr_my-favorites__icon {
             // @include size(16px, 100%);
             animation-name: beat;
-            animation-duration:3s;
+            animation-duration: 3s;
             animation-iteration-count: infinite;
         }
+
         &.is_active {
             fill: #ff6473;
         }
+
         &::before {
             @include pseudo;
             @include size(300%, 120%);
@@ -87,55 +103,71 @@
     }
 }
 
-$gr_games-vn-header-url:'/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg';
-$gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lottery--212--pure.svg';
+$gr_games-vn-header-url: '/c_lottery-category/c_lottery-class--VIETNAM/c_lottery--vietnam.svg';
+$gr_games-vn-header-url--pure: '/c_lottery-category/c_lottery-class--VN_5M/c_lottery--212--pure.svg';
+
 .gr_games-vn-header__logo {
     @include size(95px, 95px);
     background-position: center center;
     background-repeat: no-repeat;
     position: relative;
+
     &:not(.pure) {
         background-image: url(#{'~@IMG/lang_cn' + $gr_games-vn-header-url});
+
         @include multi-lang("us") {
             background-image: url(#{'~@IMG/lang_us' + $gr_games-vn-header-url});
         }
+
         @include multi-lang("th") {
             background-image: url(#{'~@IMG/lang_th' + $gr_games-vn-header-url});
         }
+
         @include multi-lang("jp") {
             background-image: url(#{'~@IMG/lang_jp' + $gr_games-vn-header-url});
         }
+
         @include multi-lang("vn") {
             background-image: url(#{'~@IMG/lang_vn' + $gr_games-vn-header-url});
         }
+
         @include multi-lang("id") {
             background-image: url(#{'~@IMG/lang_id' + $gr_games-vn-header-url});
         }
+
         @include multi-lang("kh") {
             background-image: url(#{'~@IMG/lang_kh' + $gr_games-vn-header-url});
         }
     }
+
     &.pure {
         background-image: url(#{'~@IMG/lang_cn' + $gr_games-vn-header-url--pure});
+
         @include multi-lang("us") {
             background-image: url(#{'~@IMG/lang_us' + $gr_games-vn-header-url--pure});
         }
+
         @include multi-lang("th") {
             background-image: url(#{'~@IMG/lang_th' + $gr_games-vn-header-url--pure});
         }
+
         @include multi-lang("jp") {
             background-image: url(#{'~@IMG/lang_jp' + $gr_games-vn-header-url--pure});
         }
+
         @include multi-lang("vn") {
             background-image: url(#{'~@IMG/lang_vn' + $gr_games-vn-header-url--pure});
         }
+
         @include multi-lang("id") {
             background-image: url(#{'~@IMG/lang_id' + $gr_games-vn-header-url--pure});
         }
+
         @include multi-lang("kh") {
             background-image: url(#{'~@IMG/lang_kh' + $gr_games-vn-header-url--pure});
         }
     }
+
     &::before {
         @include pseudo;
         @include size(100%, 12px);
@@ -143,26 +175,69 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
         bottom: -6px;
         left: 5%;
     }
+
     &.lottery_223 {
-        @include multi-lang("cn") {background-image: url('~@IMG/lang_cn/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');}
-        @include multi-lang("jp") {background-image: url('~@IMG/lang_jp/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');}
-        @include multi-lang("us") {background-image: url('~@IMG/lang_us/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');}
-        @include multi-lang("th") {background-image: url('~@IMG/lang_th/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');}
-        @include multi-lang("vn") {background-image: url('~@IMG/lang_vn/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');}
-        @include multi-lang("kh") {background-image: url('~@IMG/lang_kh/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');}
-        @include multi-lang("id") {background-image: url('~@IMG/lang_id/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');}
+        @include multi-lang("cn") {
+            background-image: url('~@IMG/lang_cn/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');
+        }
+
+        @include multi-lang("jp") {
+            background-image: url('~@IMG/lang_jp/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');
+        }
+
+        @include multi-lang("us") {
+            background-image: url('~@IMG/lang_us/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');
+        }
+
+        @include multi-lang("th") {
+            background-image: url('~@IMG/lang_th/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');
+        }
+
+        @include multi-lang("vn") {
+            background-image: url('~@IMG/lang_vn/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');
+        }
+
+        @include multi-lang("kh") {
+            background-image: url('~@IMG/lang_kh/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');
+        }
+
+        @include multi-lang("id") {
+            background-image: url('~@IMG/lang_id/c_lottery-category/c_lottery-class--VN_30S/c_lottery--223.svg');
+        }
     }
+
     &.lottery_256 {
-        @include multi-lang("cn") {background-image: url('~@IMG/lang_cn/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');}
-        @include multi-lang("jp") {background-image: url('~@IMG/lang_jp/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');}
-        @include multi-lang("us") {background-image: url('~@IMG/lang_us/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');}
-        @include multi-lang("th") {background-image: url('~@IMG/lang_th/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');}
-        @include multi-lang("vn") {background-image: url('~@IMG/lang_vn/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');}
-        @include multi-lang("kh") {background-image: url('~@IMG/lang_kh/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');}
-        @include multi-lang("id") {background-image: url('~@IMG/lang_id/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');}
+        @include multi-lang("cn") {
+            background-image: url('~@IMG/lang_cn/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');
+        }
+
+        @include multi-lang("jp") {
+            background-image: url('~@IMG/lang_jp/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');
+        }
+
+        @include multi-lang("us") {
+            background-image: url('~@IMG/lang_us/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');
+        }
+
+        @include multi-lang("th") {
+            background-image: url('~@IMG/lang_th/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');
+        }
+
+        @include multi-lang("vn") {
+            background-image: url('~@IMG/lang_vn/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');
+        }
+
+        @include multi-lang("kh") {
+            background-image: url('~@IMG/lang_kh/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');
+        }
+
+        @include multi-lang("id") {
+            background-image: url('~@IMG/lang_id/c_lottery-category/c_lottery-class--VN_256/c_lottery--256.svg');
+        }
     }
 
 }
+
 .gr_games-vn-header__square {
     @include size(271px, 100px);
     @include box_shadow(0 6px 8px -8px shadow_color(dark));
@@ -174,12 +249,15 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
     padding: 7px 0;
     position: relative;
     z-index: 1;
+
     & strong {
         font-weight: 600;
-        & + span {
+
+        &+span {
             padding-left: 5px;
         }
     }
+
     // 紅點
     &::before,
     &::after {
@@ -189,35 +267,43 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
         top: 5px;
         left: 5px;
     }
+
     &::after {
         right: 5px;
         left: auto;
     }
+
     &.is_active {
         background-color: #ffebc7;
     }
+
     & span:last-child {
         @include multi-lang('vn') {
             width: 100%;
             display: inline-block;
         }
     }
+
     &.gr_games-vn-header__square--medium {
         margin: 10px 1.4% 0;
         vertical-align: top;
         width: 311px;
     }
+
     &.gr_games-vn-header__square--long {
         @include multi-lang("all") {
             line-height: 1.9em;
         }
+
         vertical-align: top;
         padding: 0;
         width: 401px;
+
         & span:last-child {
             display: inline;
         }
-        & ~ .gr_games-vn-header__lottery-period {
+
+        &~.gr_games-vn-header__lottery-period {
             float: right;
             margin: 0 3.2% 0 0;
         }
@@ -230,16 +316,19 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
     margin: 0 auto;
     opacity: 0;
     visibility: hidden;
+
     & .gr_number__content {
         line-height: 20px;
     }
+
     & .gr_number__content--item {
         & .gr_item__title--icon {
             margin: -1.5px 0;
             transform: scale3d(0.7, 0.7, 1);
         }
+
         &:first-of-type:nth-last-of-type(2),
-        &:first-of-type:nth-last-of-type(2) ~ .gr_number__content--item {
+        &:first-of-type:nth-last-of-type(2)~.gr_number__content--item {
             & .gr_item__title--icon {
                 background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOC41MDQ0OCIgaGVpZ2h0PSIxOC44MDk1NiIgdmlld0JveD0iMCAwIDE4LjUwNDQ4IDE4LjgwOTU2Ij48dGl0bGU+6LOH55SiIDE8L3RpdGxlPjxnIGlkPSLlnJblsaRfMiIgZGF0YS1uYW1lPSLlnJblsaQgMiI+PGcgaWQ9IuWcluWxpF8xLTIiIGRhdGEtbmFtZT0i5ZyW5bGkIDEiPjxwYXRoIGQ9Ik05LjI1MjQ1LDMuMTg1NjlBNi4yMTg2OCw2LjIxODY4LDAsMSwxLDMuMDQzMzYsOS40MTQzNyw2LjIxNjUyLDYuMjE2NTIsMCwwLDEsOS4yNTI0NSwzLjE4NTY5Wk05LjI1MjQ1LDBsMS4zMzg5NCwyLjA2OTgxTDEyLjQ3NzI3LjU2ODUzbC41Mjg2LDIuMzkzNjQsMi4yOTI5Mi0uNzUwNDFMMTQuOTkzNyw0LjYyNjJsMi4zOTUzMS4wODExOUwxNi4yNzE5Miw2Ljg3ODc3bDIuMjMyNTYuODkyMzZMMTYuNzE5MzMsOS40MzQ3NWwxLjc4NTE1LDEuNjAyODUtMi4yNTIxNS45NTQzNCwxLjEzNjY4LDIuMTA5NC0yLjQzNTcuMTIyMzcuMzQ1NDgsMi4zNzQxLTIuMzMzMy0uNzEwMDdMMTIuNDc3MjcsMTguMjQxbC0xLjk0NzA2LTEuNDgxMjdMOS4yNTI0NSwxOC44MDk1Niw3LjkzMjYzLDE2LjczOTcyLDYuMDQ2MzQsMTguMjQxbC0uNTQ4MTUtMi4zOTM2NC0yLjI3MzM2Ljc1MDQ1LjMwNTA4LTIuNDE0OS0yLjQxNDQ0LS4wODE1NkwyLjIzMDk0LDExLjkzMDgsMCwxMS4wMzc2LDEuODA0NjksOS4zNzQsMCw3Ljc3MTEzbDIuMjUyMTEtLjk1MzU1TDEuMTE1NDcsNC43MDczOSwzLjU3MDMsNC41ODU4MiwzLjIyNDgyLDIuMjExNzZsMi4zMzM3MS43MTAwNy40ODc4LTIuMzUzM0w3Ljk5NDI0LDIuMDQ5Wm0wLDIuNTc2NzhhNi44Mjc2LDYuODI3NiwwLDEsMS02LjgzOCw2LjgzNzU5LDYuODI4NDYsNi44Mjg0NiwwLDAsMSw2LjgzOC02LjgzNzU5WiIgc3R5bGU9ImZpbGw6I2M2OWM2ZDtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L2c+PC9zdmc+');
                 height: 28px;
@@ -248,6 +337,7 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
                 transform: scale3d(0.7, 0.7, 1);
             }
         }
+
         &:last-child,
         &:nth-last-child(2),
         &:nth-last-child(3),
@@ -258,9 +348,11 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
                 transform: scale3d(1, 1, 1);
             }
         }
+
         & .gr_item__content--item {
             height: 25px;
             line-height: 25px;
+
             &::before {
                 top: -1px;
                 left: -1px;
@@ -268,6 +360,7 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
             }
         }
     }
+
     &.is_active {
         opacity: 1;
         visibility: visible;
@@ -282,11 +375,13 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
     position: absolute;
     user-select: none;
     z-index: 60;
+
     & .gr_number__header {
         cursor: inherit;
         line-height: 25px;
         text-align: right;
     }
+
     & .gr_header__close {
         @include size(30px);
         padding: 7px;
@@ -296,6 +391,7 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
         vertical-align: middle;
         stroke: #ffffff;
         stroke-miterlimit: 10;
+
         & .gr_close__icon {
             @include size(100%);
             display: block;
@@ -314,6 +410,7 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
     width: 30px;
     position: relative;
     z-index: 4;
+
     // 按鈕
     & .gr_lottery-period__button-group {
         left: 0px;
@@ -321,19 +418,24 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
         transform: translateY(-50%);
         position: absolute;
         z-index: 3;
+
         & div {
-            &.gr_button-group__history{
+            &.gr_button-group__history {
                 margin: 3px auto;
             }
+
             line-height: normal;
             width: 30px;
             height: 30px;
-            & button,a{
+
+            & button,
+            a {
                 position: relative;
                 width: 100%;
                 height: 100%;
                 cursor: pointer;
-                & span{
+
+                & span {
                     @include box_shadow(0px 0px 3px shadow_color(default));
                     background-color: #fff;
                     color: darken(text_color(weak), 50%);
@@ -347,15 +449,17 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
                     opacity: 1;
                     visibility: hidden;
                     z-index: 5;
-                    &::before{
+
+                    &::before {
                         @include triangle($color_default_invert, right, 6px);
                         left: calc(100% - 1px);
                         top: 0;
                         transform: translateY(50%);
                     }
                 }
-                &:hover{
-                    & span{
+
+                &:hover {
+                    & span {
                         transition: all 0.2s ease;
                         right: 35px;
                         opacity: 1;
@@ -374,6 +478,7 @@ $gr_games-vn-header-url--pure:'/c_lottery-category/c_lottery-class--VN_5M/c_lott
 .gr_games-vn-header--320 {
     display: none;
 }
+
 $gr_games-vn-header-height: 60px;
 
 @media screen and (max-width: 980px) {
@@ -384,6 +489,7 @@ $gr_games-vn-header-height: 60px;
         position: fixed;
         left: 0;
         z-index: 60;
+
         & .gr_games-vn-header__my-favorites {
             @include size(15px, 23px);
             position: relative;
@@ -398,21 +504,26 @@ $gr_games-vn-header-height: 60px;
             stroke: #f15a24;
             transition: fill 0.3s linear;
             vertical-align: middle;
+
             & .gr_my-favorites__icon {
                 @include size(100%);
             }
+
             &.is_active {
                 fill: #f15a24;
             }
         }
+
         & .gr_games-vn-header__title {
             vertical-align: middle;
             position: relative;
             z-index: 1;
         }
+
         &::before {
             display: none;
         }
+
         .gr_games-vn-lotteryStatus-warp {
             // position: relative;
             // display: inline-block;
@@ -420,6 +531,7 @@ $gr_games-vn-header-height: 60px;
             position: absolute;
             top: 5px;
             right: 6px;
+
             .gr_games-vn-lotteryStatus-toggle {
                 font-size: 14px;
                 background-color: #8e7c66;
@@ -431,10 +543,12 @@ $gr_games-vn-header-height: 60px;
                 float: right;
                 height: 21px;
                 line-height: 21px;
+
                 @include multi-lang('vn') {
                     padding: 2px 3px;
                 }
-                &::before{
+
+                &::before {
                     @include triangle($color_default_invert, up, 6px);
                     left: 50%;
                     bottom: -3px;
@@ -444,6 +558,7 @@ $gr_games-vn-header-height: 60px;
                     visibility: hidden;
                 }
             }
+
             .gr_games-vn-lotteryStatus {
                 opacity: 0;
                 visibility: hidden;
@@ -459,13 +574,15 @@ $gr_games-vn-header-height: 60px;
                 white-space: nowrap;
                 @include box_shadow(0px 0px 3px shadow_color(default));
             }
+
             &.is_active {
                 .gr_games-vn-lotteryStatus-toggle {
-                    &::before{
+                    &::before {
                         opacity: 1;
                         visibility: visible;
                     }
                 }
+
                 .gr_games-vn-lotteryStatus {
                     opacity: 1;
                     visibility: visible;
@@ -473,6 +590,7 @@ $gr_games-vn-header-height: 60px;
             }
         }
     }
+
     .gr_games-vn-header__button {
         @include size(31px, 14px);
         background: #333333;
@@ -483,39 +601,47 @@ $gr_games-vn-header-height: 60px;
         text-align: center;
         vertical-align: middle;
         z-index: 4;
+
         & .gr_button__icon {
             @include size(7px, 8px);
             fill: #ffffff;
             width: 8px;
         }
+
         & .gr_icon--shadow {
             fill: #a7a9ac;
             opacity: 0.8;
         }
+
         &::before {
             display: none;
         }
 
     }
+
     .gr_games-vn-header__inner {
         font-size: $font_size;
         padding: 0.5px 8px;
         vertical-align: top;
         height: 100%;
     }
+
     .gr_games-vn-header__title {
         height: 24px;
         line-height: 24px;
     }
+
     .gr_games-vn-header__desc {
         float: left;
         font-size: $font_size_small;
+
         & .gr_desc__draw {
             & strong {
                 padding-left: 0px;
             }
         }
     }
+
     .gr_games-vn-header__button-group {
         display: block;
         font-size: 0;
@@ -524,41 +650,63 @@ $gr_games-vn-header-height: 60px;
         bottom: 0;
         padding-right: 5px;
     }
+
     .gr_button-group__button {
         display: inline-block;
         padding: 0px 2px 5.5px 2px;
         position: relative;
         top: 3px;
     }
-    .gr_number__nubmer_new--title{
+
+    .gr_number__nubmer_new--title {
         font-size: 12px;
         margin-right: 8px;
     }
-    
-    .gr_item__title--icon{
-            margin: 0.3em 0;
-            display: inline-block;
-            text-align: center;
-            line-height: 20px;
-            width: 20px;
-            height: 20px;
-            color: #fff;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOC41MDQ0OCIgaGVpZ2h0PSIxOC44MDk1NiIgdmlld0JveD0iMCAwIDE4LjUwNDQ4IDE4LjgwOTU2Ij48dGl0bGU+6LOH55SiIDE8L3RpdGxlPjxnIGlkPSLlnJblsaRfMiIgZGF0YS1uYW1lPSLlnJblsaQgMiI+PGcgaWQ9IuWcluWxpF8xLTIiIGRhdGEtbmFtZT0i5ZyW5bGkIDEiPjxwYXRoIGQ9Ik05LjI1MjQ1LDMuMTg1NjlBNi4yMTg2OCw2LjIxODY4LDAsMSwxLDMuMDQzMzYsOS40MTQzNyw2LjIxNjUyLDYuMjE2NTIsMCwwLDEsOS4yNTI0NSwzLjE4NTY5Wk05LjI1MjQ1LDBsMS4zMzg5NCwyLjA2OTgxTDEyLjQ3NzI3LjU2ODUzbC41Mjg2LDIuMzkzNjQsMi4yOTI5Mi0uNzUwNDFMMTQuOTkzNyw0LjYyNjJsMi4zOTUzMS4wODExOUwxNi4yNzE5Miw2Ljg3ODc3bDIuMjMyNTYuODkyMzZMMTYuNzE5MzMsOS40MzQ3NWwxLjc4NTE1LDEuNjAyODUtMi4yNTIxNS45NTQzNCwxLjEzNjY4LDIuMTA5NC0yLjQzNTcuMTIyMzcuMzQ1NDgsMi4zNzQxLTIuMzMzMy0uNzEwMDdMMTIuNDc3MjcsMTguMjQxbC0xLjk0NzA2LTEuNDgxMjdMOS4yNTI0NSwxOC44MDk1Niw3LjkzMjYzLDE2LjczOTcyLDYuMDQ2MzQsMTguMjQxbC0uNTQ4MTUtMi4zOTM2NC0yLjI3MzM2Ljc1MDQ1LjMwNTA4LTIuNDE0OS0yLjQxNDQ0LS4wODE1NkwyLjIzMDk0LDExLjkzMDgsMCwxMS4wMzc2LDEuODA0NjksOS4zNzQsMCw3Ljc3MTEzbDIuMjUyMTEtLjk1MzU1TDEuMTE1NDcsNC43MDczOSwzLjU3MDMsNC41ODU4MiwzLjIyNDgyLDIuMjExNzZsMi4zMzM3MS43MTAwNy40ODc4LTIuMzUzM0w3Ljk5NDI0LDIuMDQ5Wm0wLDIuNTc2NzhhNi44Mjc2LDYuODI3NiwwLDEsMS02LjgzOCw2LjgzNzU5LDYuODI4NDYsNi44Mjg0NiwwLDAsMSw2LjgzOC02LjgzNzU5WiIgc3R5bGU9ImZpbGw6I2M2OWM2ZDtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L2c+PC9zdmc+');
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center;
-        }
-    .grand_prize{
+
+    .gr_item__title--icon {
+        margin: 0.3em 0;
+        display: inline-block;
+        text-align: center;
+        line-height: 20px;
+        width: 20px;
+        height: 20px;
+        color: #fff;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOC41MDQ0OCIgaGVpZ2h0PSIxOC44MDk1NiIgdmlld0JveD0iMCAwIDE4LjUwNDQ4IDE4LjgwOTU2Ij48dGl0bGU+6LOH55SiIDE8L3RpdGxlPjxnIGlkPSLlnJblsaRfMiIgZGF0YS1uYW1lPSLlnJblsaQgMiI+PGcgaWQ9IuWcluWxpF8xLTIiIGRhdGEtbmFtZT0i5ZyW5bGkIDEiPjxwYXRoIGQ9Ik05LjI1MjQ1LDMuMTg1NjlBNi4yMTg2OCw2LjIxODY4LDAsMSwxLDMuMDQzMzYsOS40MTQzNyw2LjIxNjUyLDYuMjE2NTIsMCwwLDEsOS4yNTI0NSwzLjE4NTY5Wk05LjI1MjQ1LDBsMS4zMzg5NCwyLjA2OTgxTDEyLjQ3NzI3LjU2ODUzbC41Mjg2LDIuMzkzNjQsMi4yOTI5Mi0uNzUwNDFMMTQuOTkzNyw0LjYyNjJsMi4zOTUzMS4wODExOUwxNi4yNzE5Miw2Ljg3ODc3bDIuMjMyNTYuODkyMzZMMTYuNzE5MzMsOS40MzQ3NWwxLjc4NTE1LDEuNjAyODUtMi4yNTIxNS45NTQzNCwxLjEzNjY4LDIuMTA5NC0yLjQzNTcuMTIyMzcuMzQ1NDgsMi4zNzQxLTIuMzMzMy0uNzEwMDdMMTIuNDc3MjcsMTguMjQxbC0xLjk0NzA2LTEuNDgxMjdMOS4yNTI0NSwxOC44MDk1Niw3LjkzMjYzLDE2LjczOTcyLDYuMDQ2MzQsMTguMjQxbC0uNTQ4MTUtMi4zOTM2NC0yLjI3MzM2Ljc1MDQ1LjMwNTA4LTIuNDE0OS0yLjQxNDQ0LS4wODE1NkwyLjIzMDk0LDExLjkzMDgsMCwxMS4wMzc2LDEuODA0NjksOS4zNzQsMCw3Ljc3MTEzbDIuMjUyMTEtLjk1MzU1TDEuMTE1NDcsNC43MDczOSwzLjU3MDMsNC41ODU4MiwzLjIyNDgyLDIuMjExNzZsMi4zMzM3MS43MTAwNy40ODc4LTIuMzUzM0w3Ljk5NDI0LDIuMDQ5Wm0wLDIuNTc2NzhhNi44Mjc2LDYuODI3NiwwLDEsMS02LjgzOCw2LjgzNzU5LDYuODI4NDYsNi44Mjg0NiwwLDAsMSw2LjgzOC02LjgzNzU5WiIgc3R5bGU9ImZpbGw6I2M2OWM2ZDtmaWxsLXJ1bGU6ZXZlbm9kZCIvPjwvZz48L2c+PC9zdmc+');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+
+    .grand_prize {
         width: 24px;
         height: 24px;
         color: transparent;
         background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTguNTA0NDgiIGhlaWdodD0iMjQuOTE2NjciIHZpZXdCb3g9IjAgMCAxOC41MDQ0OCAyNC45MTY2NyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJsaW5lYXItZ3JhZGllbnQiIHgxPSIxNi4zNzc5MiIgeTE9IjE3LjA0NTk0IiB4Mj0iNC4zNjA2NCIgeTI9IjEwLjEwNzc2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjNzMxOGMxIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmYwMDhlIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRpdGxlPuizh+eUoiAzPC90aXRsZT48ZyBpZD0i5ZyW5bGkXzIiIGRhdGEtbmFtZT0i5ZyW5bGkIDIiPjxnIGlkPSLlnJblsaRfMS0yIiBkYXRhLW5hbWU9IuWcluWxpCAxIj48cGF0aCBkPSJNMTMuMzMwMDksMTcuMTY1MTJsMS44MDYzNiw2Ljc5NzU4LTIuNTk4LTIuMjExNzYtLjk5MzUyLDMuMTY1NzMtMS42MjM2NC02LjAyNi43NzA4Mi0xLjIzODI1LDIuMTkyMTgsMS42NjM2MVpNOS4yNTI0NSwzLjE4NTY5QTYuMjE4NjgsNi4yMTg2OCwwLDEsMSwzLjA0MzM2LDkuNDE0MzcsNi4yMTY1Miw2LjIxNjUyLDAsMCwxLDkuMjUyNDUsMy4xODU2OVpNOS4yNTI0NSwwbDEuMzM4OTQsMi4wNjk4MUwxMi40NzcyNy41Njg1M2wuNTI4NiwyLjM5MzY0LDIuMjkyOTItLjc1MDQxTDE0Ljk5MzcsNC42MjYybDIuMzk1MzEuMDgxMTlMMTYuMjcxOTIsNi44Nzg3N2wyLjIzMjU2Ljg5MjM2TDE2LjcxOTMzLDkuNDM0NzVsMS43ODUxNSwxLjYwMjg1LTIuMjUyMTUuOTU0MzQsMS4xMzY2OCwyLjEwOTQtMi40MzU3LjEyMjM3LjM0NTQ4LDIuMzc0MS0yLjMzMzMtLjcxMDA3TDEyLjQ3NzI3LDE4LjI0MWwtMS45NDcwNi0xLjQ4MTI3TDkuMjUyNDUsMTguODA5NTYsNy45MzI2MywxNi43Mzk3Miw2LjA0NjM0LDE4LjI0MWwtLjU0ODE1LTIuMzkzNjQtMi4yNzMzNi43NTA0NS4zMDUwOC0yLjQxNDktMi40MTQ0NC0uMDgxNTZMMi4yMzA5NCwxMS45MzA4LDAsMTEuMDM3NiwxLjgwNDY5LDkuMzc0LDAsNy43NzExM2wyLjI1MjExLS45NTM1NUwxLjExNTQ3LDQuNzA3MzksMy41NzAzLDQuNTg1ODIsMy4yMjQ4MiwyLjIxMTc2bDIuMzMzNzEuNzEwMDcuNDg3OC0yLjM1MzNMNy45OTQyNCwyLjA0OVptMCwyLjU3Njc4YTYuODI3Niw2LjgyNzYsMCwxLDEtNi44MzgsNi44Mzc1OSw2LjgyODQ2LDYuODI4NDYsMCwwLDEsNi44MzgtNi44Mzc1OVpNNS4xNTI3MywxNy4wODQzNSwzLjM2OCwyMy43NmwyLjE3MTM4LTEuNzY1MTgsMS40MTk3MSwyLjcxODczLDEuNTgzMy01Ljg4NEw3Ljc5MTEsMTcuNjUyNDYsNS42NjA1MiwxOS4zMTYwN1oiIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtmaWxsOnVybCgjbGluZWFyLWdyYWRpZW50KSIvPjxwYXRoIGQ9Ik02LjAxNzU3LDEwLjY0NDM4LDcsMTAuNTU4NDRhMi4xNzI1OSwyLjE3MjU5LDAsMCwwLC4zMjUyLjk2OTczLDEuNzY5LDEuNzY5LDAsMCwwLC43OTIuNjEyMywyLjk5MzI0LDIuOTkzMjQsMCwwLDAsMS4yMDkuMjMzNCwyLjg5NzMsMi44OTczLDAsMCwwLDEuMDUyNzMtLjE3Njc2LDEuNDY3ODYsMS40Njc4NiwwLDAsMCwuNjc5NjktLjQ4NjMzLDEuMTI4NjUsMS4xMjg2NSwwLDAsMCwuMjIyNjYtLjY3MzgzLDEuMDI5NTcsMS4wMjk1NywwLDAsMC0uMjE0ODQtLjY0NzQ2LDEuNTk5NDksMS41OTk0OSwwLDAsMC0uNzA5LS40NjQ4NCwxNC4wNzA3OCwxNC4wNzA3OCwwLDAsMC0xLjQwMjM0LS4zODM3OSw3LjIyMDYyLDcuMjIwNjIsMCwwLDEtMS41MTk1My0uNDkxMjEsMi4xMzUsMi4xMzUsMCwwLDEtLjg0MDgyLS43MzM0LDEuNzk0OSwxLjc5NDksMCwwLDEtLjI3NjM3LS45ODA0NywyLjAwMDI5LDIuMDAwMjksMCwwLDEsLjMzNzg5LTEuMTE0MjYsMi4xMDE3OSwyLjEwMTc5LDAsMCwxLC45ODgyOC0uNzg3MTEsMy43NTc4OCwzLjc1Nzg4LDAsMCwxLDEuNDQ1MzEtLjI2ODU1LDMuOTU1MjEsMy45NTUyMSwwLDAsMSwxLjU0Mzk1LjI4MjIzLDIuMjI0MTUsMi4yMjQxNSwwLDAsMSwxLjAyODMyLjgzMDA4LDIuMzc1NzksMi4zNzU3OSwwLDAsMSwuMzg2NzIsMS4yNDAyM2wtLjk5OS4wNzUyYTEuNjE1LDEuNjE1LDAsMCwwLS41NDQ5Mi0xLjEyNzkzQTIuMTI0MTMsMi4xMjQxMywwLDAsMCw5LjEzMjgsNi4wODQ4MWEyLjE5ODIsMi4xOTgyLDAsMCwwLTEuMzc3OTMuMzQ2NjgsMS4wMzgxMywxLjAzODEzLDAsMCwwLS40MzI2Mi44MzUuODk2NzUuODk2NzUsMCwwLDAsLjMwNjY0LjY5ODI0LDQuMTU1MTIsNC4xNTUxMiwwLDAsMCwxLjU3MTI5LjU2MTUyLDEwLjMyMSwxMC4zMjEsMCwwLDEsMS43NDIxOS41MDJBMi4zODI3NSwyLjM4Mjc1LDAsMCwxLDExLjk1OCw5LjgzMDlhMS45NjExOSwxLjk2MTE5LDAsMCwxLC4zMjcxNSwxLjEyMDEyLDIuMTQ4NDYsMi4xNDg0NiwwLDAsMS0uMzU5MzcsMS4xODQ1NywyLjM3NjMxLDIuMzc2MzEsMCwwLDEtMS4wMzQxOC44NjQyNiwzLjU5OTA4LDMuNTk5MDgsMCwwLDEtMS41MTc1OC4zMDg1OSw0LjUyNTE4LDQuNTI1MTgsMCwwLDEtMS43OTEtLjMxMTUyLDIuNTAxMTUsMi41MDExNSwwLDAsMS0xLjEzMjgxLS45MzY1MkEyLjY1MjQyLDIuNjUyNDIsMCwwLDEsNi4wMTc1NywxMC42NDQzOFoiIHN0eWxlPSJmaWxsOiNmZmYiLz48L2c+PC9nPjwvc3ZnPg==');
     }
-        .gr_games-vn-header__nubmer_new{
-            display: flex;
-        }
+
+    .gr_games-vn-header__nubmer_new {
+        display: flex;
+    }
+
+    .vn-arrow-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 13px;
+        height: 13px;
+        transform-origin: 50% 50%;
+        transition: transform .25s ease;
+        transform: translateY(-1px) rotate(0);
+    }
+
+    .vn-arrow-wrap.is-open {
+
+        transform: translateY(-3px) rotate(180deg);
+    }
+
     .gr_games-vn-header__animation {
         padding-bottom: 22px;
+
         & .gr_animation__prompt {
             width: 100%;
             background: backgrounds(accent_heavy);

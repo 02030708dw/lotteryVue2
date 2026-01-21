@@ -5,23 +5,15 @@
                 <!-- 表头：5列期号 -->
                 <div class="vn-history-mobile__head">
                     <div class="vn-history-mobile__headLevel">奖期</div>
-                    <div
-                        class="vn-history-mobile__headCol"
-                        v-for="(col, idx) in cols"
-                        :key="idx"
-                        :class="{ 'is-odd': idx % 2 === 0 }"
-                    >
+                    <div class="vn-history-mobile__headCol" v-for="(col, idx) in cols" :key="idx"
+                        :class="{ 'is-odd': idx % 2 === 0 }">
                         {{ formatIssue(col.issue) }}
                     </div>
                 </div>
 
                 <!-- 表体：9行(0~8)，每行5列 -->
                 <div class="vn-history-mobile__list">
-                    <dl
-                        class="vn-history-mobile__item"
-                        v-for="(level, rowIndex) in levels"
-                        :key="level"
-                    >
+                    <dl class="vn-history-mobile__item" v-for="(level, rowIndex) in levels" :key="level">
                         <dt class="vn-history-mobile__level">
                             <i class="vn-history-mobile__badge">
                                 {{ level }}
@@ -30,19 +22,11 @@
 
                         <dd class="vn-history-mobile__nums">
                             <div class="vn-history-mobile__grid">
-                                <div
-                                    class="vn-history-mobile__col"
-                                    v-for="(col, cIdx) in cols"
-                                    :key="cIdx"
-                                    :class="{ 'is-odd': cIdx % 2 === 0 }"
-                                >
-                                    <div
-                                        class="vn-history-mobile__num"
-                                        v-for="(v, i) in normalizeCell(
-                                            col.rows[rowIndex]
-                                        )"
-                                        :key="i"
-                                    >
+                                <div class="vn-history-mobile__col" v-for="(col, cIdx) in cols" :key="cIdx"
+                                    :class="{ 'is-odd': cIdx % 2 === 0 }">
+                                    <div class="vn-history-mobile__num" v-for="(v, i) in normalizeCell(
+                                        col.rows[rowIndex]
+                                    )" :key="i">
                                         {{ v || "-" }}
                                     </div>
                                 </div>
@@ -106,29 +90,26 @@ export default {
         }
     },
     mounted() {
-        document.addEventListener("mousedown", this.onGlobalDown, true);
-        document.addEventListener("touchstart", this.onGlobalDown, true);
+        document.addEventListener("pointerdown", this.onGlobalDown)
     },
     beforeDestroy() {
-        document.removeEventListener("mousedown", this.onGlobalDown, true);
-        document.removeEventListener("touchstart", this.onGlobalDown, true);
+        document.removeEventListener("pointerdown", this.onGlobalDown)
     },
     methods: {
         onGlobalDown(e) {
-            const panel = this.$refs.panel;
-            if (!panel) return;
-            if (panel.contains(e.target)) return;
-            this.handleHistoryToggle();
+            const panel = this.$refs.panel
+            if (!panel) return
+            if (panel.contains(e.target)) return
+            if (e.target.closest('.js-vn-history-trigger')) return
+            this.handleHistoryToggle()
         },
 
-        // 20260119-1920 => 1920（你要完整就直接 return issue）
         formatIssue(issue) {
             if (!issue) return "";
             const parts = String(issue).split("-");
             return parts[1] || issue;
         },
 
-        // 单元格统一成数组（多条就换行显示）
         normalizeCell(cell) {
             if (Array.isArray(cell)) {
                 const list = cell
@@ -157,7 +138,7 @@ export default {
     position: fixed;
     z-index: 9999;
 
-    top: 105px;
+    top: 75px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 12px;
@@ -192,6 +173,7 @@ export default {
 
 .vn-history-mobile__content {
     max-height: 70vh;
+    min-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -280,6 +262,7 @@ export default {
     justify-content: center;
     align-items: center;
     position: relative;
+    background: rgba(0, 0, 0, 0.06);
 
     &::after {
         content: "";
@@ -316,11 +299,14 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.06);
-    border-left: 1px solid rgba(0, 0, 0, 0.04); /* 可选：列分隔更清晰 */
+    border-left: 1px solid rgba(0, 0, 0, 0.04);
+    /* 可选：列分隔更清晰 */
 }
+
 .vn-history-mobile__col.is-odd {
     background: #fff;
 }
+
 /* 可选：第一列不需要左边线的话 */
 .vn-history-mobile__col:first-child {
     border-left: 0;
