@@ -74,6 +74,9 @@
                                 30 giây 01 kỳ mở thưởng
                             </span>
                         </div>
+                        <span class="vn-arrow-wrap" :class="{ 'is-open': getPopActive.VNhistory }" v-if="VN_isLocal">
+                            <i class="el-icon-arrow-down"></i>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -228,14 +231,17 @@ export default {
         // 導向到歷史獎期頁面
         goHistory() {
             this[_M.SET_HISTORY]({ path: this.$route.fullPath, mode: 'add' })
+            this[_M.SET_HISTORY]({ path: this.$route.fullPath, mode: 'add' })
             this[_M.SET_HEADER_NAV_IS_BACK](true)
             this.$router.push(this.openHistory)
         },
         toggleStatus() {
             this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
+            this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
             const lot = this.$refs.lotteryStatus
             lot.offsetWidth >= lot.offsetParent.offsetWidth &&
                 (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
+                    (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
         },
     },
     computed: {

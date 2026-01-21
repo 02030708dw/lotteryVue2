@@ -525,8 +525,8 @@ $gr_games-vn-header-height: 60px;
         }
 
         .gr_games-vn-lotteryStatus-warp {
-            // position: relative;
-            // display: inline-block;
+            position: relative;
+            display: inline-block;
             width: 100%;
             position: absolute;
             top: 5px;
@@ -621,8 +621,9 @@ $gr_games-vn-header-height: 60px;
 
     .gr_games-vn-header__inner {
         font-size: $font_size;
-        padding: 5.5px 8px;
+        padding: 0.5px 8px;
         vertical-align: top;
+        height: 100%;
     }
 
     .gr_games-vn-header__title {
@@ -633,9 +634,6 @@ $gr_games-vn-header-height: 60px;
     .gr_games-vn-header__desc {
         float: left;
         font-size: $font_size_small;
-        height: 21px;
-        line-height: 18px;
-        padding-top: 3px;
 
         & .gr_desc__draw {
             & strong {
@@ -662,6 +660,7 @@ $gr_games-vn-header-height: 60px;
 
     .gr_number__nubmer_new--title {
         font-size: 12px;
+        margin-right: 8px;
     }
 
     .gr_item__title--icon {
