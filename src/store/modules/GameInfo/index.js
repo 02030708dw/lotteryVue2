@@ -127,6 +127,9 @@ const actions = {
         commit(_M.SET_GAME_INFO_DATA, { canPageNation: true })
         return data
     },
+    async [_M.GET_GAME_INFO_VNLIST]({ commit, state, rootGetters, dispatch }, payload) {
+        console.log(1111)
+    },
     /**
      * API 取得 投注紀錄單筆注單資料
      * @param {any} { commit, state, rootGetters }

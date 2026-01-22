@@ -63,6 +63,7 @@
                 </template>
             </vnd-header>
         </div>
+        <bet-record v-model="showBetRecord"/>
     </div>
 </template>
 <script>
@@ -71,10 +72,11 @@ import { warnMessageBox } from '@UTIL'
 import { getData } from '@V/SalesTime/config/data'
 import RollTxt from './header/rollTxt.vue'
 import VndHeader from './header/vndHeader.vue'
+import BetRecord from './header/betRecord.vue'
 
 export default {
     name: 'GamesHeader320',
-    components: { VndHeader, RollTxt },
+    components: {BetRecord, VndHeader, RollTxt },
     data() {
         return {
             gameModeTemp: 0,
@@ -86,7 +88,8 @@ export default {
             gameShowMode: 0,
             setFavoritingTimer: null,
             // statusX: {}
-            maxWStatus: ''
+            maxWStatus: '',
+            showBetRecord:false
         }
     },
     beforeDestroy() {
@@ -184,6 +187,8 @@ export default {
                 case 'his':
                     return this.goHistory()
                 case 'betRecord':
+                    this.showBetRecord=true
+                    break
                 case 'award':
                 case 'per':
             }
