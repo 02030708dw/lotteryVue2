@@ -1,5 +1,5 @@
-import { API } from '@API'
-import { handleAjax, returnState, controlDate, componentBox, warnMessageBox, warnMessageBox2, today } from '@UTIL'
+import {API} from '@API'
+import {handleAjax, returnState, controlDate, componentBox, warnMessageBox, warnMessageBox2, today} from '@UTIL'
 
 const state = {
     gameInfoIsLoading: false,
@@ -41,7 +41,7 @@ const actions = {
      * @param {any} { commit, state, rootGetters }
      * @param {object} payload 投注紀錄資料
      */
-    async [_M.GET_GAME_INFO_LIST]({ commit, state, rootGetters, dispatch }, payload) {
+    async [_M.GET_GAME_INFO_LIST]({commit, state, rootGetters, dispatch}, payload) {
         if (rootGetters.isShowDemo) {
             return
         }
@@ -88,9 +88,10 @@ const actions = {
             }
             endDate = state.gameInfoData.endDate
         } else if (+state.gameInfoData.periodType === 4) {
-            ({ lotteryId, saleStartDate, saleEndDate } = returnState(state.gameInfoData))
+            ({lotteryId, saleStartDate, saleEndDate} = returnState(state.gameInfoData))
+            console.log(lotteryId)
         } else {
-            ({ startIssue, endIssue, lotteryId } = returnState(state.gameInfoData))
+            ({startIssue, endIssue, lotteryId} = returnState(state.gameInfoData))
             // if (!lotteryId) {
             //     return dispatch(_M.SET_MESSAGE_BOX_DATA, warnMessageBox({
             //         // '请选择一个彩种。'
@@ -115,29 +116,121 @@ const actions = {
             // }
         }
         commit(_M.SET_GAME_INFO_LOAD, true)
-        const { functionType } = payload || {}
-        let params = { ...state.gameInfoData, startDate, endDate, startIssue, endIssue, saleStartDate, saleEndDate }
+        const {functionType} = payload || {}
+        let params = {...state.gameInfoData, startDate, endDate, startIssue, endIssue, saleStartDate, saleEndDate}
         if (functionType) {
             params.functionType = functionType
-            commit(_M.SET_GAME_INFO_DATA, { functionType })
+            commit(_M.SET_GAME_INFO_DATA, {functionType})
         }
         const data = await handleAjax(url, params, rootGetters)
         data && dispatch(_M.SET_GAME_INFO_LIST, data)
         commit(_M.SET_GAME_INFO_LOAD, false)
-        commit(_M.SET_GAME_INFO_DATA, { canPageNation: true })
+        commit(_M.SET_GAME_INFO_DATA, {canPageNation: true})
         return data
     },
-    async [_M.GET_GAME_INFO_VNLIST]({ commit, state, rootGetters, dispatch }, payload) {
-        console.log(1111)
+    async [_M.GET_GAME_INFO_VNLIST]({commit, state, rootGetters, dispatch}, payload) {
+        if (rootGetters.isShowDemo) {
+            return
+        }
+        const page = payload ? payload.page : false
+        // 越南,泰國,股票 改打 orderHistoryVN
+        const url = (['vn', 'th', 'stock', 'la', 'my'].includes((payload || {}).countryType)) ? API.orderHistoryVN : API.orderHistory
+        let startDate = null
+        let endDate = null
+        let startIssue = null
+        let endIssue = null
+        let saleStartDate = null
+        let saleEndDate = null
+        let lotteryId = payload.lotteryId
+        if (!page) {
+            const calSum = state.gameInfoData.calSum
+                ? true
+                : payload
+                    ? payload.calSum
+                    : false
+            state.gameInfoData.page
+                ? commit(_M.SET_GAME_INFO_DATA, {page: null, calSum})
+                : commit(_M.SET_GAME_INFO_DATA, {calSum})
+            commit(_M.RESET_GAME_INFO_TEMP)
+            dispatch(_M.SET_GAME_INFO_PAGE_NATION_NUM)
+        } else {
+            if (!state.gameInfoData.canPageNation) {
+                payload.page = null
+            }
+            commit(_M.SET_GAME_INFO_DATA, payload)
+        }
+        // if (state.gameTempInfo[page]) {
+        //     commit(_M.SET_GAME_INFO_LIST, state.gameTempInfo[page])
+        //     return
+        // }
+        // 投注號不需要日期
+        if ([1, 2].includes(+state.gameInfoData.periodType)) {
+            // GameClientKM : 20170625 Sun 09:27:55 增加一個狀態旗標識別用...資料正在加載...
+            if (state.gameInfoData.startDate === 2) {
+                startDate = controlDate(7)[4].value
+            } else if (state.gameInfoData.startDate === 3) {
+                startDate = controlDate(7)[8].value
+            } else {
+                startDate = state.gameInfoData.startDate
+            }
+            endDate = state.gameInfoData.endDate
+        } else if (+state.gameInfoData.periodType === 4) {
+            ({lotteryId, saleStartDate, saleEndDate} = returnState(state.gameInfoData))
+        } else {
+            ({startIssue, endIssue, lotteryId} = returnState(state.gameInfoData))
+            // if (!lotteryId) {
+            //     return dispatch(_M.SET_MESSAGE_BOX_DATA, warnMessageBox({
+            //         // '请选择一个彩种。'
+            //         message: 'popup_141'
+            //     }))
+            // } else if (!(startIssue || endIssue)) {
+            //     return dispatch(_M.SET_MESSAGE_BOX_DATA, warnMessageBox({
+            //         // '请输入投注期号。'
+            //         message: 'popup_142'
+            //     }))
+            // } else {
+            if (/^\d{9}/.test(startIssue) && !/-/.test(startIssue)) {
+                startIssue = startIssue.split('')
+                startIssue.splice(8, 0, '-')
+                startIssue = startIssue.join('')
+            }
+            if (/^\d{9}/.test(endIssue) && !/-/.test(endIssue)) {
+                endIssue = endIssue.split('')
+                endIssue.splice(8, 0, '-')
+                endIssue = endIssue.join('')
+            }
+            // }
+        }
+        commit(_M.SET_GAME_INFO_LOAD, true)
+        const {functionType} = payload || {}
+        let params = {
+            ...state.gameInfoData,
+            startDate,
+            endDate,
+            startIssue,
+            endIssue,
+            saleStartDate,
+            saleEndDate,
+            lotteryId
+        }
+        if (functionType) {
+            params.functionType = functionType
+            commit(_M.SET_GAME_INFO_DATA, {functionType})
+        }
+        const data = await handleAjax(url, params, rootGetters)
+        data && dispatch(_M.SET_GAME_INFO_LIST, data)
+        commit(_M.SET_GAME_INFO_LOAD, false)
+        commit(_M.SET_GAME_INFO_DATA, {canPageNation: true})
+        return data
     },
     /**
      * API 取得 投注紀錄單筆注單資料
      * @param {any} { commit, state, rootGetters }
      * @param {object} payload 注單編號
      */
-    async [_M.GET_GAME_INFO_DETAIL]({ commit, state, rootGetters }, payload) {
+    async [_M.GET_GAME_INFO_DETAIL]({commit, state, rootGetters}, payload) {
         commit(_M.SET_GAME_INFO_LOAD, true)
-        const params = { ...state.gameInfoData, ...payload, projectId: payload.projectId }
+        const params = {...state.gameInfoData, ...payload, projectId: payload.projectId}
         let url = payload.countryType !== 'vn' ? API.orderHistoryDetail : API.orderHistoryDetailVN
         const data = await handleAjax(url, params, rootGetters)
         if (data) {
@@ -146,7 +239,7 @@ const actions = {
             if (rootGetters.RWDMode === 3) {
                 const page = parseInt(index / 20) + 1
                 const itemIndex = index % 20
-                temp[page].data.list[itemIndex] = { ...data.data.list[0] }
+                temp[page].data.list[itemIndex] = {...data.data.list[0]}
                 commit(_M.SET_GAME_TEMP_INFO, temp)
             } else {
                 temp.data.list[index] = data.data.list[0]
@@ -168,8 +261,8 @@ const actions = {
      * issueData 是 設定 lotteryId 和 methodId 後 觸發 handelAjax 取得..
      * TODO: 獲得 獎期清單\
      */
-    async [_M.GET_GAME_INFO_ISSUE]({ commit, state, rootGetters }) {
-        const params = { queryDate: state.gameInfoData.startDate, lotteryId: state.gameInfoData.lotteryId }
+    async [_M.GET_GAME_INFO_ISSUE]({commit, state, rootGetters}) {
+        const params = {queryDate: state.gameInfoData.startDate, lotteryId: state.gameInfoData.lotteryId}
         const issueData = await handleAjax(API.issueList, params, rootGetters)
         issueData && commit(_M.SET_GAME_INFO_ISSUE, issueData.data)
     },
@@ -177,7 +270,7 @@ const actions = {
      * 設定資料並緩存在陣列
      * @param {object} payload 設定投注資料
      */
-    [_M.SET_GAME_INFO_DATA]({ state, commit }, payload) {
+    [_M.SET_GAME_INFO_DATA]({state, commit}, payload) {
         // commit(_M.RESET_GAME_INFO_TEMP)
         commit(_M.SET_GAME_INFO_DETAIL_INDEX, -1)
         commit(_M.SET_GAME_INFO_SHARE_INDEX, -1)
@@ -187,20 +280,20 @@ const actions = {
      * 投注紀錄詳情資料頁索引
      * @param {number} payLoad 投注紀錄詳情資料頁 Index
      */
-    [_M.SET_GAME_INFO_DETAIL_INDEX]({ commit }, payLoad) {
+    [_M.SET_GAME_INFO_DETAIL_INDEX]({commit}, payLoad) {
         commit(_M.SET_GAME_INFO_DETAIL_INDEX, payLoad)
     },
     /**
      * 投注紀錄分享資料頁索引
      * @param {number} payLoad 投注紀錄詳情資料頁 Index
      */
-    [_M.SET_GAME_INFO_SHARE_INDEX]({ commit }, payLoad) {
+    [_M.SET_GAME_INFO_SHARE_INDEX]({commit}, payLoad) {
         commit(_M.SET_GAME_INFO_SHARE_INDEX, payLoad)
     },
     /**
      * 清除所有資料
      */
-    [_M.CLEAR_GAME_INFO_DATA]({ commit }) {
+    [_M.CLEAR_GAME_INFO_DATA]({commit}) {
         commit(_M.SET_GAME_INFO_LIST, {})
         commit(_M.SET_GAME_INFO_DATA, returnState(gameInfoDataTemp))
         commit(_M.SET_GAME_INFO_ISSUE, [])
@@ -213,14 +306,14 @@ const actions = {
      * 分頁顯示頁碼位置
      * @param {any} payLoad 獎期列表
      */
-    [_M.SET_GAME_INFO_PAGE_NATION_NUM]({ commit }, payLoad) {
+    [_M.SET_GAME_INFO_PAGE_NATION_NUM]({commit}, payLoad) {
         commit(_M.SET_GAME_INFO_PAGE_NATION_NUM, payLoad)
     },
     /**
      * 投注徹單
      * @param {any} payLoad 投注單號
      */
-    [_M.ACTION_PROJECT_CANCEL]({ commit, dispatch, rootGetters }, payLoad) {
+    [_M.ACTION_PROJECT_CANCEL]({commit, dispatch, rootGetters}, payLoad) {
         const {
             projectId,
             countryType,
@@ -234,17 +327,17 @@ const actions = {
             beforeConfirm: async (instance) => {
                 // '撤销中...'
                 instance.confirmDataText = 'popup_054'
-                const data = await handleAjax(API.userProjectCancel, {id: projectId}, rootGetters, { isNotShowMessageBox: true })
+                const data = await handleAjax(API.userProjectCancel, {id: projectId}, rootGetters, {isNotShowMessageBox: true})
                 if (!data) {
                     // '撤销失败'
-                    dispatch(_M.SET_MESSAGE_BOX_DATA, warnMessageBox2({ message: 'popup_057' }))
+                    dispatch(_M.SET_MESSAGE_BOX_DATA, warnMessageBox2({message: 'popup_057'}))
                     return
                 }
                 if (data.result === '0') {
                     // '撤销成功'
                     data.message = 'popup_051'
                     data.type = 'success'
-                    const { availablebalance } = data.data
+                    const {availablebalance} = data.data
                     availablebalance && commit(_M.SET_WALLET_BALANCE, availablebalance)
                     commit(_M.SET_OFFSET_GET_BALANCE_NUM, 1)
                     await dispatch(_M.GET_GAME_INFO_DETAIL, {projectId, countryType})
@@ -254,7 +347,7 @@ const actions = {
                     dispatch(_M.SET_MESSAGE_BOX_DATA, componentBox({
                         show: false
                     }))
-                    await dispatch(_M.GET_GAME_INFO_LIST, { countryType })
+                    await dispatch(_M.GET_GAME_INFO_LIST, {countryType})
 
                     // 320 撤銷成功時回上一頁
                     fn && fn()
@@ -266,7 +359,7 @@ const actions = {
      * 設定投注紀錄資料
      * @param {any} payLoad 资料
      */
-    [_M.SET_GAME_INFO_LIST]({ commit }, payLoad) {
+    [_M.SET_GAME_INFO_LIST]({commit}, payLoad) {
         if (payLoad.params && payLoad.params.calSum) {
             const sum = payLoad.data.list.splice(0, 1)[0]
             commit(_M.SET_GAME_INFO_SUM, sum)
@@ -277,7 +370,7 @@ const actions = {
      * 設定投注紀錄總計資料
      * @param {any} payLoad 资料
      */
-    [_M.SET_GAME_INFO_SUM]({ commit }, payLoad) {
+    [_M.SET_GAME_INFO_SUM]({commit}, payLoad) {
         commit(_M.SET_GAME_INFO_SUM, payLoad)
     }
 }

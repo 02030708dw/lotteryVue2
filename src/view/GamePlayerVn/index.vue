@@ -27,6 +27,7 @@ import GameSubmitSuccess from './GameSubmitSuccess'
 import GameSubmitBox from './GameSubmitBox/'
 import PrizePeriodEnd from './PrizePeriodEnd'
 import { mapActions, mapGetters } from 'vuex'
+import GameInfo from '@C/../store/modules/GameInfo/'
 import blockedFilter from '@C/games/VN/helpers/blockedFilter'
 export default {
     name: 'GamePlayerVN',
@@ -64,7 +65,7 @@ export default {
         })
     },
     created() {
-        this.setStore({ GamePlayerVN })
+        this.setStore({ GamePlayerVN,GameInfo })
         this[_M.GET_COLD_DOWN_VN_DATA]()
         this[_M.GET_GAME_CONFIG_VN_DATA]()
     },

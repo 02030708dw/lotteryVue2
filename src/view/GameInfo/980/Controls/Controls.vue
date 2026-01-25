@@ -131,7 +131,7 @@ export default {
             _M.SET_GAME_INFO_DATA,
             _M.SET_GAME_INFO_PAGE_NATION_NUM,
             _M.CLEAR_GAME_INFO_DATA,
-            'vnList'
+            _M.GET_GAME_INFO_VNLIST
         ]),
         change(params) {
             // const key = Object.keys(params)[0]
@@ -238,19 +238,15 @@ export default {
                         this.statusArr = this.statusDefalut.slice()
                         this[_M.SET_GAME_INFO_DATA]({status: this.statusDefalut.slice()})
                     }
-
                     this[_M.SET_GAME_INFO_PAGE_NATION_NUM](1)
-                    const data2 = await this[_M.GET_GAME_INFO_VNLIST]({
+                    const data = await this[_M.GET_GAME_INFO_VNLIST]({
                         calSum: true,
-                        functionType: this.lotteryCountry === 'ft'
-                            ? 'ft'
-                            : this.correctFilterMode.replace('offical', 'normal'),
+                        functionType: 'vn',
                         countryType: this.lotteryCountry,
                         lotteryId
                     })
-                    return
                     if (data) {
-                        this.changeUrl()
+                        // this.changeUrl()
                         this.controllerToggle = false
                     }
                 })
