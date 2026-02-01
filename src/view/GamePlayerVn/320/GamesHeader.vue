@@ -60,10 +60,72 @@
                             </span>
                         </div>
                     </div>
+                    <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
+                        :class="{ is_active: isStatusActive }"
+                        v-if="!VN_isLocal && getDataArr['VN_ALL'] && getSellTime">
+                        <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
+                        <div v-if="!VN_isLocal || lang !== 'vn'" class="gr_games-vn-lotteryStatus"
+                            :style="{ 'max-width': maxWStatus }" ref="lotteryStatus">
+                            <div class="gr_games-vn-lotteryStatus__sold">
+                                <span class="gr_games-vn-lotteryStatus__sold--title">
+                                    <!-- {{$t('贩售:')}} -->
+                                    {{ $t('timetable_001') }}
+                                </span>
+                                <span class="gr_games-vn-lotteryStatus__sold--txt">
+                                    {{ $t(getSellTime.selling[0], {
+                                        '0': getSellTime.selling[1],
+                                        '1': getSellTime.selling[2]
+                                    }
+                                    ) }}
+                                </span>
+                                <span>;</span>
+                            </div>
+                            <div class="gr_games-vn-lotteryStatus__time">
+                                <span class="gr_games-vn-lotteryStatus__time--title">
+                                    <!-- {{$t('开奖:')}} -->
+                                    {{ $t('timetable_002') }}
+                                </span>
+                                <span class="gr_games-vn-lotteryStatus__time--txt">
+                                    {{ $t(getSellTime.winning[0], {
+                                        '0': getSellTime.winning[1],
+                                        '1': getSellTime.winning[2],
+                                        '2': getSellTime.winning[3]
+                                    }
+                                    ) }}
+                                </span>
+                            </div>
+                        </div>
+                        <div v-else class="gr_games-vn-lotteryStatus" :style="{ 'max-width': maxWStatus }"
+                            ref="lotteryStatus">
+                            <div class="gr_games-vn-lotteryStatus__sold">
+                                <span class="gr_games-vn-lotteryStatus__sold--txt">
+                                    Nhận cược và mở thưởng từ 05:00 hôm nay đến 07:00 ngày mai
+                                </span>
+                                <span>;</span>
+                            </div>
+                            <div class="gr_games-vn-lotteryStatus__time">
+                                <span class="gr_games-vn-lotteryStatus__time--txt">
+                                    30 giây 01 kỳ mở thưởng
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-if="!VN_isLocal" class="gr_games-vn-header__button-group">
+                        <div class="gr_button-group__button  u_c--pointer"
+                            v-if="isShowOfficalPage && !isHideOfficalPage">
+                            <a v-if="!isShowDemo" class="i_lottery-period--official-website" :href="openOfficalPage"
+                                target="_blank">
+                                <!-- 开奖官网 -->
+                                <span>
+                                    {{ $t('common_006') }}
+                                </span>
+                            </a>
+                        </div>
+                    </div>
                 </template>
             </vnd-header>
         </div>
-        <bet-record v-model="showBetRecord"/>
+        <bet-record v-model="showBetRecord" />
     </div>
 </template>
 <script>
@@ -76,7 +138,7 @@ import BetRecord from './header/betRecord.vue'
 
 export default {
     name: 'GamesHeader320',
-    components: {BetRecord, VndHeader, RollTxt },
+    components: { BetRecord, VndHeader, RollTxt },
     data() {
         return {
             gameModeTemp: 0,
@@ -89,7 +151,7 @@ export default {
             setFavoritingTimer: null,
             // statusX: {}
             maxWStatus: '',
-            showBetRecord:false
+            showBetRecord: false
         }
     },
     beforeDestroy() {
@@ -187,7 +249,7 @@ export default {
                 case 'his':
                     return this.goHistory()
                 case 'betRecord':
-                    this.showBetRecord=true
+                    this.showBetRecord = true
                     break
                 case 'award':
                 case 'per':
