@@ -19,7 +19,7 @@ export default {
         </div>
         <div class="bott">
             <div class="btn" @click="$emit('onExtra', 'his')">
-                {{$t('common_007')}}
+                {{ $t("common_007") }}
             </div>
             <!-- <div class="btn" @click="$emit('onExtra','betRecord')">{{ $t('投注记录') }}</div> -->
             <!--  <div class="empty btn" v-if="showEmptyBtn" @click="$emit('onExtra','award')">
@@ -87,8 +87,13 @@ export default {
                 color: #f7931e;
             }
 
-            .gr_g{
-                margin: 7.5px 0 ;
+            .gr_g {
+                margin: 7.5px 0;
+
+                .gr_desc__draw strong {
+                    margin-left: 0;
+                    font-size: 10px;
+                }
             }
         }
     }
@@ -114,6 +119,10 @@ export default {
             color: #fff;
             border-radius: 5px;
             position: relative;
+            //文字不换行，超出部分省略号显示
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             .perIcon {
                 position: absolute;
