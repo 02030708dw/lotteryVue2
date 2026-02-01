@@ -3,9 +3,9 @@
         <div class="gr_games-vn-header__inner  u_clearfix">
             <vnd-header @onExtra="headerClick">
                 <template #top>
-                    <div class="l js-vn-history-trigger" @click.stop="handleHistoryToggle">
+                    <div v-if="VN_isLocal" class="l js-vn-history-trigger" @click.stop="handleHistoryToggle">
                         <span>{{ VN_lastIssue | fIssue }}</span>
-                        <div class="gr_games-vn-header__nubmer_new" v-if="VN_isLocal">
+                        <div class="gr_games-vn-header__nubmer_new">
                             <dt class="gr_number__nubmer_new--title">
                                 <i class="gr_item__title--icon grand_prize">{{ 0 }}</i>
                                 <span class="gr_number__nubmer_new"> {{ lastNumber[lastNumber.length - 1] }}</span>
@@ -36,7 +36,7 @@
                                 </span>
                             </span>
                         </div>
-                        <div class="gr_games-vn-header__desc" v-else>
+                        <div class="gr_games-vn-header__desc gr_g" v-else>
                             <span class="gr_desc__draw" v-if="isOpen">
                                 <!-- {{$t("目前尚未开放奖期")}} -->
                                 {{ $t('common_003') }}

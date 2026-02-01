@@ -1,25 +1,27 @@
 <script>
-import {defineComponent, reactive, ref} from '@vue/composition-api'
+import { defineComponent, reactive, ref } from "@vue/composition-api";
 
 export default {
-    name:'vndHeader',
-    data(){
+    name: "vndHeader",
+    data() {
         return {
-            showEmptyBtn:false,
-            sp:false
-        }
-    }
-}
+            showEmptyBtn: false,
+            sp: false,
+        };
+    },
+};
 </script>
 
 <template>
     <div class="gameTime">
         <div class="t">
-            <slot name="top"/>
+            <slot name="top" />
         </div>
         <div class="bott">
-            <div class="btn" @click="$emit('onExtra','his')">{{ $t('history') }}</div>
-                     <div class="btn" @click="$emit('onExtra','betRecord')">{{ $t('投注记录') }}</div>
+            <div class="btn" @click="$emit('onExtra', 'his')">
+                {{$t('common_007')}}
+            </div>
+            <!-- <div class="btn" @click="$emit('onExtra','betRecord')">{{ $t('投注记录') }}</div> -->
             <!--  <div class="empty btn" v-if="showEmptyBtn" @click="$emit('onExtra','award')">
                {{ $t('recentOpen') }}
                <slot name="btnnr"/>
@@ -81,8 +83,12 @@ export default {
             strong {
                 font-weight: normal;
                 margin-left: 10px;
-                font-size: 18px;
+                font-size: 14px;
                 color: #f7931e;
+            }
+
+            .gr_g{
+                margin: 7.5px 0 ;
             }
         }
     }
@@ -94,7 +100,7 @@ export default {
         gap: 5px;
 
         > div {
-            flex: 1
+            flex: 1;
         }
 
         .btn {
@@ -192,7 +198,7 @@ export default {
                 position: relative;
 
                 &::before {
-                    content: attr(s-able)+"st";
+                    content: attr(s-able) + "st";
                     position: absolute;
                     left: 0;
                     top: 0;
@@ -209,7 +215,7 @@ export default {
     .noData {
         font-size: 30px;
         margin-top: 50px;
-        .centerFlex()
+        .centerFlex();
     }
 
     .close {
