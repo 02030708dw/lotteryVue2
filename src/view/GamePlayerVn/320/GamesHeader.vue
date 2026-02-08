@@ -13,6 +13,20 @@
                     <div class="gr_tooltip__popper">{{ $t(tipTxt) }}</div>
                 </div>
                 <span class="gr_games-vn-header__title">{{ currentTitle }}</span>
+                <div class="gr_games-vn-header__nubmer_new js-vn-history-trigger" @click.stop="handleHistoryToggle"
+                    v-if="VN_isLocal">
+                    <dt class="gr_number__nubmer_new--title">
+                        <i class="gr_item__title--icon grand_prize">{{ 0 }}</i>
+                        <span class="gr_number__nubmer_new"> {{ lastNumber[lastNumber.length - 1] }}</span>
+                    </dt>
+                    <dt class="gr_number__nubmer_new--title">
+                        <i class="gr_item__title--icon">{{ 8 }}</i>
+                        <span class="gr_number__nubmer_new"> {{ lastNumber[0] }}</span>
+                    </dt>
+                    <span class="vn-arrow-wrap" :class="{ 'is-open': getPopActive.VNhistory }" v-if="VN_isLocal">
+                        <i class="el-icon-arrow-down"></i>
+                    </span>
+                </div>
                 <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
                     :class="{ is_active: isStatusActive }" v-if="getDataArr['VN_ALL'] && getSellTime">
                     <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
@@ -114,16 +128,6 @@
                 <div class="gr_button-group__button  u_c--pointer" @click.prevent="goHistory">
                     <i class="i_lottery-period--history" />
                 </div>
-            </div>
-            <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
-                <dt class="gr_number__nubmer_new--title">
-                    <i class="gr_item__title--icon">{{ 8 }}</i>
-                    <span class="gr_number__nubmer_new"> {{ lastNumber[8] }}</span>
-                </dt>
-                <dt class="gr_number__nubmer_new--title">
-                    <i class="gr_item__title--icon">{{ 7 }}</i>
-                    <span class="gr_number__nubmer_new"> {{ lastNumber[7] }}</span>
-                </dt>
             </div>
         </div>
     </div>

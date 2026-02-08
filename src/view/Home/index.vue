@@ -71,7 +71,7 @@ export default {
             })
             this[_M.GET_ALL_OPEN_ISSUE]()
             this[_M.GET_ALL_ISSUE]()
-            this.allIssueTimer = setInterval(() => this[_M.GET_ALL_OPEN_ISSUE](), 10000)
+            this.allIssueTimer = setInterval(() => this[_M.GET_ALL_OPEN_ISSUE](), 30000)
             this.timer = setInterval(this[_M.GET_FLIP_TIMEER_ALL], 1000)
         }
     },

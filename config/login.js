@@ -24,7 +24,7 @@ const urls = {
     ao: 'http://api-autoodds.b2bdev.com',
     cr: 'ttp://api-currency.b2bdev.com',
     lang: 'http://api-lang.b2bdev.com',
-    develop: 'https://original.gw1238.online',
+    develop: 'https://gc1st.gw1238.online',
     2015: 'http://landgameclient.com',
     prod: 'https://api.shicai-client.com'
 }
