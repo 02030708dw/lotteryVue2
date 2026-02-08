@@ -1,129 +1,135 @@
 <template>
     <div class="gr_games-vn-header  gr_games-vn-header--320  gr_container bg_secondary">
         <div class="gr_games-vn-header__inner  u_clearfix">
-            <vnd-header @onExtra="headerClick">
-                <template #top>
-                    <div v-if="VN_isLocal" class="l js-vn-history-trigger" @click.stop="handleHistoryToggle">
-                        <span>{{ VN_lastIssue | fIssue }}</span>
-                        <div class="gr_games-vn-header__nubmer_new">
-                            <dt class="gr_number__nubmer_new--title">
-                                <i class="gr_item__title--icon grand_prize">{{ 0 }}</i>
-                                <span class="gr_number__nubmer_new"> {{ lastNumber[lastNumber.length - 1] }}</span>
-                            </dt>
-                            <dt class="gr_number__nubmer_new--title">
-                                <i class="gr_item__title--icon">{{ 8 }}</i>
-                                <span class="gr_number__nubmer_new"> {{ lastNumber[0] }}</span>
-                            </dt>
+            <div class="">
+                <div class="gr_games-vn-header__my-favorites  gr_my-favorites__tooltip"
+                    :class="{ is_active: isInFavorites, is_tooltip: isTip }" v-if="!isW88 && !isOneLotGame"
+                    @click="setMyFavorites">
+                    <svg class="gr_my-favorites__icon" viewBox="0 0 17.85 16.11">
+                        <path
+                            d="M8.93,3.15C8.17-.47,2.14-.66.77,3.65c-2.18,6.79,6.67,9,8.16,12,1.48-3.07,10.32-5.25,8.15-12C15.71-.66,9.68-.47,8.93,3.15Z" />
+                    </svg>
+                    <span class="gr_tooltip__arrow" />
+                    <div class="gr_tooltip__popper">{{ $t(tipTxt) }}</div>
+                </div>
+                <span class="gr_games-vn-header__title">{{ currentTitle }}</span>
+                <div class="gr_games-vn-header__nubmer_new js-vn-history-trigger" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
+                    <dt class="gr_number__nubmer_new--title">
+                        <i class="gr_item__title--icon grand_prize">{{ 0 }}</i>
+                        <span class="gr_number__nubmer_new"> {{ lastNumber[lastNumber.length - 1] }}</span>
+                    </dt>
+                    <dt class="gr_number__nubmer_new--title">
+                        <i class="gr_item__title--icon">{{ 8 }}</i>
+                        <span class="gr_number__nubmer_new"> {{ lastNumber[0] }}</span> 
+                    </dt>
+                    <span class="vn-arrow-wrap" :class="{ 'is-open': getPopActive.VNhistory }" v-if="VN_isLocal">
+                        <i class="el-icon-arrow-down"></i>
+                    </span>
+                </div>
+                <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
+                    :class="{ is_active: isStatusActive }" v-if="getDataArr['VN_ALL'] && getSellTime">
+                    <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
+                    <div v-if="!VN_isLocal || lang !== 'vn'" class="gr_games-vn-lotteryStatus"
+                        :style="{ 'max-width': maxWStatus }" ref="lotteryStatus">
+                        <div class="gr_games-vn-lotteryStatus__sold">
+                            <span class="gr_games-vn-lotteryStatus__sold--title">
+                                <!-- {{$t('贩售:')}} -->
+                                {{ $t('timetable_001') }}
+                            </span>
+                            <span class="gr_games-vn-lotteryStatus__sold--txt">
+                                {{ $t(getSellTime.selling[0], {
+                                    '0': getSellTime.selling[1],
+                                    '1': getSellTime.selling[2]
+                                }
+                                ) }}
+                            </span>
+                            <span>;</span>
                         </div>
-                        <span class="vn-arrow-wrap" :class="{ 'is-open': getPopActive.VNhistory }" v-if="VN_isLocal">
-                            <i class="el-icon-arrow-down"></i>
+                        <div class="gr_games-vn-lotteryStatus__time">
+                            <span class="gr_games-vn-lotteryStatus__time--title">
+                                <!-- {{$t('开奖:')}} -->
+                                {{ $t('timetable_002') }}
+                            </span>
+                            <span class="gr_games-vn-lotteryStatus__time--txt">
+                                {{ $t(getSellTime.winning[0], {
+                                    '0': getSellTime.winning[1],
+                                    '1': getSellTime.winning[2],
+                                    '2': getSellTime.winning[3]
+                                }
+                                ) }}
+                            </span>
+                        </div>
+                    </div>
+                    <div v-else class="gr_games-vn-lotteryStatus" :style="{ 'max-width': maxWStatus }"
+                        ref="lotteryStatus">
+                        <div class="gr_games-vn-lotteryStatus__sold">
+                            <span class="gr_games-vn-lotteryStatus__sold--txt">
+                                Nhận cược và mở thưởng từ 05:00 hôm nay đến 07:00 ngày mai
+                            </span>
+                            <span>;</span>
+                        </div>
+                        <div class="gr_games-vn-lotteryStatus__time">
+                            <span class="gr_games-vn-lotteryStatus__time--txt">
+                                30 giây 01 kỳ mở thưởng
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
+                <span class="gr_desc__draw" v-if="isOpen">
+                    <!-- {{$t("目前尚未开放奖期")}} -->
+                    {{ $t('common_003') }}
+                </span>
+                <span v-else>
+                    <!-- 第{0}期 -->
+                    <i18n path="common_001" tag="span">
+                        <strong place="0">{{ VN_localIssue }}</strong>
+                    </i18n>
+                    <span class="gr_desc__draw">
+                        <strong>{{ localTimer }}</strong>
+                    </span>
+                </span>
+            </div>
+            <div class="gr_games-vn-header__desc" v-else>
+                <span class="gr_desc__draw" v-if="isOpen">
+                    <!-- {{$t("目前尚未开放奖期")}} -->
+                    {{ $t('common_003') }}
+                </span>
+                <span v-else>
+                    <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_S']">
+                        <!-- 南 -->
+                        {{ $t("vn_t_048") }}
+                        <strong>{{ VN_S_timer }}</strong>
+                    </span>
+                    <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_C']">
+                        <!-- 中 -->
+                        {{ $t("vn_t_049") }}
+                        <strong>{{ VN_C_timer }}</strong>
+                    </span>
+                    <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_N']">
+                        <!-- 北 -->
+                        {{ $t("vn_t_050") }}
+                        <strong>{{ VN_N_timer }}</strong>
+                    </span>
+                </span>
+            </div>
+            <div class="gr_games-vn-header__button-group">
+                <div class="gr_button-group__button  u_c--pointer" v-if="isShowOfficalPage && !isHideOfficalPage">
+                    <a v-if="!isShowDemo" class="i_lottery-period--official-website" :href="openOfficalPage"
+                        target="_blank">
+                        <!-- 开奖官网 -->
+                        <span>
+                            {{ $t('common_006') }}
                         </span>
-                    </div>
-                    <div class="r">
-                        <span>{{ VN_localIssue | fIssue }}</span>
-                        <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
-                            <span class="gr_desc__draw" v-if="isOpen">
-                                <!-- {{$t("目前尚未开放奖期")}} -->
-                                {{ $t('common_003') }}
-                            </span>
-                            <span v-else>
-                                <!--                                    &lt;!&ndash; 第{0}期 &ndash;&gt;
-                                    <i18n path="common_001" tag="span">
-                                        <strong place="0">{{ VN_localIssue }}</strong>
-                                    </i18n>-->
-                                <span class="gr_desc__draw">
-                                    <strong>{{ localTimer }}</strong>
-                                </span>
-                            </span>
-                        </div>
-                        <div class="gr_games-vn-header__desc gr_g" v-else>
-                            <span class="gr_desc__draw" v-if="isOpen">
-                                <!-- {{$t("目前尚未开放奖期")}} -->
-                                {{ $t('common_003') }}
-                            </span>
-                            <span v-else>
-                                <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_S']">
-                                    <!-- 南 -->
-                                    {{ $t('vn_t_048') }}
-                                    <strong>{{ VN_S_timer }}</strong>
-                                </span>
-                                <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_C']">
-                                    <!-- 中 -->
-                                    {{ $t('vn_t_049') }}
-                                    <strong>{{ VN_C_timer }}</strong>
-                                </span>
-                                <span class="gr_desc__draw" v-show="VN_lotteryOfficialSwitch['VN_N']">
-                                    <!-- 北 -->
-                                    {{ $t('vn_t_050') }}
-                                    <strong>{{ VN_N_timer }}</strong>
-                                </span>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
-                        :class="{ is_active: isStatusActive }"
-                        v-if="!VN_isLocal && getDataArr['VN_ALL'] && getSellTime">
-                        <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
-                        <div v-if="!VN_isLocal || lang !== 'vn'" class="gr_games-vn-lotteryStatus"
-                            :style="{ 'max-width': maxWStatus }" ref="lotteryStatus">
-                            <div class="gr_games-vn-lotteryStatus__sold">
-                                <span class="gr_games-vn-lotteryStatus__sold--title">
-                                    <!-- {{$t('贩售:')}} -->
-                                    {{ $t('timetable_001') }}
-                                </span>
-                                <span class="gr_games-vn-lotteryStatus__sold--txt">
-                                    {{ $t(getSellTime.selling[0], {
-                                        '0': getSellTime.selling[1],
-                                        '1': getSellTime.selling[2]
-                                    }
-                                    ) }}
-                                </span>
-                                <span>;</span>
-                            </div>
-                            <div class="gr_games-vn-lotteryStatus__time">
-                                <span class="gr_games-vn-lotteryStatus__time--title">
-                                    <!-- {{$t('开奖:')}} -->
-                                    {{ $t('timetable_002') }}
-                                </span>
-                                <span class="gr_games-vn-lotteryStatus__time--txt">
-                                    {{ $t(getSellTime.winning[0], {
-                                        '0': getSellTime.winning[1],
-                                        '1': getSellTime.winning[2],
-                                        '2': getSellTime.winning[3]
-                                    }
-                                    ) }}
-                                </span>
-                            </div>
-                        </div>
-                        <div v-else class="gr_games-vn-lotteryStatus" :style="{ 'max-width': maxWStatus }"
-                            ref="lotteryStatus">
-                            <div class="gr_games-vn-lotteryStatus__sold">
-                                <span class="gr_games-vn-lotteryStatus__sold--txt">
-                                    Nhận cược và mở thưởng từ 05:00 hôm nay đến 07:00 ngày mai
-                                </span>
-                                <span>;</span>
-                            </div>
-                            <div class="gr_games-vn-lotteryStatus__time">
-                                <span class="gr_games-vn-lotteryStatus__time--txt">
-                                    30 giây 01 kỳ mở thưởng
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-if="!VN_isLocal" class="gr_games-vn-header__button-group">
-                        <div class="gr_button-group__button  u_c--pointer"
-                            v-if="isShowOfficalPage && !isHideOfficalPage">
-                            <a v-if="!isShowDemo" class="i_lottery-period--official-website" :href="openOfficalPage"
-                                target="_blank">
-                                <!-- 开奖官网 -->
-                                <span>
-                                    {{ $t('common_006') }}
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </template>
-            </vnd-header>
+                    </a>
+                </div>
+                <div class="gr_button-group__button  u_c--pointer" @click.prevent="goHistory">
+                    <i class="i_lottery-period--history" />
+                </div>
+            </div>
+     
         </div>
         <bet-record v-model="showBetRecord" />
     </div>

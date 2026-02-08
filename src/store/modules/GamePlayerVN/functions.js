@@ -357,6 +357,7 @@ export const getIsFocusArea = (getters, area) => {
 export const fetchStopBetNumber = ({ commit, rootGetters }) => {
     handleAjax(API.stopBetting, {menuType: 3}, rootGetters, { isPromise: true })
         .then(({data}) => {
+            console.log(data,'1231231111111111')
             const { stop_bet_number } = data
             commit(_M.SET_VN_TEMP_DATA, {
                 temp: 'VN_stopNumber',
