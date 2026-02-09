@@ -10,7 +10,7 @@ import router from './router'
 import store from './store/store'
 import i18n from './lang/lang'
 import { sync } from 'vuex-router-sync'
-import VueCompositionAPI from '@vue/composition-api'
+
 // 彈窗
 import MessageBox from '@C/MessageBox'
 // Vue-Lazyload(懶加載)
@@ -65,7 +65,6 @@ import ElementUI from '@E/src'
 import directive from './directive'
 
 Vue.use(ElementUI)
-Vue.use(VueCompositionAPI)
 ElementUI.i18n((key, value) => i18n.t(key, value))
 
 Vue.use(directive)

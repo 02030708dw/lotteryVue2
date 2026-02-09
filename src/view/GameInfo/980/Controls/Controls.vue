@@ -130,8 +130,7 @@ export default {
             _M.GET_GAME_INFO_ISSUE,
             _M.SET_GAME_INFO_DATA,
             _M.SET_GAME_INFO_PAGE_NATION_NUM,
-            _M.CLEAR_GAME_INFO_DATA,
-            _M.GET_GAME_INFO_VNLIST
+            _M.CLEAR_GAME_INFO_DATA
         ]),
         change(params) {
             // const key = Object.keys(params)[0]
@@ -228,25 +227,6 @@ export default {
                     })
                     if (data) {
                         this.changeUrl()
-                        this.controllerToggle = false
-                    }
-                }),
-            $directSearch: this.$createObservableMethod('directSearch')
-                .throttleTime(1000)
-                .do(async (lotteryId) => {
-                    if (this.statusArr.length === 0) {
-                        this.statusArr = this.statusDefalut.slice()
-                        this[_M.SET_GAME_INFO_DATA]({status: this.statusDefalut.slice()})
-                    }
-                    this[_M.SET_GAME_INFO_PAGE_NATION_NUM](1)
-                    const data = await this[_M.GET_GAME_INFO_VNLIST]({
-                        calSum: true,
-                        functionType: 'vn',
-                        countryType: this.lotteryCountry,
-                        lotteryId
-                    })
-                    if (data) {
-                        // this.changeUrl()
                         this.controllerToggle = false
                     }
                 })

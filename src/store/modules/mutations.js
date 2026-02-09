@@ -97,7 +97,6 @@ export const SET_EXAMPLE_TRANS = 'SET_EXAMPLE_TRANS'
 // Gameinfo.js
 /** API 取得 投注紀錄資料 */
 export const GET_GAME_INFO_LIST = 'GET_GAME_INFO_LIST'
-export const GET_GAME_INFO_VNLIST = 'GET_GAME_INFO_VNLIST'
 /** API 取得 投注紀錄單筆注單資料 */
 export const GET_GAME_INFO_DETAIL = 'GET_GAME_INFO_DETAIL'
 /** 設定 投注紀錄資料 */

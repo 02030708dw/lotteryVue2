@@ -1,6 +1,6 @@
 <template>
     <div>
-         <HeaderNav />
+        <!-- <HeaderNav /> -->
         <div>
             <Navigation :isShowDetail="(isShowDetail || isShowShare) && is320" />
             <Controls v-if="!(isShowDetail || isShowShare ) || !is320" :lotteryCountry="lotteryCountry" :changeLotteryCountry="changeLotteryCountry"/>

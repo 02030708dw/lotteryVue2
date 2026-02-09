@@ -13,19 +13,6 @@
                     <div class="gr_tooltip__popper">{{ $t(tipTxt) }}</div>
                 </div>
                 <span class="gr_games-vn-header__title">{{ currentTitle }}</span>
-                <div class="gr_games-vn-header__nubmer_new js-vn-history-trigger" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
-                    <dt class="gr_number__nubmer_new--title">
-                        <i class="gr_item__title--icon grand_prize">{{ 0 }}</i>
-                        <span class="gr_number__nubmer_new"> {{ lastNumber[lastNumber.length - 1] }}</span>
-                    </dt>
-                    <dt class="gr_number__nubmer_new--title">
-                        <i class="gr_item__title--icon">{{ 8 }}</i>
-                        <span class="gr_number__nubmer_new"> {{ lastNumber[0] }}</span> 
-                    </dt>
-                    <span class="vn-arrow-wrap" :class="{ 'is-open': getPopActive.VNhistory }" v-if="VN_isLocal">
-                        <i class="el-icon-arrow-down"></i>
-                    </span>
-                </div>
                 <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
                     :class="{ is_active: isStatusActive }" v-if="getDataArr['VN_ALL'] && getSellTime">
                     <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
@@ -75,7 +62,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
                 <span class="gr_desc__draw" v-if="isOpen">
@@ -129,22 +115,25 @@
                     <i class="i_lottery-period--history" />
                 </div>
             </div>
-     
+            <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
+                <dt class="gr_number__nubmer_new--title">
+                    <i class="gr_item__title--icon">{{ 8 }}</i>
+                    <span class="gr_number__nubmer_new"> {{ lastNumber[8] }}</span>
+                </dt>
+                <dt class="gr_number__nubmer_new--title">
+                    <i class="gr_item__title--icon">{{ 7 }}</i>
+                    <span class="gr_number__nubmer_new"> {{ lastNumber[7] }}</span>
+                </dt>
+            </div>
         </div>
-        <bet-record v-model="showBetRecord" />
     </div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { warnMessageBox } from '@UTIL'
 import { getData } from '@V/SalesTime/config/data'
-import RollTxt from './header/rollTxt.vue'
-import VndHeader from './header/vndHeader.vue'
-import BetRecord from './header/betRecord.vue'
-
 export default {
     name: 'GamesHeader320',
-    components: { BetRecord, VndHeader, RollTxt },
     data() {
         return {
             gameModeTemp: 0,
@@ -156,8 +145,7 @@ export default {
             gameShowMode: 0,
             setFavoritingTimer: null,
             // statusX: {}
-            maxWStatus: '',
-            showBetRecord: false
+            maxWStatus: ''
         }
     },
     beforeDestroy() {
@@ -172,14 +160,9 @@ export default {
     },
     watch: {
         VN_currentlottery(newVal, oldVal) {
-            // console.log('[Header320 watch]', this._uid, 'old=', oldVal && oldVal.name, 'new=', newVal && newVal.name)
+            console.log('[Header320 watch]', this._uid, 'old=', oldVal && oldVal.name, 'new=', newVal && newVal.name)
             this[_M.SET_GAME_LASTNUMBER_VN]()
             this[_M.GET_GAME_LASTNUMBER_VN]()
-        }
-    },
-    filters: {
-        fIssue(v = '') {
-            return v.substring(4, v.length)
         }
     },
     methods: {
@@ -250,17 +233,6 @@ export default {
             lot.offsetWidth >= lot.offsetParent.offsetWidth &&
                 (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
         },
-        headerClick(t) {
-            switch (t) {
-                case 'his':
-                    return this.goHistory()
-                case 'betRecord':
-                    this.showBetRecord = true
-                    break
-                case 'award':
-                case 'per':
-            }
-        }
     },
     computed: {
         ...mapGetters([
@@ -287,8 +259,7 @@ export default {
             'hideOw',
             'lang',
             'isShowDemo',
-            'VN_lastNumber',
-            'VN_lastIssue'
+            'VN_lastNumber'
         ]),
         currentTitle() {
             return this.VN_isLocal

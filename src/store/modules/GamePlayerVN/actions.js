@@ -196,6 +196,7 @@ export default {
         let retry = 5
         const fetchlastNumber = () => {
             const { name: menuCode, lottery: lotteryId } = VN_currentlottery
+            console.log({ menuCode, lotteryId }, rootGetters, options);
             handleAjax(API.vnLatestDrawV2, { menuCode, lotteryId }, rootGetters, options)
                 .then(({ data }) => {
                     const obj = data[menuCode]
