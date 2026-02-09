@@ -22,14 +22,14 @@
             </div>
             <div class="gr_page__controls__toggle">
                 <!--全部/官方/信用-->
-                <ul class="gr_page_links u_clearfix" v-show="isCN">
+                <!-- <ul class="gr_page_links u_clearfix" v-show="isCN">
                     <li
                         class="gr_page_links--item"
                         :class="{ 'is_active': item.titleValue === correctFilterMode }"
                         v-for="item in modeList"
                         :key="item.titleKey"
                         @click="correctFilterMode = item.titleValue">{{$t(item.titleKey)}}</li>
-                </ul>
+                </ul> -->
                 <!--可筛选状态显示：预设全部,未开奖, 中奖, 未中奖-->
                 <!--
                 <el-select :class='className' v-model='status' :listObject='statusArray' showLabel='titleKey' showValue='stateValue'>
@@ -48,67 +48,13 @@
                 </el-select>
 
                 <!-- 中國彩 -->
-                <template v-if="isCN">
-                    <!-- 分類 -->
-                    <!-- <el-select v-show="isCN" :class="className" :className="className" v-model='correctFilterMode' showLabel='label' showValue='value'>
-                        <el-option v-for="item in modeList" :label='$t(item.titleKey)' :key='item.titleKey' :value='item.titleValue'></el-option>
-                    </el-select> -->
-                    <!-- 所有彩种 -->
-                    <el-select :class='className' :className='className' :placeholder="$t(games)" clearable v-model='lotteryId' :listGroup='filterLotteryList'>
-                        <el-option-group v-for='menu in filterLotteryList' :key='menu.lottery' :label="$t(menu.title_key)" :value='menu.lottery' >
-                            <el-option v-for='itemChild in menu.childs' :key='itemChild.title' :label='$t(itemChild.title_key)' :value='itemChild.lottery' v-if="!itemChild.isNotOpen"/>
-                        </el-option-group>
-                    </el-select>
-                    <!-- 所有玩法 -->
-                    <el-select :class='className' :className='className' :placeholder="$t(methods)" clearable filterable v-model='methodId' :listObject='getMethod' showLabel='showTitle' showValue='methodId'>
-                        <el-option v-for='itemMethod in getMethod' :key='itemMethod.methodId' :label='tans(itemMethod.showTitle)' :value='itemMethod.methodId' />
-                    </el-select>
-                    <!-- 搜尋類型 -->
-                    <el-select :class='className' :className='className' v-model='periodType' :listObject="orderTypeArr" showLabel='title_key' showValue='value'>
-                        <el-option v-for='(type, index) in orderTypeArr' :label='$t(type.title_key)' :key='type.title_key' :value='type.value' />
-                    </el-select>
-                    <!-- 投注期号 -->
-                    <template v-if="+periodType === 3">
-                        <div class="gr_page__draw">
-                            <el-input type="tel" ref='startIssueInput' :class="className" :placeholder='$t(issueName)' v-model='startIssue' :icon="showIconStartIssue" :on-icon-click="() => clearable('startIssue')" />
-                            <span>~</span>
-                            <el-input type="tel" ref='endIssueInput' :class="className" :placeholder='$t(issueName)' v-model='endIssue' :icon="showIconEndIssue" :on-icon-click="() => clearable('endIssue')" />
-                        </div>
-                    </template>
-                    <!-- 搜尋日期 -->
-                    <el-date-picker v-else class="small el-select" popper-class="el-date-editor--calendar" type="daterange" format="yyyy-MM-dd" v-model="openDateArray" :pickerOptions="pickerOptionsOrder" :placeholder="$t( +periodType === 1 ? 'popup_028' : 'bettingrc_081')" :editable="false" :clearable="false" />
-                </template>
+
 
                 <!-- 番攤 -->
-                <template v-else-if="isFT">
-                    <!-- 所有彩种 -->
-                    <el-select :class='className' :className='className' :placeholder="$t(games)" clearable v-model='lotteryId' :listGroup='FTlotList'>
-                        <el-option-group v-for='menu in FTlotList' :key='menu.lottery' :label="$t(menu.title_key)" :value='menu.lottery' >
-                            <el-option v-for='itemChild in menu.childs' :key='itemChild.title' :label='$t(itemChild.title_key)' :value='itemChild.lottery' v-if="!itemChild.isNotOpen"/>
-                        </el-option-group>
-                    </el-select>
-                    <!-- 所有玩法 -->
-                    <el-select :class='className' :className='className' :placeholder="$t(methods)" clearable filterable v-model='methodId' :listObject='getMethod' showLabel='showTitle' showValue='methodId'>
-                        <el-option v-for='itemMethod in getMethod' :key='itemMethod.methodId' :label='tans(itemMethod.showTitle)' :value='itemMethod.methodId' />
-                    </el-select>
-                    <!-- 搜尋類型 -->
-                    <el-select :class='className' :className='className' v-model='periodType' :listObject="orderTypeArr" showLabel='title_key' showValue='value'>
-                        <el-option v-for='(type, index) in orderTypeArr' :label='$t(type.title_key)' :key='type.title_key' :value='type.value' />
-                    </el-select>
-                    <!-- 投注期号 -->
-                    <template v-if="+periodType === 3">
-                        <div class="gr_page__draw">
-                            <el-input type="tel" ref='startIssueInput' :class="className" :placeholder='$t(issueName)' v-model='startIssue' :icon="showIconStartIssue" :on-icon-click="() => clearable('startIssue')" />
-                            <span>~</span>
-                            <el-input type="tel" ref='endIssueInput' :class="className" :placeholder='$t(issueName)' v-model='endIssue' :icon="showIconEndIssue" :on-icon-click="() => clearable('endIssue')" />
-                        </div>
-                    </template>
-                    <!-- 搜尋日期 -->
-                    <el-date-picker v-else class="small el-select" popper-class="el-date-editor--calendar" type="daterange" format="yyyy-MM-dd" v-model="openDateArray" :pickerOptions="pickerOptionsOrder" :placeholder="$t( +periodType === 1 ? 'popup_028' : 'bettingrc_081')" :editable="false" :clearable="false" />
-                </template>
+
 
                 <!-- 越南彩 -->
-                <div class="gr_page__vn__toggle" v-else-if="isVN">
+                <div class="gr_page__vn__toggle" v-if="isVN">
                     <!-- '所有彩种' -->
                     <el-select v-if="!isW88" :class='className' :className='className' v-model="lotteryId" clearable :placeholder="$t(games)" :listGroup="areaList">
                         <el-option-group v-for="child in areaList" :key="child.title_key" :label="$t(child.title_key)">
