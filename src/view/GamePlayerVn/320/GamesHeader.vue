@@ -76,7 +76,6 @@
                         </div>
                     </div>
                 </div>
-                <<<<<<< HEAD=======>>>>>>> bbe10e9 (11)
             </div>
             <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
                 <span class="gr_desc__draw" v-if="isOpen">
@@ -130,8 +129,7 @@
                     <i class="i_lottery-period--history" />
                 </div>
             </div>
-            <<<<<<< HEAD <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle"
-                v-if="VN_isLocal">
+            <div class="gr_games-vn-header__nubmer_new" @click.stop="handleHistoryToggle" v-if="VN_isLocal">
                 <dt class="gr_number__nubmer_new--title">
                     <i class="gr_item__title--icon">{{ 8 }}</i>
                     <span class="gr_number__nubmer_new"> {{ lastNumber[8] }}</span>
@@ -140,11 +138,8 @@
                     <i class="gr_item__title--icon">{{ 7 }}</i>
                     <span class="gr_number__nubmer_new"> {{ lastNumber[7] }}</span>
                 </dt>
+            </div>
         </div>
-        =======
-
-        >>>>>>> bbe10e9 (11)
-    </div>
     </div>
 </template>
 <script>
