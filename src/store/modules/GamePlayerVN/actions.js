@@ -19,6 +19,21 @@ let globalNowTime = 0
 let countNum = 0
 let isFetching = false
 let isFirstColdDown = true
+let stopBetPromise = null
+
+const fetchStopBetNumberOnce = (ctx) => {
+  // 已经请求过（或正在请求）就直接复用同一个 promise
+  if (stopBetPromise) return stopBetPromise
+
+  stopBetPromise = Promise
+    .resolve(fetchStopBetNumber(ctx))
+    .catch((err) => {
+      stopBetPromise = null
+      throw err
+    })
+
+  return stopBetPromise
+}
 
 export default {
     [_M.SET_VN_TEMP_DATA]({ commit }, payload) {
@@ -167,7 +182,7 @@ export default {
         }
         fetchCountdownConfig()
         fetchAreaIssue()
-        fetchStopBetNumber({ commit, rootGetters })
+        fetchStopBetNumberOnce({ commit, rootGetters })
     },
     [_M.SET_GAME_LASTNUMBER_VN]({ commit }, payload) {
         commit(_M.SET_GAME_LASTNUMBER_VN, payload)
