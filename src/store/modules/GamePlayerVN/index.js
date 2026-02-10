@@ -78,10 +78,10 @@ const getters = {
             {
                 title_key: 'PL2,PL3'
             },
-            {
-                // '特殊'
-                title_key: 'vn_t_007'
-            }
+            // {
+            //     // '特殊'
+            //     title_key: 'vn_t_007'
+            // }
         ],
         Input: [
             {
