@@ -29,7 +29,7 @@
                 </div>
                 <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
                     :class="{ is_active: isStatusActive }" v-if="getDataArr['VN_ALL'] && getSellTime">
-                    <div class="gr_games-vn-lotteryStatus-toggle" style="z-index: 100;">{{ $t('timetable_003') }}</div>
+                    <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
                     <div v-if="!VN_isLocal || lang !== 'vn'" class="gr_games-vn-lotteryStatus"
                         :style="{ 'max-width': maxWStatus }" ref="lotteryStatus">
                         <div class="gr_games-vn-lotteryStatus__sold">
