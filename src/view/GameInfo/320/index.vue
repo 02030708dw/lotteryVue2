@@ -4,7 +4,7 @@
         <div>
             <Navigation :isShowDetail="(isShowDetail || isShowShare) && is320" />
             <Controls v-if="!(isShowDetail || isShowShare ) || !is320" :lotteryCountry="lotteryCountry" :changeLotteryCountry="changeLotteryCountry"/>
-            <!-- <InfoList v-if="!isShowDetail || !is320" :lotteryCountry="lotteryCountry" /> -->
+            <InfoList v-if="!isShowDetail || !is320" :lotteryCountry="lotteryCountry" />
             <component :is="`InfoList_${lotteryCountry}`" v-if="!(isShowDetail || isShowShare ) || !is320" :lotteryCountry="lotteryCountry"/>
             <GameInfoDetail v-if="isShowDetail && is320" :lotteryCountry="lotteryCountry"/>
             <GameInfoShare v-if="isShowShare && is320" :lotteryCountry="lotteryCountry"/>

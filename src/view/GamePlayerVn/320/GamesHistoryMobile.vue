@@ -4,7 +4,7 @@
             <div class="vn-history-mobile__content">
                 <!-- 表头：5列期号 -->
                 <div class="vn-history-mobile__head">
-                    <div class="vn-history-mobile__headLevel">奖期</div>
+                    <div class="vn-history-mobile__headLevel">{{ $t('popup_032') }}</div>
                     <div class="vn-history-mobile__headCol" v-for="(col, idx) in cols" :key="idx"
                         :class="{ 'is-odd': idx % 2 === 0 }">
                         {{ formatIssue(col.issue) }}
@@ -198,7 +198,7 @@ export default {
     font-size: 11px;
     font-weight: 600;
     color: #333;
-
+    white-space: nowrap;
     /* 对齐竖线 */
     position: relative;
 
