@@ -591,6 +591,11 @@ $gr_games-vn-header-height: 60px;
         }
     }
 
+    .new_gr_games-vn-header__top {
+        display: flex;
+        align-items: center;
+    }
+
     .gr_games-vn-header__button {
         @include size(31px, 14px);
         background: #333333;

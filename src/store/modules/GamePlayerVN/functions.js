@@ -5,7 +5,7 @@ import i18n from '@/lang/lang'
 const Input = async ({ commit, dispatch, rootGetters }, orderData, payload) => {
     let ltProject = []
     const { ltProjectNum, ltMoneyAmout, showList } = orderData
-    showList.forEach(({methodId, codes, scode_key, onePrice, times, issue, money, mode, tNums}) => {
+    showList.forEach(({ methodId, codes, scode_key, onePrice, times, issue, money, mode, tNums }) => {
         const obj = {
             methodId,
             codes,
@@ -42,7 +42,7 @@ const Input = async ({ commit, dispatch, rootGetters }, orderData, payload) => {
             availablebalance && commit(_M.SET_WALLET_BALANCE, availablebalance)
             // 越南彩只有自主彩,顯示獎期
             const message = !!rootGetters.VN_isLocal
-                ? `${i18n.t('common_001', {'0': res.params.ltProject[0].issue})} ${i18n.t(res.message_key)}`
+                ? `${i18n.t('common_001', { '0': res.params.ltProject[0].issue })} ${i18n.t(res.message_key)}`
                 : res.message_key
 
             dispatch(_M.SET_MESSAGE_BOX_DATA, {
@@ -60,14 +60,14 @@ const Input = async ({ commit, dispatch, rootGetters }, orderData, payload) => {
                 isShowCancelBtn: true,
                 cancelText: 'popup_124',
                 beforeCancel: (instance) => {
-                /*
-                rootGetters.isIos
-                    ? intance.$router.push(routerUrl)
-                    : window.open(routerUrl, '_blank')
-                */
+                    /*
+                    rootGetters.isIos
+                        ? intance.$router.push(routerUrl)
+                        : window.open(routerUrl, '_blank')
+                    */
                     setTimeout(() => {
                         instance.$store.dispatch(_M.SET_MESSAGE_BOX_DATA, warnMessageBox({
-                        // '游戏回馈'
+                            // '游戏回馈'
                             zIndex: 2007,
                             beforeConfirm: async (feedbackMsgBox) => {
                                 const params = {
@@ -94,7 +94,7 @@ const Input = async ({ commit, dispatch, rootGetters }, orderData, payload) => {
                     }, 100)
                 }
             })
-        // 封鎖停押
+            // 封鎖停押
         } else if (errorCode === 8103) { //投注金额超过最大上限，无法完成投注
             const obj = returnState(rootGetters.VN_stopNumber)
             Object.entries(res.data.stop_bet_number).forEach(([key, numbers]) => {
@@ -110,7 +110,7 @@ const Input = async ({ commit, dispatch, rootGetters }, orderData, payload) => {
         } else if ([9501, 9502, 9503].includes(errorCode)) {
             const { Over = [], Stop } = res.data
             Stop && commit(_M.SET_STOP_VN_DATA, Stop)
-            ;[9502, 9503].includes(errorCode) && commit(_M.SET_STOP_AND_OVER_VN_DATA, [...rootGetters.VN_stop, ...Over].unique())
+                ;[9502, 9503].includes(errorCode) && commit(_M.SET_STOP_AND_OVER_VN_DATA, [...rootGetters.VN_stop, ...Over].unique())
             dispatch(_M.SET_MESSAGE_BOX_DATA, {
                 fast: !!payload,
                 isFilter: true,
@@ -139,7 +139,7 @@ const Input = async ({ commit, dispatch, rootGetters }, orderData, payload) => {
                 //     commit(_M.SET_GAME_LT_PROJECT, {type: 4, data: arr})
                 // }
             }))
-        // 玩法開關
+            // 玩法開關
         } else if (errorCode === 9009 || errorCode === 9010) {
             commit(_M.SET_BLOCKED_VN_DATA, res.data.vnBlockedMethod)
             dispatch(_M.SET_MESSAGE_BOX_DATA, {
@@ -162,7 +162,7 @@ export const submitOrder = {
         let ltProject = []
         const { order, showList, ltMoneyAmout } = orderData
         let ltProjectNum = 0
-        showList.forEach(({key, codes, id: rowId, orderId, scode_key, ...data}) => {
+        showList.forEach(({ key, codes, id: rowId, orderId, scode_key, ...data }) => {
             const obj = {
                 pid: rowId,
                 ...data,
@@ -206,7 +206,7 @@ export const submitOrder = {
                 availablebalance && commit(_M.SET_WALLET_BALANCE, availablebalance)
                 // 越南彩只有自主彩,顯示獎期
                 const message = !!rootGetters.VN_isLocal
-                    ? `${i18n.t('common_001', {'0': res.params.ltProject[0].issue})} ${i18n.t(res.message_key)}`
+                    ? `${i18n.t('common_001', { '0': res.params.ltProject[0].issue })} ${i18n.t(res.message_key)}`
                     : res.message_key
 
                 dispatch(_M.SET_MESSAGE_BOX_DATA, {
@@ -224,14 +224,14 @@ export const submitOrder = {
                     isShowCancelBtn: true,
                     cancelText: 'popup_124',
                     beforeCancel: (instance) => {
-                    /*
-                    rootGetters.isIos
-                        ? intance.$router.push(routerUrl)
-                        : window.open(routerUrl, '_blank')
-                    */
+                        /*
+                        rootGetters.isIos
+                            ? intance.$router.push(routerUrl)
+                            : window.open(routerUrl, '_blank')
+                        */
                         setTimeout(() => {
                             instance.$store.dispatch(_M.SET_MESSAGE_BOX_DATA, warnMessageBox({
-                            // '游戏回馈'
+                                // '游戏回馈'
                                 zIndex: 2007,
                                 beforeConfirm: async (feedbackMsgBox) => {
                                     const params = {
@@ -258,7 +258,7 @@ export const submitOrder = {
                         }, 100)
                     }
                 })
-            // 封鎖停押
+                // 封鎖停押
             } else if (errorCode === 8103) { //投注金额超过最大上限，无法完成投注
                 const obj = returnState(rootGetters.VN_stopNumber)
                 Object.entries(res.data.stop_bet_number).forEach(([key, numbers]) => {
@@ -274,7 +274,7 @@ export const submitOrder = {
             } else if ([9501, 9502, 9503].includes(errorCode)) {
                 const { Over = [], Stop } = res.data
                 Stop && commit(_M.SET_STOP_VN_DATA, Stop)
-                ;[9502, 9503].includes(errorCode) && commit(_M.SET_STOP_AND_OVER_VN_DATA, [...rootGetters.VN_stop, ...Over].unique())
+                    ;[9502, 9503].includes(errorCode) && commit(_M.SET_STOP_AND_OVER_VN_DATA, [...rootGetters.VN_stop, ...Over].unique())
                 dispatch(_M.SET_MESSAGE_BOX_DATA, {
                     fast: !!payload,
                     isFilter: true,
@@ -303,7 +303,7 @@ export const submitOrder = {
                     //     commit(_M.SET_GAME_LT_PROJECT, {type: 4, data: arr})
                     // }
                 }))
-            // 玩法開關
+                // 玩法開關
             } else if (errorCode === 9009 || errorCode === 9010) {
                 commit(_M.SET_BLOCKED_VN_DATA, res.data.vnBlockedMethod)
                 dispatch(_M.SET_MESSAGE_BOX_DATA, {
@@ -355,9 +355,8 @@ export const getIsFocusArea = (getters, area) => {
 }
 
 export const fetchStopBetNumber = ({ commit, rootGetters }) => {
-    handleAjax(API.stopBetting, {menuType: 3}, rootGetters, { isPromise: true })
-        .then(({data}) => {
-            console.log(data,'1231231111111111')
+    handleAjax(API.stopBetting, { menuType: 3 }, rootGetters, { isPromise: true })
+        .then(({ data }) => {
             const { stop_bet_number } = data
             commit(_M.SET_VN_TEMP_DATA, {
                 temp: 'VN_stopNumber',

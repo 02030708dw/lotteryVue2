@@ -1,65 +1,44 @@
 <template>
-<div>
-    <div class="gr_game-vn-menu">
-        <div class="gr_game-vn-menu__slidePrev" @click="slidePrev"><i class="el-icon-arrow-left" /></div>
-        <Hooper :settings="hooperSettings" ref="carousel" class="gr_game-vn-menu__title">
-            <slide
-                v-for="(lottery, lotteryId) in lotteryListLocalVN"
-                :key="lotteryId"
-                :class="{is_active: +lotteryId === +VN_lotteryId}"
-                @click.native="changeLocaGame(lotteryId)"
-            >
-                <div>{{$t(lottery.title_key)}}</div>
-            </slide>
-            <slide
-                v-for="(item, index) in VN_gameMenu"
-                :key="item.title_key"
-                :class="isActive(index)"
-                @click.native="changeGame(index)"
-                v-if="VN_lotteryOfficialSwitch[item.key] && ((VN_gameType !== 'Old' && index) || VN_gameType === 'Old')"
-            >
-                <div>{{$t(item.title_key)}}</div>
-            </slide>
-        </Hooper>
-        <div class="gr_game-vn-menu__slideNext" @click="slideNext"><i class="el-icon-arrow-right" /></div>
-    </div>
-    <div class="gr_game-vn-menu__gameType">
-        <div class="gr_game-vn-menu__gameType__content" v-if="!VN_isOnlyOld">
-            <!-- '經典' -->
-            <div
-                v-if="VN_hasOld"
-                @click="handleClick('Old')"
-                :class="{ is_active: VN_gameType === 'Old' }"
-            >
-                {{$t('pk10_t_129')}}
-            </div>
-            <!-- '輸入' -->
-            <div
-                v-if="VN_hasInput && VN_menuIndex"
-                @click="handleClick('Input')"
-                :class="{ is_active: VN_gameType === 'Input' }"
-            >
-                {{$t('vn_t_072')}}
-            </div>
-            <!-- '快选' -->
-            <div
-                @click="handleClick('Quick')"
-                v-if="VN_hasQuick && VN_menuIndex"
-                :class="{ is_active: VN_gameType === 'Quick' }"
-            >
-                {{$t('vn_t_093')}}
-            </div>
-            <!-- '快选' -->
-            <div
-                @click="handleClick('Balls')"
-                v-if="VN_hasBall && VN_menuIndex"
-                :class="{ is_active: VN_gameType === 'Balls' }"
-            >
-                {{$t('vn_t_073')}}
+    <div>
+        <div class="gr_game-vn-menu" :style="{ padding: VN_isLocal ? '30px 0 40px' : '60px 0 40px' }">
+            <div class="gr_game-vn-menu__slidePrev" @click="slidePrev"><i class="el-icon-arrow-left" /></div>
+            <Hooper :settings="hooperSettings" ref="carousel" class="gr_game-vn-menu__title">
+                <slide v-for="(lottery, lotteryId) in lotteryListLocalVN" :key="lotteryId"
+                    :class="{ is_active: +lotteryId === +VN_lotteryId }" @click.native="changeLocaGame(lotteryId)">
+                    <div>{{ $t(lottery.title_key) }}</div>
+                </slide>
+                <slide v-for="(item, index) in VN_gameMenu" :key="item.title_key" :class="isActive(index)"
+                    @click.native="changeGame(index)"
+                    v-if="VN_lotteryOfficialSwitch[item.key] && ((VN_gameType !== 'Old' && index) || VN_gameType === 'Old')">
+                    <div>{{ $t(item.title_key) }}</div>
+                </slide>
+            </Hooper>
+            <div class="gr_game-vn-menu__slideNext" @click="slideNext"><i class="el-icon-arrow-right" /></div>
+        </div>
+        <div class="gr_game-vn-menu__gameType">
+            <div class="gr_game-vn-menu__gameType__content" v-if="!VN_isOnlyOld">
+                <!-- '經典' -->
+                <div v-if="VN_hasOld" @click="handleClick('Old')" :class="{ is_active: VN_gameType === 'Old' }">
+                    {{ $t('pk10_t_129') }}
+                </div>
+                <!-- '輸入' -->
+                <div v-if="VN_hasInput && VN_menuIndex" @click="handleClick('Input')"
+                    :class="{ is_active: VN_gameType === 'Input' }">
+                    {{ $t('vn_t_072') }}
+                </div>
+                <!-- '快选' -->
+                <div @click="handleClick('Quick')" v-if="VN_hasQuick && VN_menuIndex"
+                    :class="{ is_active: VN_gameType === 'Quick' }">
+                    {{ $t('vn_t_093') }}
+                </div>
+                <!-- '快选' -->
+                <div @click="handleClick('Balls')" v-if="VN_hasBall && VN_menuIndex"
+                    :class="{ is_active: VN_gameType === 'Balls' }">
+                    {{ $t('vn_t_073') }}
+                </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -135,7 +114,8 @@ export default {
         ...mapGetters([
             'VN_gameMenuSubData',
             'VN_gameType',
-            'VN_isOld'
+            'VN_isOld',
+            'VN_isLocal',
         ])
         // currentGameMenuSub() {
         //     return this.VN_gameMenuSubData[this.currentGameType]

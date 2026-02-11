@@ -1,10 +1,16 @@
 <template>
-    <div class="gr_games-vn-header  gr_games-vn-header--320  gr_container bg_secondary">
-        <div class="gr_games-vn-header__inner  u_clearfix">
-            <div>
+    <div class="gr_games-vn-header  gr_games-vn-header--320  gr_container bg_secondary"
+        :style="{ height: !VN_isLocal ? '60px' : '30px' }">
+        <div class="gr_games-vn-header__inner  u_clearfix"
+            :style="{ padding: !VN_isLocal ? '5.5px 8px' : '0.5px 8px' }">
+            <div :class="VN_isLocal ? 'new_gr_games-vn-header__top' : ''">
+                <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
+                    <!-- {{ VN_lastNumber_V2 }} -->
+                    <strong place="0" v-if="VN_lastNumber_V2.length">{{ VN_lastNumber_V2[0].issue.slice(4) }}</strong>
+                </div>
                 <div class="gr_games-vn-header__my-favorites  gr_my-favorites__tooltip"
-                    :class="{ is_active: isInFavorites, is_tooltip: isTip }" v-if="!isW88 && !isOneLotGame"
-                    @click="setMyFavorites">
+                    :class="{ is_active: isInFavorites, is_tooltip: isTip }"
+                    v-if="!isW88 && !isOneLotGame && !VN_isLocal" @click="setMyFavorites">
                     <svg class="gr_my-favorites__icon" viewBox="0 0 17.85 16.11">
                         <path
                             d="M8.93,3.15C8.17-.47,2.14-.66.77,3.65c-2.18,6.79,6.67,9,8.16,12,1.48-3.07,10.32-5.25,8.15-12C15.71-.66,9.68-.47,8.93,3.15Z" />
@@ -12,7 +18,7 @@
                     <span class="gr_tooltip__arrow" />
                     <div class="gr_tooltip__popper">{{ $t(tipTxt) }}</div>
                 </div>
-                <span class="gr_games-vn-header__title">{{ currentTitle }}</span>
+                <span class="gr_games-vn-header__title" v-if="!VN_isLocal">{{ currentTitle }}</span>
                 <div class="gr_games-vn-header__nubmer_new js-vn-history-trigger" @click.stop="handleHistoryToggle"
                     v-if="VN_isLocal">
                     <dt class="gr_number__nubmer_new--title">
@@ -28,7 +34,7 @@
                     </span>
                 </div>
                 <div class="gr_games-vn-lotteryStatus-warp" @click.stop="toggleStatus"
-                    :class="{ is_active: isStatusActive }" v-if="getDataArr['VN_ALL'] && getSellTime">
+                    :class="{ is_active: isStatusActive }" v-if="getDataArr['VN_ALL'] && getSellTime && !VN_isLocal">
                     <div class="gr_games-vn-lotteryStatus-toggle">{{ $t('timetable_003') }}</div>
                     <div v-if="!VN_isLocal || lang !== 'vn'" class="gr_games-vn-lotteryStatus"
                         :style="{ 'max-width': maxWStatus }" ref="lotteryStatus">
@@ -79,23 +85,24 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
-                <span class="gr_desc__draw" v-if="isOpen">
-                    <!-- {{$t("目前尚未开放奖期")}} -->
-                    {{ $t('common_003') }}
-                </span>
-                <span v-else>
-                    <!-- 第{0}期 -->
-                    <i18n path="common_001" tag="span">
-                        <strong place="0">{{ VN_localIssue }}</strong>
-                    </i18n>
-                    <span class="gr_desc__draw">
-                        <strong>{{ localTimer }}</strong>
+                <div class="gr_games-vn-header__desc" v-if="VN_isLocal" style="margin-left: auto ;">
+                    <span class="gr_desc__draw" v-if="isOpen">
+                        <!-- {{$t("目前尚未开放奖期")}} -->
+                        {{ $t('common_003') }}
                     </span>
-                </span>
+                    <span v-else>
+                        <!-- 第{0}期 -->
+                        <!-- <i18n path="common_001" tag="span"> -->
+                        <strong place="0" v-if="VN_localIssue">{{ VN_localIssue.slice(4) }}</strong>
+                        <!-- </i18n> -->
+                        <span class="gr_desc__draw">
+                            <strong>{{ localTimer }}</strong>
+                        </span>
+                    </span>
+                </div>
             </div>
-            <div class="gr_games-vn-header__desc" v-else>
+
+            <div class="gr_games-vn-header__desc" v-if="!VN_isLocal">
                 <span class="gr_desc__draw" v-if="isOpen">
                     <!-- {{$t("目前尚未开放奖期")}} -->
                     {{ $t('common_003') }}
@@ -118,7 +125,7 @@
                     </span>
                 </span>
             </div>
-            <div class="gr_games-vn-header__button-group">
+            <div class="gr_games-vn-header__button-group" v-if="!VN_isLocal">
                 <div class="gr_button-group__button  u_c--pointer" v-if="isShowOfficalPage && !isHideOfficalPage">
                     <a v-if="!isShowDemo" class="i_lottery-period--official-website" :href="openOfficalPage"
                         target="_blank">
@@ -237,11 +244,11 @@ export default {
         },
         toggleStatus() {
             this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
-
+            this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
             const lot = this.$refs.lotteryStatus
-            if (lot && lot.offsetParent && lot.offsetWidth >= lot.offsetParent.offsetWidth) {
-                this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`
-            }
+            lot.offsetWidth >= lot.offsetParent.offsetWidth &&
+                (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
+                    (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
         },
     },
     computed: {
@@ -269,7 +276,8 @@ export default {
             'hideOw',
             'lang',
             'isShowDemo',
-            'VN_lastNumber'
+            'VN_lastNumber',
+            'VN_lastNumber_V2'
         ]),
         currentTitle() {
             return this.VN_isLocal

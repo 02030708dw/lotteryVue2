@@ -13,6 +13,7 @@
         position: relative;
         z-index: 2;
     }
+
     .gr_game-vn-menu__inner {
         float: left;
         width: calc(100% - 260px);
@@ -26,11 +27,13 @@
         //     width: calc(100% - 280px);
         // }
     }
+
     .gr_game-vn-menu__bar {
         float: left;
         overflow: hidden;
         width: calc(100% - 66px);
     }
+
     .gr_game-vn-menu__group {
         font-size: 0;
         height: 33px;
@@ -38,6 +41,7 @@
         position: relative;
         transition: all 0.25s ease-out;
         white-space: nowrap;
+
         & .gr_group__item {
             background: transparent;
             cursor: pointer;
@@ -47,13 +51,16 @@
             text-align: center;
             transition: all 0.3s ease;
             z-index: 5;
+
             &:first-of-type .gr_item__text {
                 border-left-color: transparent;
             }
+
             &:last-of-type .gr_item__text {
                 border-right-color: transparent;
             }
         }
+
         & .gr_item__text {
             // @include size(89.5px, 25px);
             min-width: 90px;
@@ -65,13 +72,16 @@
             line-height: 25px;
             vertical-align: middle;
         }
+
         & .is_active {
             @include background_gradient(ture, to bottom, rgba(backgrounds(default), 0.8), rgba(backgrounds(default), 0.8), rgba(backgrounds(accent), 0.7), ture);
             color: text_color(primary);
+
             & .gr_item__text {
                 border-color: transparent;
             }
-            & + .gr_group__item .gr_item__text {
+
+            &+.gr_group__item .gr_item__text {
                 border-left-color: transparent;
             }
         }
@@ -82,6 +92,7 @@
             transform: scale(1.15);
         }
     }
+
     // 左右控制箭頭
     .gr_game-vn-menu__controller {
         @include size(33px, 33px);
@@ -90,12 +101,14 @@
         line-height: 33px;
         position: relative;
         text-align: center;
+
         &::before {
             @include pseudo;
             @include size(1px, 25px);
             position: absolute;
             top: 5px;
         }
+
         & .gr_controller__arrow {
             @include size(16px);
             border: 1px solid currentColor;
@@ -104,6 +117,7 @@
             vertical-align: middle;
             position: relative;
             transform: scale(1);
+
             &::before {
                 @include pseudo;
                 @include size(5px);
@@ -113,23 +127,29 @@
                 left: 50%;
             }
         }
+
         &.is_disabled {
             cursor: not-allowed;
+
             & .gr_controller__arrow {
                 opacity: 0.5;
             }
         }
+
         &:not(.is_disabled) .gr_controller__arrow {
             @include animate(pound, 1s, infinite);
         }
     }
+
     .gr_game-vn-menu__controller--left {
         float: left;
+
         &::before {
             border-right: 1px solid border_color(accent_dark);
             box-shadow: 1px 0 0 currentColor;
             right: 0;
         }
+
         & .gr_controller__arrow {
             &::before {
                 border-top: none;
@@ -138,13 +158,16 @@
             }
         }
     }
+
     .gr_game-vn-menu__controller--right {
         float: right;
+
         &::before {
             border-left: 1px solid currentColor;
             box-shadow: -1px 0 0 border_color(accent_dark);
             left: 0;
         }
+
         & .gr_controller__arrow {
             &::before {
                 border-bottom: none;
@@ -153,6 +176,7 @@
             }
         }
     }
+
     // 玩法切換
     .gr_game-vn-menu__toggle {
         width: auto !important;
@@ -165,27 +189,33 @@
         line-height: 20px;
         margin: 6.5px 10px 0 0;
         text-align: center;
+
         & .gr_toggle__item {
             display: inline-block;
             font-size: $font_size_small;
             min-width: 45px;
             border-left: 1px solid;
             padding: 0 2px;
+
             &:first-child {
                 border-left: none;
             }
         }
+
         & .is_active {
             background: text_color(default_invert);
             color: text_color(primary);
             cursor: default;
         }
+
         @include multi-lang("us") {
             width: 140px;
         }
+
         @include multi-lang("th") {
             width: 140px;
         }
+
         @include multi-lang("vn") {
             width: 180px;
         }
@@ -205,44 +235,55 @@
         min-width: 320px;
         padding: $gr_games-header-height 0 $gr_game-vn-menu-height;
         background: backgrounds(secondary_heavy);
+
         & .el-collapse {
             background: backgrounds(primary);
         }
     }
+
     .gr_game-vn-menu__content {
         background: backgrounds(primary);
         min-height: 0;
         position: relative;
         z-index: 55;
     }
+
     .gr_game-vn-menu__toggle {
         min-width: 320px;
         position: relative;
         width: 100%;
         z-index: 56;
+
         &.is_active {
             position: fixed;
             left: 0;
             z-index: 58;
+
             & .gr_title__icon {
                 transform: rotate(180deg);
             }
+
             & .c_tab {
                 margin-top: 40px;
                 display: block;
             }
-            & + .gr_game-vn-menu__content {
+
+            &+.gr_game-vn-menu__content {
                 margin-top: 40px;
             }
-            & + .gr_game-vn-menu__content.is_tab {
+
+            &+.gr_game-vn-menu__content.is_tab {
                 margin-top: 90px;
             }
         }
+
         & .c_tab {
             display: none;
         }
     }
-    .gr_game-vn-menu__slidePrev, .gr_game-vn-menu__slideNext {
+
+    .gr_game-vn-menu__slidePrev,
+    .gr_game-vn-menu__slideNext {
         color: rgba(77, 77, 77, .5);
         width: 20px;
         height: $gr_game-vn-menu-height;
@@ -250,6 +291,7 @@
         float: left;
         text-align: center;
     }
+
     .gr_game-vn-menu__title {
         height: $gr_game-vn-menu-height;
         color: text_color(default_invert);
@@ -257,31 +299,37 @@
         padding: 8px 0;
         width: calc(100% - 40px);
         float: left;
+
         .hooper-slide {
             text-align: center;
             color: #4D4D4D;
             border-right: 1px solid;
             position: relative;
             padding: 0 5px;
+
             div {
                 height: 100%;
                 line-height: 24px;
                 border-radius: 4px;
 
             }
+
             &.is_active {
                 div {
                     background-color: rgba(255, 255, 255, 0.5);
                 }
             }
-        // &:first-child {
+
+            // &:first-child {
 
             // }
         }
     }
+
     .gr_game-vn-menu__gameType {
         padding: 0 5px;
         margin-top: 10px;
+
         .gr_game-vn-menu__gameType__content {
             display: flex;
             justify-content: space-around;
@@ -290,6 +338,7 @@
             border-radius: 5px;
             box-shadow: 0 0 3px 2px #ccc, inset 0 0 5px 2px #ccc;
             overflow: hidden;
+
             & div {
                 cursor: pointer;
                 width: 100%;
@@ -300,6 +349,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
                 &.is_active {
                     background: white;
                     color: #5E5F6D;

@@ -22,17 +22,17 @@ let isFirstColdDown = true
 let stopBetPromise = null
 
 const fetchStopBetNumberOnce = (ctx) => {
-  // 已经请求过（或正在请求）就直接复用同一个 promise
-  if (stopBetPromise) return stopBetPromise
+    // 已经请求过（或正在请求）就直接复用同一个 promise
+    if (stopBetPromise) return stopBetPromise
 
-  stopBetPromise = Promise
-    .resolve(fetchStopBetNumber(ctx))
-    .catch((err) => {
-      stopBetPromise = null
-      throw err
-    })
+    stopBetPromise = Promise
+        .resolve(fetchStopBetNumber(ctx))
+        .catch((err) => {
+            stopBetPromise = null
+            throw err
+        })
 
-  return stopBetPromise
+    return stopBetPromise
 }
 
 export default {
@@ -211,7 +211,6 @@ export default {
         let retry = 5
         const fetchlastNumber = () => {
             const { name: menuCode, lottery: lotteryId } = VN_currentlottery
-            console.log({ menuCode, lotteryId }, rootGetters, options);
             handleAjax(API.vnLatestDrawV2, { menuCode, lotteryId }, rootGetters, options)
                 .then(({ data }) => {
                     const obj = data[menuCode]
