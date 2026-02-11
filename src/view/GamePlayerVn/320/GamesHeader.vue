@@ -6,7 +6,7 @@
             <div :class="VN_isLocal ? 'new_gr_games-vn-header__top' : ''">
                 <div class="gr_games-vn-header__desc" v-if="VN_isLocal">
                     <!-- {{ VN_lastNumber_V2 }} -->
-                    <strong place="0" v-if="VN_lastNumber_V2.length">{{ VN_lastNumber_V2[0].issue.slice(4) }}</strong>
+                    <strong style="color: #9a7242;" place="0" v-if="VN_lastNumber_V2.length">{{ VN_lastNumber_V2[0].issue.slice(4) }}</strong>
                 </div>
                 <div class="gr_games-vn-header__my-favorites  gr_my-favorites__tooltip"
                     :class="{ is_active: isInFavorites, is_tooltip: isTip }"
@@ -90,13 +90,13 @@
                         <!-- {{$t("目前尚未开放奖期")}} -->
                         {{ $t('common_003') }}
                     </span>
-                    <span v-else>
+                    <span style="display: flex;align-items: center;" v-else>
                         <!-- 第{0}期 -->
                         <!-- <i18n path="common_001" tag="span"> -->
-                        <strong place="0" v-if="VN_localIssue">{{ VN_localIssue.slice(4) }}</strong>
+                        <strong style="color: #9a7242;" place="0" v-if="VN_localIssue">{{ VN_localIssue.slice(4) }}</strong>
                         <!-- </i18n> -->
                         <span class="gr_desc__draw">
-                            <strong>{{ localTimer }}</strong>
+                            <strong style="font-size: 18px;">{{ localTimer }}</strong>
                         </span>
                     </span>
                 </div>
