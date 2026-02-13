@@ -19,20 +19,44 @@ let globalNowTime = 0
 let countNum = 0
 let isFetching = false
 let isFirstColdDown = true
+// 放这里：只执行一次的 Promise 缓存
 let stopBetPromise = null
+let areaIssuePromise = null
 
+const sleep = (ms) => new Promise(r => setTimeout(r, ms))
+
+// stopBet：只请求一次（失败可下次再试，就保留 catch 清缓存）
 const fetchStopBetNumberOnce = (ctx) => {
-    // 已经请求过（或正在请求）就直接复用同一个 promise
-    if (stopBetPromise) return stopBetPromise
+  if (stopBetPromise) return stopBetPromise
 
-    stopBetPromise = Promise
-        .resolve(fetchStopBetNumber(ctx))
-        .catch((err) => {
-            stopBetPromise = null
-            throw err
-        })
+  stopBetPromise = Promise.resolve(fetchStopBetNumber(ctx)).catch((err) => {
+    stopBetPromise = null // 失败后允许下次重新触发
+    throw err
+  })
 
-    return stopBetPromise
+  return stopBetPromise
+}
+
+// areaIssue：同上，只启动一次（保留 5s 重试）
+const fetchAreaIssueOnce = ({ commit, rootGetters }) => {
+  if (areaIssuePromise) return areaIssuePromise
+
+  const param = { menuType: 3, issueCount: 1 }
+  const options = { isPromise: true }
+
+  const run = () =>
+    handleAjax(API.areaIssue, param, rootGetters, options)
+      .then(({ data }) => {
+        commit(_M.SET_VN_AREA_DATA, data)
+        return data
+      })
+      .catch(async (err) => {
+        await sleep(5000)
+        return run()
+      })
+
+  areaIssuePromise = run()
+  return areaIssuePromise
 }
 
 export default {
@@ -181,7 +205,7 @@ export default {
                 .catch(() => setTimeout(fetchAreaIssue, 5000))
         }
         fetchCountdownConfig()
-        fetchAreaIssue()
+        fetchAreaIssueOnce({ commit, rootGetters })
         fetchStopBetNumberOnce({ commit, rootGetters })
     },
     [_M.SET_GAME_LASTNUMBER_VN]({ commit }, payload) {
