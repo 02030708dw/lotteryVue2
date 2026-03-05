@@ -20,6 +20,7 @@ let countNum = 0
 let isFetching = false
 let isFirstColdDown = true
 // 放这里：只执行一次的 Promise 缓存
+let stopVNDate = false
 let stopBetPromise = null
 let areaIssuePromise = null
 
@@ -27,36 +28,36 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms))
 
 // stopBet：只请求一次（失败可下次再试，就保留 catch 清缓存）
 const fetchStopBetNumberOnce = (ctx) => {
-  if (stopBetPromise) return stopBetPromise
+    if (stopBetPromise) return stopBetPromise
 
-  stopBetPromise = Promise.resolve(fetchStopBetNumber(ctx)).catch((err) => {
-    stopBetPromise = null // 失败后允许下次重新触发
-    throw err
-  })
+    stopBetPromise = Promise.resolve(fetchStopBetNumber(ctx)).catch((err) => {
+        stopBetPromise = null // 失败后允许下次重新触发
+        throw err
+    })
 
-  return stopBetPromise
+    return stopBetPromise
 }
 
 // areaIssue：同上，只启动一次（保留 5s 重试）
 const fetchAreaIssueOnce = ({ commit, rootGetters }) => {
-  if (areaIssuePromise) return areaIssuePromise
+    if (areaIssuePromise) return areaIssuePromise
 
-  const param = { menuType: 3, issueCount: 1 }
-  const options = { isPromise: true }
+    const param = { menuType: 3, issueCount: 1 }
+    const options = { isPromise: true }
 
-  const run = () =>
-    handleAjax(API.areaIssue, param, rootGetters, options)
-      .then(({ data }) => {
-        commit(_M.SET_VN_AREA_DATA, data)
-        return data
-      })
-      .catch(async (err) => {
-        await sleep(5000)
-        return run()
-      })
+    const run = () =>
+        handleAjax(API.areaIssue, param, rootGetters, options)
+            .then(({ data }) => {
+                commit(_M.SET_VN_AREA_DATA, data)
+                return data
+            })
+            .catch(async (err) => {
+                await sleep(5000)
+                return run()
+            })
 
-  areaIssuePromise = run()
-  return areaIssuePromise
+    areaIssuePromise = run()
+    return areaIssuePromise
 }
 
 export default {
@@ -102,8 +103,15 @@ export default {
                 let coldTime = Math.ceil((config.sale_end - nowtime + 1100) / 1000)
                 if (coldTime <= 0) {
                     const isFocusArea = getIsFocusArea(rootGetters, area)
-                    flipTimer.isCountDown && dispatch(_M.GET_COLD_DOWN_VN_DATA, isFocusArea)
-                    data[area] = { isCountDown: false }
+                    // ✅ 只有焦点区才去刷新倒计时接口
+                    if (isFocusArea && flipTimer.isCountDown) {
+                        dispatch(_M.GET_COLD_DOWN_VN_DATA, true)
+                        // 焦点区：置 false，防止接口尚未回来时每秒狂刷
+                        data[area] = { isCountDown: false }
+                    } else {
+                        // ✅ 非焦点区：不要置 false！保持原 flipTimer（通常还是 true）
+                        data[area] = flipTimer
+                    }
                     return
                 }
                 const hours = formatTimer(~~(coldTime / 3600))
