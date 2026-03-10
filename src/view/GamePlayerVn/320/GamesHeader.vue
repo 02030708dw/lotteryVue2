@@ -18,6 +18,7 @@
                     <span class="gr_tooltip__arrow" />
                     <div class="gr_tooltip__popper">{{ $t(tipTxt) }}</div>
                 </div>
+                12
                 <span class="gr_games-vn-header__title" v-if="!VN_isLocal">{{ currentTitle }}</span>
                 <div class="gr_games-vn-header__nubmer_new js-vn-history-trigger" @click.stop="handleHistoryToggle"
                     v-if="VN_isLocal">
