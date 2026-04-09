@@ -237,8 +237,8 @@ const actions = {
 
             // 测试彩种关闭用
             if (rootGetters.isDev) {
-                delete data[1]
-                delete data[2]
+                // delete data[1]
+                // delete data[2]
                 // 越南彩
                 // delete data[3]
                 // delete data[3].list.VN_S
@@ -247,7 +247,7 @@ const actions = {
                 // 棋牌
                 // delete data[4]
                 // delete data[4].list.SSC_LHD
-                delete data[5]
+                // delete data[5]
                 // 泰国彩
                 // delete data[6]
                 // 股票彩

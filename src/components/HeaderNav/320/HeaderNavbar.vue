@@ -21,6 +21,17 @@
             <line class="gr_icon__bar  gr_icon__decoration" x1="25.9" y1="5.24" x2="25.9" y2="10.71" />
         </svg>
     </div><!-- gr_game-hamburger -->
+    <div v-show="isShowLotteryTitle && !isShowDemo && !hamburgar" class="gr_header__balance" @click.stop>
+        <span class="gr_header__balance-num">{{availableBalanceFormat}}</span>
+        <span @click="getBalance">
+            <svg class="gr_user-area__icon" viewBox="0 0 18 18">
+                <path class="gr_icon__stroke" d="M1.6,7.5c0.7-3.4,3.7-6,7.4-6c2.6,0,4.9,1.3,6.3,3.4"/>
+                <polygon class="gr_icon__arrow" points="11.9,5.1 16.5,9 17.6,3.1"/>
+                <path class="gr_icon__stroke" d="M16.4,10.5c-0.7,3.4-3.7,6-7.4,6c-2.6,0-4.9-1.3-6.3-3.4"/>
+                <polygon class="gr_icon__arrow" points="6.1,12.9 1.5,9 0.4,14.9"/>
+            </svg>
+        </span>
+    </div>
     <div v-show="isShowHomeIcon" class="gr_game-hamburger" @click.stop="handleToHome">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.07776 19.625"><path d="M22.168,8.169,18.883,5.72123V.90316H14.87437v1.831L12.14668.70191a1.01721,1.01721,0,0,0-1.21656,0L.90975,8.169a1.01834,1.01834,0,0,0,.60855,1.83462H3.0109V19.125H9.072V11.66314h4.93341V19.125h6.0614V10.00361h1.4926A1.01836,1.01836,0,0,0,22.168,8.169Z" style="fill:none;stroke:#ffcb85;stroke-miterlimit:10"/></g></g></svg>
     </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="gr_games-vn-header  gr_games-vn-header--320  gr_container bg_secondary"
-        :style="{ height: !VN_isLocal ? '60px' : '30px' }">
+        :style="{ height: !VN_isLocal ? '60px' : '62px' }">
         <div class="gr_games-vn-header__inner  u_clearfix"
             :style="{ padding: !VN_isLocal ? '5.5px 8px' : '0.5px 8px' }">
             <div :class="VN_isLocal ? 'new_gr_games-vn-header__top' : ''">
@@ -140,14 +140,37 @@
                 </div>
             </div>
         </div>
+        <!-- 越南5分彩/30秒彩 四个功能按钮 -->
+        <div class="gr_vn-local-nav-buttons" v-if="VN_isLocal">
+            <button class="gr_vn-local-nav-btn" @click="showHistory = true">{{$t('common_007')}}</button>
+            <button class="gr_vn-local-nav-btn" @click="showBetting = true">{{$t('home_009')}}</button>
+            <button class="gr_vn-local-nav-btn" @click.stop="handleHistoryToggle">
+                近期开奖结果<i class="el-icon-arrow-down"></i>
+            </button>
+            <button class="gr_vn-local-nav-btn" @click="$emit('trend-toggle')">
+                走势图<i :class="trendOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
+            </button>
+        </div>
+
+        <!-- 历史弹窗 -->
+        <VnHistoryPopup :visible.sync="showHistory" :menuCode="currentMenuCode" />
+        <!-- 投注记录弹窗 -->
+        <VnBettingRecordPopup :visible.sync="showBetting" :lotteryId="VN_lotteryId" />
     </div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { warnMessageBox } from '@UTIL'
 import { getData } from '@V/SalesTime/config/data'
+import VnHistoryPopup from './VnHistoryPopup'
+import VnBettingRecordPopup from './VnBettingRecordPopup'
 export default {
     name: 'GamesHeader320',
+    components: { VnHistoryPopup, VnBettingRecordPopup },
+    props: {
+        handleHistoryToggle: { type: Function, required: true },
+        trendOpen: { type: Boolean, default: false }
+    },
     data() {
         return {
             gameModeTemp: 0,
@@ -159,18 +182,14 @@ export default {
             gameShowMode: 0,
             setFavoritingTimer: null,
             // statusX: {}
-            maxWStatus: ''
+            maxWStatus: '',
+            showHistory: false,
+            showBetting: false
         }
     },
     beforeDestroy() {
         clearTimeout(this.tipTimer)
         clearTimeout(this.setFavoritingTimer)
-    },
-    props: {
-        handleHistoryToggle: {
-            type: Function,
-            required: true
-        }
     },
     watch: {
         VN_currentlottery(newVal, oldVal) {
@@ -241,6 +260,12 @@ export default {
             this[_M.SET_HISTORY]({ path: this.$route.fullPath, mode: 'add' })
             this[_M.SET_HEADER_NAV_IS_BACK](true)
             this.$router.push(this.openHistory)
+        },
+        // 導向到投注記錄頁面
+        goGameInfo() {
+            this[_M.SET_HISTORY]({ path: this.$route.fullPath, mode: 'add' })
+            this[_M.SET_HEADER_NAV_IS_BACK](true)
+            this.$router.push('/GameInfo')
         },
         toggleStatus() {
             this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
@@ -317,6 +342,12 @@ export default {
                 menuCode = Object.keys(this.lotteryOfficialVN)[0] + '-'
             }
             return url + menuCode
+        },
+        currentMenuCode() {
+            if (this.VN_currentlottery) {
+                return `${this.VN_currentlottery.name}-${this.VN_lotteryId}`
+            }
+            return `${this.VN_pos}-`
         },
         isStatusActive() {
             return this.getPopActive.gameStatus

@@ -10,7 +10,7 @@ const rmids = {
     ao: '109',
     cr: '109',
     lang: '109',
-    develop: '266',
+    develop: '363',
     2015: '160',
     prod: '266'
 }
@@ -24,9 +24,9 @@ const urls = {
     ao: 'http://api-autoodds.b2bdev.com',
     cr: 'ttp://api-currency.b2bdev.com',
     lang: 'http://api-lang.b2bdev.com',
-    develop: 'https://gc1st.gw1238.online',
+    develop: 'http://gc_uat.mvkbmb.online',
     2015: 'http://landgameclient.com',
-    prod: 'https://api.shicai-client.com'
+    prod: 'https://gc1st.gw1238.online'
 }
 
 // op 預設值
@@ -38,14 +38,14 @@ const op = {
     ao: 'testOP1',
     cr: 'testOP1',
     lang: 'testOP1',
-    develop: 'web',
+    develop: 'qwer',
     2015: 'test',
     prod: 'web'
 }
 
 let config = {
     // id: process.env.USERNAME,
-    id:'1688735462343',
+    id:'3688735468471',
     port: 8084,
     env: null,
     rmid: null,
@@ -82,10 +82,10 @@ const rmid = config.rmid || rmids[config.env] || ''
 const md5Last3Num = md5.update(rmid).digest('hex').slice(-3).toLocaleLowerCase()
 const prefix = `/login/thirdparty/${rmid}-${md5Last3Num}`
 const target = urls[config.env]
-let login = `${prefix}?thirdpartyUserId=${config.id}`
+let login = `${prefix}?token=${config.id}`
 config.currency && (login += `&currency=${config.currency}`)
 login += `&op=${config.op}`
-config.token && (login += `&thirdpartyUserId=${config.token}`)
+config.token && (login += `&token=${config.token}`)
 
 module.exports = {
     port: config.port,

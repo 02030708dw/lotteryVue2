@@ -19,6 +19,8 @@ import RWD_980 from './980'
 import RWD_320 from './320'
 import RwdMixin from '@C/RwdMixin'
 import GamePlayerVN from '../../store/modules/GamePlayerVN'
+import HistoryBallVN from '../../store/modules/HistoryBallVN'
+import GameInfo from '../../store/modules/GameInfo'
 import FeedbackMsgBox from './FeedbackMsgBox'
 import GameIssueBox from './GameIssueBox'
 import StopMsgBox from './StopMsgBox'
@@ -64,7 +66,7 @@ export default {
         })
     },
     created() {
-        this.setStore({ GamePlayerVN })
+        this.setStore({ GamePlayerVN, HistoryBallVN, GameInfo })
         this[_M.GET_COLD_DOWN_VN_DATA]()
         this[_M.GET_GAME_CONFIG_VN_DATA]()
     },

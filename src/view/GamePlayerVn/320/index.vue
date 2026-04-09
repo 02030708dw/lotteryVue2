@@ -2,8 +2,9 @@
     <div>
         <HeaderNav />
         <div ref="container" v-if="!VN_isLoading">
-            <GamesHeader :handleHistoryToggle="handleHistoryToggle" />
-            <GameMenu :isGameMenuActive="isGameMenuActive" v-show="!showGameBox" />
+            <GamesHeader :handleHistoryToggle="handleHistoryToggle" :trendOpen="showTrend" @trend-toggle="showTrend = !showTrend" />
+            <VnTrendPopup v-if="VN_isLocal" :visible="showTrend" :lotteryId="VN_lotteryId" @close="showTrend = false" />
+            <GameMenu :isGameMenuActive="isGameMenuActive" :trendOpen="showTrend && VN_isLocal" v-show="!showGameBox" />
             <GameSubMenu v-show="!showGameBox" />
 
             <VN class="gr_game-vn" :currentGame="gameNameArr[VN_subMenuIndex]"
@@ -58,6 +59,7 @@ import GameStatistics from './GameStatistics'
 import GameControlls from './GameControlls'
 import InfoBox from './InfoBox'
 import GameInfo from './GameInfo'
+import VnTrendPopup from './VnTrendPopup'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -67,7 +69,8 @@ export default {
         return {
             showGameBox: false,
             isFast: false,
-            isGameMenuActive: false
+            isGameMenuActive: false,
+            showTrend: false
         }
     },
     created() {
@@ -90,6 +93,8 @@ export default {
             'VN_nowblockedId',
             'VN_gameSubmit',
             'VN_localIssue',
+            'VN_isLocal',
+            'VN_lotteryId',
             'getPopActive'
         ]),
         historyToggle() {
@@ -149,7 +154,8 @@ export default {
         GameControlls,
         InfoBox,
         GameInfo,
-        GamesHistoryMobile
+        GamesHistoryMobile,
+        VnTrendPopup
     }
 }
 </script>

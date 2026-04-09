@@ -320,6 +320,30 @@ body {
 
 
 
+    .gr_header__balance {
+        position: fixed;
+        top: 0;
+        right: 40px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        color: #ffcb85;
+        font-size: 14px;
+        padding: 0 8px;
+        z-index: 200;
+        .gr_header__balance-num {
+            margin-right: 2px;
+        }
+        .gr_user-area__icon {
+            @include size(14px);
+            cursor: pointer;
+            vertical-align: middle;
+            fill: none;
+            stroke: #ffcb85;
+            stroke-width: 1;
+        }
+    }
+
     // .gr_header,
     // .gr_header + div {
     //     transition: transform 0.3s ease;

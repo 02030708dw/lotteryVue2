@@ -119,7 +119,9 @@ export const API = {
     /** 所有獎期 */
     nextFewIssues: ApiFn('game/nextFewIssues'),
     /** 熱門彩種清單 */
-    getPopularGroupEntries: ApiFn('game/popularGroupEntries/get')
+    getPopularGroupEntries: ApiFn('game/popularGroupEntries/get'),
+    /** 走势图 */
+    getVndTrend: ApiFn('game/getVndTrend')
 }
 
 export const Storage = {

@@ -469,6 +469,51 @@ $gr_games-vn-header-url--pure: '/c_lottery-category/c_lottery-class--VN_5M/c_lot
             }
         }
     }
+
+    .gr_vn-local-nav-buttons--980 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        height: 32px;
+
+        .gr_vn-local-nav-btn {
+            flex: 1;
+            height: 32px;
+            background: #5E5F6D;
+            color: #ffffff;
+            border: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            font-size: 12px;
+            outline: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            white-space: nowrap;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &:active {
+                background: darken(#5E5F6D, 8%);
+            }
+
+            i {
+                margin-left: 3px;
+                font-size: 10px;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    .gr_games-vn-header--local {
+        height: 172px;
+    }
 }
 
 
@@ -726,6 +771,48 @@ $gr_games-vn-header-height: 60px;
             padding: 5px 10px;
             position: fixed;
             z-index: 51;
+        }
+    }
+
+    .gr_vn-local-nav-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        height: 30px;
+
+        .gr_vn-local-nav-btn {
+            flex: 1;
+            height: 30px;
+            background: #5E5F6D;
+            color: #ffffff;
+            border: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            font-size: 10px;
+            outline: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            white-space: nowrap;
+            overflow: hidden;
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &:active {
+                background: darken(#5E5F6D, 8%);
+            }
+
+            i {
+                margin-left: 2px;
+                font-size: 9px;
+                flex-shrink: 0;
+            }
         }
     }
 }

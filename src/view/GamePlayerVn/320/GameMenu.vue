@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="gr_game-vn-menu" :style="{ padding: VN_isLocal ? '30px 0 40px' : '60px 0 40px' }">
+        <div class="gr_game-vn-menu" :style="{ padding: VN_isLocal ? (trendOpen ? '0 0 40px' : '62px 0 40px') : '60px 0 40px' }">
             <div class="gr_game-vn-menu__slidePrev" @click="slidePrev"><i class="el-icon-arrow-left" /></div>
             <Hooper :settings="hooperSettings" ref="carousel" class="gr_game-vn-menu__title">
                 <slide v-for="(lottery, lotteryId) in lotteryListLocalVN" :key="lotteryId"
@@ -48,6 +48,9 @@ import GameMenu from '../980/GameMenu'
 export default {
     name: 'GameMenu',
     extends: GameMenu,
+    props: {
+        trendOpen: { type: Boolean, default: false }
+    },
     components: {
         Hooper, Slide
     },
