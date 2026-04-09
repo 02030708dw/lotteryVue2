@@ -2,9 +2,31 @@
     <div>
         <HeaderNav />
         <div ref="container" v-if="!VN_isLoading">
-            <GamesHeader :handleHistoryToggle="handleHistoryToggle" :trendOpen="showTrend" @trend-toggle="showTrend = !showTrend" />
-            <VnTrendPopup v-if="VN_isLocal" :visible="showTrend" :lotteryId="VN_lotteryId" @close="showTrend = false" />
-            <GameMenu :isGameMenuActive="isGameMenuActive" :trendOpen="showTrend && VN_isLocal" v-show="!showGameBox" />
+            <GamesHeader
+                :handleHistoryToggle="handleHistoryToggle"
+                :recentOpen="showRecentResults"
+                :trendOpen="showTrend"
+                @trend-toggle="toggleTrend"
+                @recent-toggle="toggleRecentResults"
+            />
+            <VnTrendPopup
+                v-if="VN_isLocal"
+                :visible="showTrend"
+                :lotteryId="VN_lotteryId"
+                @close="showTrend = false"
+                @transitioning="handleOverlayTransition"
+            />
+            <VnRecentResultsMobile
+                v-if="VN_isLocal"
+                :visible="showRecentResults"
+                :handleToggle="toggleRecentResults"
+                @transitioning="handleOverlayTransition"
+            />
+            <GameMenu
+                :isGameMenuActive="isGameMenuActive"
+                :trendOpen="(showTrend || showRecentResults || overlayClosing) && VN_isLocal"
+                v-show="!showGameBox"
+            />
             <GameSubMenu v-show="!showGameBox" />
 
             <VN class="gr_game-vn" :currentGame="gameNameArr[VN_subMenuIndex]"
@@ -54,6 +76,7 @@ import GamesHeader from './GamesHeader'
 import GameMenu from './GameMenu'
 import GameSubMenu from './GameSubMenu'
 import GamesHistoryMobile from './GamesHistoryMobile'
+import VnRecentResultsMobile from './VnRecentResultsMobile'
 import GameBox from './GameBox/'
 import GameStatistics from './GameStatistics'
 import GameControlls from './GameControlls'
@@ -70,7 +93,9 @@ export default {
             showGameBox: false,
             isFast: false,
             isGameMenuActive: false,
-            showTrend: false
+            showTrend: false,
+            showRecentResults: false,
+            overlayClosing: false
         }
     },
     created() {
@@ -104,7 +129,8 @@ export default {
     methods: {
         ...mapActions([
             _M.SET_HEADER_NAV_IS_BACK,
-            _M.SET_STOP_AND_OVER_VN_DATA
+            _M.SET_STOP_AND_OVER_VN_DATA,
+            _M.SET_POP_ACTIVE
         ]),
         handleGameBox(showList = []) {
             const isStop = showList.find(({ methodId, issue }) => this.VN_nowStopId[methodId + (this.VN_localIssue || issue)])
@@ -132,15 +158,46 @@ export default {
         },
         back() {
             this.showGameBox = false
+            this.showTrend = false
+            this.showRecentResults = false
             this[_M.SET_HEADER_NAV_IS_BACK](false)
             this[_M.SET_STOP_AND_OVER_VN_DATA]()
         },
         setIsFast(bool) {
             this.isFast = bool
         },
-        handleHistoryToggle() {
-            this[_M.SET_POP_ACTIVE]({ VNhistory: !this.getPopActive.VNhistory })
+        toggleTrend() {
+            const next = !this.showTrend
+            this.showTrend = next
+            if (next) {
+                this.showRecentResults = false
+            }
+            next && this.getPopActive.VNhistory && this[_M.SET_POP_ACTIVE]({ VNhistory: false })
         },
+        toggleRecentResults(nextState) {
+            const next = typeof nextState === 'boolean'
+                ? nextState
+                : !this.showRecentResults
+
+            this.showRecentResults = next
+            if (next) {
+                this.showTrend = false
+            }
+        },
+        handleOverlayTransition(isClosing) {
+            this.overlayClosing = isClosing
+        },
+        handleHistoryToggle(nextState) {
+            const next = typeof nextState === 'boolean'
+                ? nextState
+                : !this.getPopActive.VNhistory
+
+            if (next) {
+                this.showTrend = false
+                this.showRecentResults = false
+            }
+            this[_M.SET_POP_ACTIVE]({ VNhistory: next })
+        }
     },
     components: {
         HeaderNav,
@@ -155,6 +212,7 @@ export default {
         InfoBox,
         GameInfo,
         GamesHistoryMobile,
+        VnRecentResultsMobile,
         VnTrendPopup
     }
 }

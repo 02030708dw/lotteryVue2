@@ -118,7 +118,7 @@ export default {
             'VN_gameMenuSubData',
             'VN_gameType',
             'VN_isOld',
-            'VN_isLocal',
+            'VN_isLocal'
         ])
         // currentGameMenuSub() {
         //     return this.VN_gameMenuSubData[this.currentGameType]
@@ -126,3 +126,9 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+.gr_game-vn-menu {
+    transition: none;
+}
+</style>

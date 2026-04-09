@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="gr_games-vn-header  gr_games-vn-header--320  gr_container bg_secondary"
         :style="{ height: !VN_isLocal ? '60px' : '62px' }">
         <div class="gr_games-vn-header__inner  u_clearfix"
@@ -144,8 +144,8 @@
         <div class="gr_vn-local-nav-buttons" v-if="VN_isLocal">
             <button class="gr_vn-local-nav-btn" @click="showHistory = true">{{$t('common_007')}}</button>
             <button class="gr_vn-local-nav-btn" @click="showBetting = true">{{$t('home_009')}}</button>
-            <button class="gr_vn-local-nav-btn" @click.stop="handleHistoryToggle">
-                近期开奖结果<i class="el-icon-arrow-down"></i>
+            <button class="gr_vn-local-nav-btn js-vn-recent-trigger" @click="$emit('recent-toggle')">
+                近期开奖结果<i :class="recentOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
             </button>
             <button class="gr_vn-local-nav-btn" @click="$emit('trend-toggle')">
                 走势图<i :class="trendOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
@@ -169,6 +169,7 @@ export default {
     components: { VnHistoryPopup, VnBettingRecordPopup },
     props: {
         handleHistoryToggle: { type: Function, required: true },
+        recentOpen: { type: Boolean, default: false },
         trendOpen: { type: Boolean, default: false }
     },
     data() {
@@ -271,10 +272,10 @@ export default {
             this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
             this[_M.SET_POP_ACTIVE]({ gameStatus: !this.isStatusActive })
             const lot = this.$refs.lotteryStatus
-            lot.offsetWidth >= lot.offsetParent.offsetWidth &&
-                (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
-                    (this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`)
-        },
+            if (lot && lot.offsetWidth >= lot.offsetParent.offsetWidth) {
+                this.maxWStatus = `${lot.offsetParent.offsetWidth - 10}px`
+            }
+        }
     },
     computed: {
         ...mapGetters([
@@ -365,10 +366,8 @@ export default {
                 switch (+this.VN_isLocal) {
                     case 212:
                         return 'https://181888.org/history/?lottoCode=YN5FC'
-                        break
                     case 223:
                         return 'https://181888.org/history/?lottoCode=YN30MC'
-                        break
                 }
             } else {
                 return 'https://www.minhngoc.net.vn/'

@@ -1,6 +1,10 @@
 <template>
-    <transition name="vn-trend-slide">
-        <div class="vn-trend" v-if="visible">
+    <transition
+        name="vn-trend-slide"
+        @before-leave="notifyTransition(true)"
+        @after-leave="notifyTransition(false)"
+    >
+        <div class="vn-trend" v-show="visible">
             <div class="vn-trend__loading" v-if="isLoading">
                 <i class="el-icon-loading"></i>
             </div>
@@ -87,13 +91,6 @@
 </template>
 
 <script>
-import { handleAjax } from '@UTIL'
-import { API } from '@API'
-
-const BSEO_PAIRS = [
-    { bs: 1, eo: 1 }, { bs: 1, eo: -1 }, { bs: -1, eo: 1 }, { bs: -1, eo: -1 },
-    { bs: 1, eo: 1 }, { bs: -1, eo: -1 }, { bs: 1, eo: -1 }, { bs: -1, eo: 1 }
-]
 
 function genMock() {
     const items = []
@@ -148,19 +145,28 @@ export default {
         return {
             isLoading: false,
             list: [],
+            loadedLotteryId: null,
             activeTab: 'sp',
             tabs: [
-                { key: 'sp',    label: 'SP' },
+                { key: 'sp', label: 'SP' },
                 { key: 'eight', label: 'eight' },
-                { key: 'bs',    label: 'B/S' },
-                { key: 'eo',    label: 'E/O' }
+                { key: 'bs', label: 'B/S' },
+                { key: 'eo', label: 'E/O' }
             ]
         }
     },
     watch: {
         visible(val) {
-            if (val) this.load()
-            else this.reset()
+            if (val) {
+                this.ensureLoaded()
+            }
+        },
+        lotteryId(val, oldVal) {
+            if (`${val || ''}` === `${oldVal || ''}`) return
+            this.reset()
+            if (this.visible) {
+                this.ensureLoaded(true)
+            }
         },
         activeTab(val) {
             if (val === 'bs' || val === 'eo') {
@@ -177,23 +183,41 @@ export default {
         }
     },
     methods: {
+        notifyTransition(isClosing) {
+            this.$emit('transitioning', isClosing)
+        },
         close() {
             this.$emit('close')
         },
         reset() {
             this.list = []
-            this.activeTab = 'sp'
+            this.loadedLotteryId = null
         },
-        async load() {
+        async ensureLoaded(force = false) {
+            const lotteryKey = `${this.lotteryId || ''}`
+
+            if (!force && this.loadedLotteryId === lotteryKey && this.list.length) {
+                if (this.activeTab === 'bs' || this.activeTab === 'eo') {
+                    this.$nextTick(() => this.scrollToRight())
+                }
+                return
+            }
+            if (this.isLoading) return
+
             this.isLoading = true
-            this.reset()
+            this.list = []
             // TODO: 替换为真实 API（接口 500 修复后）
             // const res = await handleAjax(API.getVndTrend, { lotteryId: +this.lotteryId }, this.$store.getters, { isNotShowMessageBox: true })
             // if (res && res.data) this.list = Array.isArray(res.data) ? res.data : []
 
-            await new Promise(r => setTimeout(r, 300))
+            await new Promise((resolve) => setTimeout(resolve, 300))
             this.list = genMock()
+            this.loadedLotteryId = lotteryKey
             this.isLoading = false
+
+            if (this.activeTab === 'bs' || this.activeTab === 'eo') {
+                this.$nextTick(() => this.scrollToRight())
+            }
         },
         scrollToRight() {
             const el = this.$refs.content
@@ -241,10 +265,11 @@ export default {
 .vn-trend-slide-leave-active {
     transition: height 0.2s ease;
     overflow: hidden;
+    will-change: height;
 }
 .vn-trend-slide-enter,
 .vn-trend-slide-leave-to {
-    height: 0 !important;
+    height: 62px !important;
 }
 .vn-trend-slide-enter-to,
 .vn-trend-slide-leave {
@@ -254,21 +279,26 @@ export default {
 
 .vn-trend {
     width: 100%;
+    height: 194px;
     background: #fff;
     font-size: 12px;
     padding-top: 62px;
     box-sizing: border-box;  // 让 height 包含 padding，过渡时精确控制总高度
 
     &__loading {
-        text-align: center;
-        padding: 28px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 132px;
         color: #999;
         font-size: 20px;
     }
 
     &__empty {
-        text-align: center;
-        padding: 28px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 132px;
         color: #999;
     }
 

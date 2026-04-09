@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="vn-history-mobile">
         <div class="vn-history-mobile__panel" ref="panel">
             <div class="vn-history-mobile__content">
@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { formatVNBingoCode } from "@UTIL/games/VN";
+import { mapGetters } from 'vuex'
+import { formatVNBingoCode } from '@UTIL/games/VN'
 
 export default {
-    name: "GamesHistoryMobile",
+    name: 'GamesHistoryMobile',
     props: {
         handleHistoryToggle: {
             type: Function,
@@ -52,48 +52,48 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(["VN_lastNumber_V2"]),
+        ...mapGetters(['VN_lastNumber_V2']),
 
         // 取最新 5 期，每期把 code 格式化成 9 行，并 reverse 成：8 在上，0 在下
         cols() {
             const src = Array.isArray(this.VN_lastNumber_V2)
                 ? this.VN_lastNumber_V2
-                : [];
+                : []
             const raw = src.slice(0, 5).map(it => {
-                const rows = formatVNBingoCode((it && it.code) || "");
+                const rows = formatVNBingoCode((it && it.code) || '')
                 return {
                     issue: it && it.issue,
                     rows: Array.isArray(rows) ? rows.slice() : []
-                };
-            });
+                }
+            })
 
             // 不足 5 列补空列（防止布局乱）
-            const rowCount = raw[0].rows.length || 9;
+            const rowCount = raw[0].rows.length || 9
             while (raw.length < 5) {
                 raw.push({
-                    issue: "",
-                    rows: Array.from({ length: rowCount }, () => "-")
-                });
+                    issue: '',
+                    rows: Array.from({ length: rowCount }, () => '-')
+                })
             }
-            return raw;
+            return raw
         },
 
         // 行数（一般 9）
         rowCount() {
-            return this.cols[0].rows.length || 0;
+            return this.cols[0].rows.length || 0
         },
 
         // 左侧等级：8 ~ 0
         levels() {
-            const n = this.rowCount;
-            return Array.from({ length: n }, (_, i) => n - 1 - i);
+            const n = this.rowCount
+            return Array.from({ length: n }, (_, i) => n - 1 - i)
         }
     },
     mounted() {
-        document.addEventListener("pointerdown", this.onGlobalDown)
+        document.addEventListener('pointerdown', this.onGlobalDown)
     },
     beforeDestroy() {
-        document.removeEventListener("pointerdown", this.onGlobalDown)
+        document.removeEventListener('pointerdown', this.onGlobalDown)
     },
     methods: {
         onGlobalDown(e) {
@@ -105,32 +105,32 @@ export default {
         },
 
         formatIssue(issue) {
-            if (!issue) return "";
-            const parts = String(issue).split("-");
-            return parts[1] || issue;
+            if (!issue) return ''
+            const parts = String(issue).split('-')
+            return parts[1] || issue
         },
 
         normalizeCell(cell) {
             if (Array.isArray(cell)) {
                 const list = cell
                     .flat()
-                    .map(v => (v == null ? "" : String(v)).trim())
-                    .filter(Boolean);
-                return list.length ? list : ["-"];
+                    .map(v => (v == null ? '' : String(v)).trim())
+                    .filter(Boolean)
+                return list.length ? list : ['-']
             }
-            if (typeof cell === "string") {
-                const s = cell.trim();
-                if (!s) return ["-"];
+            if (typeof cell === 'string') {
+                const s = cell.trim()
+                if (!s) return ['-']
                 const arr = s
-                    .split(",")
+                    .split(',')
                     .map(x => x.trim())
-                    .filter(Boolean);
-                return arr.length ? arr : [s];
+                    .filter(Boolean)
+                return arr.length ? arr : [s]
             }
-            return ["-"];
+            return ['-']
         }
     }
-};
+}
 </script>
 
 <style scoped lang="scss">
