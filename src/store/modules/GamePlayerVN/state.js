@@ -6,6 +6,7 @@ export default {
     VN_lastNumber: '',
     VN_lastIssue: '',
     VN_lastNumber_V2: [],
+    VN_trend: [],
     VN_area: {},
     VN_gameConfig: {},
     VN_game: {

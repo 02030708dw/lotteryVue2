@@ -124,6 +124,9 @@ export default {
     [_M.SET_GAME_LASTNUMBER_VN_V2](state, payload = {}) {
         state.VN_lastNumber_V2 = payload
     },
+    [_M.SET_GAME_TREND_VN](state, payload = []) {
+        state.VN_trend = payload
+    },
     /**
      * 設定越南彩獎期城市
      * @param {any} state Global Stroe

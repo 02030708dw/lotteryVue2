@@ -4,6 +4,36 @@
             <div class="vn-popup__header">
                 <i class="el-icon-circle-close vn-popup__close" @click="close"></i>
             </div>
+            <div class="vn-popup__toolbar">
+                <el-select
+                    class="vn-popup__select"
+                    v-model="queryMenuCode"
+                    v-if="!isW88"
+                    :listObject="country"
+                    showLabel="title_key"
+                    showValue="menuCode"
+                >
+                    <el-option
+                        v-for="(item, index) in country"
+                        v-if="isShow(item.menuCode)"
+                        :key="index"
+                        :label="item.title_key"
+                        :value="item.menuCode"
+                    />
+                </el-select>
+                <el-date-picker
+                    class="vn-popup__date"
+                    type="date"
+                    format="yyyy-MM-dd"
+                    v-model="queryDate"
+                    :editable="false"
+                    :clearable="false"
+                    :picker-options="pickerOptionsOpen"
+                />
+                <button class="vn-popup__search" @click="search">
+                    <i class="el-icon-search"></i>
+                </button>
+            </div>
             <div class="vn-popup__subtitle">{{ $t('bettingrc_045') }}</div>
             <div class="vn-popup__body" ref="body" @scroll="onScroll">
                 <template v-if="historyList.length > 0">
@@ -37,52 +67,79 @@
 </template>
 
 <script>
+import DatePicker from '@E/packages/date-picker/index.js'
 import { mapGetters, mapActions } from 'vuex'
 import { formatVNBingoCode } from '@UTIL/games/VN'
-import { returnState } from '@UTIL'
+import { returnState, warnMessageBox } from '@UTIL'
 
 export default {
     name: 'VnHistoryPopup',
+    components: {
+        [DatePicker.name]: DatePicker
+    },
     props: {
         visible: { type: Boolean, default: false },
         menuCode: { type: String, default: '' }
     },
     data() {
         return {
-            isLoading: false
+            isLoading: false,
+            pickerOptionsOpen: {
+                disabledDate(time) {
+                    return time.getTime() > Date.now() || (time && time.valueOf() < Date.now() - 86400000 * 7)
+                }
+            }
         }
     },
     watch: {
         visible(val) {
-            if (val) this.load()
+            if (val) this.initQuery()
         }
     },
     methods: {
         ...mapActions([
             _M.GET_HISTORYBALLVN_LIST,
-            _M.CLEAR_HISTORYBALLVN_LIST
+            _M.CLEAR_HISTORYBALLVN_LIST,
+            _M.SET_HISTORYBALLVN_DATA
         ]),
         close() {
             this.$emit('update:visible', false)
         },
-        async load() {
+        initQuery() {
+            this[_M.SET_HISTORYBALLVN_DATA]({
+                menuCode: this.menuCode || this.queryMenuCode,
+                cancelDeadline: moment().format('YYYY-MM-DD')
+            })
+            this.search()
+        },
+        resetScroll() {
+            this.$nextTick(() => {
+                const el = this.$refs.body
+                if (el) el.scrollTop = 0
+            })
+        },
+        async search() {
+            if (!this.queryDate) {
+                this.$msg(warnMessageBox({ message: 'trend_055' }))
+                return
+            }
             this.isLoading = true
-            const today = moment().format('YYYY-MM-DD')
             this[_M.CLEAR_HISTORYBALLVN_LIST]()
+            this.resetScroll()
             await this[_M.GET_HISTORYBALLVN_LIST]({
-                menuCode: this.menuCode,
-                cancelDeadline: today,
+                menuCode: this.queryMenuCode,
+                cancelDeadline: moment(this.queryDate).format('YYYY-MM-DD'),
                 next: null
             })
             this.isLoading = false
         },
         async loadMore() {
             if (this.isLoading || !this.lastIssue) return
-            // 当天第一期为1，不再加载
             if (+this.lastIssue.split('-')[1] === 1) return
             this.isLoading = true
             await this[_M.GET_HISTORYBALLVN_LIST]({
-                menuCode: this.menuCode,
+                menuCode: this.queryMenuCode,
+                cancelDeadline: moment(this.queryDate).format('YYYY-MM-DD'),
                 next: this.lastIssue
             })
             this.isLoading = false
@@ -96,21 +153,63 @@ export default {
         },
         formatPrize(prize) {
             return formatVNBingoCode(prize)
+        },
+        isShow(menuCode) {
+            const [key] = menuCode.split('-')
+            return (((this.lotteryMenu || [])[3] || {}).list || {})[key]
         }
     },
     computed: {
         ...mapGetters([
             'getHistoryBallVNTempList',
-            'VN_cityData'
+            'VN_cityData',
+            'getHistoryBallVNData',
+            'lotteryListLocalVN',
+            'lotteryOfficialVN',
+            'lotteryMenu',
+            'isW88'
         ]),
+        queryDate: {
+            set(cancelDeadline) {
+                this[_M.SET_HISTORYBALLVN_DATA]({ cancelDeadline })
+            },
+            get() {
+                return this.getHistoryBallVNData.cancelDeadline
+            }
+        },
+        queryMenuCode: {
+            set(menuCode) {
+                this[_M.SET_HISTORYBALLVN_DATA]({ menuCode })
+            },
+            get() {
+                return this.getHistoryBallVNData.menuCode || this.menuCode
+            }
+        },
+        country() {
+            let arr = []
+            Object
+                .values(this.lotteryListLocalVN)
+                .forEach(({ name, lottery, title_key }) => arr.push({ menuCode: `${name}-${lottery}`, title_key: this.$t(title_key) }))
+            Object
+                .entries(this.lotteryOfficialVN)
+                .forEach(([name, obj]) => arr.push({ menuCode: `${name}-`, title_key: `${this.$t('home_016')} - ${this.$t(obj.title_key)}` }))
+            return arr
+        },
         historyList() {
+            const official = ['VN_S', 'VN_C', 'VN_N']
             const data = Object.values(returnState(this.getHistoryBallVNTempList))
             if (data.length === 0) return []
             let result = []
             const lotName = Object.keys(data[0])[0]
+            const isOfficial = official.findIndex((checkWord) => {
+                return this.queryMenuCode.includes(checkWord)
+            }) > -1
             data.forEach((oneGroup) => {
                 Object.entries(oneGroup[lotName]).forEach(([lottery, cardsData]) => {
-                    result = result.concat(cardsData)
+                    const normalizedCards = isOfficial
+                        ? cardsData.map(card => ({ ...card, lottery }))
+                        : cardsData
+                    result = result.concat(normalizedCards)
                 })
             })
             return result
@@ -158,7 +257,6 @@ export default {
         color: #fff;
         flex-shrink: 0;
 
-        // 底部金色条纹
         &::after {
             content: '';
             position: absolute;
@@ -176,6 +274,51 @@ export default {
         cursor: pointer;
     }
 
+    &__toolbar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        background: #f5f0e8;
+        border-bottom: 1px solid #e8e0cc;
+        flex-shrink: 0;
+
+        ::v-deep .el-input__inner {
+            height: 34px;
+            line-height: 34px;
+            border-color: #d5ccb7;
+            color: #6d6555;
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        ::v-deep .el-input__icon {
+            line-height: 34px;
+        }
+    }
+
+    &__select {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
+    &__date {
+        flex: 0 0 132px;
+    }
+
+    &__search {
+        width: 34px;
+        height: 34px;
+        border: 1px solid #d5ccb7;
+        background: #fff;
+        color: #b7ae98;
+        border-radius: 4px;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
     &__subtitle {
         padding: 8px 12px;
         font-size: 12px;
@@ -190,11 +333,11 @@ export default {
         flex: 1;
         background: #fff;
 
-        // 覆盖全局固定宽度，适配弹窗
         ::v-deep .gr_game-info__number {
             width: 90%;
             margin: 5px auto;
         }
+
         ::v-deep .gr_game-info__number + .gr_game-info__number {
             margin-top: 8px;
         }

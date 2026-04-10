@@ -25,7 +25,7 @@
 
 <script>
 import { formatNumber } from '@UTIL'
-import { betStatusCls, methodName, parseDanto, parseUnit, traceSubTaskStatus, parseVNCode } from '@UTIL/presenter'
+import { betStatusCls, traceSubTaskStatus, parseVNCode } from '@UTIL/presenter'
 import { mapGetters, mapActions } from 'vuex'
 import SubDetail_vn from '@C/SubDetail_vn'
 
@@ -101,7 +101,6 @@ export default {
     methods: {
         ...mapActions([
             _M.SET_GAME_INFO_DETAIL_INDEX,
-            _M.SET_HEADER_NAV_IS_BACK,
             _M.ACTION_PROJECT_CANCEL
         ]),
         back() {

@@ -77,7 +77,7 @@ const getters = {
             },
             {
                 title_key: 'PL2,PL3'
-            },
+            }
             // {
             //     // '特殊'
             //     title_key: 'vn_t_007'
@@ -137,6 +137,7 @@ const getters = {
     VN_lastNumber: state => state.VN_lastNumber,
     VN_lastIssue: state => state.VN_lastIssue,
     VN_lastNumber_V2: state => state.VN_lastNumber_V2,
+    VN_trend: state => state.VN_trend || [],
     VN_lastIssue_V2: state => state.VN_lastIssue_V2,
     VN_currentlottery: (state, getters) => getters.lotteryListLocalVN[getters.VN_lotteryId],
     VN_localArea: (state, getters) => (getters.VN_currentlottery || {}).name,
@@ -204,7 +205,7 @@ const getters = {
     VN_cityData: (state, getters) => {
         let obj = { 0: '' }
         getters.lotteryListArr.forEach(
-            ([key, { function_type, lottery, title_key }]) =>
+            ([, { function_type, lottery, title_key }]) =>
                 function_type.indexOf('VN_') === 0 && (obj[lottery] = title_key)
         )
         return obj
@@ -212,7 +213,7 @@ const getters = {
     VN_cityArea: (state, getters) => {
         let obj = {}
         getters.lotteryListArr.forEach(
-            ([key, { function_type, lottery }]) =>
+            ([, { function_type, lottery }]) =>
                 function_type.indexOf('VN_') === 0 && (obj[lottery] = function_type)
         )
         return obj

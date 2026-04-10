@@ -9,7 +9,6 @@
                 <i class="el-icon-loading"></i>
             </div>
             <div class="vn-trend__layout" v-else-if="list.length > 0">
-                <!-- 左侧 Tab 按钮 -->
                 <div class="vn-trend__tabs">
                     <button
                         v-for="tab in tabs"
@@ -20,13 +19,10 @@
                     >{{ tab.label }}</button>
                 </div>
 
-                <!-- 右侧内容区 -->
                 <div class="vn-trend__content" ref="content">
-
-                    <!-- SP: sping 号码，只展示5行×4列=20奖期 -->
                     <div class="vn-trend__num-grid" v-if="activeTab === 'sp'">
                         <div
-                            v-for="(item, i) in list.slice(0, 20)"
+                            v-for="(item, i) in displayList.slice(0, 20)"
                             :key="i"
                             class="vn-trend__num-cell"
                             :class="{ 'is-shade': isShade(i), 'is-waiting': i === 0 && !item.sping }"
@@ -36,10 +32,9 @@
                         </div>
                     </div>
 
-                    <!-- eight: 八平码，只展示5行×4列=20奖期 -->
                     <div class="vn-trend__num-grid" v-if="activeTab === 'eight'">
                         <div
-                            v-for="(item, i) in list.slice(0, 20)"
+                            v-for="(item, i) in displayList.slice(0, 20)"
                             :key="i"
                             class="vn-trend__num-cell"
                             :class="{ 'is-shade': isShade(i), 'is-waiting': i === 0 && !item['8ping'] }"
@@ -49,7 +44,6 @@
                         </div>
                     </div>
 
-                    <!-- B/S: 大小走势瀑布图 -->
                     <div class="vn-trend__chart" v-if="activeTab === 'bs'">
                         <div
                             v-for="(row, ri) in bsGrid"
@@ -66,7 +60,6 @@
                         </div>
                     </div>
 
-                    <!-- E/O: 单双走势瀑布图 -->
                     <div class="vn-trend__chart" v-if="activeTab === 'eo'">
                         <div
                             v-for="(row, ri) in eoGrid"
@@ -82,7 +75,6 @@
                             ></div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div v-else class="vn-trend__empty">暂无数据</div>
@@ -91,49 +83,7 @@
 </template>
 
 <script>
-
-function genMock() {
-    const items = []
-    // 第 0 条：当前期，尚未开奖
-    items.push({ issue: '20260409-2100', '8ping': '', sping: '', BS8: '', E08: '', BSxy: [], EOxy: [] })
-
-    // 生成 49 期历史数据
-    const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
-    const pad = (n, l) => String(n).padStart(l, '0')
-
-    // 用于生成连续方向的 streak 生成器
-    function genStreaks(isBig, streakLen) {
-        // streakLen: 1-4 的随机连续数
-        const arr = []
-        let remaining = streakLen
-        let cur = isBig ? 1 : -1
-        while (remaining > 0) {
-            const take = Math.min(remaining, rand(1, Math.min(4, remaining)))
-            arr.push(cur * take)
-            cur = -cur
-            remaining -= take
-        }
-        return arr
-    }
-
-    for (let i = 0; i < 49; i++) {
-        const issueNum = 2099 - i
-        const sp = pad(rand(0, 999999), 6)
-        const ep = pad(rand(0, 99), 2)
-        const isBig = parseInt(ep) >= 50
-        const isOdd = parseInt(ep) % 2 === 1
-        items.push({
-            issue: `20260409-${issueNum}`,
-            '8ping': ep,
-            sping: sp,
-            BS8: isBig ? '大' : '小',
-            E08: isOdd ? '单' : '双',
-            BSxy: genStreaks(isBig, rand(2, 4)),
-            EOxy: genStreaks(isOdd, rand(2, 4))
-        })
-    }
-    return items
-}
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
     name: 'VnTrendPopup',
@@ -144,8 +94,8 @@ export default {
     data() {
         return {
             isLoading: false,
-            list: [],
             loadedLotteryId: null,
+            pendingCountdownRefresh: false,
             activeTab: 'sp',
             tabs: [
                 { key: 'sp', label: 'SP' },
@@ -158,7 +108,13 @@ export default {
     watch: {
         visible(val) {
             if (val) {
-                this.ensureLoaded()
+                this.ensureLoaded(true)
+            }
+        },
+        isLoading(val) {
+            if (!val && this.pendingCountdownRefresh && this.visible && this.isCountdownClosed) {
+                this.pendingCountdownRefresh = false
+                this.ensureLoaded(true)
             }
         },
         lotteryId(val, oldVal) {
@@ -168,6 +124,16 @@ export default {
                 this.ensureLoaded(true)
             }
         },
+        isCountdownClosed(val, oldVal) {
+            if (!this.visible || !val || oldVal !== false) return
+
+            if (this.isLoading) {
+                this.pendingCountdownRefresh = true
+                return
+            }
+
+            this.ensureLoaded(true)
+        },
         activeTab(val) {
             if (val === 'bs' || val === 'eo') {
                 this.$nextTick(() => this.scrollToRight())
@@ -175,14 +141,48 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['VN_trend', 'VN_flipTimer', 'VN_localArea']),
+        list() {
+            return Array.isArray(this.VN_trend) ? this.VN_trend : []
+        },
+        currentFlipTimer() {
+            return this.VN_flipTimer[this.VN_localArea] || {}
+        },
+        isCountdownClosed() {
+            return !!this.VN_localArea && this.currentFlipTimer.isCountDown === false
+        },
+        displayList() {
+            if (!this.list.length) return []
+            if (!this.list[0].sping && !this.list[0]['8ping']) {
+                return this.list
+            }
+
+            return [{
+                issue: '',
+                sping: '',
+                '8ping': '',
+                BSxy: [],
+                EOxy: []
+            }, ...this.list]
+        },
         bsGrid() {
-            return this.buildGrid('BSxy', 'B', 'S')
+            return this.buildGrid('BSxy', 'BS8', {
+                '大': 'B',
+                '小': 'S'
+            })
         },
         eoGrid() {
-            return this.buildGrid('EOxy', 'E', 'O')
+            return this.buildGrid('EOxy', 'EO8', {
+                '双': 'E',
+                '單': 'O',
+                '单': 'O'
+            })
         }
     },
     methods: {
+        ...mapActions([
+            _M.GET_GAME_TREND_VN
+        ]),
         notifyTransition(isClosing) {
             this.$emit('transitioning', isClosing)
         },
@@ -190,8 +190,8 @@ export default {
             this.$emit('close')
         },
         reset() {
-            this.list = []
             this.loadedLotteryId = null
+            this.pendingCountdownRefresh = false
         },
         async ensureLoaded(force = false) {
             const lotteryKey = `${this.lotteryId || ''}`
@@ -205,15 +205,12 @@ export default {
             if (this.isLoading) return
 
             this.isLoading = true
-            this.list = []
-            // TODO: 替换为真实 API（接口 500 修复后）
-            // const res = await handleAjax(API.getVndTrend, { lotteryId: +this.lotteryId }, this.$store.getters, { isNotShowMessageBox: true })
-            // if (res && res.data) this.list = Array.isArray(res.data) ? res.data : []
-
-            await new Promise((resolve) => setTimeout(resolve, 300))
-            this.list = genMock()
-            this.loadedLotteryId = lotteryKey
-            this.isLoading = false
+            try {
+                const nextList = await this[_M.GET_GAME_TREND_VN](+this.lotteryId)
+                this.loadedLotteryId = nextList.length ? lotteryKey : null
+            } finally {
+                this.isLoading = false
+            }
 
             if (this.activeTab === 'bs' || this.activeTab === 'eo') {
                 this.$nextTick(() => this.scrollToRight())
@@ -223,35 +220,50 @@ export default {
             const el = this.$refs.content
             if (el) el.scrollLeft = el.scrollWidth
         },
-        buildGrid(key, posLabel, negLabel) {
-            const MIN_ROWS = 6
-            const cols = []
-            // 跳过第 0 条（当前期尚未开奖）
-            this.list.slice(1).forEach(item => {
-                (item[key] || []).forEach(val => {
-                    if (val === 0) return
-                    cols.push({ type: val > 0 ? posLabel : negLabel, depth: Math.abs(val) })
+        getTrendPoint(point = []) {
+            if (!Array.isArray(point) || point.length < 2) return null
+
+            const x = +point[0]
+            const y = Math.abs(+point[1])
+
+            if (!x || !y) return null
+
+            return {
+                col: x - 1,
+                row: y - 1
+            }
+        },
+        buildGrid(pointKey, valueKey, valueMap) {
+            const ROWS = 6
+            const source = this.list || []
+            const points = source
+                .map((item) => {
+                    const point = this.getTrendPoint(item[pointKey])
+                    const type = valueMap[item[valueKey]]
+
+                    if (!point || !type || point.row >= ROWS) return null
+
+                    return {
+                        ...point,
+                        type
+                    }
                 })
+                .filter(Boolean)
+
+            const maxCol = points.length
+                ? Math.max(...points.map(point => point.col))
+                : 0
+            const grid = Array.from({ length: ROWS }, () => Array(maxCol + 2).fill(null))
+
+            points.forEach(({ row, col, type }) => {
+                grid[row][col] = type
             })
 
-            // 末尾加一列空列（待开奖占位）
-            const totalCols = cols.length + 1
-            const maxDepth = cols.length
-                ? Math.max(MIN_ROWS, ...cols.map(c => c.depth))
-                : MIN_ROWS
-
-            const grid = Array.from({ length: maxDepth }, () => Array(totalCols).fill(null))
-            cols.forEach((col, ci) => {
-                for (let r = 0; r < col.depth; r++) {
-                    grid[r][ci] = col.type
-                }
-            })
-            // 最后一列保持 null（空列）
             return grid
         },
         isShade(i) {
-            const col = i % 4
-            const row = Math.floor(i / 4)
+            const row = i % 5
+            const col = Math.floor(i / 5)
             return (row + col) % 2 === 1
         }
     }
@@ -259,23 +271,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// 固定高度过渡，避免 max-height 每帧重新计算布局导致卡顿
-// 总高度 = padding-top(62px) + layout(132px) = 194px
 .vn-trend-slide-enter-active,
 .vn-trend-slide-leave-active {
     transition: height 0.2s ease;
     overflow: hidden;
     will-change: height;
 }
+
 .vn-trend-slide-enter,
 .vn-trend-slide-leave-to {
     height: 62px !important;
 }
+
 .vn-trend-slide-enter-to,
 .vn-trend-slide-leave {
     height: 194px !important;
 }
-
 
 .vn-trend {
     width: 100%;
@@ -283,7 +294,7 @@ export default {
     background: #fff;
     font-size: 12px;
     padding-top: 62px;
-    box-sizing: border-box;  // 让 height 包含 padding，过渡时精确控制总高度
+    box-sizing: border-box;
 
     &__loading {
         display: flex;
@@ -302,11 +313,11 @@ export default {
         color: #999;
     }
 
-    // 等待开奖的 ... 动画
     @keyframes vn-dots {
         0%, 100% { opacity: 1; }
-        50%       { opacity: 0.2; }
+        50% { opacity: 0.2; }
     }
+
     &__dots {
         display: inline-block;
         color: #f57c00;
@@ -315,14 +326,12 @@ export default {
         animation: vn-dots 1.2s ease-in-out infinite;
     }
 
-    // 左右布局：固定 132px（= 6行 × 22px，与 B/S E/O 图高度一致）
     &__layout {
         display: flex;
         height: 132px;
         overflow: hidden;
     }
 
-    // 左侧 Tab 列
     &__tabs {
         flex-shrink: 0;
         width: 52px;
@@ -353,20 +362,22 @@ export default {
         }
     }
 
-    // 右侧内容区（可横向滚动，隐藏滚动条）
     &__content {
         flex: 1;
         overflow: auto;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; // Firefox
-        &::-webkit-scrollbar { display: none; } // Chrome/Safari
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
-    // ── 数字格（SP / eight）────────────────────────
     &__num-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(5, 1fr);
+        grid-auto-flow: column;
         height: 100%;
     }
 
@@ -375,25 +386,24 @@ export default {
         align-items: center;
         justify-content: center;
         text-align: center;
-        color: #333;
-        background: #fff;
-        border-bottom: 1px solid #f5f0e8;
-        border-right: 1px solid #f5f0e8;
-        font-size: 12px;
+        color: #111;
+        background: #fbefdf;
+        border-bottom: 1px solid #f4e6d2;
+        border-right: 1px solid #f4e6d2;
+        font-size: 13px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
 
         &.is-shade {
-            background: #fff0e0;
+            background: #fff;
         }
 
         &.is-waiting {
-            background: #fff8f0;
+            background: #fbefdf;
         }
     }
 
-    // ── 走势瀑布图（B/S, E/O）──────────────────────
     &__chart {
         background: #34373d;
         min-width: max-content;
@@ -406,18 +416,21 @@ export default {
     &__chart-cell {
         width: 22px;
         height: 22px;
-        border: 1px solid white;
+        background: #34373d;
+        border: 1px solid rgba(255, 255, 255, 0.45);
         border-right: none;
         border-top: none;
         position: relative;
         flex-shrink: 0;
 
-        // 用 ::before 渲染圆圈，与参考实现一致
         &::before {
             content: attr(content);
             position: absolute;
             border-radius: 50%;
-            inset: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
             margin: auto;
             width: 85%;
             height: 85%;
@@ -425,19 +438,21 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
-            font-weight: bold;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1;
             color: #fff;
+            box-sizing: border-box;
+            pointer-events: none;
         }
 
-        &.B::before { background-color: #e05252; }
+        &.B::before { background-color: #ff1f14; }
         &.S::before { background-color: #ebae43; }
-        &.E::before { background-color: #e05252; }
+        &.E::before { background-color: #ff1f14; }
         &.O::before { background-color: #ebae43; }
 
-        // 最右侧空列（待开奖占位）
         &.is-last {
-            border-right: 1px solid white;
+            border-right: 1px solid rgba(255, 255, 255, 0.45);
         }
     }
 }

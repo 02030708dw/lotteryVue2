@@ -14,3 +14,4 @@ out/
 conf.json
 copyToSvn.bat
 *.claude
+*.codex

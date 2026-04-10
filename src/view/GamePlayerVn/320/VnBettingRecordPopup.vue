@@ -1,17 +1,15 @@
 <template>
     <div class="vn-popup-overlay" v-if="visible" @click.self="close">
         <div class="vn-popup">
-
-            <!-- 标题栏 -->
             <div class="vn-popup__header">
-                <i v-if="GameInfoDetailIndex !== -1"
-                   class="el-icon-arrow-left vn-popup__back"
-                   @click="goBackToList">
-                </i>
+                <i
+                    v-if="GameInfoDetailIndex !== -1"
+                    class="el-icon-arrow-left vn-popup__back"
+                    @click="goBackToList"
+                ></i>
                 <i class="el-icon-circle-close vn-popup__close" @click="close"></i>
             </div>
 
-            <!-- 列表视图 -->
             <template v-if="GameInfoDetailIndex === -1">
                 <div class="vn-popup__subtitle">{{ $t('bettingrc_045') }}</div>
                 <div class="vn-popup__body gr_page__content" ref="body" @scroll="onScroll">
@@ -43,18 +41,15 @@
                         <i class="el-icon-loading"></i>
                     </div>
                 </div>
-                <!-- 底部合计栏 -->
                 <div class="vn-popup__footer" v-if="gameSum && gameSum.sum_total_price > 0">
                     <span>{{ $t('bettingrc_073') }} {{ formatNumber(gameSum.sum_total_price) }}</span>
                     <span>{{ $t('bettingrc_015') }} {{ formatNumber(gameSum.sum_bonus) }}</span>
                 </div>
             </template>
 
-            <!-- 详情视图 -->
-            <div class="vn-popup__body vn-popup__body--detail" v-else>
+            <div class="vn-popup__body vn-popup__body--detail" v-else ref="detailBody">
                 <VnBettingDetail />
             </div>
-
         </div>
     </div>
 </template>
@@ -77,8 +72,14 @@ export default {
             if (val) {
                 this.load()
             } else {
-                // 关闭时重置详情
                 this[_M.SET_GAME_INFO_DETAIL_INDEX](-1)
+            }
+        },
+        GameInfoDetailIndex(val) {
+            if (val !== -1) {
+                this.$nextTick(() => {
+                    this.resetDetailScroll()
+                })
             }
         }
     },
@@ -87,8 +88,7 @@ export default {
             _M.GET_GAME_INFO_LIST,
             _M.SET_GAME_INFO_DATA,
             _M.CLEAR_GAME_INFO_DATA,
-            _M.SET_GAME_INFO_DETAIL_INDEX,
-            _M.SET_HEADER_NAV_IS_BACK
+            _M.SET_GAME_INFO_DETAIL_INDEX
         ]),
         close() {
             this[_M.SET_GAME_INFO_DETAIL_INDEX](-1)
@@ -127,8 +127,13 @@ export default {
                 this.loadMore()
             }
         },
+        resetDetailScroll() {
+            const el = this.$refs.detailBody
+            if (el) {
+                el.scrollTop = 0
+            }
+        },
         showDetail(index) {
-            this[_M.SET_HEADER_NAV_IS_BACK](true)
             this[_M.SET_GAME_INFO_DETAIL_INDEX](index)
         },
         goBackToList() {
@@ -214,7 +219,6 @@ export default {
         color: #fff;
         flex-shrink: 0;
 
-        // 底部金色条纹
         &::after {
             content: '';
             position: absolute;
@@ -253,25 +257,26 @@ export default {
         overflow-y: auto;
         flex: 1;
         background: #fff;
-        // 覆盖 gr_page__content 的 min-height
         min-height: 0 !important;
         padding: 0 !important;
 
-        // 完全复刻 GameInfo 320 列表样式
         ::v-deep .table_default table {
             border: none;
             width: 100%;
+
             tbody td {
                 border: none;
                 position: relative;
                 text-align: left;
                 padding: 0 35px 0 10px;
             }
+
             tfoot td {
                 text-align: center;
                 padding: 40px 0;
                 color: #999;
             }
+
             i.el-icon-arrow-right {
                 position: absolute;
                 top: 50%;
@@ -280,6 +285,7 @@ export default {
                 color: #b3b3b3;
             }
         }
+
         ::v-deep .table_hover_bg tbody td:hover {
             cursor: pointer;
         }
@@ -297,6 +303,7 @@ export default {
         text-align: right;
         padding: 8px 0;
         font-size: 13px;
+
         span {
             margin-right: 16px;
         }

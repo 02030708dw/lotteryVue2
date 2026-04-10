@@ -20,11 +20,10 @@ let countNum = 0
 let isFetching = false
 let isFirstColdDown = true
 // 放这里：只执行一次的 Promise 缓存
-let stopVNDate = false
 let stopBetPromise = null
 let areaIssuePromise = null
 
-const sleep = (ms) => new Promise(r => setTimeout(r, ms))
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 // stopBet：只请求一次（失败可下次再试，就保留 catch 清缓存）
 const fetchStopBetNumberOnce = (ctx) => {
@@ -51,7 +50,7 @@ const fetchAreaIssueOnce = ({ commit, rootGetters }) => {
                 commit(_M.SET_VN_AREA_DATA, data)
                 return data
             })
-            .catch(async (err) => {
+            .catch(async () => {
                 await sleep(5000)
                 return run()
             })
@@ -59,6 +58,74 @@ const fetchAreaIssueOnce = ({ commit, rootGetters }) => {
     areaIssuePromise = run()
     return areaIssuePromise
 }
+
+const getVnTrendSource = (payload) => {
+    if (Array.isArray(payload)) return payload
+    if (!payload || typeof payload !== 'object') return []
+
+    const candidates = [
+        payload.list,
+        payload.items,
+        payload.rows,
+        payload.data,
+        payload.result
+    ]
+
+    return candidates.find(Array.isArray) || []
+}
+
+const normalizeVnTrendDigits = (value, minLength = 0) => {
+    const digits = String(value == null ? '' : value).replace(/\D/g, '')
+
+    if (!digits) return ''
+    if (!minLength) return digits
+    return digits.padStart(minLength, '0')
+}
+
+const normalizeVnTrendSeries = (value) => {
+    if (Array.isArray(value)) {
+        return value
+            .map(item => Number(item))
+            .filter(item => !Number.isNaN(item) && item !== 0)
+    }
+
+    if (typeof value === 'string') {
+        return value
+            .split(',')
+            .map(item => Number(item.trim()))
+            .filter(item => !Number.isNaN(item) && item !== 0)
+    }
+
+    return []
+}
+
+const normalizeVnTrendItem = (item = {}) => {
+    const sping = normalizeVnTrendDigits(
+        item.sping || item.sp || item.code || item.number || item.result,
+        6
+    )
+    const eightPing = normalizeVnTrendDigits(
+        item['8ping'] || item.eightPing || item.eight || item.last2 || item.ball,
+        2
+    ) || sping.slice(-2)
+
+    return {
+        issue: item.issue || item.issueNo || item.issueNumber || item.turnNum || '',
+        sping,
+        '8ping': eightPing,
+        BS8: item.BS8 || item.bs8 || '',
+        EO8: item.EO8 || item.eo8 || '',
+        BSxy: normalizeVnTrendSeries(item.BSxy || item.bsxy || item.bsTrend),
+        EOxy: normalizeVnTrendSeries(item.EOxy || item.eoxy || item.eoTrend)
+    }
+}
+
+const getVnTrendIssueValue = (issue) => +(String(issue || '').replace(/\D/g, '')) || 0
+
+const normalizeVnTrendList = (payload) => getVnTrendSource(payload)
+    .map(item => normalizeVnTrendItem(item))
+    .filter(item => item.issue || item.sping || item['8ping'] || item.BSxy.length || item.EOxy.length)
+    .sort((a, b) => getVnTrendIssueValue(b.issue) - getVnTrendIssueValue(a.issue))
 
 export default {
     [_M.SET_VN_TEMP_DATA]({ commit }, payload) {
@@ -222,6 +289,9 @@ export default {
     [_M.SET_GAME_LASTNUMBER_VN_V2]({ commit }, payload) {
         commit(_M.SET_GAME_LASTNUMBER_VN_V2, payload)
     },
+    [_M.SET_GAME_TREND_VN]({ commit }, payload) {
+        commit(_M.SET_GAME_TREND_VN, payload)
+    },
     /**
      * 取得越南彩最新號碼
      * @param {any} { state, commit }
@@ -267,6 +337,27 @@ export default {
                 .catch(() => setTimeout(fetchlastNumber, 5000))
         }
         fetchlastNumber()
+    },
+    [_M.GET_GAME_TREND_VN]({ commit, rootGetters }, payload) {
+        const options = { isPromise: true, isNotShowMessageBox: true }
+        const lotteryId = +(payload || rootGetters.VN_lotteryId)
+
+        if (!lotteryId) {
+            commit(_M.SET_GAME_TREND_VN, [])
+            return Promise.resolve([])
+        }
+
+        return handleAjax(API.getVndTrend, { lotteryrId: lotteryId }, rootGetters, options)
+            .then(({ data }) => {
+                const list = normalizeVnTrendList(data)
+
+                commit(_M.SET_GAME_TREND_VN, list)
+                return list
+            })
+            .catch(() => {
+                commit(_M.SET_GAME_TREND_VN, [])
+                return []
+            })
     },
     /**
      * 設定越南彩遊戲資料
@@ -326,7 +417,7 @@ export default {
                         ? instance.$root.$emit('reset')
                         : instance.$root.$emit('reset', { times: '' })
                     getters.VN_isOld && dispatch(_M.GAME_ORDER_VN_SUBMIT, { type: 5 })
-                        ; (!payload || getters.VN_isOld) && dispatch(_M.GAME_ORDER_VN_SUBMIT, { type: 1, showList: [] })
+                    ;(!payload || getters.VN_isOld) && dispatch(_M.GAME_ORDER_VN_SUBMIT, { type: 1, showList: [] })
                 }
             },
             afterClose() {
