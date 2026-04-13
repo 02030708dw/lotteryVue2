@@ -44,7 +44,47 @@
                                             :key="`${row.label}-${numberIndex}`"
                                             class="vn-recent__number"
                                         >
-                                            <span class="vn-recent__head">{{ formatDisplayNumber(number).head }}</span><span class="vn-recent__tail">{{ formatDisplayNumber(number).tail }}</span>
+                                            <span class="vn-recent__head">
+                                                <template v-for="(char, charIndex) in formatDisplayNumber(number).head.split('')">
+                                                    <span
+                                                        :key="`${row.label}-${numberIndex}-head-${charIndex}-${rollVersion}`"
+                                                        class="vn-recent__digit-window"
+                                                    >
+                                                        <span
+                                                            v-if="isRolling && isDigit(char)"
+                                                            class="vn-recent__digit-roll"
+                                                            :style="getRollStyle(char, index, numberIndex, charIndex)"
+                                                        >
+                                                            <span
+                                                                v-for="(digit, digitIndex) in getRollingDigits(char, index, numberIndex, charIndex)"
+                                                                :key="`${row.label}-${numberIndex}-head-${charIndex}-${digitIndex}`"
+                                                                class="vn-recent__digit"
+                                                            >{{ digit }}</span>
+                                                        </span>
+                                                        <span v-else class="vn-recent__digit">{{ char }}</span>
+                                                    </span>
+                                                </template>
+                                            </span><span class="vn-recent__tail">
+                                                <template v-for="(char, charIndex) in formatDisplayNumber(number).tail.split('')">
+                                                    <span
+                                                        :key="`${row.label}-${numberIndex}-tail-${charIndex}-${rollVersion}`"
+                                                        class="vn-recent__digit-window"
+                                                    >
+                                                        <span
+                                                            v-if="isRolling && isDigit(char)"
+                                                            class="vn-recent__digit-roll"
+                                                            :style="getRollStyle(char, index, numberIndex, charIndex + formatDisplayNumber(number).head.length)"
+                                                        >
+                                                            <span
+                                                                v-for="(digit, digitIndex) in getRollingDigits(char, index, numberIndex, charIndex + formatDisplayNumber(number).head.length)"
+                                                                :key="`${row.label}-${numberIndex}-tail-${charIndex}-${digitIndex}`"
+                                                                class="vn-recent__digit"
+                                                            >{{ digit }}</span>
+                                                        </span>
+                                                        <span v-else class="vn-recent__digit">{{ char }}</span>
+                                                    </span>
+                                                </template>
+                                            </span>
                                         </span>
                                         <span
                                             v-if="numberIndex !== row.numbers.length - 1"
@@ -100,7 +140,10 @@ export default {
     },
     data() {
         return {
-            currentIndex: 0
+            currentIndex: 0,
+            isRolling: false,
+            rollVersion: 0,
+            rollTimer: null
         }
     },
     computed: {
@@ -125,6 +168,11 @@ export default {
         },
         hasNewer() {
             return this.currentIndex > 0
+        },
+        currentDrawRollKey() {
+            const draw = this.currentDraw
+            if (!draw) return ''
+            return `${draw.issue}|${draw.rows.map(row => row.numbers.join(',')).join('|')}`
         }
     },
     watch: {
@@ -132,8 +180,10 @@ export default {
             if (val) {
                 this.currentIndex = 0
                 document.addEventListener('click', this.onGlobalClick)
+                this.startRolling()
             } else {
                 document.removeEventListener('click', this.onGlobalClick)
+                this.stopRolling()
             }
         },
         drawList(list) {
@@ -144,10 +194,15 @@ export default {
             if (this.currentIndex > list.length - 1) {
                 this.currentIndex = list.length - 1
             }
+        },
+        currentDrawRollKey(val, oldVal) {
+            if (!this.visible || !val || val === oldVal) return
+            this.startRolling()
         }
     },
     beforeDestroy() {
         document.removeEventListener('click', this.onGlobalClick)
+        this.stopRolling()
     },
     methods: {
         getCollapsedHeight() {
@@ -167,6 +222,20 @@ export default {
         goNewer() {
             if (!this.hasNewer) return
             this.currentIndex -= 1
+        },
+        startRolling() {
+            if (!this.currentDraw) return
+            clearTimeout(this.rollTimer)
+            this.rollVersion += 1
+            this.isRolling = true
+            this.rollTimer = setTimeout(() => {
+                this.isRolling = false
+            }, 3000)
+        },
+        stopRolling() {
+            clearTimeout(this.rollTimer)
+            this.rollTimer = null
+            this.isRolling = false
         },
         normalizeDraw(item = {}) {
             const rows = this.buildRows(item.code)
@@ -228,6 +297,36 @@ export default {
             return {
                 head: digits.slice(0, -2),
                 tail: digits.slice(-2)
+            }
+        },
+        isDigit(char) {
+            return /\d/.test(char)
+        },
+        getRollingDigits(char, rowIndex, numberIndex, charIndex) {
+            if (!this.isDigit(char)) return [char]
+
+            const target = +char
+            const start = (this.rollVersion + rowIndex + numberIndex + charIndex) % 10
+            const total = 24 + ((rowIndex + numberIndex + charIndex) % 8)
+            const digits = []
+
+            for (let index = 0; index < total; index += 1) {
+                digits.push(`${(start + index) % 10}`)
+            }
+
+            digits.push(`${target}`)
+            return digits
+        },
+        getRollStyle(char, rowIndex, numberIndex, charIndex) {
+            const offset = this.getRollingDigits(char, rowIndex, numberIndex, charIndex).length - 1
+            const order = (numberIndex * 6) + charIndex
+            const delay = Math.min(order * 0.08, 0.72)
+            const duration = Math.max(2.2, 3 - delay)
+
+            return {
+                '--offset': offset,
+                '--delay': `${delay}s`,
+                '--duration': `${duration}s`
             }
         },
         waitForHeightTransition(el, done) {
@@ -367,6 +466,30 @@ export default {
     white-space: nowrap;
 }
 
+.vn-recent__digit-window {
+    display: inline-flex;
+    overflow: hidden;
+    height: 1em;
+    line-height: 1;
+    vertical-align: top;
+}
+
+.vn-recent__digit-roll {
+    display: flex;
+    flex-direction: column;
+    animation: vn-recent-digit-roll var(--duration, 3s) cubic-bezier(0.16, 0.78, 0.18, 1) forwards;
+    animation-delay: var(--delay, 0s);
+    will-change: transform;
+}
+
+.vn-recent__digit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1em;
+    line-height: 1;
+}
+
 .vn-recent__head {
     color: #444;
 }
@@ -429,5 +552,15 @@ export default {
     text-align: center;
     color: #999;
     font-size: 13px;
+}
+
+@keyframes vn-recent-digit-roll {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(calc(var(--offset) * -1em));
+    }
 }
 </style>

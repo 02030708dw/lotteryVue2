@@ -145,10 +145,10 @@
             <button class="gr_vn-local-nav-btn" @click="showHistory = true">{{$t('common_007')}}</button>
             <button class="gr_vn-local-nav-btn" @click="showBetting = true">{{$t('home_009')}}</button>
             <button class="gr_vn-local-nav-btn js-vn-recent-trigger" @click="$emit('recent-toggle')">
-                近期开奖结果<i :class="recentOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
+                {{ $t('common_00001') }}<i :class="recentOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
             </button>
             <button class="gr_vn-local-nav-btn" @click="$emit('trend-toggle')">
-                走势图<i :class="trendOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
+                {{ $t('common_00002') }}<i :class="trendOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
             </button>
         </div>
 

@@ -42,7 +42,7 @@
                         v-for="(item, index) in historyList"
                         :key="index"
                     >
-                        <div class="gr_number__header u_f--bold">
+                        <div class="gr_number__header u_f--bold" style="padding: 10px;">
                             {{ VN_cityData[item.lottery] ? $t(VN_cityData[item.lottery]) : $t('common_001', { 0: item.issue }) }}
                         </div>
                         <div class="gr_number__content">
