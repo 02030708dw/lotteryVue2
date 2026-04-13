@@ -5,6 +5,7 @@
             <GamesHeader
                 :handleHistoryToggle="handleHistoryToggle"
                 :recentOpen="showRecentResults"
+                :recentHintActive="recentHintActive"
                 :trendOpen="showTrend"
                 @trend-toggle="toggleTrend"
                 @recent-toggle="toggleRecentResults"
@@ -94,7 +95,8 @@ export default {
             isFast: false,
             isGameMenuActive: false,
             showTrend: false,
-            showRecentResults: false,
+            showRecentResults: true,
+            recentHintActive: true,
             overlayClosing: false
         }
     },
@@ -180,6 +182,9 @@ export default {
                 : !this.showRecentResults
 
             this.showRecentResults = next
+            if (!next) {
+                this.recentHintActive = false
+            }
             if (next) {
                 this.showTrend = false
             }

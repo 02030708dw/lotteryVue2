@@ -145,7 +145,13 @@
             <button class="gr_vn-local-nav-btn" @click="showHistory = true">{{$t('common_007')}}</button>
             <button class="gr_vn-local-nav-btn" @click="showBetting = true">{{$t('home_009')}}</button>
             <button class="gr_vn-local-nav-btn js-vn-recent-trigger" @click="$emit('recent-toggle')">
-                {{ $t('common_00001') }}<i :class="recentOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
+                {{ $t('common_00001') }}<i
+                    :class="[
+                        recentOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down',
+                        'gr_vn-local-nav-btn__arrow',
+                        { 'is-bounce': recentHintActive }
+                    ]"
+                ></i>
             </button>
             <button class="gr_vn-local-nav-btn" @click="$emit('trend-toggle')">
                 {{ $t('common_00002') }}<i :class="trendOpen ? 'el-icon-arrow-up' : 'el-icon-arrow-down'"></i>
@@ -170,6 +176,7 @@ export default {
     props: {
         handleHistoryToggle: { type: Function, required: true },
         recentOpen: { type: Boolean, default: false },
+        recentHintActive: { type: Boolean, default: false },
         trendOpen: { type: Boolean, default: false }
     },
     data() {
@@ -394,3 +401,34 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+.gr_vn-local-nav-btn__arrow {
+    display: inline-block;
+    margin-left: 3px;
+}
+
+.gr_vn-local-nav-btn__arrow.is-bounce {
+    animation: vn-recent-arrow-bounce 1.35s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes vn-recent-arrow-bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-2px);
+    }
+
+    55% {
+        transform: translateY(1px);
+    }
+
+    75% {
+        transform: translateY(-1px);
+    }
+}
+</style>
