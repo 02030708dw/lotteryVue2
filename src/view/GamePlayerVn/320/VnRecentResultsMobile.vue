@@ -114,7 +114,7 @@
                     </div>
                 </div>
 
-                <div v-else class="vn-recent__empty">暂无数据</div>
+                <div v-else class="vn-recent__empty">{{ $t('bettingrc_031') }}</div>
             </div>
         </div>
     </transition>
@@ -179,10 +179,8 @@ export default {
         visible(val) {
             if (val) {
                 this.currentIndex = 0
-                document.addEventListener('click', this.onGlobalClick)
                 this.startRolling()
             } else {
-                document.removeEventListener('click', this.onGlobalClick)
                 this.stopRolling()
             }
         },
@@ -201,19 +199,11 @@ export default {
         }
     },
     beforeDestroy() {
-        document.removeEventListener('click', this.onGlobalClick)
         this.stopRolling()
     },
     methods: {
         getCollapsedHeight() {
             return 62
-        },
-        onGlobalClick(e) {
-            const panel = this.$refs.panel
-            if (!panel) return
-            if (panel.contains(e.target)) return
-            if (e.target.closest('.js-vn-recent-trigger')) return
-            this.handleToggle(false)
         },
         goOlder() {
             if (!this.hasOlder) return
