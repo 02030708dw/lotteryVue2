@@ -95,8 +95,8 @@ export default {
             isFast: false,
             isGameMenuActive: false,
             showTrend: false,
-            showRecentResults: true,
-            recentHintActive: true,
+            showRecentResults: false,
+            recentHintActive: false,
             overlayClosing: false
         }
     },
