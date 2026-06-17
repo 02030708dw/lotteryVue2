@@ -44,6 +44,7 @@ export const API = {
     availableBalance: ApiFn('wallet/availableBalance'),
     /** 用户投注 */
     gameOrder: ApiFn('game/order'),
+    demoOrder: 'http://127.0.0.1:6001/game/order',
     /** 追号记录查询 */
     orderFutureHistory: ApiFn('game/orderFutureHistory'),
     /** 追号记录查询詳細 */

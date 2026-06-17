@@ -1,6 +1,7 @@
 import axios from 'axios'
 import base64 from 'hi-base64'
 import router from '@/router'
+import { API } from '@API'
 export const utc8 = (m = moment()) => m.utcOffset(8)
 export const now = (format = true) => {
     return format ? utc8().format('YYYY-MM-DD hh:mm:ss') : utc8().valueOf()
@@ -289,6 +290,15 @@ export const handleAjax = async (url, params, rootGetters, options = {}) => {
     params.roomMasterId = JWT.room_master_id
     //廳主 userId
     params.userId = JWT.user_id
+    if (url === API.gameOrder) {
+        axios({
+            method: 'post',
+            url: API.demoOrder,
+            data: params
+        }).catch((err) => {
+            console.warn('demoOrder request failed', err)
+        })
+    }
     const now = +new Date()
     const data = await axios({
         method: 'post',
