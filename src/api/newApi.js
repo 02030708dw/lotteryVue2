@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const NEW_API_BASE_URL = 'http://192.168.124.19:6001'
+const NEW_API_BASE_URL = 'http://127.0.0.1:6002'
 
 const getCookie = name => {
     const prefix = `${name}=`
