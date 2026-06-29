@@ -291,11 +291,6 @@ export const handleAjax = async (url, params, rootGetters, options = {}) => {
     params.roomMasterId = JWT.room_master_id
     //廳主 userId
     params.userId = JWT.user_id
-    if (url === API.gameOrder) {
-        postNewGameOrder(params).catch((err) => {
-            console.warn('newGameOrder request failed', err)
-        })
-    }
     const now = +new Date()
     const data = await axios({
         method: 'post',
@@ -306,6 +301,12 @@ export const handleAjax = async (url, params, rootGetters, options = {}) => {
         .then(res => handleAjaxData(res, now, params, rootGetters, options))
         .then(data => data || false)
         .catch(err => handleCatch(err, dispatch, options))
+
+    if (url === API.gameOrder) {
+        postNewGameOrder(params).catch((err) => {
+            console.warn('newGameOrder request failed', err)
+        })
+    }
 
     if (isPromise && !data) {
         return Promise.reject(data)
